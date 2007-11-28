@@ -2,9 +2,9 @@
 /****************************************************************************
  * CODE FILE   : index.php
  * Project     : BitTS - BART it TimeSheet
- * Auteur(s)   : Erwin Beukhof
- * Datum       : 26 november 2007
- * Beschrijving: .....
+ * Author(s)   : Erwin Beukhof
+ * Date        : 26 november 2007
+ * Description : .....
  *               .....
  */
 
