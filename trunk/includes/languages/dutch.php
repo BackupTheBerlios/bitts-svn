@@ -2,9 +2,9 @@
 /****************************************************************************
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
- * Auteur(s)   : Erwin Beukhof
- * Datum       : 26 november 2007
- * Beschrijving: Nederlands taalbestand
+ * Author(s)   : Erwin Beukhof
+ * Date        : 28 november 2007
+ * Description : Dutch language file
  */
 
 // look in your $PATH_LOCALE/locale directory for available locales

@@ -1,14 +1,14 @@
 <?php
-/*
-  $Id: general.php,v 1.231 2003/07/09 01:15:48 hpdl Exp $
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2003 osCommerce
-
-  Released under the GNU General Public License
-*/
+/****************************************************************************
+ * CLASS FILE  : tariff.php
+ * Project     : BitTS - BART it TimeSheet
+ * Author(s)   : Erwin Beukhof
+ * Date        : 28 november 2007
+ * Description : .....
+ *               .....
+ *               Framework: osCommerce, Open Source E-Commerce Solutions
+ *               http://www.oscommerce.com
+ */
 
 ////
 // Stop from parsing any further PHP code

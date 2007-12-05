@@ -38,6 +38,7 @@
 
   // define our database connection
   define('DB_SERVER', '127.0.0.1'); // eg, localhost - should not be empty for productive servers
+  define('DB_SERVER_TYPE', 'mysql'); // eg, mysql - database server type
   define('DB_SERVER_USERNAME', 'bitts_conn');
   define('DB_SERVER_PASSWORD', 'bitts_conn');
   define('DB_DATABASE', 'bitts');

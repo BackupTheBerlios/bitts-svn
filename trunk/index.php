@@ -6,38 +6,19 @@
  * Date        : 26 november 2007
  * Description : .....
  *               .....
+ *               Framework: osCommerce, Open Source E-Commerce Solutions
+ *               http://www.oscommerce.com
  */
 
 /****************************************************************************
  * IMPORT
  */
-?>
-<!-- application_top //-->
-<?php require('includes/application_top.php'); ?>
-<!-- application_top_eof //-->
-<?php
-// the following cPath references come from application_top.php
-  $category_depth = 'top';
-  if (isset($cPath) && tep_not_null($cPath)) {
-    $categories_products_query = tep_db_query("select count(*) as total from " . TABLE_PRODUCTS_TO_CATEGORIES . " where categories_id = '" . (int)$current_category_id . "'");
-    $cateqories_products = tep_db_fetch_array($categories_products_query);
-    if ($cateqories_products['total'] > 0) {
-      $category_depth = 'products'; // display products
-    } else {
-      $category_parent_query = tep_db_query("select count(*) as total from " . TABLE_CATEGORIES . " where parent_id = '" . (int)$current_category_id . "'");
-      $category_parent = tep_db_fetch_array($category_parent_query);
-      if ($category_parent['total'] > 0) {
-        $category_depth = 'nested'; // navigate through the categories
-      } else {
-        $category_depth = 'products'; // category has no products, but display the 'no products' message
-      }
-    }
-  }
-?>
-<!-- header //-->
-<?php require(DIR_WS_INCLUDES . 'header.php'); ?>
-<!-- header_eof //-->
 
+  // application_top //
+  require('includes/application_top.php');
+  // header //
+  require(DIR_WS_INCLUDES . 'header.php');
+?>
 <!-- body //-->
 <table border="0" width="100%" cellspacing="3" cellpadding="3">
   <tr>

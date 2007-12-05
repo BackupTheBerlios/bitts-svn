@@ -2,13 +2,15 @@
 /****************************************************************************
  * CODE FILE   : application_bottom.php
  * Project     : BitTS - BART it TimeSheet
- * Auteur(s)   : Erwin Beukhof
- * Datum       : 26 november 2007
- * Beschrijving: .....
+ * Author(s)   : Erwin Beukhof
+ * Date        : 28 november 2007
+ * Description : .....
  *               .....
+ *               Framework: osCommerce, Open Source E-Commerce Solutions
+ *               http://www.oscommerce.com
  */
 
-// close session (store variables)
+  // close session (store variables)
   tep_session_close();
 
   if (STORE_PAGE_PARSE_TIME == 'true') {

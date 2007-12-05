@@ -1,17 +1,16 @@
 <?php
-/*
-  $Id: html_output.php,v 1.56 2003/07/09 01:15:48 hpdl Exp $
+/****************************************************************************
+ * CODE FILE   : password_funcs.php
+ * Project     : BitTS - BART it TimeSheet
+ * Author(s)   : Erwin Beukhof
+ * Date        : 29 november 2007
+ * Description : .....
+ *               .....
+ *               Framework: osCommerce, Open Source E-Commerce Solutions
+ *               http://www.oscommerce.com
+ */
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2003 osCommerce
-
-  Released under the GNU General Public License
-*/
-
-////
-// The HTML href link wrapper function
+  // The HTML href link wrapper function
   function tep_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true) {
     global $request_type, $session_started, $SID;
 
@@ -41,7 +40,7 @@
 
     while ( (substr($link, -1) == '&') || (substr($link, -1) == '?') ) $link = substr($link, 0, -1);
 
-// Add the session ID when moving from different HTTP and HTTPS servers, or when SID is defined
+    // Add the session ID when moving from different HTTP and HTTPS servers, or when SID is defined
     if ( ($add_session_id == true) && ($session_started == true) && (SESSION_FORCE_COOKIE_USE == 'False') ) {
       if (tep_not_null($SID)) {
         $_sid = $SID;

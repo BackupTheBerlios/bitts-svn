@@ -1,23 +1,19 @@
 <?php
-/*
-  $Id: compatibility.php,v 1.19 2003/04/09 16:12:54 project3000 Exp $
+/****************************************************************************
+ * CODE FILE   : compatibility.php
+ * Project     : BitTS - BART it TimeSheet
+ * Author(s)   : Erwin Beukhof
+ * Date        : 28 november 2007
+ * Description : .....
+ *               .....
+ *               Framework: osCommerce, Open Source E-Commerce Solutions
+ *               http://www.oscommerce.com
+ */
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2003 osCommerce
-
-  Released under the GNU General Public License
-
-  Modified by Marco Canini, <m.canini@libero.it>
-  - Fixed a bug with arrays in $HTTP_xxx_VARS
-*/
-
-////
-// Recursively handle magic_quotes_gpc turned off.
-// This is due to the possibility of have an array in
-// $HTTP_xxx_VARS
-// Ie, products attributes
+  // Recursively handle magic_quotes_gpc turned off.
+  // This is due to the possibility of have an array in
+  // $HTTP_xxx_VARS
+  // Ie, products attributes
   function do_magic_quotes_gpc(&$ar) {
     if (!is_array($ar)) return false;
 
@@ -30,12 +26,12 @@
     }
   }
 
-// $HTTP_xxx_VARS are always set on php4
+  // $HTTP_xxx_VARS are always set on php4
   if (!is_array($HTTP_GET_VARS)) $HTTP_GET_VARS = array();
   if (!is_array($HTTP_POST_VARS)) $HTTP_POST_VARS = array();
   if (!is_array($HTTP_COOKIE_VARS)) $HTTP_COOKIE_VARS = array();
 
-// handle magic_quotes_gpc turned off.
+  // handle magic_quotes_gpc turned off.
   if (!get_magic_quotes_gpc()) {
     do_magic_quotes_gpc($HTTP_GET_VARS);
     do_magic_quotes_gpc($HTTP_POST_VARS);

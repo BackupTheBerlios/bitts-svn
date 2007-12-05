@@ -2,10 +2,12 @@
 /****************************************************************************
  * CODE FILE   : header.php
  * Project     : BitTS - BART it TimeSheet
- * Auteur(s)   : Erwin Beukhof
- * Datum       : 26 november 2007
- * Beschrijving: .....
+ * Author(s)   : Erwin Beukhof
+ * Date        : 28 november 2007
+ * Description : .....
  *               .....
+ *               Framework: osCommerce, Open Source E-Commerce Solutions
+ *               http://www.oscommerce.com
  */
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">

@@ -6,6 +6,8 @@
  * Date        : 28 november 2007
  * Description : .....
  *               .....
+ *               Framework: osCommerce, Open Source E-Commerce Solutions
+ *               http://www.oscommerce.com
  */
 
   class customer {

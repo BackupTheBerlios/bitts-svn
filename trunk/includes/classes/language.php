@@ -6,6 +6,8 @@
  * Datum       : 26 november 2007
  * Beschrijving: browser language detection logic Copyright phpMyAdmin (select_lang.lib.php3 v1.24 04/19/2002)
  *               Copyright Stephane Garin <sgarin@sgarin.com> (detect_language.php v0.1 04/02/2002)
+ *               Framework: osCommerce, Open Source E-Commerce Solutions
+ *               http://www.oscommerce.com
  */
 
   class language {
