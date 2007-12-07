@@ -11,7 +11,7 @@
   class role {
     private $role_id, $project_id, $name, $description, $mandatory_ticket_entry, $employees_roles;
 
-    function role($role_id = '') {
+    function role($role_id = '', $child_object = '') {
         $this->role_id = $role_id;
         $this->employees_roles = array();
 
@@ -26,8 +26,12 @@
         $this->$description = $role_result['description'];
         $this->$mandatory_ticket_entry = $role_result['mandatory_ticket_entry'];
 
-        // Retrieve all employees_roles for this role
-        $this->employees_roles = employee_role::get_array($this->role_id);
+        // Retrieve specific employee_role or all employees_roles for this role
+        if (tep_not_null($child_object)) {
+          $this->employees_roles[0] = $child_object;
+        } else {
+          $this->employees_roles = employee_role::get_array($this->role_id);
+        }
       }
     }
 
@@ -45,6 +49,16 @@
       }
 
       return $role_array;
+    }
+
+    public static function get_selected_tree($tariff_id = '') {
+      $employee_role = employee_role::get_select_tree($tariff_id);
+      $role = new role($employee_role->get_parent_id(), $employee_role);
+      return $role;
+    }
+
+    public function get_parent_id() {
+      return $this->project_id;
     }
   }
 ?>

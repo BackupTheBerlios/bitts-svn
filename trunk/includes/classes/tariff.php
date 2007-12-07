@@ -38,8 +38,11 @@
           $index++;
         }
       }
-
       return $tariff_array;
+    }
+
+    public function get_parent_id() {
+      return $this->employee_role_id;
     }
   }
 ?>

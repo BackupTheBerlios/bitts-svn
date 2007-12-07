@@ -11,7 +11,7 @@
   class employee_role {
     var $employee_role_id, $role_id, $employee, $start_date, $end_date, $tariffs;
 
-    function employee_role($employee_role_id = '') {
+    function employee_role($employee_role_id = '', $child_object = '') {
       $this->employee_role_id = $employee_role_id;
       $this->tariffs = array();
 
@@ -26,8 +26,12 @@
         $this->$start_date = $employee_role_result['start_date'];
         $this->$end_date = $employee_role_result['end_date'];
 
-        // Retrieve all tariffs for this employee_role
-        $this->tariffs = tariff::get_array($this->employee_role_id);
+        // Retrieve specific tariff or all tariffs for this employee_role
+        if (tep_not_null($child_object)) {
+          $this->tariffs[0] = $child_object;
+        } else {
+          $this->tariffs = tariff::get_array($this->employee_role_id);
+        }
       }
     }
 
@@ -43,8 +47,32 @@
           $index++;
         }
       }
-
       return $employee_role_array;
+    }
+
+    public static function get_selectable_tree($employee_id = '') {
+      $employee_role_array = array();
+
+      if (tep_not_null($employee_id)) {
+        $index = 0;
+        $employee_id = tep_db_prepare_input($employee_id);
+        $employees_roles_query = tep_db_query("select employee_role_id from " . TABLE_EMPLOYEES_ROLES . " where employee_id = '" . (int)$employee_id . "'");
+        while ($employees_roles_result = tep_db_fetch_array($employees_roles_query)) {
+          $this->employee_role_array[$index] = new employee_role($employees_roles_result['employee_role_id']);
+          $index++;
+        }
+      }
+      return $employee_role_array;
+    }
+
+    public static function get_selected_tree($tariff_id = '') {
+      $tariff = new tariff($tariff_id);
+      $employee_role = new employee_role($tariff->get_parent_id(), $tariff);
+      return $employee_role;
+    }
+
+    public function get_parent_id() {
+      return $this->role_id;
     }
   }
 ?>
