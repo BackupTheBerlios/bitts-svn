@@ -46,7 +46,22 @@ define('HTML_PARAMS','dir="LTR" lang="nl"');
 define('CHARSET', 'iso-8859-1');
 
 // page title
-define('TITLE', STORE_NAME);
+define('TITLE', COMPANY_NAME . ' - ' . PROJECT_NAME . ' ' . PROJECT_VERSION);
+
+define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // header text in includes/header.php
 define('HEADER_TITLE_CREATE_ACCOUNT', 'Account aanmaken');
@@ -99,22 +114,6 @@ define('ENTRY_COMPANY', 'Bedrijfsnaam:');
 define('ENTRY_COMPANY_ERROR', '');
 define('ENTRY_COMPANY_TEXT', '');
 // Einde gewijzigde code tbv TVA_INTRACOM_v3.0
-
-// Nieuwe code tbv TVA_INTRACOM_v3.0
-// define('ENTRY_COMPANY_ERROR', 'De Bedrijfsnaam dient minimaal ' . ENTRY_COMPANY_MIN_LENGTH . ' karakters te bevatten.');
-// define('ENTRY_COMPANY_TEXT', 'Alleen indien u het Bedrijf gefactureerd wilt hebben voor uw order');
-// Einde nieuwe code tbv TVA_INTRACOM_v3.0
-
-// Ajout pour TVA_INTRACOM_v3.0
-define('ENTRY_TVA_INTRACOM', 'Intracomm. BTW Nr :');
-define('ENTRY_TVA_INTRACOM_ERROR', 'Het intracomm. BTW nummer van uw Bedrijf dient minimaal ' . ENTRY_TVA_INTRACOM_MIN_LENGTH . ' karakters te bevatten.');
-define('ENTRY_TVA_INTRACOM_TEXT', 'Alleen indien het ingevulde Bedrijf zich binnen de EEG bevindt');
-define('ENTRY_CONTROL_TVA_INTRACOM', 'Na controle blijkt dat uw intracomm. BTW nummer niet correct is. Leave it blank if you don\'t know it.<br>For info, it must be structured like this:<br>Germany: \'DE\' + 9 numeric characters<br>Austria: \'AT\' + 9 numeric and alphanumeric characters<br>Belgium : \'BE\' + 9 numeric characters<br>Denmark : \'DK\' + 8 numeric characters<br>Spain: \'ES\' + 9 characters<br>Finland : \'FI\' + 8 numeric characters<br>France: \'FR\' + 2 figures (informatic key) + N° SIREN (9 figures)<br>United Kingdom: \'GB\' + 9 numeric characters<br>Greece: \'EL\' + 9 numeric characters<br>Irlande : \'IE\' + 8 numeric and alphabetic characters<br>Italy : \'IT\' + 11 numeric characters<br>Luxembourg: \'LU\' + 8 numeric characters<br>Netherlands: \'NL\' + 12 alphanumeric characters, one of them a letter<br>Portugal : \'PT\' + 9 numeric characters<br>Sweden : \'SE\' + 12 numeric characters<br>Cyprus : \'CY\' + 8 numeric characters and 1 alphabetic character<br>Estonia : \'EE\' + 9 numeric characters<br>Hungary : \'HU\' + 8 numeric characters<br>Latvia : \'LV\' + 11 numeric characters<br>Lithuania : \'LT\' + 9 or 12 numeric characters<br>Malta : \'MT\' + 8 numeric characters<br>Poland : \'PL\' + 10 numeric characters<br>Slovakia : \'SK\' + 9 or 10 numeric characters<br>Czech Republic : \'CZ\' + 8 or 9 or 10 numeric characters<br>Slovania : \'SI\' + 8 numeric characters');
-define('ENTRY_NO_VERIF_TVA_INTRACOM', 'Impossible to check your VAT number: leave it empty');
-  // Begin update for TVA_INTRACOM_v3.9
-        define('ENTRY_CONTROL_TVA_INTRACOM_COUNTRY', 'The intracom. VAT number does not correspond to the indicated country. Leave it blank if you don\'t know it.');
-        // End update for TVA_INTRACOM_v3.9
-// Fin ajout pour TVA_INTRACOM_v3.0
 
 define('ENTRY_GENDER', 'Geslacht:');
 define('ENTRY_GENDER_ERROR', 'Selecteer a.u.b. uw geslacht.');
@@ -259,5 +258,4 @@ define('TEXT_REQUIRED', '<span class="errorText">Verplicht</span>');
 
 define('TEXT_TAX_POLICY', 'incl. BTW');
 
-define('FOOTER_TEXT_BODY', 'Alle prijzen in EURO ' . TEXT_TAX_POLICY . '<br>---<br>Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . STORE_NAME . '</a>, K.v.K. Utrecht: 30211123, BTW nr: NL 170480859B01');
 ?>

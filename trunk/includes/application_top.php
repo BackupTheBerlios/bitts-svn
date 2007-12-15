@@ -3,30 +3,24 @@
  * CODE FILE   : application_top.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 28 november 2007
+ * Date        : 11 december 2007
  * Description : .....
  *               .....
  *               Framework: osCommerce, Open Source E-Commerce Solutions
  *               http://www.oscommerce.com
  */
 
-  // start the timer for the page parse time log
-  define('PAGE_PARSE_START_TIME', microtime());
-
   // set the level of error reporting
   error_reporting(E_ALL & ~E_NOTICE);
 
-// check if register_globals is enabled.
-// since this is a temporary measure this message is hardcoded. The requirement will be removed before 2.2 is finalized.
+  // check if register_globals is enabled.
+  // since this is a temporary measure this message is hardcoded. The requirement will be removed before 2.2 is finalized.
   if (function_exists('ini_get')) {
     ini_get('register_globals') or exit('Server Requirement Error: register_globals is disabled in your PHP configuration. This can be enabled in your php.ini configuration file or in the .htaccess file in your catalog directory.');
   }
 
   // include server parameters
-  require('includes/configure.php');
-
-  // define the project version
-  define('PROJECT_VERSION', 'BitTS v0.1a');
+  require('includes/configuration.php');
 
   // set the type of request (secure or not)
   $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
@@ -46,35 +40,21 @@
   // include the list of project database tables
   require(DIR_WS_INCLUDES . 'database_tables.php');
 
-  // customization for the design layout
-  define('BOX_WIDTH', 175); // how wide the boxes should be in pixels (default: 125)
-
   // include the database functions
-  require(DIR_WS_FUNCTIONS . 'database_' . DB_SERVER_TYPE . '.php');
+  require(DIR_WS_CLASSES . 'database.php');
 
   // make a connection to the database... now
-  tep_db_connect() or die('Unable to connect to database server!');
+  $database = new database();
+  $database->connect() or die('Unable to connect to database server!');
 
   // set the application parameters
-  $configuration_query = tep_db_query('select configuration_key as cfgKey, configuration_value as cfgValue from ' . TABLE_CONFIGURATION);
-  while ($configuration = tep_db_fetch_array($configuration_query)) {
-    define($configuration['cfgKey'], $configuration['cfgValue']);
+  $configuration_query = $database->query('select configuration_key, configuration_value from ' . TABLE_CONFIGURATION);
+  while ($configuration_result = $database->fetch_array($configuration_query)) {
+    define($configuration_result['configuration_key'], $configuration_result['configuration_value']);
   }
 
-  // if gzip_compression is enabled, start to buffer the output
-  if ( (GZIP_COMPRESSION == 'true') && ($ext_zlib_loaded = extension_loaded('zlib')) && (PHP_VERSION >= '4') ) {
-    if (($ini_zlib_output_compression = (int)ini_get('zlib.output_compression')) < 1) {
-      if (PHP_VERSION >= '4.0.4') {
-        ob_start('ob_gzhandler');
-      } else {
-        include(DIR_WS_FUNCTIONS . 'gzip_compression.php');
-        ob_start();
-        ob_implicit_flush();
-      }
-    } else {
-      ini_set('zlib.output_compression_level', GZIP_LEVEL);
-    }
-  }
+  // Close database connection
+  $database->close();
 
   // set the HTTP GET parameters manually if search_engine_friendly_urls is enabled
   if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') {
@@ -228,17 +208,8 @@
   // include the password crypto functions
   require(DIR_WS_FUNCTIONS . 'password_funcs.php');
 
-  // infobox
-  require(DIR_WS_CLASSES . 'boxes.php');
-
-  // initialize the message stack for output messages
-  require(DIR_WS_CLASSES . 'message_stack.php');
-  $messageStack = new messageStack;
-
   // set which precautions should be checked
   define('WARN_CONFIG_WRITEABLE', 'true');
   define('WARN_SESSION_DIRECTORY_NOT_WRITEABLE', 'true');
   define('WARN_SESSION_AUTO_START', 'true');
-
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_DEFAULT);
 ?>

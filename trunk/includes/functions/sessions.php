@@ -1,14 +1,14 @@
 <?php
-/*
-  $Id: sessions.php,v 1.19 2003/07/02 22:10:34 hpdl Exp $
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2003 osCommerce
-
-  Released under the GNU General Public License
-*/
+/****************************************************************************
+ * CODE FILE   : sessions.php
+ * Project     : BitTS - BART it TimeSheet
+ * Author(s)   : Erwin Beukhof
+ * Date        : 11 december 2007
+ * Description : .....
+ *               .....
+ *               Framework: osCommerce, Open Source E-Commerce Solutions
+ *               http://www.oscommerce.com
+ */
 
   if (STORE_SESSIONS == 'mysql') {
     if (!$SESS_LIFE = get_cfg_var('session.gc_maxlifetime')) {
@@ -24,8 +24,11 @@
     }
 
     function _sess_read($key) {
-      $value_query = tep_db_query("select value from " . TABLE_SESSIONS . " where sesskey = '" . tep_db_input($key) . "' and expiry > '" . time() . "'");
-      $value = tep_db_fetch_array($value_query);
+      $database = new database();
+      $database->connect();
+      $value_query = $database->query("select sessions_value from " . TABLE_SESSIONS . " where sessions_key = '" . $database->input($key) . "' and sessions_expiry > '" . time() . "'");
+      $value = $database->fetch_array($value_query);
+      $database->close();
 
       if (isset($value['value'])) {
         return $value['value'];
@@ -40,23 +43,33 @@
       $expiry = time() + $SESS_LIFE;
       $value = $val;
 
-      $check_query = tep_db_query("select count(*) as total from " . TABLE_SESSIONS . " where sesskey = '" . tep_db_input($key) . "'");
-      $check = tep_db_fetch_array($check_query);
+      $database = new database();
+      $database->connect();
+      $check_query = $database->query("select count(*) as total from " . TABLE_SESSIONS . " where sessions_key = '" . $database->input($key) . "'");
+      $check = $database->fetch_array($check_query);
 
       if ($check['total'] > 0) {
-        return tep_db_query("update " . TABLE_SESSIONS . " set expiry = '" . tep_db_input($expiry) . "', value = '" . tep_db_input($value) . "' where sesskey = '" . tep_db_input($key) . "'");
+        $result = $database->query("update " . TABLE_SESSIONS . " set sessions_expiry = '" . $database->input($expiry) . "', sessions_value = '" . $database->input($value) . "' where sessions_key = '" . $database->input($key) . "'");
       } else {
-        return tep_db_query("insert into " . TABLE_SESSIONS . " values ('" . tep_db_input($key) . "', '" . tep_db_input($expiry) . "', '" . tep_db_input($value) . "')");
+        $result = $database->query("insert into " . TABLE_SESSIONS . " values ('" . $database->input($key) . "', '" . $database->input($expiry) . "', '" . $database->input($value) . "')");
       }
+      $database->close();
+      return $result;
     }
 
     function _sess_destroy($key) {
-      return tep_db_query("delete from " . TABLE_SESSIONS . " where sesskey = '" . tep_db_input($key) . "'");
+      $database = new database();
+      $database->connect();
+      $result = $database->query("delete from " . TABLE_SESSIONS . " where sessions_key = '" . tep_db_input($key) . "'");
+      $database->close();
+      return $result;
     }
 
     function _sess_gc($maxlifetime) {
-      tep_db_query("delete from " . TABLE_SESSIONS . " where expiry < '" . time() . "'");
-
+      $database = new database();
+      $database->connect();
+      $database->query("delete from " . TABLE_SESSIONS . " where sessions_expiry < '" . time() . "'");
+      $database->close();
       return true;
     }
 

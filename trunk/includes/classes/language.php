@@ -3,7 +3,7 @@
  * CLASS FILE  : language.php
  * Project     : BitTS - BART it TimeSheet
  * Auteur(s)   : Erwin Beukhof
- * Datum       : 26 november 2007
+ * Datum       : 11 december 2007
  * Beschrijving: browser language detection logic Copyright phpMyAdmin (select_lang.lib.php3 v1.24 04/19/2002)
  *               Copyright Stephane Garin <sgarin@sgarin.com> (detect_language.php v0.1 04/02/2002)
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -53,14 +53,17 @@
                                'zh' => 'zh|chinese simplified');
 
       $this->catalog_languages = array();
-      $languages_query = tep_db_query("select languages_id, name, code, image, directory from " . TABLE_LANGUAGES . " order by sort_order");
-      while ($languages = tep_db_fetch_array($languages_query)) {
-        $this->catalog_languages[$languages['code']] = array('id' => $languages['languages_id'],
-                                                             'name' => $languages['name'],
-                                                             'image' => $languages['image'],
-                                                             'directory' => $languages['directory']);
+      $database = new database();
+      $database->connect();
+      $languages_query = $database->query("select languages_id, languages_name, languages_code, languages_image, languages_directory from " . TABLE_LANGUAGES);
+      while ($languages_result = $database->fetch_array($languages_query)) {
+        $this->catalog_languages[$languages_result['languages_code']] = array('id' => $languages_result['languages_id'],
+                                                             'name' => $languages_result['languages_name'],
+                                                             'image' => $languages_result['languages_image'],
+                                                             'directory' => $languages_result['languages_directory']);
       }
-
+      $database->close();
+      
       $this->browser_languages = '';
       $this->language = '';
 
@@ -82,7 +85,7 @@
         reset($this->languages);
         while (list($key, $value) = each($this->languages)) {
           if (eregi('^(' . $value . ')(;q=[0-9]\\.[0-9])?$', $this->browser_languages[$i]) && isset($this->catalog_languages[$key])) {
-            $this->language = $this->catalog_languages[$key];
+          	$this->language = $this->catalog_languages[$key];
             break 2;
           }
         }
