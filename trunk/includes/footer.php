@@ -21,6 +21,9 @@
       <tr>
         <td align="center" class="smallText"><?php echo FOOTER_TEXT_BODY; ?></td>
       </tr>
+      <tr>
+        <td align="center" class="smallText"><?php echo $_SESSION['employee']->fullname; ?></td>
+      </tr>
     </table>
     <br>
   </body>

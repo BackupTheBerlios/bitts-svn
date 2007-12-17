@@ -3,9 +3,11 @@
  * CODE FILE   : configuration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 11 december 2007
- * Description : .....
- *               .....
+ * Date        : 17 december 2007
+ * Description : Configuration parameters.
+ *               Semi-permanent and basic configuration parameters are placed
+ *               here.
+ * 
  *               Framework: osCommerce, Open Source E-Commerce Solutions
  *               http://www.oscommerce.com
  */
@@ -44,6 +46,5 @@
   define('DB_SERVER_USERNAME', 'bitts_conn');
   define('DB_SERVER_PASSWORD', 'bitts_pwd');
   define('DB_DATABASE_NAME', 'bitts'); // database name
-  define('USE_PCONNECT', 'false'); // use persistent connections?
   define('STORE_SESSIONS', 'mysql'); // leave empty '' for default handler or set to 'mysql'
 ?>

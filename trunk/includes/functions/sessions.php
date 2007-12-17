@@ -3,7 +3,7 @@
  * CODE FILE   : sessions.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 11 december 2007
+ * Date        : 17 december 2007
  * Description : .....
  *               .....
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -24,11 +24,12 @@
     }
 
     function _sess_read($key) {
-      $database = new database();
-      $database->connect();
+      $database = $_SESSION['database'];
+      //$database = new database();
+      //$database->connect();
       $value_query = $database->query("select sessions_value from " . TABLE_SESSIONS . " where sessions_key = '" . $database->input($key) . "' and sessions_expiry > '" . time() . "'");
       $value = $database->fetch_array($value_query);
-      $database->close();
+      //$database->close();
 
       if (isset($value['value'])) {
         return $value['value'];
@@ -43,8 +44,9 @@
       $expiry = time() + $SESS_LIFE;
       $value = $val;
 
-      $database = new database();
-      $database->connect();
+      $database = $_SESSION['database'];
+      //$database = new database();
+      //$database->connect();
       $check_query = $database->query("select count(*) as total from " . TABLE_SESSIONS . " where sessions_key = '" . $database->input($key) . "'");
       $check = $database->fetch_array($check_query);
 
@@ -53,23 +55,25 @@
       } else {
         $result = $database->query("insert into " . TABLE_SESSIONS . " values ('" . $database->input($key) . "', '" . $database->input($expiry) . "', '" . $database->input($value) . "')");
       }
-      $database->close();
+      //$database->close();
       return $result;
     }
 
     function _sess_destroy($key) {
-      $database = new database();
-      $database->connect();
+      $database = $_SESSION['database'];
+      //$database = new database();
+      //$database->connect();
       $result = $database->query("delete from " . TABLE_SESSIONS . " where sessions_key = '" . tep_db_input($key) . "'");
-      $database->close();
+      //$database->close();
       return $result;
     }
 
     function _sess_gc($maxlifetime) {
-      $database = new database();
-      $database->connect();
+      $database = $_SESSION['database'];
+      //$database = new database();
+      //$database->connect();
       $database->query("delete from " . TABLE_SESSIONS . " where sessions_expiry < '" . time() . "'");
-      $database->close();
+      //$database->close();
       return true;
     }
 
