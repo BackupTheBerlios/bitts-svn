@@ -9,7 +9,6 @@
 
   interface database_interface {
     public function connect();
-    public function pconnect();
     public function select_db($database);
     public function error();
     public function errno();
