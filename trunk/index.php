@@ -3,15 +3,11 @@
  * CODE FILE   : index.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 11 december 2007
+ * Date        : 17 december 2007
  * Description : .....
  *               .....
  *               Framework: osCommerce, Open Source E-Commerce Solutions
  *               http://www.oscommerce.com
- */
-
-/****************************************************************************
- * IMPORT
  */
 
   // application_top //
@@ -29,4 +25,4 @@
 <!-- footer_eof //-->
 <!-- application_bottom //-->
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
-<!-- application_bottom //-->
+<!-- application_bottom_eof //-->
