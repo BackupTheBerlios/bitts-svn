@@ -3,7 +3,7 @@
  * CLASS FILE  : language.php
  * Project     : BitTS - BART it TimeSheet
  * Auteur(s)   : Erwin Beukhof
- * Datum       : 11 december 2007
+ * Datum       : 17 december 2007
  * Beschrijving: browser language detection logic Copyright phpMyAdmin (select_lang.lib.php3 v1.24 04/19/2002)
  *               Copyright Stephane Garin <sgarin@sgarin.com> (detect_language.php v0.1 04/02/2002)
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -11,9 +11,9 @@
  */
 
   class language {
-    var $languages, $catalog_languages, $browser_languages, $language;
+    public $languages, $catalog_languages, $browser_languages, $language;
 
-    function language($lng = '') {
+    public function __construct($lng = '') {
       $this->languages = array('ar' => 'ar([-_][[:alpha:]]{2})?|arabic',
                                'bg' => 'bg|bulgarian',
                                'br' => 'pt[-_]br|brazilian portuguese',
@@ -53,8 +53,7 @@
                                'zh' => 'zh|chinese simplified');
 
       $this->catalog_languages = array();
-      $database = new database();
-      $database->connect();
+      $database = $_SESSION['database'];
       $languages_query = $database->query("select languages_id, languages_name, languages_code, languages_image, languages_directory from " . TABLE_LANGUAGES);
       while ($languages_result = $database->fetch_array($languages_query)) {
         $this->catalog_languages[$languages_result['languages_code']] = array('id' => $languages_result['languages_id'],
@@ -62,8 +61,7 @@
                                                              'image' => $languages_result['languages_image'],
                                                              'directory' => $languages_result['languages_directory']);
       }
-      $database->close();
-      
+
       $this->browser_languages = '';
       $this->language = '';
 

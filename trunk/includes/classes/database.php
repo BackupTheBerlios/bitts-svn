@@ -3,7 +3,7 @@
  * CLASS FILE  : database.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 december 2007
+ * Date        : 17 december 2007
  * Description : Database related functions and selection of proper database
  *               type.
  * 
@@ -34,21 +34,17 @@
   	}
 
   	public function connect($db_server = DB_SERVER_NAME, $db_server_username = DB_SERVER_USERNAME, $db_server_password = DB_SERVER_PASSWORD, $db_database = DB_DATABASE_NAME) {
-      if (USE_PCONNECT == 'true') {
-        // Persistent connections
-        $this->real_database->pconnect($db_server, $db_server_username, $db_server_password);
-      } else {
-        $this->real_database->connect($db_server, $db_server_username, $db_server_password);
-      }
+      $this->real_database->connect($db_server, $db_server_username, $db_server_password);
 
       if ($this->real_database->get_link()) {
       	$this->real_database->select_db($db_database);
       }
-
+      //echo "Link on open: " . $this->real_database->get_link();
       return $this->real_database->get_link();
     }
 
     public function close() {
+      //echo "Link on close: " . $this->real_database->get_link();
       return $this->real_database->close();
     }
 

@@ -3,11 +3,11 @@
  * CLASS FILE  : database_mysql.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 december 2007
+ * Date        : 17 december 2007
  * Description : Mysql server implementation of the database interface
  */
 
-  // Requires the interface
+  // Requires interface database_interface
   require(DIR_WS_CLASSES . 'database_interface.php');
 
   class database_mysql implements database_interface {
@@ -16,10 +16,6 @@
   	public function connect($server='', $username='', $password='', $new_link=true, $client_flags=0) {
       $this->link = mysql_connect($server, $username, $password, $new_link, $client_flags);
       //echo '$link value on connect(): ' . $this->link . '<br>';
-    }
-
-    public function pconnect($server='', $username='', $password='', $new_link=true, $client_flags=0) {
-      $this->link = mysql_pconnect($server, $username, $password, $new_link, $client_flags);
     }
 
     public function select_db($database) {
