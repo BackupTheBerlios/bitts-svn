@@ -26,11 +26,11 @@
   define('HTTPS_COOKIE_PATH', '/bitts/');
 
   // * DIR_WS_* = Webserver directories (virtual/URL)
-  define('DIR_WS_HTTP_CATALOG', '/bitts/');
-  define('DIR_WS_HTTPS_CATALOG', '/bitts/');
+  define('DIR_WS_CATALOG', '/bitts/');
   define('DIR_WS_IMAGES', 'images/');
   define('DIR_WS_ICONS', DIR_WS_IMAGES . 'icons/');
   define('DIR_WS_INCLUDES', 'includes/');
+  define('DIR_WS_BOXES', DIR_WS_INCLUDES . 'boxes/');
   define('DIR_WS_FUNCTIONS', DIR_WS_INCLUDES . 'functions/');
   define('DIR_WS_CLASSES', DIR_WS_INCLUDES . 'classes/');
   define('DIR_WS_LANGUAGES', DIR_WS_INCLUDES . 'languages/');
