@@ -3,7 +3,7 @@
  * CODE FILE   : application_top.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 17 december 2007
+ * Date        : 14 april 2008
  * Description : .....
  *               .....
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -19,11 +19,17 @@
   // Include server parameters
   require('includes/configuration.php');
 
+  // define the project version
+  define('PROJECT_VERSION', 'BitTS v0.1');
+
   // Include the list of application filenames
   require(DIR_WS_INCLUDES . 'filenames.php');
 
   // Include the list of application database tables
   require(DIR_WS_INCLUDES . 'database_tables.php');
+
+  // Customization for the design layout
+  define('BOX_WIDTH', 125); // how wide the boxes should be in pixels (default: 125)
 
   // Include the database functions
   require(DIR_WS_CLASSES . 'database.php');
@@ -64,19 +70,20 @@
   // Include the password crypto functions
   require(DIR_WS_FUNCTIONS . 'password_funcs.php');
 
+  // infobox
+  require(DIR_WS_CLASSES . 'boxes.php');
+
   // Include the employee class
   require(DIR_WS_CLASSES . 'employee.php');
-  
+
   // Get logged-on / authenticated user's name
   if ( isset( $_SERVER['LOGON_USER'] ) && $_SERVER['LOGON_USER'] != '' ) {
-  	echo "Logged in: " . $_SERVER['LOGON_USER'];
   	$_SESSION['employee'] = new employee($_SERVER['LOGON_USER'], 'employees_login');
   } else if ( isset( $_SERVER['AUTH_USER'] ) && $_SERVER['AUTH_USER'] != '' ) {
-  	echo "Logged in: " . $_SERVER['LOGON_USER'];
   	$_SESSION['employee'] = new employee($_SERVER['AUTH_USER'], 'employees_login');
   } else {
-  	echo "Not logged in!";
     // TEST LOGIN !!!!!!!!!!!!REMOVE !!!!!!!!!!!!!!!!!
   	$_SESSION['employee'] = new employee('e.beukhof', 'employees_login');
+    //$_SESSION['employee'] = null;
   }
 ?>
