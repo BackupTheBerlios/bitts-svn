@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 28 november 2007
+ * Date        : 14 april 2008
  * Description : Dutch language file
  */
 
@@ -48,9 +48,28 @@ define('CHARSET', 'iso-8859-1');
 // page title
 define('TITLE', COMPANY_NAME . ' - ' . PROJECT_NAME . ' ' . PROJECT_VERSION);
 
+define('HEADER_TEXT_CURRENT_USER', 'Huidige gebruiker : ');
+define('HEADER_TEXT_NO_CURRENT_USER', 'Niet ingelogd!');
+define('HEADER_TEXT_YOUR_DATA', 'Uw gegevens');
+
+define('BOX_HEADING_MAINMENU', 'Menu');
+define('BOX_MAINMENU_HOME', 'Home');
+define('BOX_MAINMENU_TIMEREGISTRATION', 'Tijdregistratie');
+define('BOX_MAINMENU_ANALYSIS', 'Rapportage');
+define('BOX_MAINMENU_ADMINISTRATION', 'Beheer');
+
+define('BODY_TEXT_LOGIN', 'Login');
+define('BODY_TEXT_FULLNAME', 'Volledige naam');
+define('BODY_TEXT_EMPLOYEE_ID', 'Personeelsnummer');
+define('BODY_TEXT_IS_USER', 'Is gebruiker');
+define('BODY_TEXT_IS_ANALYST', 'Is rapporteur');
+define('BODY_TEXT_IS_ADMINISTRATOR', 'Is beheerder');
+define('BODY_TEXT_YES', 'Ja');
+define('BODY_TEXT_NO', 'Nee');
+
+
+
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
-
-
 
 
 
