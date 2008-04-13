@@ -3,7 +3,7 @@
  * CLASS FILE  : employee.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 17 december 2007
+ * Date        : 14 april 2008
  * Description : .....
  *               .....
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -26,11 +26,11 @@
         case 'fullname':
           return $this->fullname;
         case 'is_user':
-          return ($this->is_user = 1);
-              case 'is_analyst':
-          return ($this->is_analyst = 1);
-              case 'is_administrator':
-          return ($this->is_administrator = 1);
+          return ($this->is_user == 1);
+        case 'is_analyst':
+          return ($this->is_analyst == 1);
+        case 'is_administrator':
+          return ($this->is_administrator == 1);
       }
       return null;
     }
@@ -50,15 +50,15 @@
       	  break;
       	}
       	case 'is_user': {
-      	  $this->is_user = ($value = true ? 1 : 0);
+      	  $this->is_user = ($value ? 1 : 0);
       	  break;
       	}
         case 'is_analyst': {
-      	  $this->is_analyst = ($value = true ? 1 : 0);
+      	  $this->is_analyst = ($value ? 1 : 0);
           break;
       	}
         case 'is_administrator': {
-      	  $this->is_administrator = ($value = true ? 1 : 0);
+      	  $this->is_administrator = ($value ? 1 : 0);
           break;
       	}
       }
@@ -84,7 +84,7 @@
 
     private function fill($employee_id = '', $login = '', $fullname = '', $password = '', $is_user = 0, $is_analyst = 0, $is_administrator = 0) {
       $this->employee_id = $employee_id;
-      $this->fullname = $login;
+      $this->login = $login;
       $this->fullname = $fullname;
       $this->password = $password;
       $this->is_user = $is_user;
