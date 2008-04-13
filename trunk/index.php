@@ -3,7 +3,7 @@
  * CODE FILE   : index.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 17 december 2007
+ * Date        : 14 april 2008
  * Description : .....
  *               .....
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -16,9 +16,84 @@
   require(DIR_WS_INCLUDES . 'header.php');
 ?>
 <!-- body //-->
-<?php
-  echo 'Hello World!';
-?>
+  <table border="0" width="100%" cellspacing="3" cellpadding="3">
+    <tr>
+      <td width="<?php echo BOX_WIDTH; ?>" valign="top">
+        <table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
+          <!-- left_navigation //-->
+          <?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+          <!-- left_navigation_eof //-->
+        </table>
+      </td>
+      <!-- body_text //-->
+      <td width="100%" valign="top">
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+          <tr>
+            <td>
+              <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td class="pageHeading"><?php echo HEADER_TEXT_YOUR_DATA; ?></td>
+                  <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'account.gif', HEADER_TEXT_YOUR_DATA, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '50'); ?></td>
+          </tr>
+          <tr>
+            <td align="center">
+              <table border="0px" width="20%" cellspacing="0" cellpadding="1" class="infoBox">
+                <tr>
+                  <td>
+                    <table border="0px" width="100%" cellspacing="0" cellpadding="3" class="infoBoxContents">
+                      <tr>
+                        <td align="right" class="boxText"><?php echo BODY_TEXT_LOGIN;?></td>
+                        <td class="boxText">:</td>
+                        <td class="boxText"><?php echo $_SESSION['employee']->login;?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="boxText"><?php echo BODY_TEXT_FULLNAME;?></td>
+                        <td class="boxText">:</td>
+                        <td class="boxText"><?php echo $_SESSION['employee']->fullname;?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="boxText"><?php echo BODY_TEXT_EMPLOYEE_ID;?></td>
+                        <td class="boxText">:</td>
+                        <td class="boxText"><?php echo $_SESSION['employee']->employee_id;?></td>
+                      </tr>
+                      <tr>
+                        <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '5'); ?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="boxText"><?php echo BODY_TEXT_IS_USER;?></td>
+                        <td class="boxText">:</td>
+                        <td class="boxText"><?php echo ($_SESSION['employee']->is_user)?BODY_TEXT_YES:BODY_TEXT_NO;?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="boxText"><?php echo BODY_TEXT_IS_ANALYST;?></td>
+                        <td class="boxText">:</td>
+                        <td class="boxText"><?php echo ($_SESSION['employee']->is_analyst)?BODY_TEXT_YES:BODY_TEXT_NO;?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="boxText"><?php echo BODY_TEXT_IS_ADMINISTRATOR;?></td>
+                        <td class="boxText">:</td>
+                        <td class="boxText"><?php echo ($_SESSION['employee']->is_administrator)?BODY_TEXT_YES:BODY_TEXT_NO;?></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '50'); ?></td>
+          </tr>
+        </table>
+      </td>
+      <!-- body_text_eof //-->
+    </tr>
+  </table>
 <!-- body_eof //-->
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

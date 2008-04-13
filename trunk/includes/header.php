@@ -23,13 +23,12 @@
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr class="header">
         <td valign="middle"><?php echo '<a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . tep_image(DIR_WS_IMAGES . COMPANY_BANNER, COMPANY_NAME) . '</a>'; ?></td>
-        <td align="right" valign="bottom"><?php echo '<a href="' . tep_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . tep_image(DIR_WS_IMAGES . 'header_account.gif', HEADER_TITLE_MY_ACCOUNT) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_SHOPPING_CART) . '">' . tep_image(DIR_WS_IMAGES . 'header_cart.gif', HEADER_TITLE_CART_CONTENTS) . '</a>&nbsp;&nbsp;<a href="' . tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL') . '">' . tep_image(DIR_WS_IMAGES . 'header_checkout.gif', HEADER_TITLE_CHECKOUT) . '</a>'; ?>&nbsp;&nbsp;</td>
       </tr>
     </table>
     <table border="0" width="100%" cellspacing="0" cellpadding="1">
       <tr class="headerNavigation">
-        <td class="headerNavigation">&nbsp;&nbsp;</td>
-        <td align="right" class="headerNavigation"><?php if (session_is_registered('customer_id')) { ?><a href="<?php echo tep_href_link(FILENAME_LOGOFF, '', 'SSL'); ?>" class="headerNavigation"><?php echo HEADER_TITLE_LOGOFF; ?></a> &nbsp;|&nbsp; <?php } ?><a href="<?php echo tep_href_link(FILENAME_ACCOUNT, '', 'SSL'); ?>" class="headerNavigation"><?php echo HEADER_TITLE_MY_ACCOUNT; ?></a> &nbsp;|&nbsp; <a href="<?php echo tep_href_link(FILENAME_SHOPPING_CART); ?>" class="headerNavigation"><?php echo HEADER_TITLE_CART_CONTENTS; ?></a> &nbsp;|&nbsp; <a href="<?php echo tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'); ?>" class="headerNavigation"><?php echo HEADER_TITLE_CHECKOUT; ?></a> &nbsp;&nbsp;</td>
+        <td class="headerNavigation">&nbsp;&nbsp;<?php if (isset($_SESSION['employee'])) echo HEADER_TEXT_CURRENT_USER . $_SESSION['employee']->fullname; else echo HEADER_TEXT_NO_CURRENT_USER?></td>
+        <td align="right" class="headerNavigation">&nbsp;&nbsp;</td>
       </tr>
     </table>
 
