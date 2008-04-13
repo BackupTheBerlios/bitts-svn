@@ -3,7 +3,7 @@
  * CODE FILE   : password_funcs.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 29 november 2007
+ * Date        : 14 april 2008
  * Description : .....
  *               .....
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -19,12 +19,12 @@
     }
 
     if ($connection == 'NONSSL') {
-      $link = HTTP_SERVER . DIR_WS_HTTP_CATALOG;
+      $link = HTTP_SERVER . DIR_WS_CATALOG;
     } elseif ($connection == 'SSL') {
       if (ENABLE_SSL == true) {
-        $link = HTTPS_SERVER . DIR_WS_HTTPS_CATALOG;
+        $link = HTTPS_SERVER . DIR_WS_CATALOG;
       } else {
-        $link = HTTP_SERVER . DIR_WS_HTTP_CATALOG;
+        $link = HTTP_SERVER . DIR_WS_CATALOG;
       }
     } else {
       die('</td></tr></table></td></tr></table><br><br><font color="#ff0000"><b>Error!</b></font><br><br><b>Unable to determine connection method on a link!<br><br>Known methods: NONSSL SSL</b><br><br>');
@@ -68,6 +68,21 @@
     return $link;
   }
 
+  // The HTML href link wrapper function with enabler/disabler
+  function tep_href_link_switched($link, $text, $is_enabled) {
+  	$retval = '';
+  	if ($is_enabled)
+  	  $retval = '<a href="' . tep_href_link($link) . '">';
+  	else
+  	  $retval = '<font color="#C0C0C0">';
+  	$retval .= $text;
+  	if ($is_enabled)
+  	  $retval .= '</a>';
+  	else
+  	  $retval .= '</font>';
+  	return $retval;
+  }
+
 ////
 // The HTML image wrapper function
   function tep_image($src, $alt = '', $width = '', $height = '', $parameters = '') {
@@ -80,7 +95,7 @@
     $image = '<img src="' . tep_output_string($src) . '" border="0" alt="' . tep_output_string($alt) . '"';
 
     if (tep_not_null($alt)) {
-      $image .= ' title=" ' . tep_output_string($alt) . ' "';
+      $image .= ' title="' . tep_output_string($alt) . '"';
     }
 
     if ( (CONFIG_CALCULATE_IMAGE_SIZE == 'true') && (empty($width) || empty($height)) ) {
