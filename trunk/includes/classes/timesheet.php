@@ -3,30 +3,62 @@
  * CLASS FILE  : timesheet.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 05 december 2007
- * Description : .....
- *               .....
+ * Date        : 22 april 2008
+ * Description : Timesheet class
+ *
  */
 
   class timesheet {
-    private $timesheet_id, $start_date, $end_date, $activities;
+    private $timesheet_id, $start_date, $end_date, $employee_id, $activities;
 
-    function timesheet($timesheet_id = '') {
-      $this->timesheet_id = $timesheet_id;
+    public function __construct($timesheet_id = 0, $employee_id = 0, $period = null) {
+      $database = $_SESSION['database'];
       $this->activities = array();
 
-      if (tep_not_null($this->timesheet_id)) {
-        $this->timesheet_id = tep_db_prepare_input($this->timesheet_id);
+      if ($timesheet_id != 0) {
+        $this->timesheet_id = $database->prepare_input($this->timesheet_id);
 
-        $timesheet_query = tep_db_query("select start_date, end_date from " . TABLE_TIMESHEETS . " where timesheet_id = '" . (int)$this->timesheet_id . "'");
-        $timesheet_result = tep_db_fetch_array($timesheet_query);
+        $timesheet_query = $database->query("select timesheets_id, timesheets_start_date, timesheets_end_date, employees_id from " . TABLE_TIMESHEETS . " where timesheets_id = '" . (int)$this->timesheet_id . "'");
+      } else {
+      	// Retrieve the timesheet for the current period or create a new one
+        $this->employee_id = $database->prepare_input($employee_id);
+      	$this->start_date = $database->prepare_input(tep_periodstartdate($period));
 
-        $this->$start_date = $timesheet_result['start_date'];
-        $this->$end_date = $timesheet_result['end_date'];
-
-        // Retrieve all activities for this timesheet
-        $this->activities = activity::get_array($this->timesheet_id);
+        $timesheet_query = $database->query("select timesheets_id, timesheets_start_date, timesheets_end_date, employees_id from " . TABLE_TIMESHEETS . " where employees_id = '" . (int)$this->employee_id . "' and timesheets_start_date = '" . $this->start_date . "'");
       }
+
+      $timesheet_result = $database->fetch_array($timesheet_query);
+
+      $this->fill($timesheet_result['timesheets_id'],
+                  $timesheet_result['timesheets_start_date'],
+                  $timesheet_result['timesheets_end_date'],
+                  $timesheet_result['employees_id']);
+
+      // Retrieve all activities for this timesheet (if any exist)
+//      $this->activities = activity::get_array($this->timesheet_id);
+    }
+
+    public function __get($varname) {
+      switch ($varname) {
+        case 'timesheet_id':
+          return $this->timesheet_id;
+      	case 'period':
+          return tep_datetoperiod($this->start_date);
+        case 'start_date':
+          return $this->start_date;
+        case 'end_date':
+          return $this->end_date;
+        case 'activities':
+          return ($this->activities);
+      }
+      return null;
+    }
+
+    private function fill($timesheet_id = 0, $start_date = '0000-00-00 00:00:00', $end_date = '0000-00-00 00:00:00', $employee_id = 0) {
+      $this->timesheet_id = $timesheet_id;
+      $this->start_date = $start_date;
+      $this->end_date = $end_date;
+      $this->employee_id = $employee_id;
     }
   }
 ?>

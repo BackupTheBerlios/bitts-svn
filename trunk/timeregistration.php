@@ -3,9 +3,9 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 april 2008
- * Description : .....
- *               .....
+ * Date        : 22 april 2008
+ * Description : Time registration form
+ *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
  *               http://www.oscommerce.com
  */
@@ -14,6 +14,10 @@
   require('includes/application_top.php');
   // header //
   require(DIR_WS_INCLUDES . 'header.php');
+
+//  if (!isset($_SESSION['timesheet'])) {
+  	$_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, $_GET['period']);
+//  }
 ?>
 <!-- body //-->
   <table border="0" width="100%" cellspacing="3" cellpadding="3">
@@ -30,10 +34,27 @@
         <table border="1" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td>
-              <table border="1" width="100%" cellspacing="0" cellpadding="0">
+              <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td class="pageHeading">HEADING_TITLE</td>
-                  <td class="pageHeading" align="right">categories_image, categories_name, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT</td>
+                  <td class="pageHeading"><?php echo HEADER_TEXT_TIMEREGISTRATION; ?></td>
+                  <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'calendar.gif', HEADER_TEXT_YOUR_DATA, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <table border="0" width="20%" cellspacing="0" cellpadding="1" class="infoBox">
+                <tr>
+                  <td>
+                    <table border="0" width="100%" cellspacing="0" cellpadding="3" class="infoBoxContents">
+                      <tr>
+                        <td align="left" class="boxText"><?php echo '<a href="' . tep_href_link(FILENAME_TIMEREGISTRATION, 'period=' . tep_next_period($_SESSION['timesheet']->period, -1)) . '">' . tep_image(DIR_WS_IMAGES . 'arrow_left.gif', TEXT_TIMEREGISTRATION_BACK) . '</a>'; ?></td>
+                        <td align="center" class="boxText"><?php echo TEXT_TIMEREGISTRATION_PERIOD . $_SESSION['timesheet']->period; ?></td>
+                        <td align="right" class="boxText"><?php echo '<a href="' . tep_href_link(FILENAME_TIMEREGISTRATION, 'period=' . tep_next_period($_SESSION['timesheet']->period, 1)) . '">' . tep_image(DIR_WS_IMAGES . 'arrow_right.gif', TEXT_TIMEREGISTRATION_FORWARD) . '</a>'; ?></td>
+                      </tr>
+                    </table>
+                  </td>
                 </tr>
               </table>
             </td>
@@ -42,25 +63,7 @@
             <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
           </tr>
           <tr>
-            <td>
-              <table border="1" width="100%" cellspacing="0" cellpadding="2">
-                <tr>
-                  <td>
-                    <table border="1" width="100%" cellspacing="0" cellpadding="2">
-                      <tr>
-                        <td align="center" class="smallText" width="20%" valign="top">categories_image, categories_name, SUBCATEGORY_IMAGE_WIDTH, SUBCATEGORY_IMAGE_HEIGHT<br>categories_name</td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-                <tr>
-                  <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
-                </tr>
-                <tr>
-                  <td>include DIR_WS_MODULES . FILENAME_NEW_PRODUCTS</td>
-                </tr>
-              </table>
-            </td>
+            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '50'); ?></td>
           </tr>
         </table>
       </td>
