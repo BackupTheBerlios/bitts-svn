@@ -17,6 +17,7 @@
     <title><?php echo TITLE; ?></title>
     <base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="shortcut icon" href="<?php echo DIR_WS_IMAGES ?>favicon.ico" type="image/x-icon">
   </head>
   <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0">
 

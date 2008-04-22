@@ -31,30 +31,33 @@
       </td>
       <!-- body_text //-->
       <td width="100%" valign="top">
-        <table border="1" width="100%" cellspacing="0" cellpadding="0">
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td>
               <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
                   <td class="pageHeading"><?php echo HEADER_TEXT_TIMEREGISTRATION; ?></td>
-                  <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'calendar.gif', HEADER_TEXT_YOUR_DATA, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+                  <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'calendar.gif', HEADER_TEXT_TIMEREGISTRATION, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
                 </tr>
               </table>
             </td>
           </tr>
           <tr>
             <td align="center">
-              <table border="0" width="20%" cellspacing="0" cellpadding="1" class="infoBox">
+              <table border="0" width="15%" cellspacing="0" cellpadding="1" class="infoBox">
                 <tr>
-                  <td>
-                    <table border="0" width="100%" cellspacing="0" cellpadding="3" class="infoBoxContents">
-                      <tr>
-                        <td align="left" class="boxText"><?php echo '<a href="' . tep_href_link(FILENAME_TIMEREGISTRATION, 'period=' . tep_next_period($_SESSION['timesheet']->period, -1)) . '">' . tep_image(DIR_WS_IMAGES . 'arrow_left.gif', TEXT_TIMEREGISTRATION_BACK) . '</a>'; ?></td>
-                        <td align="center" class="boxText"><?php echo TEXT_TIMEREGISTRATION_PERIOD . $_SESSION['timesheet']->period; ?></td>
-                        <td align="right" class="boxText"><?php echo '<a href="' . tep_href_link(FILENAME_TIMEREGISTRATION, 'period=' . tep_next_period($_SESSION['timesheet']->period, 1)) . '">' . tep_image(DIR_WS_IMAGES . 'arrow_right.gif', TEXT_TIMEREGISTRATION_FORWARD) . '</a>'; ?></td>
-                      </tr>
-                    </table>
-                  </td>
+                  <td align="left" class="infoBoxHeading"><?php echo '<a href="' . tep_href_link(FILENAME_TIMEREGISTRATION, 'period=' . tep_next_period($_SESSION['timesheet']->period, -1)) . '">' . tep_image(DIR_WS_IMAGES . 'arrow_left.gif', TEXT_TIMEREGISTRATION_BACK) . '</a>'; ?></td>
+                  <td align="center" class="infoBoxHeading"><?php echo TEXT_TIMEREGISTRATION_PERIOD . $_SESSION['timesheet']->period; ?></td>
+                  <td align="right" class="infoBoxHeading"><?php echo '<a href="' . tep_href_link(FILENAME_TIMEREGISTRATION, 'period=' . tep_next_period($_SESSION['timesheet']->period, 1)) . '">' . tep_image(DIR_WS_IMAGES . 'arrow_right.gif', TEXT_TIMEREGISTRATION_FORWARD) . '</a>'; ?></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <table border="0px" width="20%" cellspacing="0" cellpadding="3" class="infoBoxContents">
+                <tr>
+                  <td align="center" class="boxText"><?php echo tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($_SESSION['timesheet']->start_date)) . '&nbsp;&nbsp;-&nbsp;&nbsp;' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($_SESSION['timesheet']->end_date)); ?></td>
                 </tr>
               </table>
             </td>

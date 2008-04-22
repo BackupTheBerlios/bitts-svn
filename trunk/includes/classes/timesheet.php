@@ -29,13 +29,19 @@
 
       $timesheet_result = $database->fetch_array($timesheet_query);
 
-      $this->fill($timesheet_result['timesheets_id'],
-                  $timesheet_result['timesheets_start_date'],
-                  $timesheet_result['timesheets_end_date'],
-                  $timesheet_result['employees_id']);
+      if (tep_not_null($timesheet_result)) {
+        // Timesheet exists
+      	$this->fill($timesheet_result['timesheets_id'],
+                    $timesheet_result['timesheets_start_date'],
+                    $timesheet_result['timesheets_end_date'],
+                    $timesheet_result['employees_id']);
 
-      // Retrieve all activities for this timesheet (if any exist)
-//      $this->activities = activity::get_array($this->timesheet_id);
+        // Retrieve all activities for this timesheet (if any exist)
+//        $this->activities = activity::get_array($this->timesheet_id);
+      } else {
+      	// Timesheet does not exist
+      	$this->fill(0, tep_periodstartdate($period), tep_periodenddate($period), $employee_id);
+      }
     }
 
     public function __get($varname) {
