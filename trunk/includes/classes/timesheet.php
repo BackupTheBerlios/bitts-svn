@@ -24,7 +24,7 @@
         $this->employee_id = $database->prepare_input($employee_id);
       	$this->start_date = $database->prepare_input(tep_periodstartdate($period));
 
-        $timesheet_query = $database->query("select timesheets_id, timesheets_start_date, timesheets_end_date, employees_id from " . TABLE_TIMESHEETS . " where employees_id = '" . (int)$this->employee_id . "' and timesheets_start_date = '" . $this->start_date . "'");
+        $timesheet_query = $database->query("select timesheets_id, timesheets_start_date, timesheets_end_date, timesheets_locked, employees_id from " . TABLE_TIMESHEETS . " where employees_id = '" . (int)$this->employee_id . "' and timesheets_start_date = '" . $this->start_date . "'");
       }
 
       $timesheet_result = $database->fetch_array($timesheet_query);
@@ -34,7 +34,7 @@
       	$this->fill($timesheet_result['timesheets_id'],
                     $timesheet_result['timesheets_start_date'],
                     $timesheet_result['timesheets_end_date'],
-                    $timesheet_result['locked'],
+                    $timesheet_result['timesheets_locked'],
                     $timesheet_result['employees_id']);
 
         // Retrieve all activities for this timesheet (if any exist)
