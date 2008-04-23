@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 april 2008
+ * Date        : 23 april 2008
  * Description : Dutch language file
  */
 
@@ -74,7 +74,19 @@ define('BODY_TEXT_NO', 'Nee');
 define('TEXT_TIMEREGISTRATION_BACK', 'Periode terug');
 define('TEXT_TIMEREGISTRATION_PERIOD', 'Periode : ');
 define('TEXT_TIMEREGISTRATION_FORWARD', 'Periode vooruit');
+define('TEXT_TIMEREGISTRATION_IS_EMPTY', 'Geen activiteiten aanwezig');
 
+define('TEXT_ACTIVITY_DAY', 'Dag');
+define('TEXT_ACTIVITY_PROJECTNAME', 'Project');
+define('TEXT_ACTIVITY_ROLENAME', 'Rol');
+define('TEXT_ACTIVITY_AMOUNT', 'Aantal');
+define('TEXT_ACTIVITY_UNIT', 'Eenheid');
+define('TEXT_ACTIVITY_TRAVELDISTANCE', 'Reisafstand');
+define('TEXT_ACTIVITY_EXPENSES', 'Onkosten');
+define('TEXT_ACTIVITY_TICKETNUMBER', 'Ticket nr.');
+define('TEXT_ACTIVITY_COMMENT', 'Opmerkingen');
+define('TEXT_ACTIVITY_EDIT', 'Wijzigen');
+define('TEXT_ACTIVITY_DELETE', 'Verwijderen');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>

@@ -76,9 +76,10 @@
   // Include the employee class
   require(DIR_WS_CLASSES . 'employee.php');
 
-  // Include the timesheet class
+  // Include the timesheet and related classes
   require(DIR_WS_CLASSES . 'timesheet.php');
-
+  require(DIR_WS_CLASSES . 'activity.php');
+  
   // Get logged-on / authenticated user's name
   if ( isset( $_SERVER['LOGON_USER'] ) && $_SERVER['LOGON_USER'] != '' ) {
   	$_SESSION['employee'] = new employee($_SERVER['LOGON_USER'], 'employees_login');

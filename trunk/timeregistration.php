@@ -46,9 +46,9 @@
             <td align="center">
               <table border="0" width="15%" cellspacing="0" cellpadding="1" class="infoBox">
                 <tr>
-                  <td align="left" class="infoBoxHeading"><?php echo '<a href="' . tep_href_link(FILENAME_TIMEREGISTRATION, 'period=' . tep_next_period($_SESSION['timesheet']->period, -1)) . '">' . tep_image(DIR_WS_IMAGES . 'arrow_left.gif', TEXT_TIMEREGISTRATION_BACK) . '</a>'; ?></td>
+                  <td align="left" class="infoBoxHeading"><?php echo '<a href="' . tep_href_link(FILENAME_TIMEREGISTRATION, 'mPath=21&period=' . tep_next_period($_SESSION['timesheet']->period, -1)) . '">' . tep_image(DIR_WS_IMAGES . 'arrow_left.gif', TEXT_TIMEREGISTRATION_BACK) . '</a>'; ?></td>
                   <td align="center" class="infoBoxHeading"><?php echo TEXT_TIMEREGISTRATION_PERIOD . $_SESSION['timesheet']->period; ?></td>
-                  <td align="right" class="infoBoxHeading"><?php echo '<a href="' . tep_href_link(FILENAME_TIMEREGISTRATION, 'period=' . tep_next_period($_SESSION['timesheet']->period, 1)) . '">' . tep_image(DIR_WS_IMAGES . 'arrow_right.gif', TEXT_TIMEREGISTRATION_FORWARD) . '</a>'; ?></td>
+                  <td align="right" class="infoBoxHeading"><?php echo '<a href="' . tep_href_link(FILENAME_TIMEREGISTRATION, 'mPath=21&period=' . tep_next_period($_SESSION['timesheet']->period, 1)) . '">' . tep_image(DIR_WS_IMAGES . 'arrow_right.gif', TEXT_TIMEREGISTRATION_FORWARD) . '</a>'; ?></td>
                 </tr>
               </table>
             </td>
@@ -64,6 +64,47 @@
           </tr>
           <tr>
             <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+          </tr>
+          <tr>
+            <td>
+              <table border="0" width="100%" cellspacing="0" cellpadding="2" class="activityListing">
+                <tr>
+                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_DAY; ?></td>
+                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_PROJECTNAME . '<br>' . TEXT_ACTIVITY_ROLENAME; ?></td>
+                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_AMOUNT; ?></td>
+                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_UNIT; ?></td>
+                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_TRAVELDISTANCE; ?></td>
+                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_EXPENSES; ?></td>
+                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_TICKETNUMBER; ?></td>
+                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_COMMENT; ?></td>
+                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_EDIT; ?></td>
+                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_DELETE; ?></td>
+                </tr>
+                <?php if (!$_SESSION['timesheet']->empty) {
+                  $odd_or_even = "odd";
+                  for ($index = 0; $index < sizeof($_SESSION['timesheet']->activities); $index++) { ?>
+                    <tr class="activityListing-<?php echo $odd_or_even; $odd_or_even = ($odd_or_even == 'odd'?'even':'odd'); ?>">
+                      <td class="activityListing-data"><?php echo strftime('%d', tep_datetouts($_SESSION['timesheet']->activities[$index]->date)); ?></td>
+                      <td class="activityListing-data"><?php echo ''; ?></td>
+                      <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->amount; ?></td>
+                      <td class="activityListing-data"><?php echo ''; ?></td>
+                      <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->travel_distance; ?></td>
+                      <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->expenses; ?></td>
+                      <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->ticket_number; ?></td>
+                      <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->comment; ?></td>
+                      <td class="activityListing-data"><?php echo 'e'; ?></td>
+                      <td class="activityListing-data"><?php echo 'd'; ?></td>
+                    </tr>
+                  <?php }
+                } else { ?>
+                  <tr class="activityListing-odd">
+                    <td class="activityListing-data" colspan="10">
+                      <?php echo TEXT_TIMEREGISTRATION_IS_EMPTY; ?>
+                    </td>
+                  </tr>
+                <?php } ?>
+              </table>
+            </td>
           </tr>
           <tr>
             <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '50'); ?></td>

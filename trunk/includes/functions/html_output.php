@@ -1,11 +1,11 @@
 <?php
 /****************************************************************************
- * CODE FILE   : password_funcs.php
+ * CODE FILE   : html_output.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 april 2008
- * Description : .....
- *               .....
+ * Date        : 23 april 2008
+ * Description : html output functions
+ *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
  *               http://www.oscommerce.com
  */
@@ -69,10 +69,10 @@
   }
 
   // The HTML href link wrapper function with enabler/disabler
-  function tep_href_link_switched($link, $text, $is_enabled) {
+  function tep_href_link_switched($link, $parameters = '', $text, $is_enabled) {
   	$retval = '';
   	if ($is_enabled)
-  	  $retval = '<a href="' . tep_href_link($link) . '">';
+  	  $retval = '<a href="' . tep_href_link($link, $parameters) . '">';
   	else
   	  $retval = '<font color="#C0C0C0">';
   	$retval .= $text;
@@ -81,6 +81,26 @@
   	else
   	  $retval .= '</font>';
   	return $retval;
+  }
+
+  function tep_create_parameters($name, $value = '', $relevant_other_parameters = null) {
+  	$result = '';
+  	if ($value != '')
+  	  $result = $name . '=' . $value;
+  	// Walk through the array
+    for ($index = 0; $index < sizeof($relevant_other_parameters); $index++) {
+      // Retrieve parameter value
+      $key = $relevant_other_parameters[$index];
+      $value = $_GET[$relevant_other_parameters[$index]];
+      if ($key != $name && $value != '') {
+        // Detect if an ampersant is needed (first entry doesn't)
+      	if ($result != '')
+          $result .= '&';
+        // Retrieve and add parameter
+        $result .= $key . '=' . $value;
+      }
+    }
+  	return $result;
   }
 
 ////

@@ -136,34 +136,34 @@ TD.infoBox, SPAN.infoBox {
 
 /*** Box (midden) met producten (2x; even & oneven) ***/
 
-TR.accountHistory-odd, TR.addressBook-odd, TR.alsoPurchased-odd, TR.payment-odd, TR.productListing-odd, TR.productReviews-odd, TR.upcomingProducts-odd, TR.shippingOptions-odd {
-  //background: #f8f8f9;
-  background: #f0f0c0;
+TR.accountHistory-odd, TR.addressBook-odd, TR.alsoPurchased-odd, TR.payment-odd, TR.activityListing-odd, TR.productReviews-odd, TR.upcomingProducts-odd, TR.shippingOptions-odd {
+  background: #f8f8f9;
+  //background: #f0f0c0;
 }
 
-TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-even, TR.productListing-even, TR.productReviews-even, TR.upcomingProducts-even, TR.shippingOptions-even {
-  //background: #f8f8f9;
-  background: #f0f0c0;
+TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-even, TR.activityListing-even, TR.productReviews-even, TR.upcomingProducts-even, TR.shippingOptions-even {
+  background: #f8f8f9;
+  //background: #f0f0c0;
 }
 
-TABLE.productListing {
+TABLE.activityListing {
   border: 1px;
   border-style: solid;
-  //border-color: #b6b7cb;
-  border-color: #080545;
+  border-color: #b6b7cb;
+  //border-color: #080545;
   border-spacing: 1px;
 }
 
-.productListing-heading {
+.activityListing-heading {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
-  //background: #b6b7cb;
-  background: #080545;
+  background: #b6b7cb;
+  //background: #080545;
   color: #FFFFFF;
   font-weight: bold;
 }
 
-TD.productListing-data {
+TD.activityListing-data {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
 }
