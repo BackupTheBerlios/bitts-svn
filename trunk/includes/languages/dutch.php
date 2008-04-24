@@ -88,5 +88,13 @@ define('TEXT_ACTIVITY_COMMENT', 'Opmerkingen');
 define('TEXT_ACTIVITY_EDIT', 'Wijzigen');
 define('TEXT_ACTIVITY_DELETE', 'Verwijderen');
 
+define('TEXT_CALENDAR_MONDAY', 'm');
+define('TEXT_CALENDAR_TUESDAY', 'd');
+define('TEXT_CALENDAR_WEDNESDAY', 'w');
+define('TEXT_CALENDAR_THURSDAY', 'd');
+define('TEXT_CALENDAR_FRIDAY', 'v');
+define('TEXT_CALENDAR_SATURDAY', 'z');
+define('TEXT_CALENDAR_SUNDAY', 'z');
+
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>

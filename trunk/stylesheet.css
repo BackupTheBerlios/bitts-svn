@@ -146,7 +146,7 @@ TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-e
   //background: #f0f0c0;
 }
 
-TABLE.activityListing {
+TABLE.activityListing, TABLE.calendar {
   border: 1px;
   border-style: solid;
   border-color: #b6b7cb;
@@ -154,7 +154,7 @@ TABLE.activityListing {
   border-spacing: 1px;
 }
 
-.activityListing-heading {
+.activityListing-heading, .calendar-heading {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #b6b7cb;
@@ -166,6 +166,24 @@ TABLE.activityListing {
 TD.activityListing-data {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
+}
+
+TD.calendar-weekday {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background: #f8f8f9;
+}
+
+TD.calendar-weekend {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background: #b6b7cb;
+}
+
+TD.calendar-notavailable {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background: #ffffff;
 }
 
 A.pageResults {

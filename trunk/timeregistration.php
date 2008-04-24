@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 april 2008
+ * Date        : 24 april 2008
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -103,6 +103,16 @@
                     </td>
                   </tr>
                 <?php } ?>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+          </tr>
+          <tr>
+            <td align="center">
+              <table border="0" cellspacing="0" cellpadding="2" class="calendar">
+                <?php require(DIR_WS_INCLUDES . 'calendar.php'); ?>
               </table>
             </td>
           </tr>
