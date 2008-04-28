@@ -18,7 +18,9 @@
 
   // Define the webserver and path parameters
   define('HTTP_SERVER', 'http://localhost'); // eg, http://localhost - should not be empty for productive servers
+  //define('HTTP_SERVER', 'http://192.168.24.162'); // eg, http://localhost - should not be empty for productive servers
   define('HTTPS_SERVER', 'https://localhost'); // eg, https://localhost - should not be empty for productive servers
+  //define('HTTPS_SERVER', 'https://192.168.24.162'); // eg, https://localhost - should not be empty for productive servers
   define('ENABLE_SSL', true); // secure webserver for application?
   define('HTTP_COOKIE_DOMAIN', 'localhost');
   define('HTTPS_COOKIE_DOMAIN', 'localhost');

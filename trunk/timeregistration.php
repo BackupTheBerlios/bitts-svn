@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 24 april 2008
+ * Date        : 28 april 2008
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -63,7 +63,7 @@
             </td>
           </tr>
           <tr>
-            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
           </tr>
           <tr>
             <td>
@@ -77,8 +77,8 @@
                   <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_EXPENSES; ?></td>
                   <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_TICKETNUMBER; ?></td>
                   <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_COMMENT; ?></td>
-                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_EDIT; ?></td>
-                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_DELETE; ?></td>
+                  <td width="20" class="activityListing-heading">&nbsp;</td>
+                  <td width="20" class="activityListing-heading">&nbsp;</td>
                 </tr>
                 <?php if (!$_SESSION['timesheet']->empty) {
                   $odd_or_even = "odd";
@@ -92,8 +92,8 @@
                       <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->expenses; ?></td>
                       <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->ticket_number; ?></td>
                       <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->comment; ?></td>
-                      <td class="activityListing-data"><?php echo 'e'; ?></td>
-                      <td class="activityListing-data"><?php echo 'd'; ?></td>
+                      <td align="center" width="20" class="activityListing-data"><?php echo tep_image(DIR_WS_IMAGES . 'edit.gif', TEXT_ACTIVITY_EDIT); ?></td>
+                      <td align="center" width="20" class="activityListing-data"><?php echo tep_image(DIR_WS_IMAGES . 'delete.gif', TEXT_ACTIVITY_DELETE); ?></td>
                     </tr>
                   <?php }
                 } else { ?>
@@ -107,13 +107,11 @@
             </td>
           </tr>
           <tr>
-            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
           </tr>
           <tr>
             <td align="center">
-              <table border="0" cellspacing="0" cellpadding="2" class="calendar">
-                <?php require(DIR_WS_INCLUDES . 'calendar.php'); ?>
-              </table>
+              <?php require(DIR_WS_INCLUDES . 'activity_entry.php'); ?>
             </td>
           </tr>
           <tr>
