@@ -3,7 +3,7 @@
  * CODE FILE   : activity_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 28 april 2008
+ * Date        : 20 mei 2008
  * Description : Activity entry fields
  *
  */
@@ -21,22 +21,22 @@
         <table border="0" cellspacing="0" cellpadding="2" width="250" class="activity_entry">
           <tr>
             <td class="activity_entry">
-              <?php echo ($_GET['selected_date']!=''?TEXT_ACTIVITY_ENTRY_SELECTED_DATE . 'xxx':TEXT_ACTIVITY_ENTRY_NO_DATE_SELECTED); ?>
+              <?php echo ($_GET['selected_date']!=''?TEXT_ACTIVITY_ENTRY_SELECTED_DATE . tep_strftime(DATE_FORMAT_SHORT, $_GET['selected_date']):TEXT_ACTIVITY_ENTRY_NO_DATE_SELECTED); ?>
             </td>
           </tr>
           <tr>
             <td class="activity_entry">
-              <form name="projects" action="http://localhost/bitts/timeregistration.php" method="get"><select name="projects_id" onChange="this.form.submit();" size="1" style="width: 100%"<?php echo ($_GET['action']=='select_project'||$_GET['action']=='select_role'||$_GET['action']=='enter_data'?'>':' disabled>'); ?><option value="" SELECTED><?php echo TEXT_ACTIVITY_ENTRY_SELECT; ?></option><option value="1">Project 1</option><option value="2">Project 2</option></select></form>
+              <?php echo tep_draw_form('project_selection', tep_href_link(FILENAME_TIMEREGISTRATION), 'get') . tep_create_parameters(array('action'=>'select_role'), array('mPath','period','selected_date'), 'hidden_field') . tep_html_select('projects_id', tep_get_partial_array(project::get_selectable_projects(7, '2008-05-20'), 'projects_id', 'projects_name'), $_GET['action']=='select_project'||$_GET['action']=='select_role'||$_GET['action']=='enter_data', $_GET['projects_id']); ?></form>
             </td>
           </tr>
           <tr>
             <td class="activity_entry">
-              <form name="projects" action="http://localhost/bitts/timeregistration.php" method="get"><select name="roles_id" onChange="this.form.submit();" size="1" style="width: 100%"<?php echo ($_GET['action']=='select_role'||$_GET['action']=='enter_data'?'>':' disabled>'); ?><option value="" SELECTED><?php echo TEXT_ACTIVITY_ENTRY_SELECT; ?></option><option value="1">Role 1</option><option value="2">Role 2</option></select></form>
+              <?php echo tep_draw_form('role_selection', tep_href_link(FILENAME_TIMEREGISTRATION), 'get') . tep_create_parameters(array('action'=>'enter_data'), array('mPath','period','selected_date', 'projects_id'), 'hidden_field') . tep_html_select('roles_id', array('1'=>'Role 1','2'=>'Role 2','3'=>'Role 3'), $_GET['action']=='select_role'||$_GET['action']=='enter_data', $_GET['roles_id']); ?></form>
             </td>
           </tr>
           <tr>
             <td class="activity_entry">
-              <input type="text" name="amount" size="1" maxlength="5" style="width: 20%"<?php echo ($_GET['action']=='enter_data'?'>':' disabled>'); ?><select name="units_id" size="1" style="width: 80%"<?php echo ($_GET['action']=='enter_data'?'>':' disabled>'); ?><option value="" SELECTED><?php echo TEXT_ACTIVITY_ENTRY_SELECT; ?></option><option value="1">Unit 1</option><option value="2">Unit 2</option></select>
+              <input type="text" name="amount" size="1" maxlength="5" style="width: 20%"<?php echo ($_GET['action']=='enter_data'?'>':' disabled>') . tep_html_select('units_id', array('1'=>'Unit 1','2'=>'Unit 2','3'=>'Unit 3'), $_GET['action']=='enter_data', $_GET['units_id'], 'onChange="this.form.submit();" size="1" style="width: 80%"'); ?></select>
             </td>
           </tr>
           <tr>
@@ -57,7 +57,7 @@
           <tr>
             <td class="activity_entry">
               <?php echo TEXT_ACTIVITY_COMMENT; ?><br>
-              <input type="text" name="comment" size="1" maxlength="50" style="width: 100%"<?php echo ($_GET['action']=='enter_data'?'>':' disabled>'); ?>
+              <input type="text" name="comment" size="1" maxlength="50" style="width: 100%" value="<?php echo $_GET['project_selection'] . '"' . ($_GET['action']=='enter_data'?'>':' disabled>'); ?>
             </td>
           </tr>
           <tr>

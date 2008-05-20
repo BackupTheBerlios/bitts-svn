@@ -3,7 +3,7 @@
  * CLASS FILE  : project.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 05 december 2007
+ * Date        : 20 mei 2008
  * Description : .....
  *               .....
  */
@@ -56,14 +56,24 @@
       return $project;
     }
 
-    // !!!!!!!!! UNDER CONSTRUCTION !!!!!!!!!!
-    public static function get_selectable_projects($employee_id = '', $min_date = '', $max_date = '') {
+    public static function get_selectable_projects($employee_id = 0, $date = '0000-00-00') {
       $project_array = array();
-      $role_array = role::get_selectable_roles($employee_id, $min_date, $max_date);
-      $index = 0;
-      while (true) {
-        $project_array[$index] = '';
-        $index++;
+      $role_array = role::get_selectable_roles($employee_id, $date);
+      // Receive array of available roles
+      if (tep_not_null($role_array)) {
+        $database = $_SESSION['database'];
+        $project_query = 'select projects_id, projects_name, projects_description, projects_customers_contact_name, projects_customers_reference, projects_start_date, projects_end_date, projects_calculated_hours, customers_id from ' . TABLE_PROJECTS . ' where projects_id in (';
+        // Walk through the array
+        foreach ($role_array as $role) {
+          if (substr($project_query, -1) != '(')
+            $project_query .= ',';
+          $project_query .= $role['projects_id'];
+        }
+        $project_query .= ') order by projects_id';
+        $project_query = $database->query($project_query);
+        while ($project_result = $database->fetch_array($project_query)) {
+          array_push($project_array, $project_result);
+        }
       }
       return $project_array;
     }

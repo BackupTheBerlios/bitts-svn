@@ -3,7 +3,7 @@
  * CLASS FILE  : employee_role.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 05 december 2007
+ * Date        : 20 mei 2008
  * Description : .....
  *               .....
  */
@@ -69,6 +69,16 @@
       $tariff = new tariff($tariff_id);
       $employee_role = new employee_role($tariff->get_parent_id(), $tariff);
       return $employee_role;
+    }
+
+    public static function get_selectable_employees_roles($employee_id = 0, $date = '0000-00-00') {
+      $employee_role_array = array();
+      $database = $_SESSION['database'];
+      $employee_role_query = $database->query("select employees_roles_id, employees_roles_start_date, employees_roles_end_date, roles_id, employees_id from " . TABLE_EMPLOYEES_ROLES . " where employees_id = '" . $employee_id . "' and employees_roles_start_date <= '" . $date . "' and employees_roles_end_date >= '" . $date . "' order by employees_roles_id");        
+      while ($employee_role_result = $database->fetch_array($employee_role_query)) {
+        array_push($employee_role_array, $employee_role_result);
+      }
+      return $employee_role_array;
     }
 
     public function get_parent_id() {

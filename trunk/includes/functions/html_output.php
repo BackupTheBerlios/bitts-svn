@@ -3,7 +3,7 @@
  * CODE FILE   : html_output.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 april 2008
+ * Date        : 15 mei 2008
  * Description : html output functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -83,21 +83,39 @@
   	return $retval;
   }
 
-  function tep_create_parameters($name, $value = '', $relevant_other_parameters = null) {
+  function tep_create_parameters($new_or_changed_parameters, $relevant_other_parameters = null, $output_type = 'string') {
   	$result = '';
-  	if ($value != '')
-  	  $result = $name . '=' . $value;
-  	// Walk through the array
+
+  	if (sizeof($new_or_changed_parameters) > 0) {
+  	  // Walk through the array
+  	  while (list($key, $value) = each($new_or_changed_parameters)) {
+                // Detect if an ampersant is needed (first entry doesn't)
+        if ($output_type == 'string') {
+          if ($result != '')
+            $result .= '&';
+          // Retrieve and add parameter
+          $result .= $key . '=' . $value;
+        } elseif ($output_type == 'hidden_field') {
+          $result .= tep_draw_hidden_field($key, $value);
+        }
+      }
+    }
+
+  	// Walk through the other array
     for ($index = 0; $index < sizeof($relevant_other_parameters); $index++) {
       // Retrieve parameter value
       $key = $relevant_other_parameters[$index];
       $value = $_GET[$relevant_other_parameters[$index]];
       if ($key != $name && $value != '') {
-        // Detect if an ampersant is needed (first entry doesn't)
-      	if ($result != '')
-          $result .= '&';
-        // Retrieve and add parameter
-        $result .= $key . '=' . $value;
+        if ($output_type == 'string') {
+          // Detect if an ampersant is needed (first entry doesn't)
+      	  if ($result != '')
+            $result .= '&';
+          // Retrieve and add parameter
+          $result .= $key . '=' . $value;
+        } elseif ($output_type == 'hidden_field') {
+          $result .= tep_draw_hidden_field($key, $value);
+        }
       }
     }
   	return $result;
@@ -229,6 +247,25 @@
     $selection .= '>';
 
     return $selection;
+  }
+
+////
+// Output a SELECT object
+  function tep_html_select($name, $options = null, $enabled = true, $selected_value = '', $parameters = 'onChange="this.form.submit();" size="1" style="width: 100%"') {
+    $retval = '<select name="' . $name . '" ' . $parameters;
+    if (!$enabled) {
+      $retval .= 'disabled';
+    }
+    $retval .= '>';
+
+    if (tep_not_null($options)) {
+      $retval .= '<option value=""' . ($selected_value==''?' selected':'') . '>' . TEXT_ACTIVITY_ENTRY_SELECT . '</option>';
+  	  while (list($key, $value) = each($options)) {
+        $retval .= '<option value="' . $key . '"' . ($selected_value==$key?' selected':'') . '>' . $value . '</option>';
+  	  }
+    }
+
+    return $retval . '</select>';
   }
 
 ////

@@ -76,6 +76,11 @@
   // Include the employee class
   require(DIR_WS_CLASSES . 'employee.php');
 
+  // Include the project and related classes
+  require(DIR_WS_CLASSES . 'project.php');
+  require(DIR_WS_CLASSES . 'role.php');
+  require(DIR_WS_CLASSES . 'employee_role.php');
+  
   // Include the timesheet and related classes
   require(DIR_WS_CLASSES . 'timesheet.php');
   require(DIR_WS_CLASSES . 'activity.php');

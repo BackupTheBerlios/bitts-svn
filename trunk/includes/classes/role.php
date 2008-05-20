@@ -3,7 +3,7 @@
  * CLASS FILE  : role.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 05 december 2007
+ * Date        : 20 mei 2008
  * Description : .....
  *               .....
  */
@@ -55,6 +55,28 @@
       $employee_role = employee_role::get_select_tree($tariff_id);
       $role = new role($employee_role->get_parent_id(), $employee_role);
       return $role;
+    }
+
+    public static function get_selectable_roles($employee_id = 0, $date = '0000-00-00') {
+      $role_array = array();
+      $employees_roles_array = employee_role::get_selectable_employees_roles($employee_id, $date);
+      // Receive array of available employees_roles
+      if (tep_not_null($employees_roles_array)) {
+        $database = $_SESSION['database'];
+        $role_query = 'select roles_id, roles_name, roles_description, roles_mandatory_ticket_entry, projects_id from ' . TABLE_ROLES . ' where roles_id in (';
+        // Walk through the array
+        foreach ($employees_roles_array as $employee_role) {
+          if (substr($role_query, -1) != '(')
+            $role_query .= ',';
+          $role_query .= $employee_role['roles_id'];
+        }
+        $role_query .= ') order by roles_id';
+        $role_query = $database->query($role_query);        
+        while ($role_result = $database->fetch_array($role_query)) {
+          array_push($role_array, $role_result);
+        }
+      }
+      return $role_array;
     }
 
     public function get_parent_id() {

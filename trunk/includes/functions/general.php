@@ -3,7 +3,7 @@
  * CLASS FILE  : general.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 april 2008
+ * Date        : 20 mei 2008
  * Description : General functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -55,12 +55,12 @@
   }
 
   // UNIX timestamp from formatted datetime
-  function tep_datetouts($formatted_date) {
+  function tep_datetouts($formatted_date, $offset_in_days = 0) {
     $year = (int)substr($formatted_date, 0, 4);
     $month = (int)substr($formatted_date, 5, 2);
     $day = (int)substr($formatted_date, 8, 2);
 
-    return mktime(0, 0, 0, $month, $day, $year);
+    return mktime(0, 0, 0, $month, $day, $year) + ($offset_in_days * 86400);
   }
 
   // Return previous/next period
@@ -96,8 +96,16 @@
     }
   }
 
+  function tep_get_partial_array($array = null, $key = '', $value = '') {
+    $key_array = array();
+    $value_array = array();
+    foreach ($array as $row) {
+      array_push($key_array, $row[$key]);
+      array_push($value_array, $row[$value]);
+    }
+    return array_combine($key_array, $value_array);
+  }
 
-  
   
   
   
