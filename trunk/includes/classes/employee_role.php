@@ -3,7 +3,7 @@
  * CLASS FILE  : employee_role.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 20 mei 2008
+ * Date        : 21 mei 2008
  * Description : .....
  *               .....
  */
@@ -71,7 +71,7 @@
       return $employee_role;
     }
 
-    public static function get_selectable_employees_roles($employee_id = 0, $date = '0000-00-00') {
+    public static function get_selectable_employees_roles($employee_id = 0, $date = '0000-00-00', $roles_id = 0) {
       $employee_role_array = array();
       $database = $_SESSION['database'];
       $employee_role_query = $database->query("select employees_roles_id, employees_roles_start_date, employees_roles_end_date, roles_id, employees_id from " . TABLE_EMPLOYEES_ROLES . " where employees_id = '" . $employee_id . "' and employees_roles_start_date <= '" . $date . "' and employees_roles_end_date >= '" . $date . "' order by employees_roles_id");        

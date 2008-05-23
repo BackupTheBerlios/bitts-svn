@@ -3,7 +3,7 @@
  * CLASS FILE  : general.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 20 mei 2008
+ * Date        : 22 mei 2008
  * Description : General functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -99,11 +99,15 @@
   function tep_get_partial_array($array = null, $key = '', $value = '') {
     $key_array = array();
     $value_array = array();
+    $result_array = array();
     foreach ($array as $row) {
       array_push($key_array, $row[$key]);
       array_push($value_array, $row[$value]);
     }
-    return array_combine($key_array, $value_array);
+    // Only combine arrays if they contain any values
+    if (sizeof($key_array)!=0)
+      $result_array = array_combine($key_array, $value_array);
+    return $result_array;
   }
 
   

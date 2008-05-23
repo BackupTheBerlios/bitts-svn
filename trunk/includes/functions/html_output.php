@@ -3,7 +3,7 @@
  * CODE FILE   : html_output.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 15 mei 2008
+ * Date        : 23 may 2008
  * Description : html output functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -172,7 +172,7 @@
 
     $image_submit = '<input type="image" src="' . tep_output_string(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image) . '" border="0" alt="' . tep_output_string($alt) . '"';
 
-    if (tep_not_null($alt)) $image_submit .= ' title=" ' . tep_output_string($alt) . ' "';
+    if (tep_not_null($alt)) $image_submit .= ' title="' . tep_output_string($alt) . '"';
 
     if (tep_not_null($parameters)) $image_submit .= ' ' . $parameters;
 
@@ -259,13 +259,25 @@
     $retval .= '>';
 
     if (tep_not_null($options)) {
-      $retval .= '<option value=""' . ($selected_value==''?' selected':'') . '>' . TEXT_ACTIVITY_ENTRY_SELECT . '</option>';
+      if ($selected_value=='')
+        $retval .= '<option value="" selected disabled>' . TEXT_ACTIVITY_ENTRY_SELECT . '</option>';
   	  while (list($key, $value) = each($options)) {
         $retval .= '<option value="' . $key . '"' . ($selected_value==$key?' selected':'') . '>' . $value . '</option>';
   	  }
     }
 
     return $retval . '</select>';
+  }
+
+////
+// Output a a javascript focus part
+  function tep_javascript_focus($fieldname, $form = '') {
+    $script = '<script language="javascript">';
+    $script .= 'document.';
+    if (tep_not_null($form))
+      $script .= $form . '.';
+    $script .= $fieldname . '.focus();</script>';
+    return $script;
   }
 
 ////

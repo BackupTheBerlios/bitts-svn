@@ -3,7 +3,7 @@
  * CODE FILE   : application_top.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 april 2008
+ * Date        : 23 may 2008
  * Description : .....
  *               .....
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -80,19 +80,22 @@
   require(DIR_WS_CLASSES . 'project.php');
   require(DIR_WS_CLASSES . 'role.php');
   require(DIR_WS_CLASSES . 'employee_role.php');
+  require(DIR_WS_CLASSES . 'tariff.php');
   
   // Include the timesheet and related classes
   require(DIR_WS_CLASSES . 'timesheet.php');
   require(DIR_WS_CLASSES . 'activity.php');
-  
-  // Get logged-on / authenticated user's name
-  if ( isset( $_SERVER['LOGON_USER'] ) && $_SERVER['LOGON_USER'] != '' ) {
-  	$_SESSION['employee'] = new employee($_SERVER['LOGON_USER'], 'employees_login');
-  } else if ( isset( $_SERVER['AUTH_USER'] ) && $_SERVER['AUTH_USER'] != '' ) {
-  	$_SESSION['employee'] = new employee($_SERVER['AUTH_USER'], 'employees_login');
-  } else {
-    // TEST LOGIN !!!!!!!!!!!!REMOVE !!!!!!!!!!!!!!!!!
-  	$_SESSION['employee'] = new employee('e.beukhof', 'employees_login');
-    //$_SESSION['employee'] = null;
+
+  // Verify if current user is not already logged-in
+  if (!tep_not_null($_SESSION['employee_login'])) {
+    if ( isset( $_SERVER['LOGON_USER'] ) && $_SERVER['LOGON_USER'] != '' ) {
+      $_SESSION['employee_login'] = $_SERVER['LOGON_USER'];
+    } else if ( isset( $_SERVER['AUTH_USER'] ) && $_SERVER['AUTH_USER'] != '' ) {
+      $_SESSION['employee_login'] = $_SERVER['AUTH_USER'];
+    }
   }
+
+  // If logged-in now, create the employee object
+  if (tep_not_null($_SESSION['employee_login']))
+    $_SESSION['employee'] = new employee($_SESSION['employee_login'], 'employees_login');
 ?>

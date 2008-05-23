@@ -3,9 +3,9 @@
  * CLASS FILE  : employee.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 april 2008
+ * Date        : 23 may 2008
  * Description : .....
- *               .....
+ *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
  *               http://www.oscommerce.com
  */
@@ -90,6 +90,20 @@
       $this->is_user = $is_user;
       $this->is_analyst = $is_analyst;
       $this->is_administrator = $is_administrator;
+    }
+
+    public static function verify_login($login = '', $password = '') {
+      if (tep_not_null($login) && tep_not_null($password)) {
+        $database = $_SESSION['database'];
+        $employee_query = 'select employees_login, employees_password from ' . TABLE_EMPLOYEES;
+        $employee_query .= " where employees_login = '" . $login . "'";
+        $employee_query .= " and employees_password = password('" . $password . "')";
+        $employee_query .= ' and ( employees_is_user or employees_is_analyst or employees_is_administrator)';
+        $employee_query = $database->query($employee_query);
+        if ($employee_result = $database->fetch_array($employee_query))
+          return TRUE;
+      }
+      return FALSE;
     }
   }
 ?>

@@ -3,15 +3,18 @@
  * CODE FILE   : index.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 april 2008
+ * Date        : 23 may 2008
  * Description : .....
- *               .....
+ *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
  *               http://www.oscommerce.com
  */
 
   // application_top //
   require('includes/application_top.php');
+  // Check if user is logged in. If not, redirect to login page
+  if (!tep_not_null($_SESSION['employee_login']))
+    tep_redirect(tep_href_link(FILENAME_LOGIN));
   // header //
   require(DIR_WS_INCLUDES . 'header.php');
 ?>

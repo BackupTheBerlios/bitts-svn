@@ -3,7 +3,7 @@
  * CLASS FILE  : tariff.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 05 december 2007
+ * Date        : 22 may 2008
  * Description : .....
  *               .....
  */
@@ -43,6 +43,24 @@
 
     public function get_parent_id() {
       return $this->employee_role_id;
+    }
+
+    public static function get_selectable_tariffs($employee_id = 0, $role_id = 0) {
+      $tariff_array = array();
+      $database = $_SESSION['database'];
+      // Create query
+      $tariff_query = 'select tariffs_id, tariffs_amount, units_name, units_description from ' . TABLE_TARIFFS . ', ' . TABLE_UNITS . ', ' . TABLE_EMPLOYEES_ROLES;
+      $tariff_query .= ' where ' . TABLE_TARIFFS . '.units_id = ' . TABLE_UNITS . '.units_id';
+      $tariff_query .= ' and ' . TABLE_TARIFFS . '.employees_roles_id = ' . TABLE_EMPLOYEES_ROLES . '.employees_roles_id';
+      $tariff_query .= ' and ' . TABLE_EMPLOYEES_ROLES . '.employees_id = ' . $employee_id;
+      $tariff_query .= ' and ' . TABLE_EMPLOYEES_ROLES . '.roles_id = ' . $role_id;
+      // Prepare query
+      $tariff_query = $database->query($tariff_query);        
+      // Execute query and read the contents
+      while ($tariff_result = $database->fetch_array($tariff_query)) {
+        array_push($tariff_array, $tariff_result);
+      }
+      return $tariff_array;
     }
   }
 ?>
