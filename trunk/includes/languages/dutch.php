@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 may 2008
+ * Date        : 26 may 2008
  * Description : Dutch language file
  */
 
@@ -13,12 +13,14 @@
 // on RedHat try 'en_US'
 // on FreeBSD try 'en_US.ISO_8859-1'
 // on Windows try 'en', or 'English'
-@setlocale(LC_TIME, 'nl_NL.ISO8859-1');
+@setlocale(LC_TIME, 'nl_NL');
 
 define('DATE_FORMAT_SHORT', '%d-%m-%Y');  // this is used for strftime()
 define('DATE_FORMAT_LONG', '%A %d %B %Y'); // this is used for strftime()
 define('DATE_FORMAT', 'd-m-Y'); // this is used for date()
 define('DATE_TIME_FORMAT', DATE_FORMAT_SHORT . ' %H:%M:%S');
+define('NUMBER_DECIMAL_POINT', ',');
+define('NUMBER_THOUSANDS_SEPARATOR', '.');
 
 $LANGUAGE_ARRAY_MONTH = array ("January" => "januari", "February" => "februari", "March" => "maart", "April" => "april", "May" => "mei", "June" => "juni", "July" => "juli", "August" => "augustus", "September" => "september", "October" => "oktober", "November" => "november", "December" => "december");
 

@@ -12,11 +12,14 @@
 
   // application_top //
   require('includes/application_top.php');
+  // Check if user is logged in. If not, redirect to login page
+  if (!tep_not_null($_SESSION['employee_login']))
+    tep_redirect(tep_href_link(FILENAME_LOGIN));
   // header //
   require(DIR_WS_INCLUDES . 'header.php');
 
 //  if (!isset($_SESSION['timesheet'])) {
-  	$_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, $_GET['period']);
+  	$_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, tep_post_or_get('period'));
 //  }
 ?>
 <!-- body //-->

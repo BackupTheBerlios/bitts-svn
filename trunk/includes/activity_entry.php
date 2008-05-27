@@ -3,7 +3,7 @@
  * CODE FILE   : activity_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 may 2008
+ * Date        : 26 may 2008
  * Description : Activity entry fields
  *
  */
@@ -21,7 +21,11 @@
         <table border="0" cellspacing="0" cellpadding="2" width="250" class="activity_entry">
           <tr>
             <td align="center" class="activity_entry" colspan="2">
-              <?php echo ($_GET['selected_date']!=''?TEXT_ACTIVITY_ENTRY_SELECTED_DATE . tep_strftime(DATE_FORMAT_SHORT, $_GET['selected_date']):TEXT_ACTIVITY_ENTRY_NO_DATE_SELECTED); ?>
+              <?php if (tep_post_or_get('selected_date')!='') {
+                echo TEXT_ACTIVITY_ENTRY_SELECTED_DATE . tep_strftime(DATE_FORMAT_SHORT, tep_post_or_get('selected_date'));
+              } else {
+                echo TEXT_ACTIVITY_ENTRY_NO_DATE_SELECTED;
+              } ?>
             </td>
           </tr>
           <tr>
@@ -29,9 +33,9 @@
               <?php echo TEXT_ACTIVITY_PROJECTNAME; ?>
             </td>
             <td class="activity_entry">
-              <?php echo tep_draw_form('project_selection', tep_href_link(FILENAME_TIMEREGISTRATION), 'get') . tep_create_parameters(array('action'=>'select_role'), array('mPath','period','selected_date'), 'hidden_field');
-              if ($_GET['action']=='select_project'||$_GET['action']=='select_role'||$_GET['action']=='enter_data') {
-                echo tep_html_select('projects_id', tep_get_partial_array(project::get_selectable_projects($_SESSION['employee']->employee_id, tep_strftime('%Y-%m-%d', $_GET['selected_date'])), 'projects_id', 'projects_name'), TRUE, $_GET['projects_id']);
+              <?php echo tep_draw_form('project_selection', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'select_role'), array('mPath','period','selected_date'), 'hidden_field');
+              if (tep_post_or_get('action')=='select_project'||tep_post_or_get('action')=='select_role'||tep_post_or_get('action')=='enter_data') {
+                echo tep_html_select('projects_id', tep_get_partial_array(project::get_selectable_projects($_SESSION['employee']->employee_id, tep_strftime('%Y-%m-%d', tep_post_or_get('selected_date'))), 'projects_id', 'projects_name'), TRUE, tep_post_or_get('projects_id'));
               } else {
                 echo tep_html_select('projects_id', array(), FALSE);
               }
@@ -43,25 +47,26 @@
               <?php echo TEXT_ACTIVITY_ROLENAME; ?>
             </td>
             <td class="activity_entry">
-              <?php echo tep_draw_form('role_selection', tep_href_link(FILENAME_TIMEREGISTRATION), 'get') . tep_create_parameters(array('action'=>'enter_data'), array('mPath','period','selected_date', 'projects_id'), 'hidden_field');
-              if ($_GET['action']=='select_role'||$_GET['action']=='enter_data') {
-                echo tep_html_select('roles_id', tep_get_partial_array(role::get_selectable_roles($_SESSION['employee']->employee_id, tep_strftime('%Y-%m-%d', $_GET['selected_date']),$_GET['projects_id']), 'roles_id', 'roles_name'), TRUE, $_GET['roles_id']);
+              <?php echo tep_draw_form('role_selection', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'enter_data'), array('mPath','period','selected_date', 'projects_id'), 'hidden_field');
+              if (tep_post_or_get('action')=='select_role'||tep_post_or_get('action')=='enter_data') {
+                echo tep_html_select('roles_id', tep_get_partial_array(role::get_selectable_roles($_SESSION['employee']->employee_id, tep_strftime('%Y-%m-%d', tep_post_or_get('selected_date')),tep_post_or_get('projects_id')), 'roles_id', 'roles_name'), TRUE, tep_post_or_get('roles_id'));
               } else {
                 echo tep_html_select('roles_id', array(), FALSE);
               }
               ?></form>
             </td>
-          </tr>
+          </tr
+          <?php echo tep_draw_form('activity_entry', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period','selected_date','action','projects_id','roles_id'), 'hidden_field'); ?>
           <tr>
             <td class="activity_entry">
               <?php echo TEXT_ACTIVITY_AMOUNT . ' &amp; ' . TEXT_ACTIVITY_UNIT; ?>
             </td>
             <td class="activity_entry">
-              <input type="text" name="amount" size="1" maxlength="5" style="width: 20%"<?php echo ($_GET['action']=='enter_data'?'>':' disabled>');
-              if ($_GET['action']=='enter_data') {
-                echo tep_html_select('units_id', tep_get_partial_array(tariff::get_selectable_tariffs($_SESSION['employee']->employee_id, $_GET['roles_id']), 'tariffs_id', 'units_name'), TRUE, $_GET['tariffs_id'], 'onChange="this.form.submit();" size="1" style="width: 80%"');
+              <?php echo tep_draw_input_field('activity_amount', '', 'size="1" maxlength="6" style="width: 20%"' . (tep_post_or_get('action')=='enter_data'?'':' disabled'));
+              if (tep_post_or_get('action')=='enter_data') {
+                echo tep_html_select('tariffs_id', tep_get_partial_array(tariff::get_selectable_tariffs($_SESSION['employee']->employee_id, tep_post_or_get('roles_id')), 'tariffs_id', 'units_name'), TRUE, tep_post_or_get('tariffs_id'), 'size="1" style="width: 80%"');
               } else {
-                echo tep_html_select('units_id', array(), FALSE, 0, 'onChange="this.form.submit();" size="1" style="width: 80%"');
+                echo tep_html_select('tariffs_id', array(), FALSE, 0, 'size="1" style="width: 80%"');
               }
               ?></select>
             </td>
@@ -73,13 +78,13 @@
             <td class="activity_entry">
               <table border="0" cellspacing="0" cellpadding="2" width="250" class="activity_entry">
                 <tr>
-                  <td width="50%" class="activity_entry"><?php echo TEXT_ACTIVITY_TRAVELDISTANCE; ?></td><td width="50%" class="activity_entry"><input type="text" name="travel_distance" size="1" maxlength="5" style="width: 100%"<?php echo ($_GET['action']=='enter_data'?'>':' disabled>'); ?></td>
+                  <td width="50%" class="activity_entry"><?php echo TEXT_ACTIVITY_TRAVELDISTANCE; ?></td><td width="50%" class="activity_entry"><?php echo tep_draw_input_field('activity_travel_distance', '', 'size="1" maxlength="5" style="width: 100%"' . (tep_post_or_get('action')=='enter_data'?'':' disabled')); ?></td>
                 </tr>
                 <tr>
-                  <td width="50%" class="activity_entry"><?php echo TEXT_ACTIVITY_EXPENSES; ?></td><td width="50%" class="activity_entry"><input type="text" name="expenses" size="1" maxlength="5" style="width: 100%"<?php echo ($_GET['action']=='enter_data'?'>':' disabled>'); ?></td>
+                  <td width="50%" class="activity_entry"><?php echo TEXT_ACTIVITY_EXPENSES; ?></td><td width="50%" class="activity_entry"><?php echo tep_draw_input_field('activity_expenses', '', 'size="1" maxlength="7" style="width: 100%"' . (tep_post_or_get('action')=='enter_data'?'':' disabled')); ?></td>
                 </tr>
                 <tr>
-                  <td width="50%" class="activity_entry"><?php echo TEXT_ACTIVITY_TICKETNUMBER; ?></td><td width="50%" class="activity_entry"><input type="text" name="ticket_number" size="1" maxlength="5" style="width: 100%"<?php echo ($_GET['action']=='enter_data'?'>':' disabled>'); ?></td>
+                  <td width="50%" class="activity_entry"><?php echo TEXT_ACTIVITY_TICKETNUMBER; ?></td><td width="50%" class="activity_entry"><?php echo tep_draw_input_field('activity_ticket_number', '', 'size="1" maxlength="16" style="width: 100%"' . (tep_post_or_get('action')=='enter_data'?'':' disabled')); ?></td>
                 </tr>
               </table>
             </td>
@@ -89,7 +94,7 @@
               <?php echo TEXT_ACTIVITY_COMMENT; ?>
             </td>
             <td class="activity_entry">
-              <input type="text" name="comment" size="1" maxlength="50" style="width: 100%" value="<?php echo $_GET['project_selection'] . '"' . ($_GET['action']=='enter_data'?'>':' disabled>'); ?>
+              <?php echo tep_draw_input_field('activity_comment', '', 'size="1" maxlength="64" style="width: 100%"' . (tep_post_or_get('action')=='enter_data'?'':' disabled')); ?>
             </td>
           </tr>
           <tr>
@@ -99,7 +104,11 @@
           </tr>
           <tr>
             <td align="right" class="activity_entry" colspan="2">
-              <?php echo tep_image_button('button_save.gif', TEXT_ACTIVITY_ENTRY_SAVE) . '&nbsp;' . tep_image_button('button_cancel.gif', TEXT_ACTIVITY_ENTRY_CANCEL); ?>
+              <?php echo tep_image_submit('button_save.gif', TEXT_ACTIVITY_ENTRY_SAVE); ?>
+              </form>&nbsp;
+              <?php echo tep_draw_form('fcancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period'), 'hidden_field');
+              echo tep_image_submit('button_cancel.gif', TEXT_ACTIVITY_ENTRY_CANCEL);
+              ?></form>
             </td>
           </tr>
         </table>

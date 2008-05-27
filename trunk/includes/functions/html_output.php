@@ -3,7 +3,7 @@
  * CODE FILE   : html_output.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 may 2008
+ * Date        : 27 may 2008
  * Description : html output functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -83,7 +83,7 @@
   	return $retval;
   }
 
-  function tep_create_parameters($new_or_changed_parameters, $relevant_other_parameters = null, $output_type = 'string') {
+  function tep_create_parameters($new_or_changed_parameters, $relevant_other_parameters = null, $output_type = 'string', $method = 'post') {
   	$result = '';
 
   	if (sizeof($new_or_changed_parameters) > 0) {
@@ -105,7 +105,7 @@
     for ($index = 0; $index < sizeof($relevant_other_parameters); $index++) {
       // Retrieve parameter value
       $key = $relevant_other_parameters[$index];
-      $value = $_GET[$relevant_other_parameters[$index]];
+      $value = tep_post_or_get($relevant_other_parameters[$index]);
       if ($key != $name && $value != '') {
         if ($output_type == 'string') {
           // Detect if an ampersant is needed (first entry doesn't)
@@ -170,7 +170,7 @@
   function tep_image_submit($image, $alt = '', $parameters = '') {
     global $language;
 
-    $image_submit = '<input type="image" src="' . tep_output_string(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image) . '" border="0" alt="' . tep_output_string($alt) . '"';
+    $image_submit = '<input type="image" src="' . tep_output_string(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/' . $image) . '" border="0" alt="' . tep_output_string($alt) . '"';
 
     if (tep_not_null($alt)) $image_submit .= ' title="' . tep_output_string($alt) . '"';
 
@@ -184,9 +184,7 @@
 ////
 // Output a function button in the selected language
   function tep_image_button($image, $alt = '', $parameters = '') {
-    global $language;
-
-    return tep_image(DIR_WS_LANGUAGES . $language . '/images/buttons/' . $image, $alt, '', '', $parameters);
+    return tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/' . $image, $alt, '', '', $parameters);
   }
 
 ////
@@ -209,11 +207,11 @@
 
 ////
 // Output a form input field
-  function tep_draw_input_field($name, $value = '', $parameters = '', $type = 'text', $reinsert_value = true) {
+  function tep_draw_input_field($name, $value = '', $parameters = '', $type = 'text', $reinsert_value = 'true') {
     $field = '<input type="' . tep_output_string($type) . '" name="' . tep_output_string($name) . '"';
 
-    if ( (isset($GLOBALS[$name])) && ($reinsert_value == true) ) {
-      $field .= ' value="' . tep_output_string(stripslashes($GLOBALS[$name])) . '"';
+    if ($reinsert_value == 'true') {
+      $field .= ' value="' . tep_output_string(stripslashes(tep_post_or_get($name))) . '"';
     } elseif (tep_not_null($value)) {
       $field .= ' value="' . tep_output_string($value) . '"';
     }
@@ -278,6 +276,17 @@
       $script .= $form . '.';
     $script .= $fieldname . '.focus();</script>';
     return $script;
+  }
+
+////
+// Retrieve POST or GET variable
+  function tep_post_or_get($key = '') {
+    if (tep_not_null($_POST[$key]))
+      return $_POST[$key];
+    elseif (tep_not_null($_GET[$key]))
+      return $_GET[$key];
+    else
+      return '';
   }
 
 ////

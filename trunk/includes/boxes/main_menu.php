@@ -3,7 +3,7 @@
  * CODE FILE   : main_menu.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 mei 2008
+ * Date        : 26 may 2008
  * Description : Main navigation menu
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -20,11 +20,11 @@
   new infoBoxHeading($info_box_contents, true, true);
 
   $info_box_contents = array();
-  $info_box_contents[] = array('text' => ($_GET['mPath']=='11'||$_GET['mPath']==''?'<b>':'<a href="' . tep_href_link(FILENAME_DEFAULT, 'mPath=11') . '">') . BOX_MAINMENU_HOME . ($_GET['mPath']=='11'||$_GET['mPath']==''?'</b>':'</a>') . '<br>' .
+  $info_box_contents[] = array('text' => (tep_post_or_get('mPath')=='11'||tep_post_or_get('mPath')==''?'<b>':'<a href="' . tep_href_link(FILENAME_DEFAULT, 'mPath=11') . '">') . BOX_MAINMENU_HOME . (tep_post_or_get('mPath')=='11'||tep_post_or_get('mPath')==''?'</b>':'</a>') . '<br>' .
                                          '<br>' .
-                                         ($_GET['mPath']=='21'?'<b>' . BOX_MAINMENU_TIMEREGISTRATION . '</b>':tep_href_link_switched(FILENAME_TIMEREGISTRATION, tep_create_parameters(array('mPath'=>'21'), array('period', 'selected_date', 'action')), BOX_MAINMENU_TIMEREGISTRATION, $_SESSION['employee']->is_user)) . '<br>' .
-                                         ($_GET['mPath']=='31'?'<b>' . BOX_MAINMENU_ANALYSIS . '</b>':tep_href_link_switched(FILENAME_ANALYSIS, 'mPath=31', BOX_MAINMENU_ANALYSIS, $_SESSION['employee']->is_analyst)) . '<br>' .
-                                         ($_GET['mPath']=='41'?'<b>' . BOX_MAINMENU_ADMINISTRATION . '</b><br>' .
+                                         (tep_post_or_get('mPath')=='21'?'<b>' . BOX_MAINMENU_TIMEREGISTRATION . '</b>':tep_href_link_switched(FILENAME_TIMEREGISTRATION, tep_create_parameters(array('mPath'=>'21'), array('period', 'selected_date', 'action')), BOX_MAINMENU_TIMEREGISTRATION, $_SESSION['employee']->is_user)) . '<br>' .
+                                         (tep_post_or_get('mPath')=='31'?'<b>' . BOX_MAINMENU_ANALYSIS . '</b>':tep_href_link_switched(FILENAME_ANALYSIS, 'mPath=31', BOX_MAINMENU_ANALYSIS, $_SESSION['employee']->is_analyst)) . '<br>' .
+                                         (tep_post_or_get('mPath')=='41'?'<b>' . BOX_MAINMENU_ADMINISTRATION . '</b><br>' .
                                            '&nbsp;&nbsp;&nbsp;' . tep_href_link_switched(FILENAME_ADMINISTRATION_PROJECTS, '', BOX_MAINMENU_ADMINISTRATION_PROJECTS, $_SESSION['employee']->is_administrator) . '<br>' .
                                            '&nbsp;&nbsp;&nbsp;' . tep_href_link_switched(FILENAME_ADMINISTRATION_CUSTOMERS, '', BOX_MAINMENU_ADMINISTRATION_CUSTOMERS, $_SESSION['employee']->is_administrator) . '<br>' .
                                            '&nbsp;&nbsp;&nbsp;' . tep_href_link_switched(FILENAME_ADMINISTRATION_EMPLOYEES, '', BOX_MAINMENU_ADMINISTRATION_EMPLOYEES, $_SESSION['employee']->is_administrator) :

@@ -3,7 +3,7 @@
  * CLASS FILE  : general.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 mei 2008
+ * Date        : 26 mei 2008
  * Description : General functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -144,9 +144,27 @@
     tep_exit();
   }
 
+  function tep_number_db_to_user($number = 0, $precision = 0) {
+    return number_format($number, $precision, NUMBER_DECIMAL_POINT, NUMBER_THOUSANDS_SEPARATOR);
+  }
   
-  
-  
+  function tep_number_user_to_db($number = '0') {
+    $number = trim($number);
+    if (preg_match("~^([0-9]+|(?:(?:[0-9]{1,3}([.,' ]))+[0-9]{3})+)(([.,])[0-9]{1,2})?$~", $number, $matches)) {
+      if (!empty($matches['2'])) {
+        $prefix = preg_replace("~[".$matches['2']."]~", "", $matches['1']);
+      } else {
+        $prefix = $matches['1'];
+      }
+      if (!empty($matches['4'])) {
+        $postfix = ".".preg_replace("~[".$matches['4']."]~", "", $matches['3']);
+      } else {
+        $postfix = false;
+      }
+      return $prefix.$postfix;
+    }
+    return 0;
+  }
   
   
   
