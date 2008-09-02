@@ -3,8 +3,8 @@
  * CLASS FILE  : role.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 mei 2008
- * Description : .....
+ * Date        : 02 september 2008
+ * Description : Role class
  *               .....
  */
 
@@ -12,19 +12,20 @@
     private $role_id, $project_id, $name, $description, $mandatory_ticket_entry, $employees_roles;
 
     function role($role_id = '', $child_object = '') {
-        $this->role_id = $role_id;
-        $this->employees_roles = array();
+      $database = $_SESSION['database'];
+      $this->role_id = $role_id;
+      $this->employees_roles = array();
 
       if (tep_not_null($this->role_id)) {
-        $this->role_id = tep_db_prepare_input($this->role_id);
+        $this->role_id = $database->prepare_input($this->role_id);
 
-        $role_query = tep_db_query("select project_id, name, description, mandatory_ticket_entry from " . TABLE_ROLES . " where role_id = '" . (int)$this->role_id . "'");
-        $role_result = tep_db_fetch_array($role_query);
+        $role_query = $database->query("select projects_id, roles_name, roles_description, roles_mandatory_ticket_entry from " . TABLE_ROLES . " where roles_id = '" . (int)$this->role_id . "'");
+        $role_result = $database->fetch_array($role_query);
 
-        $this->$project_id = $role_result['project_id'];
-        $this->$name = $role_result['name'];
-        $this->$description = $role_result['description'];
-        $this->$mandatory_ticket_entry = $role_result['mandatory_ticket_entry'];
+        $this->project_id = $role_result['projects_id'];
+        $this->name = $role_result['roles_name'];
+        $this->description = $role_result['roles_description'];
+        $this->mandatory_ticket_entry = $role_result['roles_mandatory_ticket_entry'];
 
         // Retrieve specific employee_role or all employees_roles for this role
         if (tep_not_null($child_object)) {
@@ -33,6 +34,22 @@
           $this->employees_roles = employee_role::get_array($this->role_id);
         }
       }
+    }
+
+    public function __get($varname) {
+      switch ($varname) {
+        case 'role_id':
+          return $this->role_id;
+        case 'project_id':
+          return $this->project_id;
+        case 'name':
+          return $this->name;
+        case 'description':
+          return $this->description;
+        case 'mandatory_ticket_entry':
+          return ($this->mandatory_ticket_entry == 1);
+      }
+      return null;
     }
 
     public static function get_array($project_id = '') {
@@ -52,7 +69,7 @@
     }
 
     public static function get_selected_tree($tariff_id = '') {
-      $employee_role = employee_role::get_select_tree($tariff_id);
+      $employee_role = employee_role::get_selected_tree($tariff_id);
       $role = new role($employee_role->get_parent_id(), $employee_role);
       return $role;
     }
@@ -84,6 +101,20 @@
 
     public function get_parent_id() {
       return $this->project_id;
+    }
+
+    public static function get_role_name($role_id = '') {
+      $database = $_SESSION['database'];
+      $role_query = $database->query("select roles_name from " . TABLE_ROLES . " where roles_id = '" . $role_id . "'");
+      $role_result = $database->fetch_array($role_query);
+      return $role_result['roles_name'];
+    }
+
+    public static function get_project_name($role_id = '') {
+      $database = $_SESSION['database'];
+      $role_query = $database->query("select projects_id from " . TABLE_ROLES . " where roles_id = '" . $role_id . "'");
+      $role_result = $database->fetch_array($role_query);
+      return project::get_project_name($role_result['projects_id']);
     }
   }
 ?>

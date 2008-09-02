@@ -3,28 +3,29 @@
  * CLASS FILE  : employee_role.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 21 mei 2008
- * Description : .....
+ * Date        : 02 september 2008
+ * Description : Employee_role class
  *               .....
  */
 
   class employee_role {
     var $employee_role_id, $role_id, $employee, $start_date, $end_date, $tariffs;
 
-    function employee_role($employee_role_id = '', $child_object = '') {
+    public function __construct($employee_role_id = '', $child_object = '') {
+      $database = $_SESSION['database'];
       $this->employee_role_id = $employee_role_id;
       $this->tariffs = array();
 
-      if (tep_not_null($employee_role_id)) {
-        $employee_role_id = tep_db_prepare_input($employee_role_id);
+      if (tep_not_null($this->employee_role_id)) {
+        $this->employee_role_id = $database->prepare_input($this->employee_role_id);
 
-        $employee_role_query = tep_db_query("select role_id, employee_id, start_date, end_date from " . TABLE_EMPLOYEES_ROLES . " where employee_role_id = '" . (int)$employee_role_id . "'");
-        $employee_role_result = tep_db_fetch_array($employee_role_query);
+        $employee_role_query = $database->query("select roles_id, employees_id, employees_roles_start_date, employees_roles_end_date from " . TABLE_EMPLOYEES_ROLES . " where employees_roles_id = '" . (int)$employee_role_id . "'");
+        $employee_role_result = $database->fetch_array($employee_role_query);
 
-        $this->$role_id = $employee_role_result['role_id'];
-        $this->$employee = new employee($employee_role_result['employee_id']);
-        $this->$start_date = $employee_role_result['start_date'];
-        $this->$end_date = $employee_role_result['end_date'];
+        $this->role_id = $employee_role_result['roles_id'];
+        $this->employee = new employee($employee_role_result['employees_id']);
+        $this->start_date = $employee_role_result['employees_roles_start_date'];
+        $this->end_date = $employee_role_result['employees_roles_end_date'];
 
         // Retrieve specific tariff or all tariffs for this employee_role
         if (tep_not_null($child_object)) {
@@ -83,6 +84,20 @@
 
     public function get_parent_id() {
       return $this->role_id;
+    }
+
+    public static function get_role_name($employee_role_id = '') {
+      $database = $_SESSION['database'];
+      $employee_role_query = $database->query("select roles_id from " . TABLE_EMPLOYEES_ROLES . " where employees_roles_id = '" . $employee_role_id . "'");
+      $employee_role_result = $database->fetch_array($employee_role_query);
+      return role::get_role_name($employee_role_result['roles_id']);
+    }
+
+    public static function get_project_name($employee_role_id = '') {
+      $database = $_SESSION['database'];
+      $employee_role_query = $database->query("select roles_id from " . TABLE_EMPLOYEES_ROLES . " where employees_roles_id = '" . $employee_role_id . "'");
+      $employee_role_result = $database->fetch_array($employee_role_query);
+      return role::get_project_name($employee_role_result['roles_id']);
     }
   }
 ?>

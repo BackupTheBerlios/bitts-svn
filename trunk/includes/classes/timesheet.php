@@ -56,7 +56,7 @@
         case 'end_date':
           return $this->end_date;
         case 'locked':
-          return $this->locked;
+          return ($this->locked == 1);
         case 'empty':
           return sizeof($this->activities) == 0;
         case 'activities':

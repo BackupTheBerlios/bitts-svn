@@ -3,35 +3,38 @@
  * CLASS FILE  : project.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 20 mei 2008
- * Description : .....
+ * Date        : 02 september 2008
+ * Description : Project class
  *               .....
  */
 
   class project {
-    private $project_id, $customer, $name, $description, $start_date, $end_date, $calculated_hours, $roles, $role_count;
+    private $project_id, $customer, $name, $description, $customers_contact_name, $customers_reference, $start_date, $end_date, $calculated_hours, $roles, $role_count;
 
-    function project($project_id = '', $role_object = '') {
+    public function __construct($project_id = '', $role_object = '') {
+      $database = $_SESSION['database'];
       $this->project_id = $project_id;
       $this->roles = array();
       $this->role_count = 0;
 
       if (tep_not_null($project_id)) {
-        $project_id = tep_db_prepare_input($project_id);
+        $this->project_id = $database->prepare_input($this->project_id);
 
-        $project_query = tep_db_query("select customer_id, name, description, start_date, end_date, calculated_hours from " . TABLE_PROJECTS . " where project_id = '" . (int)$project_id . "'");
-        $project_result = tep_db_fetch_array($project_query);
+        $project_query = $database->query("select customers_id, projects_name, projects_description, projects_customers_contact_name, projects_customers_reference, projects_start_date, projects_end_date, projects_calculated_hours from " . TABLE_PROJECTS . " where projects_id = '" . (int)$project_id . "'");
+        $project_result = $database->fetch_array($project_query);
 
-        $this->$customer = new customer($project_result['customer_id']);
-        $this->$name = $project_result['name'];
-        $this->$description = $project_result['description'];
-        $this->$start_date = $project_result['start_date'];
-        $this->$end_date = $project_result['end_date'];
-        $this->$calculated_hours = $project_result['calculated_hours'];
+        $this->customer = new customer($project_result['customers_id']);
+        $this->name = $project_result['projects_name'];
+        $this->description = $project_result['projects_description'];
+        $this->customers_contact_name = $project_result['projects_customers_contact_name'];
+        $this->customers_reference = $project_result['projects_customers_reference'];
+        $this->start_date = $project_result['projects_start_date'];
+        $this->end_date = $project_result['projects_end_date'];
+        $this->calculated_hours = $project_result['projects_calculated_hours'];
 
         // Retrieve specific role or all available roles for this project
         if (tep_not_null($role_object)) {
-          add_role($role_object);
+          $this->add_role($role_object);
         } else {
           $this->roles = role::get_array($this->project_id);
           // Determine size of array $this->roles (#nodes) and put this value into $child_count
@@ -39,11 +42,17 @@
       }
     }
 
-    public function get_role_count() {
-      return $role_count;
+    public function __get($varname) {
+      switch ($varname) {
+        case 'name':
+          return $this->name;
+      	case 'role_count':
+          return $this->role_count;
+      }
+      return null;
     }
 
-    public function add_role($role_object = '') {
+    private function add_role($role_object = '') {
       if (tep_not_null($role_object)) {
         $this->roles[$this->role_count] = $role_object;
         $this->role_count++;
@@ -76,6 +85,13 @@
         }
       }
       return $project_array;
+    }
+
+    public static function get_project_name($project_id = '') {
+      $database = $_SESSION['database'];
+      $project_query = $database->query("select projects_name from " . TABLE_PROJECTS . " where projects_id = '" . $project_id . "'");
+      $project_result = $database->fetch_array($project_query);
+      return $project_result['projects_name'];
     }
   }
 ?>

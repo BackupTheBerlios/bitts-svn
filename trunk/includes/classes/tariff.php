@@ -3,26 +3,27 @@
  * CLASS FILE  : tariff.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 may 2008
- * Description : .....
+ * Date        : 02 september 2008
+ * Description : Tariff class
  *               .....
  */
 
   class tariff {
-    var $tariff_id, $employee_role_id, $hours_type, $amount;
+    var $tariff_id, $employee_role_id, $unit, $tariff_amount;
 
-    function tariff($tariff_id = '') {
+    public function __construct($tariff_id = '') {
+      $database = $_SESSION['database'];
       $this->tariff_id = $tariff_id;
 
-      if (tep_not_null($tariff_id)) {
-        $tariff_id = tep_db_prepare_input($tariff_id);
+      if (tep_not_null($this->tariff_id)) {
+        $this->$tariff_id = $database->prepare_input($this->tariff_id);
 
-        $tariff_query = tep_db_query("select employee_role_id, hours_type_id, amount from " . TABLE_TARIFFS . " where tariff_id = '" . (int)$tariff_id . "'");
-        $tariff_result = tep_db_fetch_array($tariff_query);
+        $tariff_query = $database->query("select employees_roles_id, units_id, tariffs_amount from " . TABLE_TARIFFS . " where tariffs_id = '" . (int)$this->tariff_id . "'");
+        $tariff_result = $database->fetch_array($tariff_query);
 
-        $this->$employee_role_id = $tariff_result['employee_role_id'];
-        $this->$hours_type = new hours_type($tariff_result['hours_type_id']);
-        $this->$amount = $tariff_result['amount'];
+        $this->employee_role_id = $tariff_result['employees_roles_id'];
+        $this->unit = new unit($tariff_result['units_id']);
+        $this->tariff_amount = $tariff_result['tariffs_amount'];
       }
     }
 
@@ -39,6 +40,26 @@
         }
       }
       return $tariff_array;
+    }
+
+    public function __get($varname) {
+      switch ($varname) {
+        case 'tariff_id':
+          return $this->tariff_id;
+      	case 'employee_role_id':
+          return $this->employee_role_id;
+      	case 'project_name':
+          return employee_role::get_project_name($this->employee_role_id);
+       	case 'role_name':
+          return employee_role::get_role_name($this->employee_role_id);
+       	case 'unit':
+          return $this->unit;
+      	case 'unit_name':
+      	  return $this->unit->name;
+        case 'tariff_amount':
+          return $this->tariff_amount;
+      }
+      return null;
     }
 
     public function get_parent_id() {

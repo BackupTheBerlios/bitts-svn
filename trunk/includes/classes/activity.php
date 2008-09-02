@@ -3,7 +3,7 @@
  * CLASS FILE  : activity.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 april 2008
+ * Date        : 02 september 2008
  * Description : Activity class
  *
  */
@@ -22,7 +22,7 @@
         $activity_result = $database->fetch_array($activity_query);
 
         $this->date = $activity_result['activities_date'];
-//        $this->tariff = new tariff($activity_result['tariffs_id']);
+        $this->tariff = new tariff($activity_result['tariffs_id']);
         $this->amount = $activity_result['activities_amount'];
         $this->travel_distance = $activity_result['activities_travel_distance'];
         $this->expenses = $activity_result['activities_expenses'];
@@ -37,10 +37,16 @@
           return $this->activity_id;
       	case 'date':
           return $this->date;
-      	case 'tariff':
+      	case 'project_name':
+          return $this->tariff->project_name;
+       	case 'role_name':
+          return $this->tariff->role_name;
+        case 'tariff':
           return $this->tariff;
         case 'amount':
           return $this->amount;
+        case 'unit_name':
+          return $this->tariff->unit_name;
         case 'travel_distance':
           return $this->travel_distance;
         case 'expenses':
@@ -60,7 +66,7 @@
       if (tep_not_null($timesheet_id)) {
         $index = 0;
         $timesheet_id = $database->prepare_input($timesheet_id);
-        $activities_query = $database->query("select activities_id from " . TABLE_ACTIVITIES . " where timesheets_id = '" . (int)$timesheet_id . "'");
+        $activities_query = $database->query("select activities_id from " . TABLE_ACTIVITIES . " where timesheets_id = '" . (int)$timesheet_id . "' order by activities_date");
         while ($activities_result = $database->fetch_array($activities_query)) {
           $activity_array[$index] = new activity($activities_result['activities_id']);
           $index++;

@@ -98,7 +98,7 @@
         $employee_query = 'select employees_login, employees_password from ' . TABLE_EMPLOYEES;
         $employee_query .= " where employees_login = '" . $login . "'";
         $employee_query .= " and employees_password = password('" . $password . "')";
-        $employee_query .= ' and ( employees_is_user or employees_is_analyst or employees_is_administrator)';
+        $employee_query .= ' and (employees_is_user or employees_is_analyst or employees_is_administrator)';
         $employee_query = $database->query($employee_query);
         if ($employee_result = $database->fetch_array($employee_query))
           return TRUE;
