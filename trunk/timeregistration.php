@@ -69,6 +69,18 @@
             <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
           </tr>
           <tr>
+            <?php if ($_SESSION['timesheet']->locked) {
+              echo '<td align="center" class="smallText">' . TEXT_TIMEREGISTRATION_LOCKED;
+            } else {
+              echo '<td align="center">';
+              require(DIR_WS_INCLUDES . 'activity_entry.php');
+            } ?>
+            </td>
+          </tr>
+          <tr>
+            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
+          </tr>
+          <tr>
             <td>
               <table border="0" width="100%" cellspacing="0" cellpadding="2" class="activityListing">
                 <tr>
@@ -88,9 +100,9 @@
                   for ($index = 0; $index < sizeof($_SESSION['timesheet']->activities); $index++) { ?>
                     <tr class="activityListing-<?php echo $odd_or_even; $odd_or_even = ($odd_or_even == 'odd'?'even':'odd'); ?>">
                       <td class="activityListing-data"><?php echo strftime('%d', tep_datetouts($_SESSION['timesheet']->activities[$index]->date)); ?></td>
-                      <td class="activityListing-data"><?php echo ''; ?></td>
+                      <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->project_name.'<br>'.$_SESSION['timesheet']->activities[$index]->role_name; ?></td>
                       <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->amount; ?></td>
-                      <td class="activityListing-data"><?php echo ''; ?></td>
+                      <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->unit_name; ?></td>
                       <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->travel_distance; ?></td>
                       <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->expenses; ?></td>
                       <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->ticket_number; ?></td>
@@ -107,14 +119,6 @@
                   </tr>
                 <?php } ?>
               </table>
-            </td>
-          </tr>
-          <tr>
-            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
-          </tr>
-          <tr>
-            <td align="center">
-              <?php require(DIR_WS_INCLUDES . 'activity_entry.php'); ?>
             </td>
           </tr>
           <tr>
