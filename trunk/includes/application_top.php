@@ -78,10 +78,12 @@
 
   // Include the project and related classes
   require(DIR_WS_CLASSES . 'project.php');
+  require(DIR_WS_CLASSES . 'customer.php');
   require(DIR_WS_CLASSES . 'role.php');
   require(DIR_WS_CLASSES . 'employee_role.php');
   require(DIR_WS_CLASSES . 'tariff.php');
-  
+  require(DIR_WS_CLASSES . 'unit.php');
+
   // Include the timesheet and related classes
   require(DIR_WS_CLASSES . 'timesheet.php');
   require(DIR_WS_CLASSES . 'activity.php');
