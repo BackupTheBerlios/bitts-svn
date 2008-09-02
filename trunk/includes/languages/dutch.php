@@ -78,6 +78,7 @@ define('BODY_TEXT_NO', 'Nee');
 define('TEXT_TIMEREGISTRATION_BACK', 'Periode terug');
 define('TEXT_TIMEREGISTRATION_PERIOD', 'Periode : ');
 define('TEXT_TIMEREGISTRATION_FORWARD', 'Periode vooruit');
+define('TEXT_TIMEREGISTRATION_LOCKED', 'Deze periode is bevestigd en kan niet meer worden gewijzigd');
 define('TEXT_TIMEREGISTRATION_IS_EMPTY', 'Geen activiteiten aanwezig');
 
 define('TEXT_ACTIVITY_DAY', 'Dag');
