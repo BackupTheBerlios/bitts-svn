@@ -15,12 +15,12 @@
 // on Windows try 'en', or 'English'
 @setlocale(LC_TIME, 'en_US.ISO_8859-1');
 
-define('DATE_FORMAT_SHORT', '%d-%m-%Y');  // this is used for strftime()
-define('DATE_FORMAT_LONG', '%A %d %B %Y'); // this is used for strftime()
-define('DATE_FORMAT', 'd-m-Y'); // this is used for date()
+define('DATE_FORMAT_SHORT', '%m-%d-%Y');  // this is used for strftime()
+define('DATE_FORMAT_LONG', '%A %B %d, %Y'); // this is used for strftime()
+define('DATE_FORMAT', 'm-d-Y'); // this is used for date()
 define('DATE_TIME_FORMAT', DATE_FORMAT_SHORT . ' %H:%M:%S');
-define('NUMBER_DECIMAL_POINT', ',');
-define('NUMBER_THOUSANDS_SEPARATOR', '.');
+define('NUMBER_DECIMAL_POINT', '.');
+define('NUMBER_THOUSANDS_SEPARATOR', ',');
 
 $LANGUAGE_ARRAY_MONTH = array ("January" => "january", "February" => "february", "March" => "march", "April" => "april", "May" => "may", "June" => "june", "July" => "july", "August" => "august", "September" => "september", "October" => "october", "November" => "november", "December" => "december");
 
