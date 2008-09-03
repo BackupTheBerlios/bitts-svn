@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 26 may 2008
+ * Date        : 03 september 2008
  * Description : Dutch language file
  */
 
@@ -92,6 +92,14 @@ define('TEXT_ACTIVITY_TICKETNUMBER', 'Ticket nr.');
 define('TEXT_ACTIVITY_COMMENT', 'Opmerkingen');
 define('TEXT_ACTIVITY_EDIT', 'Wijzigen');
 define('TEXT_ACTIVITY_DELETE', 'Verwijderen');
+$ACTIVITY_ERROR_LEVEL = array (0 => '',
+                               1 => 'Geen project gekozen',
+                               2 => 'Geen rol gekozen',
+                               3 => 'Aantal onjuist',
+                               4 => 'Geen eenheid gekozen',
+                               5 => 'Reisafstand onjuist',
+                               6 => 'Onkosten onjuist',
+                               7 => 'Ticket nr. is verplicht');
 
 define('TEXT_CALENDAR_MONDAY', 'm');
 define('TEXT_CALENDAR_TUESDAY', 'd');
