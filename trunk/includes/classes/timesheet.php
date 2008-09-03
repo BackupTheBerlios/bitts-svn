@@ -81,7 +81,7 @@
       // Save activity
       $activity = new activity($activity_id);
       $activity->fill($date, $amount, $tariff_id, $travel_distance, $expenses, $ticket_number, $comment, $this->timesheet_id);
-      // $activity->save();
+      $activity->save();
     }
 
     public function save() {
@@ -96,7 +96,6 @@
         $this->timesheet_id = $database->prepare_input($this->timesheet_id);
         $timesheet_query = $database->query("update " . TABLE_TIMESHEETS . " set timesheets_start_date='" . $this->start_date . "', timesheets_end_date='" . $this->end_date . "', timesheets_locked='" . ($this->locked?1:0) . "', employees_id='" . $this->employee_id . "' where timesheets_id = '" . (int)$this->timesheet_id . "'");
       }
-      echo $this->timesheet_id;
     }
   }
 ?>

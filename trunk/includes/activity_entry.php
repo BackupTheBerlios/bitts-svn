@@ -3,14 +3,17 @@
  * CODE FILE   : activity_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 26 may 2008
+ * Date        : 03 september 2008
  * Description : Activity entry fields
- *
+ *               Data validation sequence
+ *               Storing of entered data (via timesheet object)
  */
 
 // When action==save_data: verify entered data and save if OK / set errorlevel when NOK
 $error_level = 0;
-if (tep_post_or_get('action')=='save_data') {
+if (tep_post_or_get('action') == '') {
+  $_POST['activity_id'] = 0;
+} else if (tep_post_or_get('action') == 'save_data') {
   // Check for data format and required fields
   // change action when not everything is filled-in
   if (tep_post_or_get('selected_date') == '') {
@@ -29,12 +32,12 @@ if (tep_post_or_get('action')=='save_data') {
     $error_level = 5;
   } else if (!activity::validate('expenses', tep_post_or_get('activity_expenses'))) {
     $error_level = 6;
-  } else if (!tep_not_null(tep_post_or_get('activity_ticket_number'))&&true) { // no ticket number when required
+  } else if (activity::ticket_entry_is_required(tep_post_or_get('tariffs_id')) && !tep_not_null(tep_post_or_get('activity_ticket_number'))) { // no ticket number when required
     $error_level = 7;
   } else {
     // OK, entry can be saved
     $_SESSION['timesheet']->save_activity(tep_post_or_get('activity_id'),
-                                          tep_post_or_get('selected_date'),
+                                          tep_strftime(DATE_FORMAT_DATABASE, tep_post_or_get('selected_date')),
                                           tep_post_or_get('activity_amount'),
                                           tep_post_or_get('tariffs_id'),
                                           tep_post_or_get('activity_travel_distance'),
@@ -48,6 +51,10 @@ if (tep_post_or_get('action')=='save_data') {
         $_POST[$key] = '';
       }
     }
+
+    // Reload the timesheet object in order to
+    // update the activity listing below
+    $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, tep_post_or_get('period'));
   }
 } ?>
   <!-- activity_entry //-->
@@ -82,7 +89,7 @@ if (tep_post_or_get('action')=='save_data') {
               <?php echo TEXT_ACTIVITY_PROJECTNAME; ?>
             </td>
             <td class="activity_entry">
-              <?php echo tep_draw_form('project_selection', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'select_role'), array('mPath','period','selected_date'), 'hidden_field');
+              <?php echo tep_draw_form('project_selection', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'select_role'), array('mPath','period','selected_date', 'activity_id'), 'hidden_field');
               if (tep_post_or_get('action')=='select_project'||tep_post_or_get('action')=='select_role'||tep_post_or_get('action')=='enter_data'||tep_post_or_get('action')=='save_data') {
                 echo tep_html_select('projects_id', tep_get_partial_array(project::get_selectable_projects($_SESSION['employee']->employee_id, tep_strftime('%Y-%m-%d', tep_post_or_get('selected_date'))), 'projects_id', 'projects_name'), TRUE, tep_post_or_get('projects_id'));
               } else {
@@ -96,7 +103,7 @@ if (tep_post_or_get('action')=='save_data') {
               <?php echo TEXT_ACTIVITY_ROLENAME; ?>
             </td>
             <td class="activity_entry">
-              <?php echo tep_draw_form('role_selection', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'enter_data'), array('mPath','period','selected_date', 'projects_id'), 'hidden_field');
+              <?php echo tep_draw_form('role_selection', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'enter_data'), array('mPath','period','selected_date', 'projects_id', 'activity_id'), 'hidden_field');
               if (tep_post_or_get('action')=='select_role'||tep_post_or_get('action')=='enter_data'||tep_post_or_get('action')=='save_data') {
                 echo tep_html_select('roles_id', tep_get_partial_array(role::get_selectable_roles($_SESSION['employee']->employee_id, tep_strftime('%Y-%m-%d', tep_post_or_get('selected_date')),tep_post_or_get('projects_id')), 'roles_id', 'roles_name'), TRUE, tep_post_or_get('roles_id'));
               } else {
@@ -105,7 +112,7 @@ if (tep_post_or_get('action')=='save_data') {
               ?></form>
             </td>
           </tr
-          <?php echo tep_draw_form('activity_entry', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'save_data'), array('mPath','period','selected_date','projects_id','roles_id'), 'hidden_field'); ?>
+          <?php echo tep_draw_form('activity_entry', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'save_data'), array('mPath','period','selected_date','projects_id','roles_id', 'activity_id'), 'hidden_field'); ?>
           <tr>
             <td class="activity_entry">
               <?php echo TEXT_ACTIVITY_AMOUNT . ' &amp; ' . TEXT_ACTIVITY_UNIT; ?>
@@ -144,7 +151,6 @@ if (tep_post_or_get('action')=='save_data') {
             </td>
             <td class="activity_entry">
               <?php echo tep_draw_input_field('activity_comment', '', 'size="1" maxlength="64" style="width: 100%"' . (tep_post_or_get('action')=='enter_data'||tep_post_or_get('action')=='save_data'?'':' disabled')); ?>
-<?php echo tep_post_or_get('action'); ?>
             </td>
           </tr>
           <tr>

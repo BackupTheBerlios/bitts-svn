@@ -3,7 +3,7 @@
  * CLASS FILE  : database_mysql.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 17 december 2007
+ * Date        : 03 september 2008
  * Description : Mysql server implementation of the database interface
  */
 
@@ -12,6 +12,10 @@
 
   class database_mysql implements database_interface {
     private $link;
+
+    public function __construct() {
+      define('DATE_FORMAT_DATABASE', '%Y-%m-%d');
+    }
 
   	public function connect($server='', $username='', $password='', $new_link=true, $client_flags=0) {
       $this->link = mysql_connect($server, $username, $password, $new_link, $client_flags);

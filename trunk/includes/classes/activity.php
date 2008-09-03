@@ -3,7 +3,7 @@
  * CLASS FILE  : activity.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 02 september 2008
+ * Date        : 03 september 2008
  * Description : Activity class
  *
  */
@@ -117,7 +117,7 @@
       return false;
     }
 
-    public static function format($name, $value) {
+    private function format($name, $value) {
       // Format the string
       $value = preg_replace('#^([-]*[0-9\.,\' ]+?)((\.|,){1}([0-9-]{1,2}))*$#e', "str_replace(array('.', ',', \"'\", ' '), '', '\\1') . '.' . sprintf('%02d','\\4')", $value);
       switch ($name) {
@@ -148,6 +148,24 @@
         }
       }
       return false;
+    }
+
+    public static function ticket_entry_is_required($tariff_id) {
+      return tariff::ticket_entry_is_required($tariff_id);
+    }
+
+    public function save() {
+      $database = $_SESSION['database'];
+      // Insert a new activity if one does not exist and retrieve the id
+      if ($this->activity_id == 0) {
+        // The activity does not exist
+        $database->query("insert into " . TABLE_ACTIVITIES . " (activities_date, activities_amount, tariffs_id, activities_travel_distance, activities_expenses, activities_ticket_number, activities_comment, timesheets_id) values ('" . $this->date . "', '" . $this->amount . "', '" . $this->tariff->tariff_id . "', '" . $this->travel_distance . "', '" . $this->expenses . "', '" . $this->ticket_number . "', '" . $this->comment . "', '" . $this->timesheet_id . "')");
+        $this->activity_id = $database->insert_id(); // The proper id is now known
+      } else {
+        // The activity exists, update the contents
+        $this->timesheet_id = $database->prepare_input($this->activity_id);
+        $activity_query = $database->query("update " . TABLE_ACTIVITIES . " set activities_date='" . $this->date . "', activities_amount='" . $this->amount . "', tariffs_id='" . $this->tariff->tariff_id . "', activities_travel_distance='" . $this->travel_distance . "', activities_expenses='" . $this->expenses . "', activities_ticket_number='" . $this->ticket_number . "', activities_comment='" . $this->comment . "', timesheets_id='" . $this->timesheet_id . "' where activities_id = '" . (int)$this->activity_id . "'");
+      }
     }
   }
 ?>

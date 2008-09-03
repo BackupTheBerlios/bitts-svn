@@ -3,7 +3,7 @@
  * CLASS FILE  : tariff.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 02 september 2008
+ * Date        : 03 september 2008
  * Description : Tariff class
  *               .....
  */
@@ -82,6 +82,13 @@
         array_push($tariff_array, $tariff_result);
       }
       return $tariff_array;
+    }
+
+    public static function ticket_entry_is_required($tariff_id) {
+      $database = $_SESSION['database'];
+      $tariff_query = $database->query("select employees_roles_id from " . TABLE_TARIFFS . " where tariffs_id = '" . $tariff_id . "'");
+      $tariff_result = $database->fetch_array($tariff_query);
+      return employee_role::ticket_entry_is_required($tariff_result['employees_roles_id']);
     }
   }
 ?>

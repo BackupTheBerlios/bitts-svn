@@ -3,7 +3,7 @@
  * CLASS FILE  : employee_role.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 02 september 2008
+ * Date        : 03 september 2008
  * Description : Employee_role class
  *               .....
  */
@@ -34,6 +34,24 @@
           $this->tariffs = tariff::get_array($this->employee_role_id);
         }
       }
+    }
+
+    public function __get($varname) {
+      switch ($varname) {
+      	case 'employee_role_id':
+          return $this->employee_role_id;
+      	case 'role_id':
+          return $this->role_id;
+       	case 'employee':
+          return $this->employee;
+       	case 'start_date':
+          return $this->start_date;
+      	case 'end_date':
+      	  return $this->end_date;
+        case 'tariffs':
+          return $this->tariffs;
+      }
+      return null;
     }
 
     public static function get_array($role_id = '') {
@@ -98,6 +116,13 @@
       $employee_role_query = $database->query("select roles_id from " . TABLE_EMPLOYEES_ROLES . " where employees_roles_id = '" . $employee_role_id . "'");
       $employee_role_result = $database->fetch_array($employee_role_query);
       return role::get_project_name($employee_role_result['roles_id']);
+    }
+
+    public static function ticket_entry_is_required($employee_role_id = '') {
+      $database = $_SESSION['database'];
+      $employee_role_query = $database->query("select roles_id from " . TABLE_EMPLOYEES_ROLES . " where employees_roles_id = '" . $employee_role_id . "'");
+      $employee_role_result = $database->fetch_array($employee_role_query);
+      return role::ticket_entry_is_required($employee_role_result['roles_id']);
     }
   }
 ?>

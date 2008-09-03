@@ -3,7 +3,7 @@
  * CLASS FILE  : role.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 02 september 2008
+ * Date        : 03 september 2008
  * Description : Role class
  *               .....
  */
@@ -25,7 +25,7 @@
         $this->project_id = $role_result['projects_id'];
         $this->name = $role_result['roles_name'];
         $this->description = $role_result['roles_description'];
-        $this->mandatory_ticket_entry = $role_result['roles_mandatory_ticket_entry'];
+        $this->mandatory_ticket_entry = ($role_result['roles_mandatory_ticket_entry'] == 1);
 
         // Retrieve specific employee_role or all employees_roles for this role
         if (tep_not_null($child_object)) {
@@ -47,7 +47,7 @@
         case 'description':
           return $this->description;
         case 'mandatory_ticket_entry':
-          return ($this->mandatory_ticket_entry == 1);
+          return $this->mandatory_ticket_entry;
       }
       return null;
     }
@@ -115,6 +115,13 @@
       $role_query = $database->query("select projects_id from " . TABLE_ROLES . " where roles_id = '" . $role_id . "'");
       $role_result = $database->fetch_array($role_query);
       return project::get_project_name($role_result['projects_id']);
+    }
+
+    public static function ticket_entry_is_required($role_id = '') {
+      $database = $_SESSION['database'];
+      $role_query = $database->query("select roles_mandatory_ticket_entry from " . TABLE_ROLES . " where roles_id = '" . $role_id . "'");
+      $role_result = $database->fetch_array($role_query);
+      return ($role_result['roles_mandatory_ticket_entry'] == 1);
     }
   }
 ?>
