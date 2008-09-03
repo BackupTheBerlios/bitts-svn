@@ -111,7 +111,7 @@ if (tep_post_or_get('action') == '') {
               }
               ?></form>
             </td>
-          </tr
+          </tr>
           <?php echo tep_draw_form('activity_entry', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'save_data'), array('mPath','period','selected_date','projects_id','roles_id', 'activity_id'), 'hidden_field'); ?>
           <tr>
             <td class="activity_entry">
