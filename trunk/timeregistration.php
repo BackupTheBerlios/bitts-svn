@@ -144,7 +144,7 @@
                       <!-- Show OK and Cancel buttons below the activity-to-be-deleted -->
                       <tr class="activityListing-<?php echo $odd_or_even; ?>">
                         <td align="right" valign="middle" class="activityListing-data" colspan="10">
-                          <?php echo TEXT_ACTIVITY_DELETE_QUESTION . tep_post_or_get('activity_id'); ?>&nbsp;
+                          <?php echo TEXT_ACTIVITY_DELETE_QUESTION; ?>&nbsp;
                           <?php echo tep_draw_form('delete_activity_confirm', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'delete_activity_confirmed'), array('mPath','period', 'activity_id'), 'hidden_field');
                             echo tep_image_submit('button_ok.gif', TEXT_ACTIVITY_DELETE_OK); ?>
                           </form>&nbsp;
