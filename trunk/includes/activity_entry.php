@@ -112,7 +112,9 @@ if (tep_post_or_get('action') == '') {
               ?></form>
             </td>
           </tr>
-          <?php echo tep_draw_form('activity_entry', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'save_data'), array('mPath','period','selected_date','projects_id','roles_id', 'activity_id'), 'hidden_field'); ?>
+          <?php if (tep_post_or_get('action') == 'enter_data' || tep_post_or_get('action') == 'save_data') {
+            echo tep_draw_form('activity_entry', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'save_data'), array('mPath','period','selected_date','projects_id','roles_id', 'activity_id'), 'hidden_field');
+          } ?>
           <tr>
             <td class="activity_entry">
               <?php echo TEXT_ACTIVITY_AMOUNT . ' &amp; ' . TEXT_ACTIVITY_UNIT; ?>
@@ -160,11 +162,20 @@ if (tep_post_or_get('action') == '') {
           </tr>
           <tr>
             <td align="right" class="activity_entry" colspan="2">
-              <?php echo tep_image_submit('button_save.gif', TEXT_ACTIVITY_ENTRY_SAVE); ?>
-              </form>&nbsp;
-              <?php echo tep_draw_form('fcancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period'), 'hidden_field');
-              echo tep_image_submit('button_cancel.gif', TEXT_ACTIVITY_ENTRY_CANCEL);
-              ?></form>
+              <?php if (tep_post_or_get('action') == 'enter_data' || tep_post_or_get('action') == 'save_data') {
+                echo tep_image_submit('button_save.gif', TEXT_ACTIVITY_ENTRY_SAVE);
+                echo '</form>';
+              } else {
+                echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_save_disabled.gif');
+              }
+              echo '&nbsp;';
+              if (tep_not_null(tep_post_or_get('action'))) {
+                echo tep_draw_form('fcancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period'), 'hidden_field');
+                echo tep_image_submit('button_cancel.gif', TEXT_ACTIVITY_ENTRY_CANCEL);
+                echo '</form>';
+              } else {
+                echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_cancel_disabled.gif');
+              } ?>
             </td>
           </tr>
         </table>
