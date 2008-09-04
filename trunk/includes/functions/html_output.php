@@ -3,7 +3,7 @@
  * CODE FILE   : html_output.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 27 may 2008
+ * Date        : 04 september 2008
  * Description : html output functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -166,9 +166,15 @@
 
 ////
 // The HTML form submit button wrapper function
-// Outputs a button in the selected language
-  function tep_image_submit($image, $alt = '', $parameters = '') {
-    $image_submit = '<input type="image" src="' . tep_output_string(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/' . $image) . '" border="0" alt="' . tep_output_string($alt) . '"';
+// Outputs a button in the selected language or from given path
+  function tep_image_submit($image, $alt = '', $parameters = '', $image_path = '') {
+    $image_submit = '<input type="image" src="';
+    if (tep_not_null($image_path)) {
+      $image_submit .= tep_output_string($image_path . $image);
+    } else {
+      $image_submit .= tep_output_string(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/' . $image);
+    }
+    $image_submit .= '" border="0" alt="' . tep_output_string($alt) . '"';
 
     if (tep_not_null($alt)) $image_submit .= ' title="' . tep_output_string($alt) . '"';
 

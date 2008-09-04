@@ -3,7 +3,7 @@
  * CODE FILE   : activity_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 03 september 2008
+ * Date        : 04 september 2008
  * Description : Activity entry fields
  *               Data validation sequence
  *               Storing of entered data (via timesheet object)
@@ -37,7 +37,7 @@ if (tep_post_or_get('action') == '') {
   } else {
     // OK, entry can be saved
     $_SESSION['timesheet']->save_activity(tep_post_or_get('activity_id'),
-                                          tep_strftime(DATE_FORMAT_DATABASE, tep_post_or_get('selected_date')),
+                                          tep_post_or_get('selected_date'),
                                           tep_post_or_get('activity_amount'),
                                           tep_post_or_get('tariffs_id'),
                                           tep_post_or_get('activity_travel_distance'),
@@ -112,7 +112,7 @@ if (tep_post_or_get('action') == '') {
               ?></form>
             </td>
           </tr>
-          <?php if (tep_post_or_get('action') == 'enter_data' || tep_post_or_get('action') == 'save_data') {
+          <?php if (tep_post_or_get('action')=='enter_data'||tep_post_or_get('action')=='save_data') {
             echo tep_draw_form('activity_entry', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'save_data'), array('mPath','period','selected_date','projects_id','roles_id', 'activity_id'), 'hidden_field');
           } ?>
           <tr>
@@ -162,14 +162,14 @@ if (tep_post_or_get('action') == '') {
           </tr>
           <tr>
             <td align="right" class="activity_entry" colspan="2">
-              <?php if (tep_post_or_get('action') == 'enter_data' || tep_post_or_get('action') == 'save_data') {
+              <?php if (tep_post_or_get('action')=='enter_data'||tep_post_or_get('action')=='save_data') {
                 echo tep_image_submit('button_save.gif', TEXT_ACTIVITY_ENTRY_SAVE);
                 echo '</form>';
               } else {
                 echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_save_disabled.gif');
               }
               echo '&nbsp;';
-              if (tep_not_null(tep_post_or_get('action'))) {
+              if (tep_post_or_get('action')=='select_project'||tep_post_or_get('action')=='select_role'||tep_post_or_get('action')=='enter_data'||tep_post_or_get('action')=='save_data') {
                 echo tep_draw_form('fcancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period'), 'hidden_field');
                 echo tep_image_submit('button_cancel.gif', TEXT_ACTIVITY_ENTRY_CANCEL);
                 echo '</form>';

@@ -3,7 +3,7 @@
  * CLASS FILE  : tariff.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 03 september 2008
+ * Date        : 04 september 2008
  * Description : Tariff class
  *               .....
  */
@@ -48,9 +48,13 @@
           return $this->tariff_id;
       	case 'employee_role_id':
           return $this->employee_role_id;
+      	case 'project_id':
+          return employee_role::get_project_id($this->employee_role_id);
       	case 'project_name':
           return employee_role::get_project_name($this->employee_role_id);
-       	case 'role_name':
+      	case 'role_id':
+          return employee_role::get_role_id($this->employee_role_id);
+        case 'role_name':
           return employee_role::get_role_name($this->employee_role_id);
        	case 'unit':
           return $this->unit;

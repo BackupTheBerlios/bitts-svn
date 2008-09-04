@@ -3,7 +3,7 @@
  * CLASS FILE  : employee_role.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 03 september 2008
+ * Date        : 04 september 2008
  * Description : Employee_role class
  *               .....
  */
@@ -104,11 +104,25 @@
       return $this->role_id;
     }
 
+    public static function get_role_id($employee_role_id = '') {
+      $database = $_SESSION['database'];
+      $employee_role_query = $database->query("select roles_id from " . TABLE_EMPLOYEES_ROLES . " where employees_roles_id = '" . $employee_role_id . "'");
+      $employee_role_result = $database->fetch_array($employee_role_query);
+      return $employee_role_result['roles_id'];
+    }
+
     public static function get_role_name($employee_role_id = '') {
       $database = $_SESSION['database'];
       $employee_role_query = $database->query("select roles_id from " . TABLE_EMPLOYEES_ROLES . " where employees_roles_id = '" . $employee_role_id . "'");
       $employee_role_result = $database->fetch_array($employee_role_query);
       return role::get_role_name($employee_role_result['roles_id']);
+    }
+
+    public static function get_project_id($employee_role_id = '') {
+      $database = $_SESSION['database'];
+      $employee_role_query = $database->query("select roles_id from " . TABLE_EMPLOYEES_ROLES . " where employees_roles_id = '" . $employee_role_id . "'");
+      $employee_role_result = $database->fetch_array($employee_role_query);
+      return role::get_project_id($employee_role_result['roles_id']);
     }
 
     public static function get_project_name($employee_role_id = '') {

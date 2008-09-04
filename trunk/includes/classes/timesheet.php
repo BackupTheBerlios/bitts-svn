@@ -3,7 +3,7 @@
  * CLASS FILE  : timesheet.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 03 september 2008
+ * Date        : 04 september 2008
  * Description : Timesheet class
  *
  */
@@ -72,7 +72,7 @@
       $this->employee_id = $employee_id;
     }
 
-    public function save_activity($activity_id = 0, $date = '0000-00-00 00:00:00', $amount = 0, $tariff_id = 0, $travel_distance = 0, $expenses = 0, $ticket_number = '', $comment = '') {
+    public function save_activity($activity_id = 0, $date = 0, $amount = 0, $tariff_id = 0, $travel_distance = 0, $expenses = 0, $ticket_number = '', $comment = '') {
       // First check if timesheet has been saved previously (timesheet_id != 0)
       // If not, first save current timesheet
       if ($this->timesheet_id == 0) {

@@ -3,7 +3,7 @@
  * CLASS FILE  : role.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 03 september 2008
+ * Date        : 04 september 2008
  * Description : Role class
  *               .....
  */
@@ -108,6 +108,13 @@
       $role_query = $database->query("select roles_name from " . TABLE_ROLES . " where roles_id = '" . $role_id . "'");
       $role_result = $database->fetch_array($role_query);
       return $role_result['roles_name'];
+    }
+
+    public static function get_project_id($role_id = '') {
+      $database = $_SESSION['database'];
+      $role_query = $database->query("select projects_id from " . TABLE_ROLES . " where roles_id = '" . $role_id . "'");
+      $role_result = $database->fetch_array($role_query);
+      return $role_result['projects_id'];
     }
 
     public static function get_project_name($role_id = '') {

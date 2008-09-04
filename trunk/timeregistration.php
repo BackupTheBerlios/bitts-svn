@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 03 september 2008
+ * Date        : 04 september 2008
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -100,16 +100,26 @@
                   $odd_or_even = "odd";
                   for ($index = 0; $index < sizeof($_SESSION['timesheet']->activities); $index++) { ?>
                     <tr class="activityListing-<?php echo $odd_or_even; $odd_or_even = ($odd_or_even == 'odd'?'even':'odd'); ?>">
-                      <td class="activityListing-data"><?php echo strftime('%d', tep_datetouts($_SESSION['timesheet']->activities[$index]->date)); ?></td>
+                      <td class="activityListing-data"><?php echo strftime('%d', $_SESSION['timesheet']->activities[$index]->date); ?></td>
                       <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->project_name.'<br>'.$_SESSION['timesheet']->activities[$index]->role_name; ?></td>
-                      <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->amount; ?></td>
+                      <td class="activityListing-data"><?php echo tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->amount, 2); ?></td>
                       <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->unit_name; ?></td>
                       <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->travel_distance; ?></td>
-                      <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->expenses; ?></td>
+                      <td class="activityListing-data"><?php echo tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->expenses, 2); ?></td>
                       <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->ticket_number; ?></td>
                       <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->comment; ?></td>
-                      <td align="center" width="20" class="activityListing-data"><?php echo tep_image(DIR_WS_IMAGES . 'edit.gif', TEXT_ACTIVITY_EDIT); ?></td>
-                      <td align="center" width="20" class="activityListing-data"><?php echo tep_image(DIR_WS_IMAGES . 'delete.gif', TEXT_ACTIVITY_DELETE); ?></td>
+                      <td align="center" width="20" class="activityListing-data">
+                      <?php if (!$_SESSION['timesheet']->locked) {
+                        echo tep_draw_form('edit_activity', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'enter_data','selected_date'=>$_SESSION['timesheet']->activities[$index]->date,'projects_id'=>$_SESSION['timesheet']->activities[$index]->project_id,'roles_id'=>$_SESSION['timesheet']->activities[$index]->role_id, 'activity_id'=>$_SESSION['timesheet']->activities[$index]->activity_id, 'activity_amount'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->amount, 2), 'tariffs_id'=>$_SESSION['timesheet']->activities[$index]->tariff->tariff_id, 'activity_travel_distance'=>$_SESSION['timesheet']->activities[$index]->travel_distance, 'activity_expenses'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->expenses, 2), 'activity_ticket_number'=>$_SESSION['timesheet']->activities[$index]->ticket_number, 'activity_comment'=>$_SESSION['timesheet']->activities[$index]->comment), array('mPath','period'), 'hidden_field');
+                        echo tep_image_submit('edit.gif', TEXT_ACTIVITY_EDIT,'',DIR_WS_IMAGES);
+                        echo '</form>';
+                      } ?>
+                      </td>
+                      <td align="center" width="20" class="activityListing-data">
+                      <?php if (!$_SESSION['timesheet']->locked) {
+                        echo tep_image(DIR_WS_IMAGES . 'delete.gif', TEXT_ACTIVITY_DELETE);
+                      } ?>
+                      </td>
                     </tr>
                   <?php }
                 } else { ?>
