@@ -3,7 +3,7 @@
  * CODE FILE   : calendar.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 mei 2008
+ * Date        : 04 september 2008
  * Description : Calendar control
  *
  */
@@ -37,7 +37,7 @@
           </tr>
           <tr>
         <?php } ?>
-        <td class="<?php echo ($colindex%7 >= 0 && $colindex%7 <= 4?'calendar-weekday':'calendar-weekend') ?>" align="center"><?php echo '<a href=' . tep_href_link(FILENAME_TIMEREGISTRATION, tep_create_parameters(array('mPath'=>'21','selected_date'=>tep_datetouts($_SESSION['timesheet']->start_date, $calendar_day - 1),'action'=>'select_project'), array('period'))) . '>' . $calendar_day . '</a>';?></td>
+        <td class="<?php echo ($colindex%7 >= 0 && $colindex%7 <= 4?'calendar-weekday':'calendar-weekend') ?>" align="center"><?php echo '<a href=' . tep_href_link(FILENAME_TIMEREGISTRATION, tep_create_parameters(array('mPath'=>'21','selected_date'=>tep_datetouts($_SESSION['timesheet']->start_date, $calendar_day - 1),'action'=>'select_project'), array('period', 'activity_id'))) . '>' . $calendar_day . '</a>';?></td>
       <?php }
       // Walk the rest of the cells to complete the current row
       for ($restindex = $colindex%7; $restindex > 0 && $restindex <= 6; $restindex++) { ?>
