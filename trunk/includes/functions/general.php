@@ -147,9 +147,10 @@
   function tep_number_db_to_user($number = 0, $precision = 0) {
     return number_format($number, $precision, NUMBER_DECIMAL_POINT, NUMBER_THOUSANDS_SEPARATOR);
   }
-  
+
   function tep_number_user_to_db($number = '0') {
     $number = trim($number);
+    // Trim front part incl. max 2 decimals
     if (preg_match("~^([0-9]+|(?:(?:[0-9]{1,3}([.,' ]))+[0-9]{3})+)(([.,])[0-9]{1,2})?$~", $number, $matches)) {
       if (!empty($matches['2'])) {
         $prefix = preg_replace("~[".$matches['2']."]~", "", $matches['1']);

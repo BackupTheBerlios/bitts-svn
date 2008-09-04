@@ -11,9 +11,7 @@
 
 // When action==save_data: verify entered data and save if OK / set errorlevel when NOK
 $error_level = 0;
-if (tep_post_or_get('action') == '') {
-  $_POST['activity_id'] = 0;
-} else if (tep_post_or_get('action') == 'save_data') {
+if (tep_post_or_get('action') == 'save_data') {
   // Check for data format and required fields
   // change action when not everything is filled-in
   if (tep_post_or_get('selected_date') == '') {

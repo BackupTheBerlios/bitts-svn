@@ -88,10 +88,10 @@
 
     public function fill($date = 0, $amount = 0, $tariff_id = '', $travel_distance = 0, $expenses = 0, $ticket_number = '', $comment = '', $timesheet_id = 0) {
       $this->date = $date;
-      $this->amount = $amount;
+      $this->amount = $this->format('amount', $amount);
       $this->tariff = new tariff($tariff_id);
-      $this->travel_distance = $travel_distance;
-      $this->expenses = $expenses;
+      $this->travel_distance = $this->format('travel_distance', $travel_distance);
+      $this->expenses = $this->format('expenses', $expenses);
       $this->ticket_number = $ticket_number;
       $this->comment = $comment;
       $this->timesheet_id = $timesheet_id;
@@ -123,7 +123,7 @@
 
     private function format($name, $value) {
       // Format the string
-      $value = preg_replace('#^([-]*[0-9\.,\' ]+?)((\.|,){1}([0-9-]{1,2}))*$#e', "str_replace(array('.', ',', \"'\", ' '), '', '\\1') . '.' . sprintf('%02d','\\4')", $value);
+      $value = str_replace(",", ".", $value);
       switch ($name) {
         case 'amount': { // Format #.##
           $value = number_format(floatval($value), 2);          
@@ -169,6 +169,13 @@
         // The activity exists, update the contents
         $activity_query = $database->query("update " . TABLE_ACTIVITIES . " set activities_date='" . tep_strftime(DATE_FORMAT_DATABASE, $this->date) . "', activities_amount='" . $this->amount . "', tariffs_id='" . $this->tariff->tariff_id . "', activities_travel_distance='" . $this->travel_distance . "', activities_expenses='" . $this->expenses . "', activities_ticket_number='" . $this->ticket_number . "', activities_comment='" . $this->comment . "' where activities_id = '" . (int)$this->activity_id . "'");
       }
+    }
+
+    public function delete() {
+      $database = $_SESSION['database'];
+      $activity_query = $database->query("delete from " . TABLE_ACTIVITIES . " where activities_id = '" . (int)$this->activity_id . "'");
+      // Reset id, otherwise one might think this activity (still) exists in db
+      $this->activity_id = 0;
     }
   }
 ?>

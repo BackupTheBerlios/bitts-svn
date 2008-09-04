@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 03 september 2008
+ * Date        : 04 september 2008
  * Description : English language file
  */
 
@@ -92,6 +92,9 @@ define('TEXT_ACTIVITY_TICKETNUMBER', 'Ticket nr.');
 define('TEXT_ACTIVITY_COMMENT', 'Remarks');
 define('TEXT_ACTIVITY_EDIT', 'Edit');
 define('TEXT_ACTIVITY_DELETE', 'Delete');
+define('TEXT_ACTIVITY_DELETE_QUESTION', 'Do you want to delete the activity above?');
+define('TEXT_ACTIVITY_DELETE_OK', 'Delete OK');
+define('TEXT_ACTIVITY_DELETE_CANCEL', 'Cancel delete');
 $ACTIVITY_ERROR_LEVEL = array (0 => '',
                                1 => 'No project selected',
                                2 => 'No role selected',

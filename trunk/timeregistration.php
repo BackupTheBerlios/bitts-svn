@@ -22,7 +22,20 @@
   // If a timesheet already exists for this employee and period, the timesheet class will automatically
   // retrieve the correct id and put this into $_SESSION['timesheet']->timesheet_id
   $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, tep_post_or_get('period'));
-?>
+
+  switch (tep_post_or_get('action')) {
+    case '':
+      $_POST['activity_id'] = 0;
+      break;
+    case 'delete_activity_confirmed':
+      $_SESSION['timesheet']->delete_activity(tep_post_or_get('activity_id'));
+      $_POST['activity_id'] = 0;
+      $_POST['action'] = '';
+      // Reload the timesheet object in order to
+      // update the activity listing that follows
+      $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, tep_post_or_get('period'));
+      break;
+  } ?>
 <!-- body //-->
   <table border="0" width="100%" cellspacing="3" cellpadding="3">
     <tr>
@@ -99,7 +112,7 @@
                 <?php if (!$_SESSION['timesheet']->empty) {
                   $odd_or_even = "odd";
                   for ($index = 0; $index < sizeof($_SESSION['timesheet']->activities); $index++) { ?>
-                    <tr class="activityListing-<?php echo $odd_or_even; $odd_or_even = ($odd_or_even == 'odd'?'even':'odd'); ?>">
+                    <tr class="activityListing-<?php echo $odd_or_even; ?>">
                       <td class="activityListing-data"><?php echo strftime('%d', $_SESSION['timesheet']->activities[$index]->date); ?></td>
                       <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->project_name.'<br>'.$_SESSION['timesheet']->activities[$index]->role_name; ?></td>
                       <td class="activityListing-data"><?php echo tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->amount, 2); ?></td>
@@ -110,18 +123,36 @@
                       <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->comment; ?></td>
                       <td align="center" width="20" class="activityListing-data">
                       <?php if (!$_SESSION['timesheet']->locked) {
-                        echo tep_draw_form('edit_activity', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'enter_data','selected_date'=>$_SESSION['timesheet']->activities[$index]->date,'projects_id'=>$_SESSION['timesheet']->activities[$index]->project_id,'roles_id'=>$_SESSION['timesheet']->activities[$index]->role_id, 'activity_id'=>$_SESSION['timesheet']->activities[$index]->activity_id, 'activity_amount'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->amount, 2), 'tariffs_id'=>$_SESSION['timesheet']->activities[$index]->tariff->tariff_id, 'activity_travel_distance'=>$_SESSION['timesheet']->activities[$index]->travel_distance, 'activity_expenses'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->expenses, 2), 'activity_ticket_number'=>$_SESSION['timesheet']->activities[$index]->ticket_number, 'activity_comment'=>$_SESSION['timesheet']->activities[$index]->comment), array('mPath','period'), 'hidden_field');
+                        echo tep_draw_form('edit_activity', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'enter_data','selected_date'=>$_SESSION['timesheet']->activities[$index]->date,'projects_id'=>$_SESSION['timesheet']->activities[$index]->project_id,'roles_id'=>$_SESSION['timesheet']->activities[$index]->role_id, 'activity_id'=>$_SESSION['timesheet']->activities[$index]->activity_id, 'activity_amount'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->amount, 2), 'tariffs_id'=>$_SESSION['timesheet']->activities[$index]->tariff->tariff_id, 'activity_travel_distance'=>"".$_SESSION['timesheet']->activities[$index]->travel_distance, 'activity_expenses'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->expenses, 2), 'activity_ticket_number'=>$_SESSION['timesheet']->activities[$index]->ticket_number, 'activity_comment'=>$_SESSION['timesheet']->activities[$index]->comment), array('mPath','period'), 'hidden_field');
                         echo tep_image_submit('edit.gif', TEXT_ACTIVITY_EDIT,'',DIR_WS_IMAGES);
                         echo '</form>';
                       } ?>
                       </td>
                       <td align="center" width="20" class="activityListing-data">
                       <?php if (!$_SESSION['timesheet']->locked) {
-                        echo tep_image(DIR_WS_IMAGES . 'delete.gif', TEXT_ACTIVITY_DELETE);
+                        echo tep_draw_form('delete_activity', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'delete_activity', 'activity_id'=>$_SESSION['timesheet']->activities[$index]->activity_id), array('mPath','period'), 'hidden_field');
+                        echo tep_image_submit('delete.gif', TEXT_ACTIVITY_DELETE,'',DIR_WS_IMAGES);
+                        echo '</form>';
                       } ?>
                       </td>
                     </tr>
-                  <?php }
+                    <?php if (tep_post_or_get('action')=='delete_activity' && tep_post_or_get('activity_id')==$_SESSION['timesheet']->activities[$index]->activity_id) { ?>
+                      <!-- Show OK and Cancel buttons below the activity-to-be-deleted -->
+                      <tr class="activityListing-<?php echo $odd_or_even; ?>">
+                        <td align="right" valign="middle" class="activityListing-data" colspan="10">
+                          <?php echo TEXT_ACTIVITY_DELETE_QUESTION . tep_post_or_get('activity_id'); ?>
+                          &nbsp;
+                          <?php echo tep_draw_form('delete_activity_confirm', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'delete_activity_confirmed'), array('mPath','period', 'activity_id'), 'hidden_field');
+                            echo tep_image_submit('button_ok.gif', TEXT_ACTIVITY_DELETE_OK); ?>
+                          &nbsp;
+                          <?php echo tep_draw_form('delete_activity_cancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period'), 'hidden_field');
+                            echo tep_image_submit('button_cancel.gif', TEXT_ACTIVITY_DELETE_CANCEL); ?>
+                          </form>
+                        </td>
+                      </tr>
+                    <?php }
+                    $odd_or_even = ($odd_or_even == 'odd'?'even':'odd');
+                  }
                 } else { ?>
                   <tr class="activityListing-odd">
                     <td class="activityListing-data" colspan="10">

@@ -84,6 +84,12 @@
       $activity->save();
     }
 
+    public function delete_activity($activity_id = 0) {
+      // Delete activity
+      $activity = new activity($activity_id);
+      $activity->delete();
+    }
+
     public function save() {
       $database = $_SESSION['database'];
       // Insert a new timesheet if one does not exist and retrieve the id
