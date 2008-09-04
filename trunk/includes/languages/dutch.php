@@ -80,6 +80,7 @@ define('TEXT_TIMEREGISTRATION_PERIOD', 'Periode : ');
 define('TEXT_TIMEREGISTRATION_FORWARD', 'Periode vooruit');
 define('TEXT_TIMEREGISTRATION_LOCKED', 'Deze periode is bevestigd en kan niet meer worden gewijzigd');
 define('TEXT_TIMEREGISTRATION_IS_EMPTY', 'Geen activiteiten aanwezig');
+define('TEXT_TIMEREGISTRATION_CONFIRM', 'Bevestig deze periode. LET OP: Hierna zijn wijzigingen niet meer mogelijk!');
 
 define('TEXT_ACTIVITY_DAY', 'Dag');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');

@@ -80,6 +80,7 @@ define('TEXT_TIMEREGISTRATION_PERIOD', 'Period : ');
 define('TEXT_TIMEREGISTRATION_FORWARD', 'Period forward');
 define('TEXT_TIMEREGISTRATION_LOCKED', 'This period has been confirmed and cannot be edited');
 define('TEXT_TIMEREGISTRATION_IS_EMPTY', 'No activities available');
+define('TEXT_TIMEREGISTRATION_CONFIRM', 'Confirm this period. NOTE: After this, changes cannot be made!');
 
 define('TEXT_ACTIVITY_DAY', 'Day');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');

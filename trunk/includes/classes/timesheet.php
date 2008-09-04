@@ -103,5 +103,10 @@
         $timesheet_query = $database->query("update " . TABLE_TIMESHEETS . " set timesheets_start_date='" . $this->start_date . "', timesheets_end_date='" . $this->end_date . "', timesheets_locked='" . ($this->locked?1:0) . "', employees_id='" . $this->employee_id . "' where timesheets_id = '" . (int)$this->timesheet_id . "'");
       }
     }
+
+    public function confirm() {
+      $this->locked = true;
+      $this->save();
+    }
   }
 ?>
