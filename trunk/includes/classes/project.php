@@ -3,13 +3,12 @@
  * CLASS FILE  : project.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 02 september 2008
+ * Date        : 10 september 2008
  * Description : Project class
- *               .....
  */
 
   class project {
-    private $project_id, $customer, $name, $description, $customers_contact_name, $customers_reference, $start_date, $end_date, $calculated_hours, $roles, $role_count;
+    private $project_id, $business_unit, $customer, $name, $description, $customers_contact_name, $customers_reference, $start_date, $end_date, $calculated_hours, $roles, $role_count;
 
     public function __construct($project_id = '', $role_object = '') {
       $database = $_SESSION['database'];
@@ -20,9 +19,10 @@
       if (tep_not_null($project_id)) {
         $this->project_id = $database->prepare_input($this->project_id);
 
-        $project_query = $database->query("select customers_id, projects_name, projects_description, projects_customers_contact_name, projects_customers_reference, projects_start_date, projects_end_date, projects_calculated_hours from " . TABLE_PROJECTS . " where projects_id = '" . (int)$project_id . "'");
+        $project_query = $database->query("select business_units_id, customers_id, projects_name, projects_description, projects_customers_contact_name, projects_customers_reference, projects_start_date, projects_end_date, projects_calculated_hours from " . TABLE_PROJECTS . " where projects_id = '" . (int)$project_id . "'");
         $project_result = $database->fetch_array($project_query);
 
+        $this->business_unit = new business_unit($project_result['business_units_id']);
         $this->customer = new customer($project_result['customers_id']);
         $this->name = $project_result['projects_name'];
         $this->description = $project_result['projects_description'];
