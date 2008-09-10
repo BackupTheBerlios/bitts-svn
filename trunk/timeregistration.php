@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 04 september 2008
+ * Date        : 10 september 2008
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -27,6 +27,8 @@
     case '':
       $_POST['activity_id'] = 0;
       break;
+    case 'delete_activity':
+      break;
     case 'delete_activity_confirmed':
       $_SESSION['timesheet']->delete_activity(tep_post_or_get('activity_id'));
       $_POST['activity_id'] = 0;
@@ -34,6 +36,8 @@
       // Reload the timesheet object in order to
       // update the activity listing that follows
       $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, tep_post_or_get('period'));
+      break;
+    case 'timesheet_to_be_confirmed':
       break;
     case 'timesheet_confirmed':
       $_SESSION['timesheet']->confirm();
@@ -170,11 +174,20 @@
             <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
           </tr>
           <tr>
-            <td align="right">
-              <?php if (!$_SESSION['timesheet']->locked) {
+            <td align="right" valign="middle" class="activityListing-data">
+              <?php if (!$_SESSION['timesheet']->locked && tep_post_or_get('action')!='timesheet_to_be_confirmed') {
                 // Confirm button enabled
-                echo tep_draw_form('confirm_timesheet', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'timesheet_confirmed'), array('mPath','period'), 'hidden_field');
+                echo tep_draw_form('pre_confirm_timesheet', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'timesheet_to_be_confirmed'), array('mPath','period'), 'hidden_field');
                 echo tep_image_submit('button_confirm.gif', TEXT_TIMEREGISTRATION_CONFIRM); ?>
+                </form>
+              <?php } else if (tep_post_or_get('action')=='timesheet_to_be_confirmed') { ?>
+                <!-- Show OK and Cancel buttons below the timesheet-to-be-confirmed -->
+                <?php echo TEXT_TIMEREGISTRATION_CONFIRM_QUESTION; ?>&nbsp;
+                <?php echo tep_draw_form('confirm_timesheet', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'timesheet_confirmed'), array('mPath','period'), 'hidden_field');
+                  echo tep_image_submit('button_ok.gif', TEXT_TIMEREGISTRATION_CONFIRM_OK); ?>
+                </form>&nbsp;
+                <?php echo tep_draw_form('confirm_timesheet_cancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period'), 'hidden_field');
+                  echo tep_image_submit('button_cancel.gif', TEXT_TIMEREGISTRATION_CONFIRM_CANCEL); ?>
                 </form>
               <?php } else {
                 // Confirm button disabled

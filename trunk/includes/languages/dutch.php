@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 04 september 2008
+ * Date        : 10 september 2008
  * Description : Dutch language file
  */
 
@@ -81,6 +81,9 @@ define('TEXT_TIMEREGISTRATION_FORWARD', 'Periode vooruit');
 define('TEXT_TIMEREGISTRATION_LOCKED', 'Deze periode is bevestigd en kan niet meer worden gewijzigd');
 define('TEXT_TIMEREGISTRATION_IS_EMPTY', 'Geen activiteiten aanwezig');
 define('TEXT_TIMEREGISTRATION_CONFIRM', 'Bevestig deze periode. LET OP: Hierna zijn wijzigingen niet meer mogelijk!');
+define('TEXT_TIMEREGISTRATION_CONFIRM_QUESTION', 'Wilt u deze periode bevestigen?');
+define('TEXT_TIMEREGISTRATION_CONFIRM_OK', 'Bevestigen OK');
+define('TEXT_TIMEREGISTRATION_CONFIRM_CANCEL', 'Bevestigen annuleren');
 
 define('TEXT_ACTIVITY_DAY', 'Dag');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');

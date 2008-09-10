@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 04 september 2008
+ * Date        : 10 september 2008
  * Description : English language file
  */
 
@@ -81,6 +81,9 @@ define('TEXT_TIMEREGISTRATION_FORWARD', 'Period forward');
 define('TEXT_TIMEREGISTRATION_LOCKED', 'This period has been confirmed and cannot be edited');
 define('TEXT_TIMEREGISTRATION_IS_EMPTY', 'No activities available');
 define('TEXT_TIMEREGISTRATION_CONFIRM', 'Confirm this period. NOTE: After this, changes cannot be made!');
+define('TEXT_TIMEREGISTRATION_CONFIRM_QUESTION', 'Do you want to confirm this period?');
+define('TEXT_TIMEREGISTRATION_CONFIRM_OK', 'Confirm OK');
+define('TEXT_TIMEREGISTRATION_CONFIRM_CANCEL', 'Cancel confirm');
 
 define('TEXT_ACTIVITY_DAY', 'Day');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');
