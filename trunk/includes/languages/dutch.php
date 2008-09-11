@@ -54,6 +54,7 @@ define('HEADER_TEXT_CURRENT_USER', 'Huidige gebruiker : ');
 define('HEADER_TEXT_NO_CURRENT_USER', 'Niet ingelogd!');
 define('HEADER_TEXT_YOUR_DATA', 'Uw gegevens');
 define('HEADER_TEXT_LOGIN', 'Inloggen');
+define('HEADER_TEXT_LOGOUT', 'Uitloggen');
 define('HEADER_TEXT_TIMEREGISTRATION', 'Tijdregistratie');
 
 define('BOX_HEADING_MAINMENU', 'Menu');

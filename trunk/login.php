@@ -38,7 +38,7 @@
         $error_level = 2;
       }
       break;
-    default:
+    case '':
       $_POST['action'] = 'process_login';
       $error_level = 0;
   }

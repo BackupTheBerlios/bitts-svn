@@ -54,6 +54,7 @@ define('HEADER_TEXT_CURRENT_USER', 'Curent user : ');
 define('HEADER_TEXT_NO_CURRENT_USER', 'Not logged in!');
 define('HEADER_TEXT_YOUR_DATA', 'Your data');
 define('HEADER_TEXT_LOGIN', 'Log in');
+define('HEADER_TEXT_LOGOUT', 'Log out');
 define('HEADER_TEXT_TIMEREGISTRATION', 'Time registration');
 
 define('BOX_HEADING_MAINMENU', 'Menu');
