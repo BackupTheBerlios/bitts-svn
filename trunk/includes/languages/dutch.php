@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 10 september 2008
+ * Date        : 11 september 2008
  * Description : Dutch language file
  */
 
@@ -67,6 +67,7 @@ define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES', 'Beheer medewerkers');
 
 define('BODY_TEXT_LOGIN', 'Login');
 define('BODY_TEXT_PASSWORD', 'Wachtwoord');
+define('BODY_TEXT_PASSWORD_VERIFY', 'Herhaal wachtwoord');
 define('BODY_TEXT_FULLNAME', 'Volledige naam');
 define('BODY_TEXT_EMPLOYEE_ID', 'Personeelsnummer');
 define('BODY_TEXT_IS_USER', 'Is gebruiker');
@@ -74,6 +75,10 @@ define('BODY_TEXT_IS_ANALYST', 'Is rapporteur');
 define('BODY_TEXT_IS_ADMINISTRATOR', 'Is beheerder');
 define('BODY_TEXT_YES', 'Ja');
 define('BODY_TEXT_NO', 'Nee');
+$LOGIN_ERROR_LEVEL = array (0 => '',
+                            1 => 'Inloggen mislukt',
+                            2 => 'Wachtwoorden komen niet overeen',
+                            3 => 'Het wachtwoord mag niet leeg zijn');
 
 define('TEXT_TIMEREGISTRATION_BACK', 'Periode terug');
 define('TEXT_TIMEREGISTRATION_PERIOD', 'Periode : ');

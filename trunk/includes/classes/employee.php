@@ -3,8 +3,8 @@
  * CLASS FILE  : employee.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 may 2008
- * Description : .....
+ * Date        : 10 september 2008
+ * Description : Employee class
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
  *               http://www.oscommerce.com
@@ -100,10 +100,38 @@
         $employee_query .= " and employees_password = password('" . $password . "')";
         $employee_query .= ' and (employees_is_user or employees_is_analyst or employees_is_administrator)';
         $employee_query = $database->query($employee_query);
-        if ($employee_result = $database->fetch_array($employee_query))
+        if ($employee_result = $database->fetch_array($employee_query)) {
           return TRUE;
+        }
       }
       return FALSE;
+    }
+
+    public static function password_is_empty($login = '') {
+      if (tep_not_null($login)) {
+        $database = $_SESSION['database'];
+        $employee_query = 'select employees_password from ' . TABLE_EMPLOYEES;
+        $employee_query .= " where employees_login = '" . $login . "'";
+        $employee_query .= " and employees_password = ''";
+        $employee_query .= ' and (employees_is_user or employees_is_analyst or employees_is_administrator)';
+        $employee_query = $database->query($employee_query);
+        if ($employee_result = $database->fetch_array($employee_query)) {
+          return TRUE;
+        }
+      }
+      return FALSE;
+    }  
+
+    public static function set_password($login = '', $password = '') {
+      $database = $_SESSION['database'];
+      $employee_query = 'update ' . TABLE_EMPLOYEES;
+      if ($password == '') {
+        $employee_query .= " set employees_password = ''";
+      } else {
+        $employee_query .= " set employees_password = password('" . $password . "')";
+      }
+      $employee_query .= " where employees_login = '" . $login . "'";
+      $database->query($employee_query);
     }
   }
 ?>

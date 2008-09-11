@@ -27,6 +27,9 @@
     case '':
       $_POST['activity_id'] = 0;
       break;
+    case 'save_data':
+      // This is handled in activity_entry.php
+      break;
     case 'delete_activity':
       break;
     case 'delete_activity_confirmed':

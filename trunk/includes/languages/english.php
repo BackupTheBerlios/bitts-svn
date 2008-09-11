@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 10 september 2008
+ * Date        : 11 september 2008
  * Description : English language file
  */
 
@@ -67,6 +67,7 @@ define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES', 'Manage employees');
 
 define('BODY_TEXT_LOGIN', 'Login');
 define('BODY_TEXT_PASSWORD', 'Password');
+define('BODY_TEXT_PASSWORD_VERIFY', 'Repeat password');
 define('BODY_TEXT_FULLNAME', 'Full name');
 define('BODY_TEXT_EMPLOYEE_ID', 'Personnel number');
 define('BODY_TEXT_IS_USER', 'Is user');
@@ -74,6 +75,10 @@ define('BODY_TEXT_IS_ANALYST', 'Is reporter');
 define('BODY_TEXT_IS_ADMINISTRATOR', 'Is admin');
 define('BODY_TEXT_YES', 'Yes');
 define('BODY_TEXT_NO', 'No');
+$LOGIN_ERROR_LEVEL = array (0 => '',
+                            1 => 'Login failed',
+                            2 => 'Passwords do not match',
+                            3 => 'Passwords can not be empty');
 
 define('TEXT_TIMEREGISTRATION_BACK', 'Period back');
 define('TEXT_TIMEREGISTRATION_PERIOD', 'Period : ');
