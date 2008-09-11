@@ -45,8 +45,6 @@
 
   // header //
   require(DIR_WS_INCLUDES . 'header.php');
-echo 'action : ' . $_POST['action'] . '<br>';
-echo 'error_level : ' . $error_level;
 ?>
 <!-- body //-->
   <table border="0" width="100%" cellspacing="3" cellpadding="3">
