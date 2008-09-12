@@ -3,7 +3,7 @@
  * CODE FILE   : application_top.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 11 september 2008
+ * Date        : 12 september 2008
  * Description : .....
  *               .....
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -91,10 +91,8 @@
   // If action == logout clear server & session variables
   if ($_POST['action']=='logout') {
     if ( isset( $_SERVER['LOGON_USER'] ) ) {
-      echo 'unset server-parameter';
       unset( $_SERVER['LOGON_USER'] );
     }
-    echo '<br>unset session-parameter';
     unset( $_SESSION['employee_login'] );
     unset( $_SESSION['employee'] );
     $_POST['action']='';
@@ -111,7 +109,6 @@
 
   // If logged-in now, create the employee object
   if (tep_not_null($_SESSION['employee_login'])) {
-    echo 'employee_login OK';
     $_SESSION['employee'] = new employee($_SESSION['employee_login'], 'employees_login');
   }
 ?>
