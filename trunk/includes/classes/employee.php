@@ -3,7 +3,7 @@
  * CLASS FILE  : employee.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 10 september 2008
+ * Date        : 15 september 2008
  * Description : Employee class
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -11,7 +11,7 @@
  */
 
   class employee {
-    private $employee_id, $login, $fullname, $password, $is_user, $is_, $is_administrator;
+    private $employee_id, $login, $fullname, $password, $is_user, $is_analyst, $is_administrator;
 
     public function __construct($selection = '', $select_by = 'employees_id') {
       $this->select($selection, $select_by);
@@ -132,6 +132,22 @@
       }
       $employee_query .= " where employees_login = '" . $login . "'";
       $database->query($employee_query);
+    }
+
+    public static function get_array($only_enabled_employees = false) {
+      $database = $_SESSION['database'];
+      $employee_array = array();
+
+      $employee_query_string = "select employees_id from " . TABLE_EMPLOYEES;
+      if ($only_enabled_employees) {
+        $employee_query_string .= " where employees_is_user = 1 or employees_is_analyst = 1 or employees_is_administrator = 1";
+      }
+      $employee_query = $database->query($employee_query_string);
+      while ($employee_result = $database->fetch_array($employee_query)) {
+        $employee_array[$index] = new employee($employee_result['employees_id']);
+        $index++;
+      }
+      return $employee_array;
     }
   }
 ?>

@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 11 september 2008
+ * Date        : 15 september 2008
  * Description : Dutch language file
  */
 
@@ -127,6 +127,22 @@ define('TEXT_ACTIVITY_ENTRY_NO_DATE_SELECTED', 'Geen datum geselecteerd');
 define('TEXT_ACTIVITY_ENTRY_SELECT', 'Selecteer');
 define('TEXT_ACTIVITY_ENTRY_SAVE', 'Opslaan');
 define('TEXT_ACTIVITY_ENTRY_CANCEL', 'Annuleren');
+
+define('REPORT_NAME_EMPLOYEES', 'Overzicht medewerkers');
+define('REPORT_NAME_PROJECTS', 'Overzicht projecten');
+define('REPORT_EMPLOYEES_ID', 'nr');
+define('REPORT_EMPLOYEES_FULLNAME', 'Naam');
+define('REPORT_EMPLOYEES_IS_USER', 'Gebruiker');
+define('REPORT_EMPLOYEES_IS_ANALYST', 'Analist');
+define('REPORT_EMPLOYEES_IS_ADMINISTRATOR', 'Admin');
+define('REPORT_TEXT_PERIOD', 'Periode: ');
+define('REPORT_TABLE_HEADER_DATE', 'Datum');
+define('REPORT_TABLE_HEADER_EMPLOYEE_NAME', 'Medewerker');
+define('REPORT_TABLE_HEADER_TICKET_NUMBER', 'Ticket nr');
+define('REPORT_TABLE_HEADER_ACTIVITY_AMOUNT', 'Aantal');
+define('REPORT_TABLE_HEADER_UNITS_NAME', 'Eenheid');
+define('REPORT_TABLE_HEADER_TARIFF', 'Tarief');
+define('REPORT_TABLE_HEADER_TOTAL', 'Totaal');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>
