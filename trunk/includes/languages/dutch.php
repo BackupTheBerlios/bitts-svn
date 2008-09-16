@@ -136,6 +136,7 @@ define('TEXT_ANALYSIS_FORWARD', 'Periode vooruit');
 
 define('REPORT_NAME_EMPLOYEES', 'Overzicht medewerkers');
 define('REPORT_NAME_PROJECTS', 'Overzicht projecten');
+define('REPORT_NAME_TIMESHEETS', 'Overzicht urenstaten');
 define('REPORT_EMPLOYEES_ID', 'nr');
 define('REPORT_EMPLOYEES_FULLNAME', 'Naam');
 define('REPORT_EMPLOYEES_IS_USER', 'Gebruiker');

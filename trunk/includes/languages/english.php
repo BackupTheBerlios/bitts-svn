@@ -135,7 +135,8 @@ define('TEXT_ANALYSIS_PERIOD', 'Period : ');
 define('TEXT_ANALYSIS_FORWARD', 'Period forward');
 
 define('REPORT_NAME_EMPLOYEES', 'Overview employees');
-define('REPORT_NAME_PROJECTS', 'Overzicht projecten');
+define('REPORT_NAME_PROJECTS', 'Overview projects');
+define('REPORT_NAME_TIMESHEETS', 'Overview timesheets');
 define('REPORT_EMPLOYEES_ID', 'nr');
 define('REPORT_EMPLOYEES_FULLNAME', 'Name');
 define('REPORT_EMPLOYEES_IS_USER', 'User');
