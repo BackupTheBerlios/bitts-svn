@@ -57,8 +57,6 @@
           <!-- left_navigation_eof //-->
         </table>
       </td>
-      <?php // (Re-)set the menu path to the value that corresponds with this page
-      $_POST['mPath'] = '21'; ?>
       <!-- body_text //-->
       <td width="100%" valign="top">
         <table border="0" width="100%" cellspacing="0" cellpadding="0">

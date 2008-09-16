@@ -29,8 +29,6 @@
           <!-- left_navigation_eof //-->
         </table>
       </td>
-      <?php // (Re-)set the menu path to the value that corresponds with this page
-      $_POST['mPath'] = '31'; ?>
       <!-- body_text //-->
       <td width="100%" valign="top">
         <table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -83,9 +81,12 @@
             <td>
               <?php echo tep_draw_form('report_employees', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_employees'), array(), 'hidden_field') . tep_href_submit(REPORT_NAME_EMPLOYEES) . '</form><br>'; ?>
               <?php echo tep_draw_form('report_projects', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_projects'), array(), 'hidden_field') . tep_href_submit(REPORT_NAME_PROJECTS) . '</form><br>'; ?>
-              <?php echo tep_draw_form('report_timesheets', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_timesheets'), array(), 'hidden_field') . tep_href_submit(HEADER_TEXT_LOGOUT) . '</form>'; ?>
+              <?php echo tep_draw_form('report_timesheets', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_timesheets'), array(), 'hidden_field') . tep_href_submit(REPORT_NAME_TIMESHEETS) . '</form>'; ?>
             </td>
-          </td>
+          </tr>
+          <tr>
+            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '50'); ?></td>
+          </tr>
         </table>
       </td>
       <!-- body_text_eof //-->
