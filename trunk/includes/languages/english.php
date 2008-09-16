@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 15 september 2008
+ * Date        : 16 september 2008
  * Description : English language file
  */
 
@@ -56,6 +56,8 @@ define('HEADER_TEXT_YOUR_DATA', 'Your data');
 define('HEADER_TEXT_LOGIN', 'Log in');
 define('HEADER_TEXT_LOGOUT', 'Log out');
 define('HEADER_TEXT_TIMEREGISTRATION', 'Time registration');
+define('HEADER_TEXT_ANALYSIS', 'Reports');
+define('HEADER_TEXT_ADMINISTRATION', 'Administration');
 
 define('BOX_HEADING_MAINMENU', 'Menu');
 define('BOX_MAINMENU_HOME', 'Home');
@@ -127,6 +129,10 @@ define('TEXT_ACTIVITY_ENTRY_NO_DATE_SELECTED', 'No date selected');
 define('TEXT_ACTIVITY_ENTRY_SELECT', 'Select');
 define('TEXT_ACTIVITY_ENTRY_SAVE', 'Save');
 define('TEXT_ACTIVITY_ENTRY_CANCEL', 'Cancel');
+
+define('TEXT_ANALYSIS_BACK', 'Period back');
+define('TEXT_ANALYSIS_PERIOD', 'Period : ');
+define('TEXT_ANALYSIS_FORWARD', 'Period forward');
 
 define('REPORT_NAME_EMPLOYEES', 'Overview employees');
 define('REPORT_NAME_PROJECTS', 'Overzicht projecten');

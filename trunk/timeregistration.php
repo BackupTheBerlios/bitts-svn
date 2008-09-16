@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 10 september 2008
+ * Date        : 16 september 2008
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -21,9 +21,9 @@
   // Create a new timesheet object with id == 0
   // If a timesheet already exists for this employee and period, the timesheet class will automatically
   // retrieve the correct id and put this into $_SESSION['timesheet']->timesheet_id
-  $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, tep_post_or_get('period'));
+  $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, $_POST['period']);
 
-  switch (tep_post_or_get('action')) {
+  switch ($_POST['action']) {
     case '':
       $_POST['activity_id'] = 0;
       break;
@@ -33,12 +33,12 @@
     case 'delete_activity':
       break;
     case 'delete_activity_confirmed':
-      $_SESSION['timesheet']->delete_activity(tep_post_or_get('activity_id'));
+      $_SESSION['timesheet']->delete_activity($_POST['activity_id']);
       $_POST['activity_id'] = 0;
       $_POST['action'] = '';
       // Reload the timesheet object in order to
       // update the activity listing that follows
-      $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, tep_post_or_get('period'));
+      $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, $_POST['period']);
       break;
     case 'timesheet_to_be_confirmed':
       break;
@@ -57,6 +57,8 @@
           <!-- left_navigation_eof //-->
         </table>
       </td>
+      <?php // (Re-)set the menu path to the value that corresponds with this page
+      $_POST['mPath'] = '21'; ?>
       <!-- body_text //-->
       <td width="100%" valign="top">
         <table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -65,7 +67,7 @@
               <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
                   <td class="pageHeading"><?php echo HEADER_TEXT_TIMEREGISTRATION; ?></td>
-                  <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'calendar.gif', HEADER_TEXT_TIMEREGISTRATION, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+                  <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'journal-64x64.png', HEADER_TEXT_TIMEREGISTRATION, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
                 </tr>
               </table>
             </td>
@@ -74,9 +76,17 @@
             <td align="center">
               <table border="0" width="15%" cellspacing="0" cellpadding="1" class="infoBox">
                 <tr>
-                  <td align="left" class="infoBoxHeading"><?php echo '<a href="' . tep_href_link(FILENAME_TIMEREGISTRATION, 'mPath=21&period=' . tep_next_period($_SESSION['timesheet']->period, -1)) . '">' . tep_image(DIR_WS_IMAGES . 'arrow_left.gif', TEXT_TIMEREGISTRATION_BACK) . '</a>'; ?></td>
+                  <?php echo tep_draw_form('period_back', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('period'=>tep_next_period($_SESSION['timesheet']->period, -1)), array('mPath'), 'hidden_field'); ?>
+                    <td align="left" class="infoBoxHeading">
+                      <?php echo tep_image_submit('arrow_left.gif', TEXT_TIMEREGISTRATION_BACK, '', DIR_WS_IMAGES); ?>
+                    </td>
+                  </form>
                   <td align="center" class="infoBoxHeading"><?php echo TEXT_TIMEREGISTRATION_PERIOD . $_SESSION['timesheet']->period; ?></td>
-                  <td align="right" class="infoBoxHeading"><?php echo '<a href="' . tep_href_link(FILENAME_TIMEREGISTRATION, 'mPath=21&period=' . tep_next_period($_SESSION['timesheet']->period, 1)) . '">' . tep_image(DIR_WS_IMAGES . 'arrow_right.gif', TEXT_TIMEREGISTRATION_FORWARD) . '</a>'; ?></td>
+                  <?php echo tep_draw_form('period_forward', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('period'=>tep_next_period($_SESSION['timesheet']->period, 1)), array('mPath'), 'hidden_field'); ?>
+                    <td align="right" class="infoBoxHeading">
+                      <?php echo tep_image_submit('arrow_right.gif', TEXT_TIMEREGISTRATION_FORWARD, '', DIR_WS_IMAGES); ?>
+                    </td>
+                  </form>
                 </tr>
               </table>
             </td>
@@ -147,16 +157,16 @@
                       } ?>
                       </td>
                     </tr>
-                    <?php if (tep_post_or_get('action')=='delete_activity' && tep_post_or_get('activity_id')==$_SESSION['timesheet']->activities[$index]->activity_id) { ?>
+                    <?php if ($_POST['action']=='delete_activity' && $_POST['activity_id']==$_SESSION['timesheet']->activities[$index]->activity_id) { ?>
                       <!-- Show OK and Cancel buttons below the activity-to-be-deleted -->
                       <tr class="activityListing-<?php echo $odd_or_even; ?>">
                         <td align="right" valign="middle" class="activityListing-data" colspan="10">
                           <?php echo TEXT_ACTIVITY_DELETE_QUESTION; ?>&nbsp;
                           <?php echo tep_draw_form('delete_activity_confirm', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'delete_activity_confirmed'), array('mPath','period', 'activity_id'), 'hidden_field');
-                            echo tep_image_submit('button_ok.gif', TEXT_ACTIVITY_DELETE_OK); ?>
+                            echo tep_image_submit('button_ok.gif', TEXT_ACTIVITY_DELETE_OK, 'style="vertical-align:middle"'); ?>
                           </form>&nbsp;
                           <?php echo tep_draw_form('delete_activity_cancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period'), 'hidden_field');
-                            echo tep_image_submit('button_cancel.gif', TEXT_ACTIVITY_DELETE_CANCEL); ?>
+                            echo tep_image_submit('button_cancel.gif', TEXT_ACTIVITY_DELETE_CANCEL, 'style="vertical-align:middle"'); ?>
                           </form>
                         </td>
                       </tr>
@@ -178,19 +188,19 @@
           </tr>
           <tr>
             <td align="right" valign="middle" class="activityListing-data">
-              <?php if (!$_SESSION['timesheet']->locked && tep_post_or_get('action')!='timesheet_to_be_confirmed') {
+              <?php if (!$_SESSION['timesheet']->locked && $_POST['action']!='timesheet_to_be_confirmed') {
                 // Confirm button enabled
                 echo tep_draw_form('pre_confirm_timesheet', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'timesheet_to_be_confirmed'), array('mPath','period'), 'hidden_field');
                 echo tep_image_submit('button_confirm.gif', TEXT_TIMEREGISTRATION_CONFIRM); ?>
                 </form>
-              <?php } else if (tep_post_or_get('action')=='timesheet_to_be_confirmed') { ?>
+              <?php } else if ($_POST['action']=='timesheet_to_be_confirmed') { ?>
                 <!-- Show OK and Cancel buttons below the timesheet-to-be-confirmed -->
                 <?php echo TEXT_TIMEREGISTRATION_CONFIRM_QUESTION; ?>&nbsp;
                 <?php echo tep_draw_form('confirm_timesheet', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'timesheet_confirmed'), array('mPath','period'), 'hidden_field');
-                  echo tep_image_submit('button_ok.gif', TEXT_TIMEREGISTRATION_CONFIRM_OK); ?>
+                  echo tep_image_submit('button_ok.gif', TEXT_TIMEREGISTRATION_CONFIRM_OK, 'style="vertical-align:middle"'); ?>
                 </form>&nbsp;
                 <?php echo tep_draw_form('confirm_timesheet_cancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period'), 'hidden_field');
-                  echo tep_image_submit('button_cancel.gif', TEXT_TIMEREGISTRATION_CONFIRM_CANCEL); ?>
+                  echo tep_image_submit('button_cancel.gif', TEXT_TIMEREGISTRATION_CONFIRM_CANCEL, 'style="vertical-align:middle"'); ?>
                 </form>
               <?php } else {
                 // Confirm button disabled

@@ -3,7 +3,7 @@
  * CODE FILE   : analysis.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 15 september 2008
+ * Date        : 16 september 2008
  * Description : Reporting form
  */
 
@@ -13,10 +13,7 @@
   if (!tep_not_null($_SESSION['employee_login']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
 
-  // Set some $_POST values
-  $_POST['mPath'] = '31';
-
-  switch (tep_post_or_get('action')) {
+  switch ($_POST['action']) {
   }
 
   // header //
@@ -32,11 +29,64 @@
           <!-- left_navigation_eof //-->
         </table>
       </td>
+      <?php // (Re-)set the menu path to the value that corresponds with this page
+      $_POST['mPath'] = '31'; ?>
       <!-- body_text //-->
       <td width="100%" valign="top">
-        <?php echo tep_draw_form('report_employees', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_employees'), array(), 'hidden_field') . tep_href_submit(REPORT_NAME_EMPLOYEES, tep_href_link(FILENAME_ANALYSIS)) . '</form><br>'; ?>
-        <?php echo tep_draw_form('report_projects', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_projects'), array(), 'hidden_field') . tep_href_submit(REPORT_NAME_PROJECTS, tep_href_link(FILENAME_ANALYSIS)) . '</form><br>'; ?>
-        <?php echo tep_draw_form('report_timesheets', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_timesheets'), array(), 'hidden_field') . tep_href_submit(HEADER_TEXT_LOGOUT, tep_href_link(FILENAME_ANALYSIS)) . '</form>'; ?>
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+          <tr>
+            <td>
+              <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td class="pageHeading"><?php echo HEADER_TEXT_ANALYSIS; ?></td>
+                  <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'presentation-64x64.png', HEADER_TEXT_ANALYSIS, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <table border="0" width="15%" cellspacing="0" cellpadding="1" class="infoBox">
+                <tr>
+                  <?php // If period is not set, use current period
+                  if (!isset($_POST['period'])) {
+                    $_POST['period'] = tep_datetoperiod();
+                  }
+                  echo tep_draw_form('period_back', tep_href_link(FILENAME_ANALYSIS)) . tep_create_parameters(array('period'=>tep_next_period($_POST['period'], -1)), array('mPath'), 'hidden_field'); ?>
+                    <td align="left" class="infoBoxHeading">
+                      <?php echo tep_image_submit('arrow_left.gif', TEXT_ANALYSIS_BACK, '', DIR_WS_IMAGES); ?>
+                    </td>
+                  </form>
+                  <td align="center" class="infoBoxHeading"><?php echo TEXT_ANALYSIS_PERIOD . $_POST['period']; ?></td>
+                  <?php echo tep_draw_form('period_forward', tep_href_link(FILENAME_ANALYSIS)) . tep_create_parameters(array('period'=>tep_next_period($_POST['period'], 1)), array('mPath'), 'hidden_field'); ?>
+                    <td align="right" class="infoBoxHeading">
+                      <?php echo tep_image_submit('arrow_right.gif', TEXT_ANALYSIS_FORWARD, '', DIR_WS_IMAGES); ?>
+                    </td>
+                  </form>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <table border="0px" width="20%" cellspacing="0" cellpadding="3" class="infoBoxContents">
+                <tr>
+                  <td align="center" class="boxText"><?php echo tep_strftime(DATE_FORMAT_SHORT, tep_datetouts(tep_periodstartdate($_POST['period']))) . '&nbsp;&nbsp;-&nbsp;&nbsp;' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts(tep_periodenddate($_POST['period']))); ?></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
+          </tr>
+          <tr>
+            <td>
+              <?php echo tep_draw_form('report_employees', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_employees'), array(), 'hidden_field') . tep_href_submit(REPORT_NAME_EMPLOYEES) . '</form><br>'; ?>
+              <?php echo tep_draw_form('report_projects', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_projects'), array(), 'hidden_field') . tep_href_submit(REPORT_NAME_PROJECTS) . '</form><br>'; ?>
+              <?php echo tep_draw_form('report_timesheets', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_timesheets'), array(), 'hidden_field') . tep_href_submit(HEADER_TEXT_LOGOUT) . '</form>'; ?>
+            </td>
+          </td>
+        </table>
       </td>
       <!-- body_text_eof //-->
     </tr>

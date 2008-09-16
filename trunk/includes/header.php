@@ -31,8 +31,7 @@
         <td class="headerNavigation">&nbsp;&nbsp;
           <?php if (isset($_SESSION['employee'])) {
             echo HEADER_TEXT_CURRENT_USER . $_SESSION['employee']->fullname . '&nbsp;&nbsp;&nbsp;';
-            //echo '[' . '<a href="' . tep_href_link(FILENAME_DEFAULT, 'action=logout') . '" class="headerNavigation">' . HEADER_TEXT_LOGOUT . '</a>]';
-            echo tep_draw_form('logout', tep_href_link(FILENAME_DEFAULT)) . tep_create_parameters(array('action'=>'logout'), null, 'hidden_field') . '[' . tep_href_submit(HEADER_TEXT_LOGOUT, '#', 'class="headerNavigation"') . ']</form>';
+            echo tep_draw_form('logout', tep_href_link(FILENAME_DEFAULT)) . tep_create_parameters(array('action'=>'logout'), null, 'hidden_field') . '[' . tep_href_submit(HEADER_TEXT_LOGOUT) . ']</form>';
           } else {
             echo HEADER_TEXT_NO_CURRENT_USER;
           } ?>

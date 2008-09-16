@@ -3,7 +3,7 @@
  * CODE FILE   : login.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 11 september 2008
+ * Date        : 16 september 2008
  * Description : Login screen
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -57,7 +57,7 @@
               <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
                   <td class="pageHeading"><?php echo HEADER_TEXT_LOGIN; ?></td>
-                  <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'key.gif', HEADER_TEXT_LOGIN, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+                  <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'lock_and_key-64x64.png', HEADER_TEXT_LOGIN, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
                 </tr>
               </table>
             </td>

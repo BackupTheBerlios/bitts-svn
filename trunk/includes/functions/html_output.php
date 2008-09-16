@@ -3,7 +3,7 @@
  * CODE FILE   : html_output.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 15 september 2008
+ * Date        : 16 september 2008
  * Description : html output functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -89,7 +89,7 @@
   	if (sizeof($new_or_changed_parameters) > 0) {
   	  // Walk through the array
   	  while (list($key, $value) = each($new_or_changed_parameters)) {
-                // Detect if an ampersant is needed (first entry doesn't)
+        // Detect if an ampersant is needed (first entry doesn't)
         if ($output_type == 'string') {
           if ($result != '')
             $result .= '&';
@@ -105,7 +105,7 @@
     for ($index = 0; $index < sizeof($relevant_other_parameters); $index++) {
       // Retrieve parameter value
       $key = $relevant_other_parameters[$index];
-      $value = tep_post_or_get($relevant_other_parameters[$index]);
+      $value = $_POST[$relevant_other_parameters[$index]];
       if ($key != $name && $value != '') {
         if ($output_type == 'string') {
           // Detect if an ampersant is needed (first entry doesn't)
@@ -187,16 +187,16 @@
 
 ////
 // The HTML form submit text wrapper function
-  function tep_href_submit($text, $url = '#', $parameters = '') {
+  function tep_href_submit($text, $parameters = '') {
     // <a href="#" onclick="parentNode.submit()" ' . $parameters . '>' . $text . '</a>
-    $href_submit = '<a href="' . $url . '" onclick="parentNode.submit()"';
-    if (tep_not_null($parameters)) {
-      $href_submit .= ' ' . $parameters;
-    }
-    $href_submit .= '>' . $text . '</a>';
+    $href_submit = '<input type="submit" class="submitLink" value="' . $text . '"';
+    if (tep_not_null($parameters)) $href_submit .= ' ' . $parameters;
+    $href_submit .= '>';
     return $href_submit;
   }
 
+  
+  
 ////
 // Output a function button in the selected language
   function tep_image_button($image, $alt = '', $parameters = '') {
@@ -227,7 +227,7 @@
     $field = '<input type="' . tep_output_string($type) . '" name="' . tep_output_string($name) . '"';
 
     if ($reinsert_value == 'true') {
-      $field .= ' value="' . tep_output_string(stripslashes(tep_post_or_get($name))) . '"';
+      $field .= ' value="' . tep_output_string(stripslashes($_POST[$name])) . '"';
     } elseif (tep_not_null($value)) {
       $field .= ' value="' . tep_output_string($value) . '"';
     }
@@ -296,7 +296,9 @@
 
 ////
 // Retrieve POST or GET variable
-  function tep_post_or_get($key = '') {
+  function tep_post_or_get_($key = '') {
+    // Because of the insecurity of $_GET parameters (manually entered in the browser,
+    // this function is obsolete
     if (tep_not_null($_POST[$key]))
       return $_POST[$key];
     elseif (tep_not_null($_GET[$key]))

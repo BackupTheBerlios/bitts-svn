@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 15 september 2008
+ * Date        : 16 september 2008
  * Description : Data gathering and reporting functions
  */
 
@@ -16,7 +16,7 @@
   if (!tep_not_null($_SESSION['employee_login']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
 
-  switch (tep_post_or_get('action')) {
+  switch ($_POST['action']) {
     case 'report_employees':
       // *** Create pdf object ***
       $pdf = new PDF();

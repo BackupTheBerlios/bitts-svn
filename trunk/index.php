@@ -3,7 +3,7 @@
  * CODE FILE   : index.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 may 2008
+ * Date        : 16 september 2008
  * Description : .....
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -36,7 +36,7 @@
               <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
                   <td class="pageHeading"><?php echo HEADER_TEXT_YOUR_DATA; ?></td>
-                  <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'account.gif', HEADER_TEXT_YOUR_DATA, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+                  <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'checklist-64x64.png', HEADER_TEXT_YOUR_DATA, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
                 </tr>
               </table>
             </td>
