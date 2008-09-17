@@ -3,7 +3,7 @@
  * CODE FILE   : analysis.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 september 2008
+ * Date        : 17 september 2008
  * Description : Reporting form
  */
 
@@ -79,9 +79,9 @@
           </tr>
           <tr>
             <td>
-              <?php echo tep_draw_form('report_employees', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_employees'), array(), 'hidden_field') . tep_href_submit(REPORT_NAME_EMPLOYEES) . '</form><br>'; ?>
-              <?php echo tep_draw_form('report_projects', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_projects'), array(), 'hidden_field') . tep_href_submit(REPORT_NAME_PROJECTS) . '</form><br>'; ?>
-              <?php echo tep_draw_form('report_timesheets', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_timesheets'), array(), 'hidden_field') . tep_href_submit(REPORT_NAME_TIMESHEETS) . '</form>'; ?>
+              <?php echo tep_draw_form('report_employees', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_employees'), array('period'), 'hidden_field') . tep_href_submit(REPORT_NAME_EMPLOYEES) . '</form><br>'; ?>
+              <?php echo tep_draw_form('report_projects', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_projects', 'per_employee'=>'true', 'show_tariff'=>'true'), array('period'), 'hidden_field') . tep_href_submit(REPORT_NAME_PROJECTS) . '</form><br>'; ?>
+              <?php echo tep_draw_form('report_timesheets', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_timesheets'), array('period'), 'hidden_field') . tep_href_submit(REPORT_NAME_TIMESHEETS) . '</form>'; ?>
             </td>
           </tr>
           <tr>

@@ -142,13 +142,20 @@ define('REPORT_EMPLOYEES_FULLNAME', 'Name');
 define('REPORT_EMPLOYEES_IS_USER', 'User');
 define('REPORT_EMPLOYEES_IS_ANALYST', 'Analyst');
 define('REPORT_EMPLOYEES_IS_ADMINISTRATOR', 'Admin');
+
+define('REPORT_TEXT_CUSTOMER_NAME', 'Customer: ');
 define('REPORT_TEXT_PERIOD', 'Period: ');
+define('REPORT_TEXT_PROJECT_NAME', 'Project: ');
+define('REPORT_TEXT_ROLE_NAME', 'Role: ');
+define('REPORT_TEXT_EMPLOYEE_NAME', 'Employee: ');
+
 define('REPORT_TABLE_HEADER_DATE', 'Date');
 define('REPORT_TABLE_HEADER_EMPLOYEE_NAME', 'Employee');
-define('REPORT_TABLE_HEADER_TICKET_NUMBER', 'Ticket nr');
 define('REPORT_TABLE_HEADER_ACTIVITY_AMOUNT', 'Amount');
-define('REPORT_TABLE_HEADER_UNITS_NAME', 'Units');
-define('REPORT_TABLE_HEADER_TARIFF', 'Tariff');
+define('REPORT_TABLE_HEADER_IS_TARIFF', ' a ');
+define('REPORT_TABLE_HEADER_TRAVEL_DISTANCE', 'km');
+define('REPORT_TABLE_HEADER_EXPENSES', 'Expenses');
+define('REPORT_TABLE_HEADER_TICKET_NUMBER', 'Ticket nr');
 define('REPORT_TABLE_HEADER_TOTAL', 'Total');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');

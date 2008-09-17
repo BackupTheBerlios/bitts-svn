@@ -3,31 +3,33 @@
  * CLASS FILE  : pdf.php
  * Project     : BitTS - BART it TimeSheet
  * Auteur(s)   : Erwin Beukhof
- * Datum       : 15 september 2008
+ * Datum       : 17 september 2008
  * Beschrijving: FPDF wrapper class with pre-formatting
  */
 
   require('fpdf.php');
 
   class PDF extends FPDF {
-    public function Header() {
-      $this->Image(DIR_WS_IMAGES . COMPANY_BANNER, null, null, 40);
+    private $per_employee, $show_tariff, $show_travel_distance, $show_expenses, $show_ticket_number;
+
+    //public function Header() {
+      //$this->Image(DIR_WS_IMAGES . COMPANY_BANNER, null, null, 40);
       //Arial bold 15
-      $this->SetFont('Arial', 'B', 15);
+      //$this->SetFont('Arial', 'B', 15);
       //Calculate width of title and position
-      $width = $this->GetStringWidth($this->title)+6;
-      $this->SetX(($this->w-$width)/2);
+      //$width = $this->GetStringWidth($this->title)+6;
+      //$this->SetX(($this->w-$width)/2);
       //Colors of frame, background and text
-      $this->SetDrawColor(0, 0, 0);
-      $this->SetFillColor(255, 255, 255);
-      $this->SetTextColor(0, 0, 0);
+      //$this->SetDrawColor(0, 0, 0);
+      //$this->SetFillColor(255, 255, 255);
+      //$this->SetTextColor(0, 0, 0);
       //Thickness of frame (1 mm)
       //$this->SetLineWidth(1);
       //Title
-      $this->Cell($width, 9, $this->title, 1, 1, 'C', true);
+      //$this->Cell($width, 9, $this->title, 1, 1, 'C', true);
       //Line break
-      $this->Ln(4);
-    }
+      //$this->Ln(4);
+    //}
 
     public function Footer() {
       //Position at 1.5 cm from bottom
@@ -39,6 +41,123 @@
       //Page number
       //$this->Cell(0, 10, 'Page ' . $this->PageNo(), 0, 0, 'C');
       $this->Cell(0, 10, TITLE, 0, 0, 'C');
+    }
+
+    public function InvoiceHeader($business_unit_image, $customer_name, $period, $project_name, $role_name, $employee_name = '') {
+      if ($business_unit_image!='') {
+        $this->Image(DIR_WS_IMAGES . $business_unit_image, null, null, 0, 20); // Logo area height == 20
+        $this->Ln(6);
+      }
+      $this->SetDrawColor(0, 0, 0);
+      $this->SetTextColor(0, 0, 0);
+      $this->SetLineWidth(.3);
+      $this->SetFont('Arial', '', 12);
+      $this->Cell(30, 6, REPORT_TEXT_CUSTOMER_NAME, 0, 0, 'L');
+      $this->Cell(50, 6, $customer_name, 0, 0, 'L');
+      $this->Ln();
+      $this->Cell(30, 6, REPORT_TEXT_PERIOD, 0, 0, 'L');
+      $this->Cell(50, 6, $period, 0, 0, 'L');
+      $this->Ln();
+      $this->Cell(30, 6, REPORT_TEXT_PROJECT_NAME, 0, 0, 'L');
+      $this->Cell(50, 6, $project_name, 0, 0, 'L');
+      $this->Ln();
+      $this->Cell(30, 6, REPORT_TEXT_ROLE_NAME, 0, 0, 'L');
+      $this->Cell(50, 6, $role_name, 0, 0, 'L');
+      $this->Ln();
+      if (employee_name != '') {
+        $this->Cell(30, 6, REPORT_TEXT_EMPLOYEE_NAME, 0, 0, 'L');
+        $this->Cell(50, 6, $employee_name, 0, 0, 'L');
+        $this->Ln();
+      }
+      $this->Ln(6);
+    }
+
+    public function InvoiceTableHeader($table_header_text = '', $per_employee = true, $show_tariff = true, $show_travel_distance = true, $show_expenses = true, $show_ticket_number = true) {
+      $this->per_employee = $per_employee;
+      $this->show_tariff = $show_tariff;
+      $this->show_travel_distance = $show_travel_distance;
+      $this->show_expenses = $show_expenses;
+      $this->show_ticket_number = $show_ticket_number;
+      $this->SetFont('Arial', 'B', 10);
+      $this->SetFillColor(191, 191, 191);
+      if ($table_header_text!='') {
+        $this->Cell(0, 5, $table_header_text, 0, 1, 'C', true);
+      }
+      $this->Cell(20, 5, REPORT_TABLE_HEADER_DATE, 'LR', 0, 'C', true);
+      if (!$this->per_employee) {
+        $this->Cell(50, 5, REPORT_TABLE_HEADER_EMPLOYEE_NAME, 'LR', 0, 'C', true);
+      }
+      $this->Cell(20, 5, REPORT_TABLE_HEADER_ACTIVITY_AMOUNT, 'LR', 0, 'C', true);
+      if (!$this->per_employee) {
+        $this->Cell(64, 5, REPORT_TABLE_HEADER_UNITS_NAME, 'LR', 0, 'C', true);
+        if ($this->show_tariff) {
+          $this->Cell(22, 5, REPORT_TABLE_HEADER_TARIFF, 'L', 0, 'C', true);
+        }
+      }
+      if ($this->show_travel_distance) {
+        $this->Cell(22, 5, REPORT_TABLE_HEADER_TRAVEL_DISTANCE, 'LR', 0, 'C', true);
+      }
+      if ($this->show_expenses) {
+        $this->Cell(22, 5, REPORT_TABLE_HEADER_EXPENSES, 'LR', 0, 'C', true);
+      }
+      if ($this->show_ticket_number) {
+        $this->Cell(35, 5, REPORT_TABLE_HEADER_TICKET_NUMBER, 'LR', 0, 'C', true);
+      }
+      if ($this->show_tariff) {
+        $this->Cell(22, 5, REPORT_TABLE_HEADER_TOTAL, 'L', 0, 'C', true);
+      }
+      // Fill the rest of the available space (277 mm -/- cell widths)
+      $this->Cell(0, 5, '', 'L', 1, 'C', true);
+    }
+
+    public function InvoiceTableContents($date, $employee_name, $activity_amount, $units_name = '', $tariff = 0.00, $travel_distance = 0, $expenses = 0.00, $ticket_number = '', $total_value = 0.00) {
+      $this->SetFont('Arial', '', 10);
+      $this->Cell(20, 5, tep_strftime(DATE_FORMAT_SHORT, $date), 0, 0, 'C');
+      if (!$this->per_employee) {
+        $this->Cell(50, 5, $employee_name);
+      }
+      $this->Cell(20, 5, tep_number_db_to_user($activity_amount, 2), 0, 0, 'R');
+      if (!$this->per_employee) {
+        $this->Cell(64, 5);
+        if ($this->show_tariff) {
+          $this->Cell(22, 5, tep_number_db_to_user($tariff, 2), 0, 0, 'R');
+        }
+      }
+      if ($this->show_travel_distance) {
+        $this->Cell(22, 5, $travel_distance, 0, 0, 'R');
+      }
+      if ($this->show_expenses) {
+        $this->Cell(22, 5, tep_number_db_to_user($expenses, 2), 0, 0, 'R');
+      }
+      if ($this->show_ticket_number) {
+        $this->Cell(35, 5, $ticket_number, 0, 0, 'C');
+      }
+      if ($this->show_tariff) {
+        $this->Cell(22, 5, tep_number_db_to_user($total_value, 2), 0, 0, 'R');
+      }
+      $this->Ln();
+    }
+
+    public function InvoiceTableFooter($total_amount, $total_travel_distance = 0, $total_expenses = 0.00, $total_value = 0.00) {
+      $this->SetFont('Arial', 'B', 10);
+      $this->Cell(20, 5);
+      if (!$this->per_employee) {
+        $this->Cell(50, 5);
+      }
+      $this->Cell(20, 5, tep_number_db_to_user($total_amount, 2), 'T', 0, 'R');
+      if ($this->show_travel_distance) {
+        $this->Cell(22, 5, $total_travel_distance, 'T', 0, 'R');
+      }
+      if ($this->show_expenses) {
+        $this->Cell(22, 5, tep_number_db_to_user($total_expenses, 2), 'T', 0, 'R');
+      }
+      if ($this->show_ticket_number) {
+        $this->Cell(35, 5);
+      }
+      if ($this->show_tariff) {
+        $this->Cell(22, 5, tep_number_db_to_user($total_value, 2), 'T', 0, 'R');
+      }
+      $this->Ln();
     }
 
     public function ChapterTitle($number, $label) {
