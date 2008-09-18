@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 september 2008
+ * Date        : 18 september 2008
  * Description : Dutch language file
  */
 
@@ -142,12 +142,25 @@ define('REPORT_EMPLOYEES_FULLNAME', 'Naam');
 define('REPORT_EMPLOYEES_IS_USER', 'Gebruiker');
 define('REPORT_EMPLOYEES_IS_ANALYST', 'Analist');
 define('REPORT_EMPLOYEES_IS_ADMINISTRATOR', 'Admin');
+define('REPORT_EMPLOYEES_TIMESHEET_AVAILABLE', 'Timesheet');
+define('REPORT_EMPLOYEES_TIMESHEET_LOCKED', 'Bevestigd');
 
-define('REPORT_TEXT_CUSTOMER_NAME', 'Klant: ');
-define('REPORT_TEXT_PERIOD', 'Periode: ');
-define('REPORT_TEXT_PROJECT_NAME', 'Project: ');
-define('REPORT_TEXT_ROLE_NAME', 'Rol: ');
-define('REPORT_TEXT_EMPLOYEE_NAME', 'Medewerker: ');
+define('REPORT_TEXT_CUSTOMER_NAME', 'Klant:');
+define('REPORT_TEXT_DATE', 'Datum:');
+define('REPORT_TEXT_PERIOD', 'Periode:');
+define('REPORT_TEXT_PROJECT_NAME', 'Project:');
+define('REPORT_TEXT_ROLE_NAME', 'Rol:');
+define('REPORT_TEXT_EMPLOYEE_NAME', 'Medewerker:');
+define('REPORT_TEXT_FOOTER_SIGNATURE_EMPLOYEE', 'Handtekening medewerker');
+define('REPORT_TEXT_FOOTER_SIGNATURE_CUSTOMER', 'Handtekening klant');
+define('REPORT_TEXT_FOOTER_ACKNOWLEDGE', 'Door ondertekening van deze urenstaat verklaart de opdrachtgever zich akkoord met de gespecificeerde aantallen, eenheden, kilometers en onkosten.');
+
+define('REPORT_CHECKBOX_SHOW_TIMESHEET_INFO', 'Toon timesheet info');
+define('REPORT_CHECKBOX_SHOW_ALL_EMPLOYEES', 'Toon alle (ex-)medewerkers');
+define('REPORT_CHECKBOX_PER_EMPLOYEE', 'Per medewerker');
+define('REPORT_CHECKBOX_SHOW_TARIFF', 'Toon tarieven');
+define('REPORT_CHECKBOX_SHOW_TRAVEL_DISTANCE', 'Toon reisafstanden');
+define('REPORT_CHECKBOX_SHOW_EXPENSES', 'Toon onkosten');
 
 define('REPORT_TABLE_HEADER_DATE', 'Datum');
 define('REPORT_TABLE_HEADER_EMPLOYEE_NAME', 'Medewerker');

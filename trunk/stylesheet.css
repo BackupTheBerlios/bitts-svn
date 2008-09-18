@@ -147,7 +147,7 @@ TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-e
   //background: #f0f0c0;
 }
 
-TABLE.activityListing, TABLE.calendar , TABLE.activity_entry{
+TABLE.activityListing, TABLE.calendar , TABLE.activity_entry, TABLE.report_listing{
   border: 1px;
   border-style: solid;
   border-color: #b6b7cb;
@@ -187,7 +187,7 @@ TD.calendar-notavailable {
   background: #ffffff;
 }
 
-TD.activity_entry {
+TD.activity_entry, TD.report_listing {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #f8f8f9;

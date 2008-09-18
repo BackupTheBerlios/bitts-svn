@@ -3,7 +3,7 @@
  * CODE FILE   : analysis.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 17 september 2008
+ * Date        : 18 september 2008
  * Description : Reporting form
  */
 
@@ -79,9 +79,40 @@
           </tr>
           <tr>
             <td>
-              <?php echo tep_draw_form('report_employees', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_employees'), array('period'), 'hidden_field') . tep_href_submit(REPORT_NAME_EMPLOYEES) . '</form><br>'; ?>
-              <?php echo tep_draw_form('report_projects', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_projects', 'per_employee'=>'true', 'show_tariff'=>'true'), array('period'), 'hidden_field') . tep_href_submit(REPORT_NAME_PROJECTS) . '</form><br>'; ?>
-              <?php echo tep_draw_form('report_timesheets', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_timesheets'), array('period'), 'hidden_field') . tep_href_submit(REPORT_NAME_TIMESHEETS) . '</form>'; ?>
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td>
+                  <?php echo tep_draw_form('report_employees', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_employees'), array('period'), 'hidden_field'); ?>
+                    <table border="0" width="100%" cellspacing="0" cellpadding="10" class="report_listing">
+                      <tr>
+                        <td valign="top"><?php echo tep_href_submit(REPORT_NAME_EMPLOYEES); ?></td>
+                        <td>
+                          <?php echo tep_draw_checkbox_field('show_timesheet_info', true, true) . REPORT_CHECKBOX_SHOW_TIMESHEET_INFO . '<br>';
+                          echo tep_draw_checkbox_field('show_all_employees', true, false) . REPORT_CHECKBOX_SHOW_ALL_EMPLOYEES; ?>
+                        </td>
+                      </tr>
+                    </table>
+                  </form>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <?php echo tep_draw_form('report_projects', tep_href_link(FILENAME_REPORT), 'post', 'target="_new"') . tep_create_parameters(array('action'=>'report_projects', 'per_employee'=>true), array('period'), 'hidden_field'); ?>
+                    <table border="0" width="100%" cellspacing="0" cellpadding="10" class="report_listing">
+                      <tr>
+                        <td valign="top"><?php echo tep_href_submit(REPORT_NAME_PROJECTS); ?></td>
+                        <td>
+                          <?php echo tep_draw_checkbox_field('per_employee', true, true, 'disabled') . REPORT_CHECKBOX_PER_EMPLOYEE . '<br>';
+                          echo tep_draw_checkbox_field('show_tariff', true, true) . REPORT_CHECKBOX_SHOW_TARIFF . '<br>';
+                          echo tep_draw_checkbox_field('show_travel_distance', true, true) . REPORT_CHECKBOX_SHOW_TRAVEL_DISTANCE . '<br>';
+                          echo tep_draw_checkbox_field('show_expenses', true, true) . REPORT_CHECKBOX_SHOW_EXPENSES; ?>
+                        </td>
+                      </tr>
+                    </table>
+                  </form>
+                </td>
+                </tr>
+              </table>
             </td>
           </tr>
           <tr>

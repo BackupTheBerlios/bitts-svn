@@ -3,7 +3,7 @@
  * CLASS FILE  : pdf.php
  * Project     : BitTS - BART it TimeSheet
  * Auteur(s)   : Erwin Beukhof
- * Datum       : 17 september 2008
+ * Datum       : 18 september 2008
  * Beschrijving: FPDF wrapper class with pre-formatting
  */
 
@@ -32,15 +32,18 @@
     //}
 
     public function Footer() {
-      //Position at 1.5 cm from bottom
-      $this->SetY(-15);
+      //Position at 1.0 cm from bottom
+      $this->SetY(-20);
+      $this->SetFont('Arial','',6);
+      $this->Cell(0, 5, REPORT_TEXT_FOOTER_ACKNOWLEDGE, 0, 1, 'C');
+      //$this->Ln();
       //Arial italic 8
       $this->SetFont('Arial','I',8);
       //Text color in gray
       $this->SetTextColor(128);
       //Page number
       //$this->Cell(0, 10, 'Page ' . $this->PageNo(), 0, 0, 'C');
-      $this->Cell(0, 10, TITLE, 0, 0, 'C');
+      $this->Cell(0, 5, TITLE, 0, 0, 'C');
     }
 
     public function InvoiceHeader($business_unit_image, $customer_name, $period, $project_name, $role_name, $employee_name = '') {
@@ -139,6 +142,7 @@
     }
 
     public function InvoiceTableFooter($total_amount, $total_travel_distance = 0, $total_expenses = 0.00, $total_value = 0.00) {
+      $this->SetLineWidth(.3);
       $this->SetFont('Arial', 'B', 10);
       $this->Cell(20, 5);
       if (!$this->per_employee) {
@@ -158,6 +162,27 @@
         $this->Cell(22, 5, tep_number_db_to_user($total_value, 2), 'T', 0, 'R');
       }
       $this->Ln();
+    }
+
+    public function InvoiceSignature() {
+      $this->SetLineWidth(.3);
+      $this->SetFont('Arial', '', 12);
+      $signature_width = 60;
+      $signature_height = 34; // Keep a margin of 8
+      $x_pos = $this->w - $this->rMargin - $signature_width;
+      // Determine if the signature cells fit on the page
+      if (($this->h - $this->x - $this->bMargin) < $signature_height) {
+        $this->AddPage();
+        // Refer to previous page
+      }
+      $this->SetY(-48);
+      $this->Cell($signature_width, 6, REPORT_TEXT_FOOTER_SIGNATURE_EMPLOYEE, 'LTR');
+      $this->SetX($x_pos);
+      $this->Cell(0, 6, REPORT_TEXT_FOOTER_SIGNATURE_CUSTOMER, 'LTR');
+      $this->Ln();
+      $this->Cell($signature_width, 20, '', 'LBR');
+      $this->SetX($x_pos);
+      $this->Cell(0, 20, '', 'LBR');
     }
 
     public function ChapterTitle($number, $label) {
@@ -230,19 +255,19 @@
     }
 
     //Colored table
-    function FancyTable($header, $data) {
+    function EmployeeTable($header, $data) {
       //Colors, line width and bold font
-      $this->SetFillColor(86, 22, 132);
-      $this->SetTextColor(255, 255, 255);
-      $this->SetDrawColor(86, 22, 132);
+      $this->SetFillColor(191, 191, 191);
+      $this->SetTextColor(0, 0, 0);
+      $this->SetDrawColor(0, 0, 0);
       $this->SetLineWidth(.3);
       // Determine and set column widths
       $width = array();
-      $this->SetFont('','B');
+      $this->SetFont('Arial', 'B', 10);
       for($index=0; $index<count($header); $index++) {
         $width[$index] = $this->GetStringWidth($header[$index])+6;
       }
-      $this->SetFont('');
+      $this->SetFont('Arial', '', 10);
       foreach ($data as $row) {
         for ($index=0; $index<count($row); $index++) {
           if ($width[$index] < $this->GetStringWidth($row[$index])+6) {
@@ -251,7 +276,7 @@
         }
       }
       //Header
-      $this->SetFont('','B');
+      $this->SetFont('Arial', 'B', 10);
       $this->SetX(($this->w-array_sum($width))/2);
       for ($index=0; $index<count($header); $index++) {
         $this->Cell($width[$index], 7, $header[$index], 1, 0, 'C', true);
@@ -260,13 +285,13 @@
       //Color and font restoration
       $this->SetFillColor(224,235,255);
       $this->SetTextColor(0);
-      $this->SetFont('');
+      $this->SetFont('Arial', '', 10);
       //Data
       $fill=false;
       foreach ($data as $row) {
         $this->SetX(($this->w-array_sum($width))/2);
         for ($index=0; $index<count($row); $index++) {
-          $this->Cell($width[$index],6,$row[$index],'LR',0,'L',$fill);
+          $this->Cell($width[$index], 6, $row[$index], 'LR', 0, ($index>1?'C':'L'), $fill);
         }
         $this->Ln();
         $fill=!$fill;

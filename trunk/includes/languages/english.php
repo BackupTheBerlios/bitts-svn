@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 september 2008
+ * Date        : 18 september 2008
  * Description : English language file
  */
 
@@ -142,12 +142,25 @@ define('REPORT_EMPLOYEES_FULLNAME', 'Name');
 define('REPORT_EMPLOYEES_IS_USER', 'User');
 define('REPORT_EMPLOYEES_IS_ANALYST', 'Analyst');
 define('REPORT_EMPLOYEES_IS_ADMINISTRATOR', 'Admin');
+define('REPORT_EMPLOYEES_TIMESHEET_AVAILABLE', 'Timesheet');
+define('REPORT_EMPLOYEES_TIMESHEET_LOCKED', 'Locked');
 
-define('REPORT_TEXT_CUSTOMER_NAME', 'Customer: ');
-define('REPORT_TEXT_PERIOD', 'Period: ');
-define('REPORT_TEXT_PROJECT_NAME', 'Project: ');
-define('REPORT_TEXT_ROLE_NAME', 'Role: ');
-define('REPORT_TEXT_EMPLOYEE_NAME', 'Employee: ');
+define('REPORT_TEXT_CUSTOMER_NAME', 'Customer:');
+define('REPORT_TEXT_DATE', 'Date:');
+define('REPORT_TEXT_PERIOD', 'Period:');
+define('REPORT_TEXT_PROJECT_NAME', 'Project:');
+define('REPORT_TEXT_ROLE_NAME', 'Role:');
+define('REPORT_TEXT_EMPLOYEE_NAME', 'Employee:');
+define('REPORT_TEXT_FOOTER_SIGNATURE_EMPLOYEE', 'Signature employee');
+define('REPORT_TEXT_FOOTER_SIGNATURE_EMPLOYEE', 'Signature customer');
+define('REPORT_TEXT_FOOTER_ACKNOWLEDGE', 'By signing this timesheet, the constituent acknowledges the specified amounts, units, travel distances and expenses.');
+
+define('REPORT_CHECKBOX_SHOW_TIMESHEET_INFO', 'Show timesheet info');
+define('REPORT_CHECKBOX_SHOW_ALL_EMPLOYEES', 'Show all (ex-)employees');
+define('REPORT_CHECKBOX_PER_EMPLOYEE', 'Per employee');
+define('REPORT_CHECKBOX_SHOW_TARIFF', 'Show tariffs');
+define('REPORT_CHECKBOX_SHOW_TRAVEL_DISTANCE', 'Show travel distances');
+define('REPORT_CHECKBOX_SHOW_EXPENSES', 'Show expenses');
 
 define('REPORT_TABLE_HEADER_DATE', 'Date');
 define('REPORT_TABLE_HEADER_EMPLOYEE_NAME', 'Employee');
