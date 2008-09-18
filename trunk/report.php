@@ -64,7 +64,7 @@
       $pdf->AddPage();
 
       $periodstartdate = $database->prepare_input(tep_periodstartdate($_POST['period']));
-      $projects_query_string = 'SELECT ts.timesheets_start_date, ts.timesheets_end_date, cus.customers_id, cus.customers_name, bu.business_units_image, pr.projects_id, pr.projects_name, bu.business_units_image, rl.roles_id, rl.roles_name, rl.roles_mandatory_ticket_entry, act.activities_date, emp.employees_id, emp.employees_fullname, act.activities_amount, units.units_id, units.units_name, tar.tariffs_amount, act.activities_travel_distance, act.activities_expenses, act.activities_ticket_number, act.activities_expenses + (act.activities_amount * tar.tariffs_amount) AS total ' .
+      $projects_query_string = 'SELECT ts.timesheets_start_date, ts.timesheets_end_date, cus.customers_id, cus.customers_name, bu.business_units_image, pr.projects_id, pr.projects_name, rl.roles_id, rl.roles_name, rl.roles_mandatory_ticket_entry, act.activities_date, emp.employees_id, emp.employees_fullname, act.activities_amount, units.units_id, units.units_name, tar.tariffs_amount, act.activities_travel_distance, act.activities_expenses, act.activities_ticket_number, act.activities_expenses + (act.activities_amount * tar.tariffs_amount) AS total ' .
                                'FROM ' . TABLE_TIMESHEETS . ' AS ts ' .
                                'INNER JOIN (' . TABLE_EMPLOYEES . ' AS emp, ' . TABLE_ACTIVITIES . ' AS act, ' . TABLE_UNITS . ', ' . TABLE_TARIFFS . ' AS tar, ' . TABLE_EMPLOYEES_ROLES . ' AS er, ' . TABLE_ROLES . ' AS rl, ' . TABLE_PROJECTS . ' AS pr, ' . TABLE_CUSTOMERS . ' AS cus, ' . TABLE_BUSINESS_UNITS . ' AS bu) ' .
                                'ON (ts.employees_id = emp.employees_id ' .
@@ -91,7 +91,7 @@
         $table_header_set = false;
 
         while ($projects_result = $database->fetch_array($projects_query)) {
-          if ($customers_id != $projects_result['customers_id'] || $projects_id != $projects_result['projects_id'] || $roles_id != $projects_result['roles_id']) {
+          if ($customers_id != $projects_result['customers_id'] || $projects_id != $projects_result['projects_id'] || $roles_id != $projects_result['roles_id'] || $employees_id != $projects_result['employees_id']) {
             $customers_id = $projects_result['customers_id'];
             $projects_id = $projects_result['projects_id'];
             $roles_id = $projects_result['roles_id'];

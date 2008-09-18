@@ -161,6 +161,7 @@ define('REPORT_CHECKBOX_PER_EMPLOYEE', 'Per employee');
 define('REPORT_CHECKBOX_SHOW_TARIFF', 'Show tariffs');
 define('REPORT_CHECKBOX_SHOW_TRAVEL_DISTANCE', 'Show travel distances');
 define('REPORT_CHECKBOX_SHOW_EXPENSES', 'Show expenses');
+define('REPORT_CHECKBOX_SHOW_COMMENTS', 'Show comments');
 
 define('REPORT_TABLE_HEADER_DATE', 'Date');
 define('REPORT_TABLE_HEADER_EMPLOYEE_NAME', 'Employee');

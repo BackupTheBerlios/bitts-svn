@@ -161,6 +161,7 @@ define('REPORT_CHECKBOX_PER_EMPLOYEE', 'Per medewerker');
 define('REPORT_CHECKBOX_SHOW_TARIFF', 'Toon tarieven');
 define('REPORT_CHECKBOX_SHOW_TRAVEL_DISTANCE', 'Toon reisafstanden');
 define('REPORT_CHECKBOX_SHOW_EXPENSES', 'Toon onkosten');
+define('REPORT_CHECKBOX_SHOW_COMMENTS', 'Toon opmerkingen');
 
 define('REPORT_TABLE_HEADER_DATE', 'Datum');
 define('REPORT_TABLE_HEADER_EMPLOYEE_NAME', 'Medewerker');

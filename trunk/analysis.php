@@ -105,7 +105,8 @@
                           <?php echo tep_draw_checkbox_field('per_employee', true, true, 'disabled') . REPORT_CHECKBOX_PER_EMPLOYEE . '<br>';
                           echo tep_draw_checkbox_field('show_tariff', true, true) . REPORT_CHECKBOX_SHOW_TARIFF . '<br>';
                           echo tep_draw_checkbox_field('show_travel_distance', true, true) . REPORT_CHECKBOX_SHOW_TRAVEL_DISTANCE . '<br>';
-                          echo tep_draw_checkbox_field('show_expenses', true, true) . REPORT_CHECKBOX_SHOW_EXPENSES; ?>
+                          echo tep_draw_checkbox_field('show_expenses', true, true) . REPORT_CHECKBOX_SHOW_EXPENSES . '<br>';
+                          echo tep_draw_checkbox_field('show_comment', true, false, 'disabled') . REPORT_CHECKBOX_SHOW_COMMENTS; ?>
                         </td>
                       </tr>
                     </table>
