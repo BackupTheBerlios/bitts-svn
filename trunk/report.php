@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 september 2008
+ * Date        : 19 september 2008
  * Description : Data gathering and reporting functions
  */
 
@@ -19,7 +19,7 @@
   switch ($_POST['action']) {
     case 'report_employees':
       // *** Create pdf object ***
-      $pdf = new PDF();
+      $pdf = new PDF('L');
       $pdf->SetTitle(REPORT_NAME_EMPLOYEES);
       $pdf->SetAuthor(TITLE);
       $pdf->AddPage();
@@ -27,7 +27,7 @@
       $pdf->Cell(30, 6, REPORT_TEXT_DATE, 0, 0, 'L');
       $pdf->Cell(100, 6, tep_strftime(DATE_FORMAT_SHORT), 0, 0, 'L');
       $pdf->Ln();
-      if ($_POST['show_timesheet_info']) {
+      if ($_POST['show_timesheet_info'] || $_POST['show_travel_distance_and_expenses']) {
         $pdf->Cell(30, 6, REPORT_TEXT_PERIOD, 0, 0, 'L');
         $pdf->Cell(100, 6, $_POST['period'] . '  (' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts(tep_periodstartdate($_POST['period']))) . ' - ' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts(tep_periodenddate($_POST['period']))) . ')', 0, 0, 'L');
         $pdf->Ln();
@@ -36,20 +36,69 @@
       $employees_array = employee::get_array($_POST['show_all_employees']);
       $table_contents = array();
       $index = 0;
+      // Set the header and orientation
+      $table_header = array(REPORT_EMPLOYEES_ID,REPORT_EMPLOYEES_FULLNAME);
+      $table_contents_orientation = array('R', 'L');
+      $column_count = 2;
+      if ($_POST['show_user_rights']) {
+        // Add to header
+        $table_header[$column_count] = REPORT_EMPLOYEES_IS_USER;
+        $table_header[$column_count + 1] = REPORT_EMPLOYEES_IS_ANALYST;
+        $table_header[$column_count + 2] = REPORT_EMPLOYEES_IS_ADMINISTRATOR;
+        // Add to orientation
+        $table_contents_orientation[$column_count] = 'C';
+        $table_contents_orientation[$column_count + 1] = 'C';
+        $table_contents_orientation[$column_count + 2] = 'C';
+        $column_count += 3;
+      }
+      if ($_POST['show_timesheet_info']) {
+        // Add to header
+        $table_header[$column_count] = REPORT_EMPLOYEES_TIMESHEET_AVAILABLE;
+        $table_header[$column_count + 1] = REPORT_EMPLOYEES_TIMESHEET_LOCKED;
+        // Add to orientation
+        $table_contents_orientation[$column_count] = 'C';
+        $table_contents_orientation[$column_count + 1] = 'C';
+        $column_count += 2;
+      }
+      if ($_POST['show_travel_distance_and_expenses']) {
+        // Add to header
+        $table_header[$column_count] = REPORT_EMPLOYEES_TRAVEL_DISTANCE;
+        $table_header[$column_count + 1] = REPORT_EMPLOYEES_EXPENSES;
+        // Add to orientation
+        $table_contents_orientation[$column_count] = 'R';
+        $table_contents_orientation[$column_count + 1] = 'R';
+        $column_count += 2;
+      }
+      // Now fill in the contents
       foreach ($employees_array as $employee) {
-        if ($_POST['show_timesheet_info']) {
+        $table_contents[$index] = array($employee->employee_id, $employee->fullname);
+        $column_count = 2;
+        if ($_POST['show_user_rights']) {
+          // Add to contents
+          $table_contents[$index][$column_count] = ($employee->is_user?'X':'-');
+          $table_contents[$index][$column_count + 1] = ($employee->is_analyst?'X':'-');
+          $table_contents[$index][$column_count + 2] = ($employee->is_administrator?'X':'-');
+          $column_count += 3;
+        }
+        if ($_POST['show_timesheet_info'] || $_POST['show_travel_distance_and_expenses']) {
+          // In both cases you need the timesheet object
           $timesheet = new timesheet(0, $employee->employee_id, $_POST['period']);
-          $table_contents[$index] = array($employee->employee_id, $employee->fullname, ($employee->is_user?'X':'-'), ($employee->is_analyst?'X':'-'), ($employee->is_administrator?'X':'-'), ($timesheet->timesheet_id!=0?'X':'-'), ($timesheet->locked?'X':'-'));
-        } else {
-          $table_contents[$index] = array($employee->employee_id, $employee->fullname, ($employee->is_user?'X':'-'), ($employee->is_analyst?'X':'-'), ($employee->is_administrator?'X':'-'));
+        }
+        if ($_POST['show_timesheet_info']) {
+          // Add to contents
+          $table_contents[$index][$column_count] = ($timesheet->timesheet_id!=0?'X':'-');
+          $table_contents[$index][$column_count + 1] = ($timesheet->locked?'X':'-');
+          $column_count += 2;
+        }
+        if ($_POST['show_travel_distance_and_expenses']) {
+          // Add to contents
+          $table_contents[$index][$column_count] = $timesheet->total_travel_distance;
+          $table_contents[$index][$column_count + 1] = tep_number_db_to_user($timesheet->total_expenses, 2);
+          $column_count += 2;
         }
         $index++;
       }
-      if ($_POST['show_timesheet_info']) {
-        $pdf->EmployeeTable(array(REPORT_EMPLOYEES_ID,REPORT_EMPLOYEES_FULLNAME,REPORT_EMPLOYEES_IS_USER,REPORT_EMPLOYEES_IS_ANALYST,REPORT_EMPLOYEES_IS_ADMINISTRATOR,REPORT_EMPLOYEES_TIMESHEET_AVAILABLE,REPORT_EMPLOYEES_TIMESHEET_LOCKED),$table_contents);
-      } else {
-        $pdf->EmployeeTable(array(REPORT_EMPLOYEES_ID,REPORT_EMPLOYEES_FULLNAME,REPORT_EMPLOYEES_IS_USER,REPORT_EMPLOYEES_IS_ANALYST,REPORT_EMPLOYEES_IS_ADMINISTRATOR),$table_contents);
-      }
+      $pdf->EmployeeTable($table_header, $table_contents, $table_contents_orientation);
       break;
     case 'report_projects':
       $database = $_SESSION['database'];

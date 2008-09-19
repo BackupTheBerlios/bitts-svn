@@ -3,7 +3,7 @@
  * CODE FILE   : analysis.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 september 2008
+ * Date        : 19 september 2008
  * Description : Reporting form
  */
 
@@ -87,7 +87,9 @@
                       <tr>
                         <td valign="top"><?php echo tep_href_submit(REPORT_NAME_EMPLOYEES); ?></td>
                         <td>
-                          <?php echo tep_draw_checkbox_field('show_timesheet_info', true, true) . REPORT_CHECKBOX_SHOW_TIMESHEET_INFO . '<br>';
+                          <?php echo tep_draw_checkbox_field('show_user_rights', true, false) . REPORT_CHECKBOX_SHOW_USER_RIGHTS . '<br>';
+                          echo tep_draw_checkbox_field('show_timesheet_info', true, true) . REPORT_CHECKBOX_SHOW_TIMESHEET_INFO . '<br>';
+                          echo tep_draw_checkbox_field('show_travel_distance_and_expenses', true, true) . REPORT_CHECKBOX_SHOW_TRAVEL_DISTANCE_AND_EXPENSES . '<br>';
                           echo tep_draw_checkbox_field('show_all_employees', true, false) . REPORT_CHECKBOX_SHOW_ALL_EMPLOYEES; ?>
                         </td>
                       </tr>

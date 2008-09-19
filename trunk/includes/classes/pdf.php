@@ -3,7 +3,7 @@
  * CLASS FILE  : pdf.php
  * Project     : BitTS - BART it TimeSheet
  * Auteur(s)   : Erwin Beukhof
- * Datum       : 18 september 2008
+ * Datum       : 19 september 2008
  * Beschrijving: FPDF wrapper class with pre-formatting
  */
 
@@ -32,17 +32,13 @@
     //}
 
     public function Footer() {
-      //Position at 1.0 cm from bottom
-      $this->SetY(-20);
-      $this->SetFont('Arial','',6);
-      $this->Cell(0, 5, REPORT_TEXT_FOOTER_ACKNOWLEDGE, 0, 1, 'C');
-      //$this->Ln();
+      //Position at 1.5 cm from bottom
+      $this->SetY(-15);
       //Arial italic 8
       $this->SetFont('Arial','I',8);
       //Text color in gray
       $this->SetTextColor(128);
-      //Page number
-      //$this->Cell(0, 10, 'Page ' . $this->PageNo(), 0, 0, 'C');
+      //Software title
       $this->Cell(0, 5, TITLE, 0, 0, 'C');
     }
 
@@ -168,14 +164,14 @@
       $this->SetLineWidth(.3);
       $this->SetFont('Arial', '', 12);
       $signature_width = 60;
-      $signature_height = 34; // Keep a margin of 8
+      $signature_height = 41; // Keep a margin of 8
       $x_pos = $this->w - $this->rMargin - $signature_width;
       // Determine if the signature cells fit on the page
       if (($this->h - $this->x - $this->bMargin) < $signature_height) {
         $this->AddPage();
         // Refer to previous page
       }
-      $this->SetY(-48);
+      $this->SetY(-54);
       $this->Cell($signature_width, 6, REPORT_TEXT_FOOTER_SIGNATURE_EMPLOYEE, 'LTR');
       $this->SetX($x_pos);
       $this->Cell(0, 6, REPORT_TEXT_FOOTER_SIGNATURE_CUSTOMER, 'LTR');
@@ -183,6 +179,9 @@
       $this->Cell($signature_width, 20, '', 'LBR');
       $this->SetX($x_pos);
       $this->Cell(0, 20, '', 'LBR');
+      $this->Ln();
+      $this->SetFont('Arial','',6);
+      $this->Cell(0, 7, REPORT_TEXT_FOOTER_ACKNOWLEDGE, 0, 1, 'C');
     }
 
     public function ChapterTitle($number, $label) {
@@ -255,7 +254,7 @@
     }
 
     //Colored table
-    function EmployeeTable($header, $data) {
+    function EmployeeTable($header, $data, $orientation) {
       //Colors, line width and bold font
       $this->SetFillColor(191, 191, 191);
       $this->SetTextColor(0, 0, 0);
@@ -291,7 +290,7 @@
       foreach ($data as $row) {
         $this->SetX(($this->w-array_sum($width))/2);
         for ($index=0; $index<count($row); $index++) {
-          $this->Cell($width[$index], 6, $row[$index], 'LR', 0, ($index>1?'C':'L'), $fill);
+          $this->Cell($width[$index], 6, $row[$index], 'LR', 0, $orientation[$index], $fill);
         }
         $this->Ln();
         $fill=!$fill;

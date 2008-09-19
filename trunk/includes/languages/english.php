@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 september 2008
+ * Date        : 19 september 2008
  * Description : English language file
  */
 
@@ -144,6 +144,8 @@ define('REPORT_EMPLOYEES_IS_ANALYST', 'Analyst');
 define('REPORT_EMPLOYEES_IS_ADMINISTRATOR', 'Admin');
 define('REPORT_EMPLOYEES_TIMESHEET_AVAILABLE', 'Timesheet');
 define('REPORT_EMPLOYEES_TIMESHEET_LOCKED', 'Locked');
+define('REPORT_EMPLOYEES_TRAVEL_DISTANCE', 'Travel dist.(km)');
+define('REPORT_EMPLOYEES_EXPENSES', 'Expenses');
 
 define('REPORT_TEXT_CUSTOMER_NAME', 'Customer:');
 define('REPORT_TEXT_DATE', 'Date:');
@@ -155,7 +157,9 @@ define('REPORT_TEXT_FOOTER_SIGNATURE_EMPLOYEE', 'Signature employee');
 define('REPORT_TEXT_FOOTER_SIGNATURE_EMPLOYEE', 'Signature customer');
 define('REPORT_TEXT_FOOTER_ACKNOWLEDGE', 'By signing this timesheet, the constituent acknowledges the specified amounts, units, travel distances and expenses.');
 
+define('REPORT_CHECKBOX_SHOW_USER_RIGHTS', 'Show user rights');
 define('REPORT_CHECKBOX_SHOW_TIMESHEET_INFO', 'Show timesheet info');
+define('REPORT_CHECKBOX_SHOW_TRAVEL_DISTANCE_AND_EXPENSES', 'Show travel distance and expenses');
 define('REPORT_CHECKBOX_SHOW_ALL_EMPLOYEES', 'Show all (ex-)employees');
 define('REPORT_CHECKBOX_PER_EMPLOYEE', 'Per employee');
 define('REPORT_CHECKBOX_SHOW_TARIFF', 'Show tariffs');

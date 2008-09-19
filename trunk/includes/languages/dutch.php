@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 september 2008
+ * Date        : 19 september 2008
  * Description : Dutch language file
  */
 
@@ -144,6 +144,8 @@ define('REPORT_EMPLOYEES_IS_ANALYST', 'Analist');
 define('REPORT_EMPLOYEES_IS_ADMINISTRATOR', 'Admin');
 define('REPORT_EMPLOYEES_TIMESHEET_AVAILABLE', 'Timesheet');
 define('REPORT_EMPLOYEES_TIMESHEET_LOCKED', 'Bevestigd');
+define('REPORT_EMPLOYEES_TRAVEL_DISTANCE', 'Reisafstand (km)');
+define('REPORT_EMPLOYEES_EXPENSES', 'Onkosten');
 
 define('REPORT_TEXT_CUSTOMER_NAME', 'Klant:');
 define('REPORT_TEXT_DATE', 'Datum:');
@@ -155,7 +157,9 @@ define('REPORT_TEXT_FOOTER_SIGNATURE_EMPLOYEE', 'Handtekening medewerker');
 define('REPORT_TEXT_FOOTER_SIGNATURE_CUSTOMER', 'Handtekening klant');
 define('REPORT_TEXT_FOOTER_ACKNOWLEDGE', 'Door ondertekening van deze urenstaat verklaart de opdrachtgever zich akkoord met de gespecificeerde aantallen, eenheden, kilometers en onkosten.');
 
+define('REPORT_CHECKBOX_SHOW_USER_RIGHTS', 'Toon gebruikersrechten');
 define('REPORT_CHECKBOX_SHOW_TIMESHEET_INFO', 'Toon timesheet info');
+define('REPORT_CHECKBOX_SHOW_TRAVEL_DISTANCE_AND_EXPENSES', 'Toon reisafstand en onkosten');
 define('REPORT_CHECKBOX_SHOW_ALL_EMPLOYEES', 'Toon alle (ex-)medewerkers');
 define('REPORT_CHECKBOX_PER_EMPLOYEE', 'Per medewerker');
 define('REPORT_CHECKBOX_SHOW_TARIFF', 'Toon tarieven');

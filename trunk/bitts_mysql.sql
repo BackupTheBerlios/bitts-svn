@@ -31,7 +31,7 @@ CREATE TABLE `activities` (
   `activities_comment` varchar(64) NOT NULL default '',
   `timesheets_id` int(11) NOT NULL default '0',
   PRIMARY KEY  (`activities_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=287 DEFAULT CHARSET=latin1;
 
 --
 -- Table structure for table `business_units`
@@ -213,7 +213,7 @@ CREATE TABLE `timesheets` (
   `timesheets_locked` tinyint(1) NOT NULL default '0',
   `employees_id` int(11) NOT NULL default '0',
   PRIMARY KEY  (`timesheets_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Table structure for table `units`
@@ -237,4 +237,4 @@ CREATE TABLE `units` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2008-09-16 20:45:01
+-- Dump completed on 2008-09-18 20:45:01

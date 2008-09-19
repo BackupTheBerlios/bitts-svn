@@ -3,7 +3,7 @@
  * CLASS FILE  : timesheet.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 04 september 2008
+ * Date        : 19 september 2008
  * Description : Timesheet class
  *
  */
@@ -61,6 +61,18 @@
           return sizeof($this->activities) == 0;
         case 'activities':
           return $this->activities;
+        case 'total_travel_distance':
+          $total_travel_distance = 0;
+          for ($index = 0; $index < sizeof($this->activities); $index++) {
+            $total_travel_distance += $this->activities[$index]->travel_distance;
+          }
+          return $total_travel_distance;
+        case 'total_expenses':
+          $total_expenses = 0.00;
+          for ($index = 0; $index < sizeof($this->activities); $index++) {
+            $total_expenses += $this->activities[$index]->expenses;
+          }
+          return $total_expenses;
       }
       return null;
     }
