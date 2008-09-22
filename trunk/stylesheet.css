@@ -194,7 +194,7 @@ TD.calendar-notavailable {
 }
 
 TD.large-calendar-weekday {
-  border: 1px solid #000000;
+  border: 1px solid #561684;
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #f8f8f9;
@@ -204,7 +204,7 @@ TD.large-calendar-weekday {
 }
 
 TD.large-calendar-weekend {
-  border: 1px solid #000000;
+  border: 1px solid #561684;
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #b6b7cb;
