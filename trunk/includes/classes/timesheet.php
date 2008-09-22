@@ -3,7 +3,7 @@
  * CLASS FILE  : timesheet.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 september 2008
+ * Date        : 22 september 2008
  * Description : Timesheet class
  *
  */
@@ -61,6 +61,12 @@
           return sizeof($this->activities) == 0;
         case 'activities':
           return $this->activities;
+        case 'total_amount':
+          $total_amount = 0.00;
+          for ($index = 0; $index < sizeof($this->activities); $index++) {
+            $total_amount += $this->activities[$index]->amount;
+          }
+          return $total_amount;
         case 'total_travel_distance':
           $total_travel_distance = 0;
           for ($index = 0; $index < sizeof($this->activities); $index++) {
@@ -119,6 +125,20 @@
     public function confirm() {
       $this->locked = true;
       $this->save();
+    }
+
+    public function get_total_amount_per_day() {
+      $total_amount_per_day = array();
+      // Fill the array with zero-hours
+      $last_day_of_the_month = (int)strftime('%d', tep_datetouts($this->end_date));
+      for ($day_index = 1; $day_index <= $last_day_of_the_month; $day_index++) {
+        $total_amount_per_day[$day_index] = 0.00;
+      }
+      // Walk through the activities
+      for ($activity_index = 0; $activity_index < sizeof($this->activities); $activity_index++) {
+        $total_amount_per_day[(int)strftime('%d', $this->activities[$activity_index]->date)] += $this->activities[$activity_index]->amount;
+      }
+      return $total_amount_per_day;
     }
   }
 ?>

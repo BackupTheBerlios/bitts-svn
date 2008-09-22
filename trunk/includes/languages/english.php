@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 september 2008
+ * Date        : 22 september 2008
  * Description : English language file
  */
 
@@ -56,12 +56,14 @@ define('HEADER_TEXT_YOUR_DATA', 'Your data');
 define('HEADER_TEXT_LOGIN', 'Log in');
 define('HEADER_TEXT_LOGOUT', 'Log out');
 define('HEADER_TEXT_TIMEREGISTRATION', 'Time registration');
+define('HEADER_TEXT_TIMEREGISTRATION_CALENDAR', 'Calendar');
 define('HEADER_TEXT_ANALYSIS', 'Reports');
 define('HEADER_TEXT_ADMINISTRATION', 'Administration');
 
 define('BOX_HEADING_MAINMENU', 'Menu');
 define('BOX_MAINMENU_HOME', 'Home');
 define('BOX_MAINMENU_TIMEREGISTRATION', 'Time registration');
+define('BOX_MAINMENU_TIMEREGISTRATION_CALENDAR', 'Calendar');
 define('BOX_MAINMENU_ANALYSIS', 'Reports');
 define('BOX_MAINMENU_ADMINISTRATION', 'Admin');
 define('BOX_MAINMENU_ADMINISTRATION_PROJECTS', 'Manage projects');
@@ -92,6 +94,7 @@ define('TEXT_TIMEREGISTRATION_CONFIRM', 'Confirm this period. NOTE: After this, 
 define('TEXT_TIMEREGISTRATION_CONFIRM_QUESTION', 'Do you want to confirm this period?');
 define('TEXT_TIMEREGISTRATION_CONFIRM_OK', 'Confirm OK');
 define('TEXT_TIMEREGISTRATION_CONFIRM_CANCEL', 'Cancel confirm');
+define('TEXT_TIMEREGISTRATION_CALENDAR_DESCRIPTION', 'Overview registered amounts per day:');
 
 define('TEXT_ACTIVITY_DAY', 'Day');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');

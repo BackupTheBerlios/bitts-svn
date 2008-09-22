@@ -173,18 +173,53 @@ TD.calendar-weekday {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #f8f8f9;
+  text-align: center;
+  vertical-align: top;
 }
 
 TD.calendar-weekend {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #b6b7cb;
+  text-align: center;
+  vertical-align: top;
 }
 
 TD.calendar-notavailable {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #ffffff;
+  text-align: center;
+  vertical-align: top;
+}
+
+TD.large-calendar-weekday {
+  border: 1px solid #000000;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background: #f8f8f9;
+  text-align: center;
+  vertical-align: top;
+  width: 50px;
+}
+
+TD.large-calendar-weekend {
+  border: 1px solid #000000;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background: #b6b7cb;
+  text-align: center;
+  vertical-align: top;
+  width: 50px;
+}
+
+TD.large-calendar-notavailable {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background: #ffffff;
+  text-align: center;
+  vertical-align: top;
+  width: 50px;
 }
 
 TD.activity_entry, TD.report_listing {
