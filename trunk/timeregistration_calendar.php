@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 september 2008
+ * Date        : 23 september 2008
  * Description : Overview of total hours per day in a calender
  */
 
@@ -12,14 +12,21 @@
   // Check if user is logged in. If not, redirect to login page
   if (!tep_not_null($_SESSION['employee_login']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
-  // header //
-  require(DIR_WS_INCLUDES . 'header.php');
 
   // Create a new timesheet object with id == 0
   // If a timesheet already exists for this employee and period, the timesheet class will automatically
   // retrieve the correct id and put this into $_SESSION['timesheet']->timesheet_id
   $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, $_POST['period']);
-?>
+
+  // Check if there are unconfirmed timesheets available with timesheets_end_date previous to today
+  // If so, create an info message
+  $oldest_unconfirmed_period = $_SESSION['timesheet']->get_oldest_unconfirmed_period();
+  if (tep_not_null($oldest_unconfirmed_period)) {
+    $_POST['info_message'] = sprintf(HEADER_INFO_UNCONFIRMED_PERIOD, $oldest_unconfirmed_period);
+  }
+
+  // header //
+  require(DIR_WS_INCLUDES . 'header.php');?>
 <!-- body //-->
   <table border="0" width="100%" cellspacing="3" cellpadding="3">
     <tr>

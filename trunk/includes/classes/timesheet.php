@@ -3,7 +3,7 @@
  * CLASS FILE  : timesheet.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 september 2008
+ * Date        : 23 september 2008
  * Description : Timesheet class
  *
  */
@@ -139,6 +139,21 @@
         $total_amount_per_day[(int)strftime('%d', $this->activities[$activity_index]->date)] += $this->activities[$activity_index]->amount;
       }
       return $total_amount_per_day;
+    }
+
+    public function get_oldest_unconfirmed_period() {
+      $database = $_SESSION['database'];
+      $oldest_unconfirmed_period_query = $database->query("select timesheets_start_date from " . TABLE_TIMESHEETS .
+                                                          " where employees_id = '" . (int)$this->employee_id . "'" .
+                                                          " and timesheets_locked = '0'" .
+                                                          " and timesheets_end_date < '" . strftime('%Y-%m-%d') . "'" .
+                                                          " order by timesheets_start_date");
+      $oldest_unconfirmed_period_result = $database->fetch_array($oldest_unconfirmed_period_query);
+      if (tep_not_null($oldest_unconfirmed_period_result)) {
+        return tep_datetoperiod($oldest_unconfirmed_period_result['timesheets_start_date']);
+      } else {
+        return null;
+      }
     }
   }
 ?>

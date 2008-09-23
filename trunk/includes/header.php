@@ -3,9 +3,11 @@
  * CODE FILE   : header.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 15 september 2008
- * Description : .....
- *               .....
+ * Date        : 23 september 2008
+ * Description : Header file
+ *               Contains html declarations and parameters
+ *               Creates error- and/or info message on top of page
+ * 
  *               Framework: osCommerce, Open Source E-Commerce Solutions
  *               http://www.oscommerce.com
  */
@@ -41,21 +43,21 @@
     </table>
 
 <?php
-  if (isset($HTTP_GET_VARS['error_message']) && tep_not_null($HTTP_GET_VARS['error_message'])) {
+  if (isset($_POST['error_message']) && tep_not_null($_POST['error_message'])) {
 ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr class="headerError">
-        <td class="headerError"><?php echo htmlspecialchars(urldecode($HTTP_GET_VARS['error_message'])); ?></td>
+        <td class="headerError"><?php echo htmlspecialchars(urldecode($_POST['error_message'])); ?></td>
       </tr>
     </table>
 <?php
   }
 
-  if (isset($HTTP_GET_VARS['info_message']) && tep_not_null($HTTP_GET_VARS['info_message'])) {
+  if (isset($_POST['info_message']) && tep_not_null($_POST['info_message'])) {
 ?>
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr class="headerInfo">
-        <td class="headerInfo"><?php echo htmlspecialchars($HTTP_GET_VARS['info_message']); ?></td>
+        <td class="headerInfo"><?php echo htmlspecialchars($_POST['info_message']); ?></td>
       </tr>
     </table>
 <?php

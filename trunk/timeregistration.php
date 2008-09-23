@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 september 2008
+ * Date        : 23 september 2008
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -15,8 +15,6 @@
   // Check if user is logged in. If not, redirect to login page
   if (!tep_not_null($_SESSION['employee_login']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
-  // header //
-  require(DIR_WS_INCLUDES . 'header.php');
 
   // Create a new timesheet object with id == 0
   // If a timesheet already exists for this employee and period, the timesheet class will automatically
@@ -28,7 +26,12 @@
       $_POST['activity_id'] = 0;
       break;
     case 'save_data':
-      // This is handled in activity_entry.php
+      if ($_SESSION['timesheet']->timesheet_id == 0) {
+        // Timesheet does not exist yet so a new one has to be created in db
+        // This is required for the test if previous unconfirmed timesheets exist
+        $_SESSION['timesheet']->save();
+      }
+      // Adding the activity is handled in activity_entry.php
       break;
     case 'delete_activity':
       break;
@@ -46,7 +49,17 @@
       $_SESSION['timesheet']->confirm();
       $_POST['action'] = '';
       break;
-  } ?>
+  }
+
+  // Check if there are unconfirmed timesheets available with timesheets_end_date previous to today
+  // If so, create an info message
+  $oldest_unconfirmed_period = $_SESSION['timesheet']->get_oldest_unconfirmed_period();
+  if (tep_not_null($oldest_unconfirmed_period)) {
+    $_POST['info_message'] = sprintf(HEADER_INFO_UNCONFIRMED_PERIOD, $oldest_unconfirmed_period);
+  }
+
+  // header //
+  require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- body //-->
   <table border="0" width="100%" cellspacing="3" cellpadding="3">
     <tr>

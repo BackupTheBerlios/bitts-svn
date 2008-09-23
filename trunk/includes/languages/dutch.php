@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 september 2008
+ * Date        : 23 september 2008
  * Description : Dutch language file
  */
 
@@ -49,6 +49,8 @@ define('CHARSET', 'iso-8859-1');
 
 // page title
 define('TITLE', COMPANY_NAME . ' - ' . PROJECT_NAME . ' ' . PROJECT_VERSION);
+
+define('HEADER_INFO_UNCONFIRMED_PERIOD', 'De urenstaat voor periode %s is nog niet bevestigd');
 
 define('HEADER_TEXT_CURRENT_USER', 'Huidige gebruiker : ');
 define('HEADER_TEXT_NO_CURRENT_USER', 'Niet ingelogd!');
