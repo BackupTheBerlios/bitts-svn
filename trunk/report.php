@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 september 2008
+ * Date        : 24 september 2008
  * Description : Data gathering and reporting functions
  */
 
@@ -213,4 +213,6 @@
   }
 
   $pdf->Output($pdf->title . '.pdf', 'D');
-?>
+  // <!-- application_bottom //-->
+  require(DIR_WS_INCLUDES . 'application_bottom.php');
+  // <!-- application_bottom_eof //--> ?>

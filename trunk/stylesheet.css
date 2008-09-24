@@ -75,13 +75,13 @@ TD.headerError {
 }
 
 TR.headerInfo {
-  background: #00ff00;
+  background: #008fc3;
 }
 
 TD.headerInfo {
   font-family: Tahoma, Verdana, Arial, sans-serif;
   font-size: 12px;
-  background: #00ff00;
+  background: #008fc3;
   color: #ffffff;
   font-weight: bold;
   text-align: center;
