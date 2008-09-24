@@ -17,7 +17,7 @@
     tep_redirect(tep_href_link(FILENAME_LOGIN));
 
     // Create a CSV object
-    $csv = new CSV($_POST['action'] . '.csv');
+    $csv = new CSV($_POST['action'] . '.csv', ';', ''); // Delimiters chosen to be ms-excel compatible
 
     switch ($_POST['action']) {
     case 'export_activities':
