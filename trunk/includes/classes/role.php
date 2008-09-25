@@ -3,7 +3,7 @@
  * CLASS FILE  : role.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 04 september 2008
+ * Date        : 25 september 2008
  * Description : Role class
  *               .....
  */
@@ -90,7 +90,7 @@
         $role_query .= ')';
         if ($project_id != 0)
           $role_query .= ' and projects_id = ' . $project_id;
-        $role_query .= ' order by roles_id';
+        $role_query .= ' order by roles_name';
         $role_query = $database->query($role_query);        
         while ($role_result = $database->fetch_array($role_query)) {
           array_push($role_array, $role_result);

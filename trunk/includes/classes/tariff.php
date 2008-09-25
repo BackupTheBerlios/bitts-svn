@@ -3,7 +3,7 @@
  * CLASS FILE  : tariff.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 04 september 2008
+ * Date        : 25 september 2008
  * Description : Tariff class
  *               .....
  */
@@ -79,6 +79,7 @@
       $tariff_query .= ' and ' . TABLE_TARIFFS . '.employees_roles_id = ' . TABLE_EMPLOYEES_ROLES . '.employees_roles_id';
       $tariff_query .= ' and ' . TABLE_EMPLOYEES_ROLES . '.employees_id = ' . $employee_id;
       $tariff_query .= ' and ' . TABLE_EMPLOYEES_ROLES . '.roles_id = ' . $role_id;
+      $tariff_query .= ' order by units_name';
       // Prepare query
       $tariff_query = $database->query($tariff_query);        
       // Execute query and read the contents

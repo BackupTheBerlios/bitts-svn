@@ -3,7 +3,7 @@
  * CLASS FILE  : project.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 10 september 2008
+ * Date        : 25 september 2008
  * Description : Project class
  */
 
@@ -78,7 +78,7 @@
             $project_query .= ',';
           $project_query .= $role['projects_id'];
         }
-        $project_query .= ') order by projects_id';
+        $project_query .= ') order by projects_name';
         $project_query = $database->query($project_query);
         while ($project_result = $database->fetch_array($project_query)) {
           array_push($project_array, $project_result);
