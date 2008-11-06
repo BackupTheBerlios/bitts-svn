@@ -139,6 +139,8 @@ define('TEXT_ANALYSIS_BACK', 'Period back');
 define('TEXT_ANALYSIS_PERIOD', 'Period : ');
 define('TEXT_ANALYSIS_FORWARD', 'Period forward');
 
+define('TEXT_BUTTON_PDF', 'Create .pdf file');
+define('TEXT_BUTTON_CSV', 'Export to .csv file');
 define('REPORT_NAME_EMPLOYEES', 'Overview employees');
 define('REPORT_NAME_PROJECTS', 'Overview projects');
 define('REPORT_NAME_TIMESHEETS', 'Overview timesheets');

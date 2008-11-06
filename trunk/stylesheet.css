@@ -9,6 +9,7 @@
   Released under the GNU General Public License
 */
 
+.boxTitle { font-family: Verdana, Arial, sans-serif; font-size: 11px; font-weight: bold; }
 .boxText { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 .errorBox { font-family : Verdana, Arial, sans-serif; font-size : 10px; background: #ffb3b5; font-weight: bold; }
 .stockWarning { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #cc0033; }
