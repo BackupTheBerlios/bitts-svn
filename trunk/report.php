@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 24 september 2008
+ * Date        : 01 december 2008
  * Description : Data gathering and reporting functions
  */
 
@@ -113,7 +113,7 @@
       $pdf->AddPage();
 
       $periodstartdate = $database->prepare_input(tep_periodstartdate($_POST['period']));
-      $projects_query_string = 'SELECT ts.timesheets_start_date, ts.timesheets_end_date, cus.customers_id, cus.customers_name, bu.business_units_image, pr.projects_id, pr.projects_name, rl.roles_id, rl.roles_name, rl.roles_mandatory_ticket_entry, act.activities_date, emp.employees_id, emp.employees_fullname, act.activities_amount, units.units_id, units.units_name, tar.tariffs_amount, act.activities_travel_distance, act.activities_expenses, act.activities_ticket_number, act.activities_expenses + (act.activities_amount * tar.tariffs_amount) AS total ' .
+      $projects_query_string = 'SELECT ts.timesheets_start_date, ts.timesheets_end_date, cus.customers_id, cus.customers_name, bu.business_units_image, pr.projects_id, pr.projects_name, rl.roles_id, rl.roles_name, rl.roles_mandatory_ticket_entry, act.activities_date, emp.employees_id, emp.employees_fullname, act.activities_amount, units.units_id, units.units_name, tar.tariffs_amount, act.activities_travel_distance, act.activities_expenses, act.activities_ticket_number, act.activities_expenses + (act.activities_amount * tar.tariffs_amount) AS total, act.activities_comment ' .
                                'FROM ' . TABLE_TIMESHEETS . ' AS ts ' .
                                'INNER JOIN (' . TABLE_EMPLOYEES . ' AS emp, ' . TABLE_ACTIVITIES . ' AS act, ' . TABLE_UNITS . ', ' . TABLE_TARIFFS . ' AS tar, ' . TABLE_EMPLOYEES_ROLES . ' AS er, ' . TABLE_ROLES . ' AS rl, ' . TABLE_PROJECTS . ' AS pr, ' . TABLE_CUSTOMERS . ' AS cus, ' . TABLE_BUSINESS_UNITS . ' AS bu) ' .
                                'ON (ts.employees_id = emp.employees_id ' .
@@ -130,77 +130,83 @@
         $projects_query_string .= 'ORDER BY cus.customers_id, pr.projects_id, rl.roles_id, emp.employees_id, units.units_id, act.activities_date';
       } else {
         // Needs some work
-        $projects_query_string .= 'ORDER BY cus.customers_id, pr.projects_id, rl.roles_id, act.activities_date, emp.employees_id';
+        $projects_query_string .= 'ORDER BY cus.customers_id, pr.projects_id, rl.roles_id, act.activities_date, emp.employees_id, units.units_id';
       }
       $projects_query = $database->query($projects_query_string);
       $projects_array = array();
 
-      if ($_POST['per_employee']) {
-        $customers_id = '';
-        $table_header_set = false;
+      $customers_id = '';
+      $table_header_set = false;
 
-        while ($projects_result = $database->fetch_array($projects_query)) {
-          if ($customers_id != $projects_result['customers_id'] || $projects_id != $projects_result['projects_id'] || $roles_id != $projects_result['roles_id'] || $employees_id != $projects_result['employees_id']) {
-            $customers_id = $projects_result['customers_id'];
-            $projects_id = $projects_result['projects_id'];
-            $roles_id = $projects_result['roles_id'];
+      while ($projects_result = $database->fetch_array($projects_query)) {
+        if ($customers_id != $projects_result['customers_id'] || $projects_id != $projects_result['projects_id'] || $roles_id != $projects_result['roles_id'] || ($_POST['per_employee'] && $employees_id != $projects_result['employees_id'])) {
+          $customers_id = $projects_result['customers_id'];
+          $projects_id = $projects_result['projects_id'];
+          $roles_id = $projects_result['roles_id'];
+          if ($_POST['per_employee']) {
             $employees_id = $projects_result['employees_id'];
-            if ($table_header_set) {
-              // A previous table exists, create a footer for that one
-              $pdf->InvoiceTableFooter($total_amount, $total_travel_distance, $total_expenses, $total_value);
-              $table_header_set = false; // To prevent the table footer to be written again on the new page
-              // New customer, project, role or employee means the timesheet of the previous one has to be signed
-              // We know there is a previous one, because the table header is set
+          }
+          if ($table_header_set) {
+            // A previous table exists, create a footer for that one
+            $pdf->InvoiceTableFooter($total_amount, $total_travel_distance, $total_expenses, $total_value);
+            $table_header_set = false; // To prevent the table footer to be written again on the new page
+            // New customer, project, role or employee means the timesheet of the previous one has to be signed
+            // We know there is a previous one, because the table header is set
+            if ($_POST['show_signature']) {
               $pdf->InvoiceSignature();
-              $pdf->AddPage();
             }
-            $pdf->InvoiceHeader($projects_result['business_units_image'],
-                                $projects_result['customers_name'],
-                                tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($projects_result['timesheets_start_date'])) . ' - ' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($projects_result['timesheets_end_date'])),
-                                $projects_result['projects_name'],
-                                $projects_result['roles_name'],
-                                $projects_result['employees_fullname']);
-            $units_id = ''; // To trigger a new table header later on
+            $pdf->AddPage();
           }
-          if ($units_id != $projects_result['units_id']) {
-            if ($table_header_set) {
-              // A previous table exists, create a footer for that one
-              $pdf->InvoiceTableFooter($total_amount, $total_travel_distance, $total_expenses, $total_value);
-              $pdf->Ln(5); // Skip a few mm
-            }
-            // Create a new table header
-            $pdf->InvoiceTableHeader($projects_result['units_name'] . ($_POST['show_tariff']?REPORT_TABLE_HEADER_IS_TARIFF.tep_number_db_to_user($projects_result['tariffs_amount'], 2):''),
-                                     $_POST['per_employee'],
-                                     $_POST['show_tariff'],
-                                     $_POST['show_travel_distance'],
-                                     $_POST['show_expenses'],
-                                     $projects_result['roles_mandatory_ticket_entry']=='1');
-            $table_header_set = true;
-            $total_amount = 0.00;
-            $total_travel_distance = 0;
-            $total_expenses = 0.00;
-            $total_value = 0.00;
-            $units_id = $projects_result['units_id'];
-          }
-          // And we're off creating the table contents
-          $pdf->InvoiceTableContents(tep_datetouts($projects_result['activities_date']),
-                                     $projects_result['employees_fullname'],
-                                     $projects_result['activities_amount'],
-                                     $projects_result['units_name'],
-                                     $projects_result['tariffs_amount'],
-                                     $projects_result['activities_travel_distance'],
-                                     $projects_result['activities_expenses'],
-                                     $projects_result['activities_ticket_number'],
-                                     $projects_result['total']);
-          $total_amount += $projects_result['activities_amount'];
-          $total_travel_distance += $projects_result['activities_travel_distance'];
-          $total_expenses += $projects_result['activities_expenses'];
-          $total_value += $projects_result['total'];
+          $pdf->InvoiceHeader($projects_result['business_units_image'],
+                              $projects_result['customers_name'],
+                              tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($projects_result['timesheets_start_date'])) . ' - ' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($projects_result['timesheets_end_date'])),
+                              $projects_result['projects_name'],
+                              $projects_result['roles_name'],
+                              ($_POST['per_employee']?$projects_result['employees_fullname']:''));
+          $units_id = ''; // To trigger a new table header later on
         }
-        if ($table_header_set) {
-          // Create a footer for the last table
-          $pdf->InvoiceTableFooter($total_amount, $total_travel_distance, $total_expenses, $total_value);
-          // Finally the document needs one last signature
+        if ($units_id != $projects_result['units_id']) {
+          if ($table_header_set) {
+            // A previous table exists, create a footer for that one
+            $pdf->InvoiceTableFooter($total_amount, $total_travel_distance, $total_expenses, $total_value);
+            $pdf->Ln(5); // Skip a few mm
+          }
+          // Create a new table header
+          $pdf->InvoiceTableHeader($projects_result['units_name'] . ($_POST['per_employee']&&$_POST['show_tariff']?REPORT_TABLE_HEADER_IS_TARIFF.tep_number_db_to_user($projects_result['tariffs_amount'], 2):''),
+                                   $_POST['per_employee'],
+                                   $_POST['show_tariff'],
+                                   $_POST['show_travel_distance'],
+                                   $_POST['show_expenses'],
+                                   $projects_result['roles_mandatory_ticket_entry']=='1',
+                                   $_POST['show_comment']);
+          $table_header_set = true;
+          $total_amount = 0.00;
+          $total_travel_distance = 0;
+          $total_expenses = 0.00;
+          $total_value = 0.00;
+          $units_id = $projects_result['units_id'];
+        }
+        // And we're off creating the table contents
+        $pdf->InvoiceTableContents(tep_datetouts($projects_result['activities_date']),
+                                   $projects_result['employees_fullname'],
+                                   $projects_result['activities_amount'],
+                                   $projects_result['units_name'],
+                                   $projects_result['tariffs_amount'],
+                                   $projects_result['activities_travel_distance'],
+                                   $projects_result['activities_expenses'],
+                                   $projects_result['activities_ticket_number'],
+                                   $projects_result['total'],
+                                   $projects_result['activities_comment']);
+        $total_amount += $projects_result['activities_amount'];
+        $total_travel_distance += $projects_result['activities_travel_distance'];
+        $total_expenses += $projects_result['activities_expenses'];
+        $total_value += $projects_result['total'];
+      }
+      if ($table_header_set) {
+        // Create a footer for the last table
+         $pdf->InvoiceTableFooter($total_amount, $total_travel_distance, $total_expenses, $total_value);
+        // Finally the document needs one last signature
+        if ($_POST['show_signature']) {
           $pdf->InvoiceSignature();
         }
       }

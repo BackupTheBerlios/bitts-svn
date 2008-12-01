@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 06 november 2008
+ * Date        : 01 december 2008
  * Description : Dutch language file
  */
 
@@ -173,15 +173,18 @@ define('REPORT_CHECKBOX_SHOW_TARIFF', 'Toon tarieven');
 define('REPORT_CHECKBOX_SHOW_TRAVEL_DISTANCE', 'Toon reisafstanden');
 define('REPORT_CHECKBOX_SHOW_EXPENSES', 'Toon onkosten');
 define('REPORT_CHECKBOX_SHOW_COMMENTS', 'Toon opmerkingen');
+define('REPORT_CHECKBOX_SHOW_SIGNATURE', 'Toon handtekeningvelden');
 
 define('REPORT_TABLE_HEADER_DATE', 'Datum');
 define('REPORT_TABLE_HEADER_EMPLOYEE_NAME', 'Medewerker');
 define('REPORT_TABLE_HEADER_ACTIVITY_AMOUNT', 'Aantal');
 define('REPORT_TABLE_HEADER_IS_TARIFF', ' a ');
+define('REPORT_TABLE_HEADER_TARIFF', 'Tarief');
 define('REPORT_TABLE_HEADER_TRAVEL_DISTANCE', 'km');
 define('REPORT_TABLE_HEADER_EXPENSES', 'Onkosten');
 define('REPORT_TABLE_HEADER_TICKET_NUMBER', 'Ticket nr');
 define('REPORT_TABLE_HEADER_TOTAL', 'Totaal');
+define('REPORT_TABLE_HEADER_COMMENT', 'Opmerkingen');
 
 define('EXPORT_NAME_ACTIVITIES', 'Export activiteiten');
 

@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 24 september 2008
+ * Date        : 01 december 2008
  * Description : English language file
  */
 
@@ -173,15 +173,18 @@ define('REPORT_CHECKBOX_SHOW_TARIFF', 'Show tariffs');
 define('REPORT_CHECKBOX_SHOW_TRAVEL_DISTANCE', 'Show travel distances');
 define('REPORT_CHECKBOX_SHOW_EXPENSES', 'Show expenses');
 define('REPORT_CHECKBOX_SHOW_COMMENTS', 'Show comments');
+define('REPORT_CHECKBOX_SHOW_SIGNATURE', 'Show signature fields');
 
 define('REPORT_TABLE_HEADER_DATE', 'Date');
 define('REPORT_TABLE_HEADER_EMPLOYEE_NAME', 'Employee');
 define('REPORT_TABLE_HEADER_ACTIVITY_AMOUNT', 'Amount');
 define('REPORT_TABLE_HEADER_IS_TARIFF', ' a ');
+define('REPORT_TABLE_HEADER_TARIFF', 'Tariff');
 define('REPORT_TABLE_HEADER_TRAVEL_DISTANCE', 'km');
 define('REPORT_TABLE_HEADER_EXPENSES', 'Expenses');
 define('REPORT_TABLE_HEADER_TICKET_NUMBER', 'Ticket nr');
 define('REPORT_TABLE_HEADER_TOTAL', 'Total');
+define('REPORT_TABLE_HEADER_COMMENT', 'Comment');
 
 define('EXPORT_NAME_ACTIVITIES', 'Export activities');
 

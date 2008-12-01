@@ -3,7 +3,7 @@
  * CODE FILE   : analysis.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 06 november 2008
+ * Date        : 01 december 2008
  * Description : Reporting form
  */
 
@@ -102,7 +102,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <?php echo tep_draw_form('report_projects', tep_href_link(FILENAME_REPORT), 'post') . tep_create_parameters(array('action'=>'report_projects', 'per_employee'=>true), array('period'), 'hidden_field'); ?>
+                    <?php echo tep_draw_form('report_projects', tep_href_link(FILENAME_REPORT), 'post') . tep_create_parameters(array('action'=>'report_projects'), array('period'), 'hidden_field'); ?>
                       <table border="0" width="100%" cellspacing="0" cellpadding="10" class="report_listing">
                         <tr>
                           <td colspan="2" class="boxTitle"><?php echo REPORT_NAME_PROJECTS; ?></td>
@@ -110,11 +110,12 @@
                         <tr>
                           <td valign="top" width="65"><?php echo tep_image_submit('button_pdf.gif', TEXT_BUTTON_PDF); ?></td>
                           <td class="boxText">
-                            <?php echo tep_draw_checkbox_field('per_employee', true, true, 'disabled') . REPORT_CHECKBOX_PER_EMPLOYEE . '<br>';
+                            <?php echo tep_draw_checkbox_field('per_employee', true, false) . REPORT_CHECKBOX_PER_EMPLOYEE . '<br>';
                             echo tep_draw_checkbox_field('show_tariff', true, true) . REPORT_CHECKBOX_SHOW_TARIFF . '<br>';
                             echo tep_draw_checkbox_field('show_travel_distance', true, true) . REPORT_CHECKBOX_SHOW_TRAVEL_DISTANCE . '<br>';
                             echo tep_draw_checkbox_field('show_expenses', true, true) . REPORT_CHECKBOX_SHOW_EXPENSES . '<br>';
-                            echo tep_draw_checkbox_field('show_comment', true, false, 'disabled') . REPORT_CHECKBOX_SHOW_COMMENTS; ?>
+                            echo tep_draw_checkbox_field('show_comment', true, true) . REPORT_CHECKBOX_SHOW_COMMENTS . '<br>';
+                            echo tep_draw_checkbox_field('show_signature', true, false) . REPORT_CHECKBOX_SHOW_SIGNATURE; ?>
                           </td>
                         </tr>
                       </table>

@@ -3,7 +3,7 @@
  * CLASS FILE  : pdf.php
  * Project     : BitTS - BART it TimeSheet
  * Auteur(s)   : Erwin Beukhof
- * Datum       : 19 september 2008
+ * Datum       : 01 december 2008
  * Beschrijving: FPDF wrapper class with pre-formatting
  */
 
@@ -63,7 +63,7 @@
       $this->Cell(30, 6, REPORT_TEXT_ROLE_NAME, 0, 0, 'L');
       $this->Cell(50, 6, $role_name, 0, 0, 'L');
       $this->Ln();
-      if (employee_name != '') {
+      if (!$employee_name == '') {
         $this->Cell(30, 6, REPORT_TEXT_EMPLOYEE_NAME, 0, 0, 'L');
         $this->Cell(50, 6, $employee_name, 0, 0, 'L');
         $this->Ln();
@@ -71,12 +71,13 @@
       $this->Ln(6);
     }
 
-    public function InvoiceTableHeader($table_header_text = '', $per_employee = true, $show_tariff = true, $show_travel_distance = true, $show_expenses = true, $show_ticket_number = true) {
+    public function InvoiceTableHeader($table_header_text = '', $per_employee = true, $show_tariff = true, $show_travel_distance = true, $show_expenses = true, $show_ticket_number = true, $show_comment = true) {
       $this->per_employee = $per_employee;
       $this->show_tariff = $show_tariff;
       $this->show_travel_distance = $show_travel_distance;
       $this->show_expenses = $show_expenses;
       $this->show_ticket_number = $show_ticket_number;
+      $this->show_comment = $show_comment;
       $this->SetFont('Arial', 'B', 10);
       $this->SetFillColor(191, 191, 191);
       if ($table_header_text!='') {
@@ -87,11 +88,8 @@
         $this->Cell(50, 5, REPORT_TABLE_HEADER_EMPLOYEE_NAME, 'LR', 0, 'C', true);
       }
       $this->Cell(20, 5, REPORT_TABLE_HEADER_ACTIVITY_AMOUNT, 'LR', 0, 'C', true);
-      if (!$this->per_employee) {
-        $this->Cell(64, 5, REPORT_TABLE_HEADER_UNITS_NAME, 'LR', 0, 'C', true);
-        if ($this->show_tariff) {
-          $this->Cell(22, 5, REPORT_TABLE_HEADER_TARIFF, 'L', 0, 'C', true);
-        }
+      if (!$this->per_employee && $this->show_tariff) {
+        $this->Cell(22, 5, REPORT_TABLE_HEADER_TARIFF, 'L', 0, 'C', true);
       }
       if ($this->show_travel_distance) {
         $this->Cell(22, 5, REPORT_TABLE_HEADER_TRAVEL_DISTANCE, 'LR', 0, 'C', true);
@@ -105,22 +103,22 @@
       if ($this->show_tariff) {
         $this->Cell(22, 5, REPORT_TABLE_HEADER_TOTAL, 'L', 0, 'C', true);
       }
+      if ($this->show_comment) {
+        $this->Cell(0, 5, REPORT_TABLE_HEADER_COMMENT, 'LR', 0, 'C', true);
+      }
       // Fill the rest of the available space (277 mm -/- cell widths)
       $this->Cell(0, 5, '', 'L', 1, 'C', true);
     }
 
-    public function InvoiceTableContents($date, $employee_name, $activity_amount, $units_name = '', $tariff = 0.00, $travel_distance = 0, $expenses = 0.00, $ticket_number = '', $total_value = 0.00) {
+    public function InvoiceTableContents($date, $employee_name, $activity_amount, $units_name = '', $tariff = 0.00, $travel_distance = 0, $expenses = 0.00, $ticket_number = '', $total_value = 0.00, $comment = '') {
       $this->SetFont('Arial', '', 10);
       $this->Cell(20, 5, tep_strftime(DATE_FORMAT_SHORT, $date), 0, 0, 'C');
       if (!$this->per_employee) {
         $this->Cell(50, 5, $employee_name);
       }
       $this->Cell(20, 5, tep_number_db_to_user($activity_amount, 2), 0, 0, 'R');
-      if (!$this->per_employee) {
-        $this->Cell(64, 5);
-        if ($this->show_tariff) {
-          $this->Cell(22, 5, tep_number_db_to_user($tariff, 2), 0, 0, 'R');
-        }
+      if (!$this->per_employee && $this->show_tariff) {
+        $this->Cell(22, 5, tep_number_db_to_user($tariff, 2), 0, 0, 'R');
       }
       if ($this->show_travel_distance) {
         $this->Cell(22, 5, $travel_distance, 0, 0, 'R');
@@ -134,6 +132,9 @@
       if ($this->show_tariff) {
         $this->Cell(22, 5, tep_number_db_to_user($total_value, 2), 0, 0, 'R');
       }
+      if ($this->show_comment) {
+        $this->Cell(0, 5, $comment);
+      }
       $this->Ln();
     }
 
@@ -145,6 +146,9 @@
         $this->Cell(50, 5);
       }
       $this->Cell(20, 5, tep_number_db_to_user($total_amount, 2), 'T', 0, 'R');
+      if (!$this->per_employee && $this->show_tariff) {
+        $this->Cell(22, 5);
+      }
       if ($this->show_travel_distance) {
         $this->Cell(22, 5, $total_travel_distance, 'T', 0, 'R');
       }
@@ -167,7 +171,7 @@
       $signature_height = 41; // Keep a margin of 8
       $x_pos = $this->w - $this->rMargin - $signature_width;
       // Determine if the signature cells fit on the page
-      if (($this->h - $this->x - $this->bMargin) < $signature_height) {
+      if (($this->h - ($this->CurOrientation=='P'?$this->x:$this->y) - $this->bMargin) < $signature_height) {
         $this->AddPage();
         // Refer to previous page
       }
