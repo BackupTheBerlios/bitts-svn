@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 01 december 2008
+ * Date        : 05 december 2008
  * Description : English language file
  */
 
@@ -55,6 +55,7 @@ define('HEADER_INFO_UNCONFIRMED_PERIOD', 'The timesheet for period %s has not be
 define('HEADER_TEXT_CURRENT_USER', 'Curent user : ');
 define('HEADER_TEXT_NO_CURRENT_USER', 'Not logged in!');
 define('HEADER_TEXT_YOUR_DATA', 'Your data');
+define('HEADER_TEXT_CURRENT_PROJECTS', 'Current projects');
 define('HEADER_TEXT_LOGIN', 'Log in');
 define('HEADER_TEXT_LOGOUT', 'Log out');
 define('HEADER_TEXT_TIMEREGISTRATION', 'Time registration');
@@ -82,6 +83,7 @@ define('BODY_TEXT_IS_ANALYST', 'Is reporter');
 define('BODY_TEXT_IS_ADMINISTRATOR', 'Is admin');
 define('BODY_TEXT_YES', 'Yes');
 define('BODY_TEXT_NO', 'No');
+define('BODY_TEXT_NOT_APPLICABLE', 'n/a');
 $LOGIN_ERROR_LEVEL = array (0 => '',
                             1 => 'Login failed',
                             2 => 'Passwords do not match',
@@ -97,6 +99,16 @@ define('TEXT_TIMEREGISTRATION_CONFIRM_QUESTION', 'Do you want to confirm this pe
 define('TEXT_TIMEREGISTRATION_CONFIRM_OK', 'Confirm OK');
 define('TEXT_TIMEREGISTRATION_CONFIRM_CANCEL', 'Cancel confirm');
 define('TEXT_TIMEREGISTRATION_CALENDAR_DESCRIPTION', 'Overview registered amounts per day:');
+
+define('TEXT_PROJECT_NAME', 'Project name');
+define('TEXT_PROJECT_START_DATE', 'Start date');
+define('TEXT_PROJECT_END_DATE', 'End date');
+define('TEXT_PROJECT_CALCULATED_HOURS', 'Calculated hours');
+define('TEXT_PROJECT_PERIOD', 'Calculation period');
+define('TEXT_PROJECT_PERIOD_BILLINGPERIOD', 'Per billing period');
+define('TEXT_PROJECT_PERIOD_ENTIREPROJECT', 'Entire project');
+define('TEXT_PROJECT_HOURS_USED', 'Used hours');
+define('TEXT_PROJECT_HOURS_USED_PERCENTAGE', 'Used hours (%)');
 
 define('TEXT_ACTIVITY_DAY', 'Day');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');

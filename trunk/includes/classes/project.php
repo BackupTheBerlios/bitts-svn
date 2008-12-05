@@ -3,7 +3,7 @@
  * CLASS FILE  : project.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 25 september 2008
+ * Date        : 05 december 2008
  * Description : Project class
  */
 
@@ -92,6 +92,50 @@
       $project_query = $database->query("select projects_name from " . TABLE_PROJECTS . " where projects_id = '" . $project_id . "'");
       $project_result = $database->fetch_array($project_query);
       return $project_result['projects_name'];
+    }
+    
+    public static function get_project_listing($date = 0) {
+      $project_array = array();
+      if ($date == 0) {
+        $date = mktime();
+      }
+      $database = $_SESSION['database'];
+      $project_query = $database->query("SELECT projects_id,projects_name,projects_start_date,projects_end_date,projects_calculated_hours,projects_calculated_hours_period," .
+          "(SELECT IFNULL(SUM(activities_amount),0) " .
+          "FROM " . TABLE_ACTIVITIES . " " .
+          "LEFT JOIN (" . TABLE_TIMESHEETS . "," . TABLE_TARIFFS . "," . TABLE_EMPLOYEES_ROLES . "," . TABLE_ROLES . ") " .
+          "ON (" . TABLE_ACTIVITIES . ".timesheets_id=" . TABLE_TIMESHEETS . ".timesheets_id " .
+            "AND " . TABLE_ACTIVITIES . ".tariffs_id=" . TABLE_TARIFFS . ".tariffs_id " .
+            "AND " . TABLE_TARIFFS . ".employees_roles_id=" . TABLE_EMPLOYEES_ROLES . ".employees_roles_id " .
+            "AND " . TABLE_EMPLOYEES_ROLES . ".roles_id=" . TABLE_ROLES . ".roles_id) " .
+          "WHERE " . TABLE_TIMESHEETS . ".timesheets_start_date<='" . tep_strftime(DATE_FORMAT_DATABASE, $date) . "' " .
+            "AND " . TABLE_TIMESHEETS . ".timesheets_end_date>='" . tep_strftime(DATE_FORMAT_DATABASE, $date) . "' " .
+            "AND " . TABLE_ROLES . ".projects_id=" . TABLE_PROJECTS . ".projects_id) AS projects_calculated_hours_used " .
+        "FROM " . TABLE_PROJECTS . " " .
+        "WHERE projects_start_date<='" . tep_strftime(DATE_FORMAT_DATABASE, $date) . "' " .
+          "AND projects_end_date>='" . tep_strftime(DATE_FORMAT_DATABASE, $date) . "' " .
+          "AND (projects_calculated_hours=0 " .
+          "OR (projects_calculated_hours>0 " .
+          "AND projects_calculated_hours_period='B')) " .
+        "UNION " .
+        "SELECT projects_id,projects_name,projects_start_date,projects_end_date,projects_calculated_hours,projects_calculated_hours_period," .
+          "(SELECT IFNULL(SUM(activities_amount),0) " .
+          "FROM " . TABLE_ACTIVITIES . " " .
+          "LEFT JOIN (" . TABLE_TARIFFS . "," . TABLE_EMPLOYEES_ROLES . "," . TABLE_ROLES . ") " .
+          "ON (" . TABLE_ACTIVITIES . ".tariffs_id=" . TABLE_TARIFFS . ".tariffs_id " .
+            "AND " . TABLE_TARIFFS . ".employees_roles_id=" . TABLE_EMPLOYEES_ROLES . ".employees_roles_id " .
+            "AND " . TABLE_EMPLOYEES_ROLES . ".roles_id=" . TABLE_ROLES . ".roles_id) " .
+          "WHERE " . TABLE_ROLES . ".projects_id=" . TABLE_PROJECTS . ".projects_id) " .
+        "FROM " . TABLE_PROJECTS . " " .
+        "WHERE projects_start_date<='" . tep_strftime(DATE_FORMAT_DATABASE, $date) . "' " .
+          "AND projects_end_date>='" . tep_strftime(DATE_FORMAT_DATABASE, $date) . "' " .
+          "AND projects_calculated_hours>0 " .
+          "AND projects_calculated_hours_period='E' " .
+        "ORDER BY ((projects_calculated_hours_used*projects_calculated_hours)/((projects_calculated_hours*projects_calculated_hours)+0.001)) DESC,projects_name ASC");
+      while ($project_result = $database->fetch_array($project_query)) {
+        array_push($project_array, $project_result);
+      }
+      return $project_array;
     }
   }
 ?>

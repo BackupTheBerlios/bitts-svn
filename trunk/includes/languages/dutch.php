@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 01 december 2008
+ * Date        : 05 december 2008
  * Description : Dutch language file
  */
 
@@ -55,6 +55,7 @@ define('HEADER_INFO_UNCONFIRMED_PERIOD', 'De urenstaat voor periode %s is nog ni
 define('HEADER_TEXT_CURRENT_USER', 'Huidige gebruiker : ');
 define('HEADER_TEXT_NO_CURRENT_USER', 'Niet ingelogd!');
 define('HEADER_TEXT_YOUR_DATA', 'Uw gegevens');
+define('HEADER_TEXT_CURRENT_PROJECTS', 'Lopende projecten');
 define('HEADER_TEXT_LOGIN', 'Inloggen');
 define('HEADER_TEXT_LOGOUT', 'Uitloggen');
 define('HEADER_TEXT_TIMEREGISTRATION', 'Tijdregistratie');
@@ -82,6 +83,7 @@ define('BODY_TEXT_IS_ANALYST', 'Is rapporteur');
 define('BODY_TEXT_IS_ADMINISTRATOR', 'Is beheerder');
 define('BODY_TEXT_YES', 'Ja');
 define('BODY_TEXT_NO', 'Nee');
+define('BODY_TEXT_NOT_APPLICABLE', 'n.v.t.');
 $LOGIN_ERROR_LEVEL = array (0 => '',
                             1 => 'Inloggen mislukt',
                             2 => 'Wachtwoorden komen niet overeen',
@@ -97,6 +99,16 @@ define('TEXT_TIMEREGISTRATION_CONFIRM_QUESTION', 'Wilt u deze periode bevestigen
 define('TEXT_TIMEREGISTRATION_CONFIRM_OK', 'Bevestigen OK');
 define('TEXT_TIMEREGISTRATION_CONFIRM_CANCEL', 'Bevestigen annuleren');
 define('TEXT_TIMEREGISTRATION_CALENDAR_DESCRIPTION', 'Overzicht geboekte aantallen per dag:');
+
+define('TEXT_PROJECT_NAME', 'Project naam');
+define('TEXT_PROJECT_START_DATE', 'Start datum');
+define('TEXT_PROJECT_END_DATE', 'Eind datum');
+define('TEXT_PROJECT_CALCULATED_HOURS', 'Gebudgetteerde uren');
+define('TEXT_PROJECT_PERIOD', 'Meetperiode');
+define('TEXT_PROJECT_PERIOD_BILLINGPERIOD', 'Per billing periode');
+define('TEXT_PROJECT_PERIOD_ENTIREPROJECT', 'Volledig project');
+define('TEXT_PROJECT_HOURS_USED', 'Gebruikte uren');
+define('TEXT_PROJECT_HOURS_USED_PERCENTAGE', 'Gebruikte uren (%)');
 
 define('TEXT_ACTIVITY_DAY', 'Dag');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');

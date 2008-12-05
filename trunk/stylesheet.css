@@ -148,7 +148,20 @@ TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-e
   //background: #f0f0c0;
 }
 
-TABLE.activityListing, TABLE.calendar , TABLE.activity_entry, TABLE.report_listing{
+TR.projectListing-red {
+  background: #ff0000;
+}
+
+TR.projectListing-orange {
+  background: #ff7f00;
+}
+
+TR.projectListing-green {
+  //background: #f8f8f9;
+  background: #00ff00;
+}
+
+TABLE.projectListing, TABLE.activityListing, TABLE.calendar , TABLE.activity_entry, TABLE.report_listing{
   border: 1px;
   border-style: solid;
   border-color: #b6b7cb;
@@ -156,7 +169,7 @@ TABLE.activityListing, TABLE.calendar , TABLE.activity_entry, TABLE.report_listi
   border-spacing: 1px;
 }
 
-.activityListing-heading, .calendar-heading {
+.projectListing-heading, .activityListing-heading, .calendar-heading {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #b6b7cb;
@@ -165,7 +178,7 @@ TABLE.activityListing, TABLE.calendar , TABLE.activity_entry, TABLE.report_listi
   font-weight: bold;
 }
 
-TD.activityListing-data {
+TD.projectListing-data, TD.activityListing-data {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
 }

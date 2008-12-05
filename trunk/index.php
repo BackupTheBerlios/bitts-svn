@@ -3,7 +3,7 @@
  * CODE FILE   : index.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 september 2008
+ * Date        : 05 december 2008
  * Description : .....
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -40,9 +40,6 @@
                 </tr>
               </table>
             </td>
-          </tr>
-          <tr>
-            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '50'); ?></td>
           </tr>
           <tr>
             <td align="center">
@@ -86,6 +83,44 @@
                     </table>
                   </td>
                 </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td class="pageHeading"><?php echo HEADER_TEXT_CURRENT_PROJECTS; ?></td>
+                  <td class="pageHeading" align="right"><?php echo tep_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table border="0" width="100%" cellspacing="0" cellpadding="2" class="projectListing">
+                <tr>
+                  <td class="projectListing-heading"><?php echo TEXT_PROJECT_NAME; ?></td>
+                  <td class="projectListing-heading"><?php echo TEXT_PROJECT_START_DATE; ?></td>
+                  <td class="projectListing-heading"><?php echo TEXT_PROJECT_END_DATE; ?></td>
+                  <td class="projectListing-heading"><?php echo TEXT_PROJECT_CALCULATED_HOURS; ?></td>
+                  <td class="projectListing-heading"><?php echo TEXT_PROJECT_PERIOD; ?></td>
+                  <td class="projectListing-heading"><?php echo TEXT_PROJECT_HOURS_USED; ?></td>
+                  <td class="projectListing-heading"><?php echo TEXT_PROJECT_HOURS_USED_PERCENTAGE; ?></td>
+                </tr>
+                <?php $project_array = project::get_project_listing(mktime()); // Current date in Unix timestamp
+                for ($index = 0; $index < sizeof($project_array); $index++) {
+                  $projects_calculated_hours_used_percentage = ($project_array[$index]['projects_calculated_hours']!=0?round(($project_array[$index]['projects_calculated_hours_used']/$project_array[$index]['projects_calculated_hours'])*100).'%':BODY_TEXT_NOT_APPLICABLE); ?>
+                  <tr class="projectListing-<?php echo ($projects_calculated_hours_used_percentage>=100?'red':($projects_calculated_hours_used_percentage>=75?'orange':'green'));?>">
+                    <td class="projectListing-data"><?php echo $project_array[$index]['projects_name']; ?></td>
+                    <td class="projectListing-data"><?php echo tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($project_array[$index]['projects_start_date'])); ?></td>
+                    <td class="projectListing-data"><?php echo ($project_array[$index]['projects_end_date']!='2099-12-31'?tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($project_array[$index]['projects_end_date'])):BODY_TEXT_NOT_APPLICABLE); ?></td>
+                    <td class="projectListing-data"><?php echo ($project_array[$index]['projects_calculated_hours']!=0?$project_array[$index]['projects_calculated_hours']:BODY_TEXT_NOT_APPLICABLE); ?></td>
+                    <td class="projectListing-data"><?php echo ($project_array[$index]['projects_calculated_hours']!=0?($project_array[$index]['projects_calculated_hours_period']=='E'?TEXT_PROJECT_PERIOD_ENTIREPROJECT:TEXT_PROJECT_PERIOD_BILLINGPERIOD):BODY_TEXT_NOT_APPLICABLE); ?></td>
+                    <td class="projectListing-data"><?php echo tep_number_db_to_user($project_array[$index]['projects_calculated_hours_used'], 2); ?></td>
+                    <td class="projectListing-data"><?php echo $projects_calculated_hours_used_percentage; ?></td>
+                  </tr>
+                <?php } ?>
               </table>
             </td>
           </tr>
