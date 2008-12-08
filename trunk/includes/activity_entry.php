@@ -3,7 +3,7 @@
  * CODE FILE   : activity_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 september 2008
+ * Date        : 08 december 2008
  * Description : Activity entry fields
  *               Data validation sequence
  *               Storing of entered data (via timesheet object)
@@ -32,6 +32,12 @@ if ($_POST['action'] == 'save_data') {
     $error_level = 6;
   } else if (activity::ticket_entry_is_required($_POST['tariffs_id']) && !tep_not_null($_POST['activity_ticket_number'])) { // no ticket number when required
     $error_level = 7;
+  } else if (!project::hours_fit_in_calculated_amount($_POST['projects_id'], activity::format('amount', $_POST['activity_amount'])-$_POST['original_activity_amount'], $_POST['selected_date']) && ($_POST['error_level_history']!=32 || $_POST['previous_activity_amount']!=activity::format('amount', $_POST['activity_amount']))) {
+    // Exceeding calculated hours, the definite value is calculated by subtracting the original value
+    // (original_activity_amount, only available when editing an existing activity) from the entered value.
+    // When OK-ing the 2nd time (error_level_history==32) without changing the activity_amount value
+    // (tested with previous_activity_amount), the entry will be saved.
+    $error_level = 32;
   } else {
     // OK, entry can be saved
     $_SESSION['timesheet']->save_activity($_POST['activity_id'],
@@ -54,7 +60,9 @@ if ($_POST['action'] == 'save_data') {
     // update the activity listing below
     $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, $_POST['period']);
   }
-} ?>
+}
+$_POST['error_level_history'] = $error_level;
+$_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity_amount']); ?>
   <!-- activity_entry //-->
   <table border="0" cellspacing="0" cellpadding="2">
     <tr>
@@ -68,7 +76,7 @@ if ($_POST['action'] == 'save_data') {
         <table border="0" cellspacing="0" cellpadding="2" width="250" class="activity_entry">
           <?php if ($error_level > 0) { ?>
             <tr>
-              <td class="activity_error" colspan="2">
+              <td class="activity_error_<?php echo ($error_level<32?'high':'middle'); ?>" colspan="2">
                 <?php echo $ACTIVITY_ERROR_LEVEL[$error_level]; ?>
               </td>
             </tr>
@@ -111,7 +119,7 @@ if ($_POST['action'] == 'save_data') {
             </td>
           </tr>
           <?php if ($_POST['action']=='enter_data'||$_POST['action']=='save_data') {
-            echo tep_draw_form('activity_entry', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'save_data'), array('mPath','period','selected_date','projects_id','roles_id', 'activity_id'), 'hidden_field');
+            echo tep_draw_form('activity_entry', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'save_data'), array('mPath','period','selected_date','projects_id','roles_id', 'activity_id', 'error_level_history', 'previous_activity_amount', 'original_activity_amount'), 'hidden_field');
           } ?>
           <tr>
             <td class="activity_entry">

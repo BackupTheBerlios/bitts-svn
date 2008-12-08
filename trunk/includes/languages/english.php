@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 05 december 2008
+ * Date        : 08 december 2008
  * Description : English language file
  */
 
@@ -124,14 +124,17 @@ define('TEXT_ACTIVITY_DELETE', 'Delete');
 define('TEXT_ACTIVITY_DELETE_QUESTION', 'Do you want to delete the activity above?');
 define('TEXT_ACTIVITY_DELETE_OK', 'Delete OK');
 define('TEXT_ACTIVITY_DELETE_CANCEL', 'Cancel delete');
-$ACTIVITY_ERROR_LEVEL = array (0 => '',
-                               1 => 'No project selected',
-                               2 => 'No role selected',
-                               3 => 'Incorrect amount',
-                               4 => 'No unit selected',
-                               5 => 'Incorrect travel distance',
-                               6 => 'Incorrect expenses',
-                               7 => 'Ticket nr. is mandatory');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$ACTIVITY_ERROR_LEVEL = array (0  => '',
+                               1  => 'No project selected',
+                               2  => 'No role selected',
+                               3  => 'Incorrect amount',
+                               4  => 'No unit selected',
+                               5  => 'Incorrect travel distance',
+                               6  => 'Incorrect expenses',
+                               7  => 'Ticket nr. is mandatory',
+                               32 => 'Exceeding calculated hours');
 
 define('TEXT_CALENDAR_MONDAY', 'm');
 define('TEXT_CALENDAR_TUESDAY', 't');

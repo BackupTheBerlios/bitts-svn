@@ -3,7 +3,7 @@
  * CLASS FILE  : activity.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 04 september 2008
+ * Date        : 08 december 2008
  * Description : Activity class
  *
  */
@@ -121,7 +121,7 @@
       return false;
     }
 
-    private function format($name, $value) {
+    public static function format($name, $value) {
       // Format the string
       $value = str_replace(",", ".", $value);
       switch ($name) {
