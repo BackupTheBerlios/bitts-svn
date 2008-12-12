@@ -3,7 +3,7 @@
  * CLASS FILE  : tariff.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 25 september 2008
+ * Date        : 12 december 2008
  * Description : Tariff class
  *               .....
  */
@@ -70,16 +70,18 @@
       return $this->employee_role_id;
     }
 
-    public static function get_selectable_tariffs($employee_id = 0, $role_id = 0) {
+    public static function get_selectable_tariffs($employee_id = 0, $date = '0000-00-00', $role_id = 0) {
       $tariff_array = array();
       $database = $_SESSION['database'];
       // Create query
-      $tariff_query = 'select tariffs_id, tariffs_amount, units_name, units_description from ' . TABLE_TARIFFS . ', ' . TABLE_UNITS . ', ' . TABLE_EMPLOYEES_ROLES;
-      $tariff_query .= ' where ' . TABLE_TARIFFS . '.units_id = ' . TABLE_UNITS . '.units_id';
-      $tariff_query .= ' and ' . TABLE_TARIFFS . '.employees_roles_id = ' . TABLE_EMPLOYEES_ROLES . '.employees_roles_id';
-      $tariff_query .= ' and ' . TABLE_EMPLOYEES_ROLES . '.employees_id = ' . $employee_id;
-      $tariff_query .= ' and ' . TABLE_EMPLOYEES_ROLES . '.roles_id = ' . $role_id;
-      $tariff_query .= ' order by units_name';
+      $tariff_query = "select tariffs_id, tariffs_amount, units_name, units_description from " . TABLE_TARIFFS . ", " . TABLE_UNITS . ", " . TABLE_EMPLOYEES_ROLES;
+      $tariff_query .= " where " . TABLE_TARIFFS . ".units_id = " . TABLE_UNITS . ".units_id";
+      $tariff_query .= " and " . TABLE_TARIFFS . ".employees_roles_id = " . TABLE_EMPLOYEES_ROLES . ".employees_roles_id";
+      $tariff_query .= " and " . TABLE_EMPLOYEES_ROLES . ".employees_id = " . $employee_id;
+      $tariff_query .= " and " . TABLE_EMPLOYEES_ROLES . ".roles_id = " . $role_id;
+      $tariff_query .= " and " . TABLE_TARIFFS . ".tariffs_start_date <= '" . $date . "'";
+      $tariff_query .= " and " . TABLE_TARIFFS . ".tariffs_end_date >= '" . $date . "'";
+      $tariff_query .= " order by units_name";
       // Prepare query
       $tariff_query = $database->query($tariff_query);        
       // Execute query and read the contents

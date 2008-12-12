@@ -3,7 +3,7 @@
  * CODE FILE   : activity_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 08 december 2008
+ * Date        : 12 december 2008
  * Description : Activity entry fields
  *               Data validation sequence
  *               Storing of entered data (via timesheet object)
@@ -128,7 +128,7 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
             <td class="activity_entry">
               <?php echo tep_draw_input_field('activity_amount', '', 'size="1" maxlength="6" style="width: 20%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled'));
               if ($_POST['action']=='enter_data'||$_POST['action']=='save_data') {
-                echo tep_html_select('tariffs_id', tep_get_partial_array(tariff::get_selectable_tariffs($_SESSION['employee']->employee_id, $_POST['roles_id']), 'tariffs_id', 'units_name'), TRUE, $_POST['tariffs_id'], 'size="1" style="width: 80%"');
+                echo tep_html_select('tariffs_id', tep_get_partial_array(tariff::get_selectable_tariffs($_SESSION['employee']->employee_id, tep_strftime('%Y-%m-%d', $_POST['selected_date']), $_POST['roles_id']), 'tariffs_id', 'units_name'), TRUE, $_POST['tariffs_id'], 'size="1" style="width: 80%"');
               } else {
                 echo tep_html_select('tariffs_id', array(), FALSE, 0, 'size="1" style="width: 80%"');
               }
