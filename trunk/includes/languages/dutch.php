@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 08 december 2008
+ * Date        : 06 january 2009
  * Description : Dutch language file
  */
 
@@ -120,6 +120,7 @@ define('TEXT_ACTIVITY_EXPENSES', 'Onkosten (&euro;)');
 define('TEXT_ACTIVITY_TICKETNUMBER', 'Ticket nr.');
 define('TEXT_ACTIVITY_COMMENT', 'Opmerkingen');
 define('TEXT_ACTIVITY_EDIT', 'Wijzigen');
+define('TEXT_ACTIVITY_COPY', 'Laatste activiteit van vorige (werk-)dag kopi&euml;ren');
 define('TEXT_ACTIVITY_DELETE', 'Verwijderen');
 define('TEXT_ACTIVITY_DELETE_QUESTION', 'Wilt u bovenstaande activiteit verwijderen?');
 define('TEXT_ACTIVITY_DELETE_OK', 'Verwijderen OK');
@@ -134,7 +135,9 @@ $ACTIVITY_ERROR_LEVEL = array (0  => '',
                                5  => 'Reisafstand onjuist',
                                6  => 'Onkosten onjuist',
                                7  => 'Ticket nr. is verplicht',
-                               32 => 'Overschrijding gebudgetteerde uren');
+                               32 => 'Overschrijding gebudgetteerde uren',
+                               33 => 'Activiteit niet geldig op geselecteerde datum',
+                               64 => 'Geen bruikbare gegevens beschikbaar');
 
 define('TEXT_CALENDAR_MONDAY', 'm');
 define('TEXT_CALENDAR_TUESDAY', 'd');

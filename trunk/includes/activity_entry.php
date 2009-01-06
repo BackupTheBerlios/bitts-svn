@@ -3,7 +3,7 @@
  * CODE FILE   : activity_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 12 december 2008
+ * Date        : 06 january 2009
  * Description : Activity entry fields
  *               Data validation sequence
  *               Storing of entered data (via timesheet object)
@@ -11,6 +11,34 @@
 
 // When action==save_data: verify entered data and save if OK / set errorlevel when NOK
 $error_level = 0;
+if ($_POST['action'] == 'copy_activity') {
+  $former_activity_id = $_SESSION['timesheet']->get_former_activity_id($_SESSION['employee']->employee_id, $_POST['selected_date']);
+  switch ($former_activity_id) {
+    case -1:
+      // Activity data cannot be used on the selected date
+      // Set errorlevel and continue as if the date has just been selected
+      $_POST['action'] = 'select_project';
+      $error_level = 33;
+      break;
+    case 0:
+      // No activity data available
+      $_POST['action'] = 'select_project';
+      $error_level = 64;
+      break;
+    default:
+      // Retrieve activity details
+      $_POST['activity_id'] = 0;
+      $_POST['projects_id'] = $_SESSION['timesheet']->former_activity->project_id;
+      $_POST['roles_id'] = $_SESSION['timesheet']->former_activity->role_id;
+      $_POST['activity_amount'] = tep_number_db_to_user($_SESSION['timesheet']->former_activity->amount, 2);
+      $_POST['tariffs_id'] = $_SESSION['timesheet']->former_activity->tariff->tariff_id;
+      $_POST['activity_travel_distance'] = "" . $_SESSION['timesheet']->former_activity->travel_distance;
+      $_POST['activity_expenses'] = tep_number_db_to_user($_SESSION['timesheet']->former_activity->expenses, 2);
+      $_POST['activity_ticket_number'] = $_SESSION['timesheet']->former_activity->ticket_number;
+      $_POST['activity_comment'] = $_SESSION['timesheet']->former_activity->comment;
+      $_POST['action'] = 'enter_data';
+  }
+}
 if ($_POST['action'] == 'save_data') {
   // Check for data format and required fields
   // change action when not everything is filled-in
@@ -67,7 +95,24 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
   <table border="0" cellspacing="0" cellpadding="2">
     <tr>
       <td valign="top">
-        <?php require(DIR_WS_INCLUDES . 'calendar.php'); ?>
+        <table border="0" cellspacing="0" cellpadding="2">
+          <tr>
+            <td><?php require(DIR_WS_INCLUDES . 'calendar.php'); ?></td>
+          </tr>
+          <tr>
+            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?></td>
+          </tr>
+          <tr>
+            <td align="center">
+              <?php if ($_POST['selected_date']!='' && true) {
+                echo tep_draw_form('activity_copy', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'copy_activity'), array('mPath', 'period', 'selected_date', 'activity_id'), 'hidden_field');
+                echo tep_image_submit('button_copy.gif', TEXT_ACTIVITY_COPY);
+                echo '</form>';
+              } else {
+                echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_copy_disabled.gif');
+              } ?>
+            </td>
+        </table>
       </td>
       <td>
         <?php echo tep_draw_separator('pixel_trans.gif', '10'); ?>

@@ -3,7 +3,7 @@
  * CLASS FILE  : activity.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 08 december 2008
+ * Date        : 06 january 2009
  * Description : Activity class
  *
  */
@@ -176,6 +176,58 @@
       $activity_query = $database->query("delete from " . TABLE_ACTIVITIES . " where activities_id = '" . (int)$this->activity_id . "'");
       // Reset id, otherwise one might think this activity (still) exists in db
       $this->activity_id = 0;
+    }
+
+    public static function get_former_activity_id($employee_id, $selected_date = null) {
+      $db_date = tep_strftime(DATE_FORMAT_DATABASE, $selected_date);
+      $database = $_SESSION['database'];
+
+      $activity_query = $database->query("SELECT a.activities_id, a.tariffs_id" .
+                                         " FROM " . TABLE_ACTIVITIES . " AS a, " . TABLE_TIMESHEETS . " AS t" .
+                                         " WHERE a.timesheets_id = t.timesheets_id" . 
+                                         " AND t.employees_id = '" . $employee_id . "'" .
+                                         " AND a.activities_date < '" . $db_date . "'" .
+                                         " ORDER BY a.activities_date DESC, a.activities_id DESC");
+      $activity_result = $database->fetch_array($activity_query);
+
+      if (tep_not_null($activity_result)) {
+        // There is a resultset, keep the activity_id for now and
+        // check if the activity is valid for the given employee and date
+        $former_activity_id = $activity_result['activities_id'];
+        $tariffs_id = $activity_result['tariffs_id'];
+
+        // The complicated way: check the entire tree for validation
+        /* $activity_query = $database->query("SELECT 1" .
+                                           " FROM " . TABLE_PROJECTS . " AS p, " . TABLE_ROLES . " AS r, " . TABLE_EMPLOYEES_ROLES . " AS er, " . TABLE_TARIFFS . " AS t" .
+                                           " WHERE p.projects_id = r.projects_id" .
+                                           " AND r.roles_id = er.roles_id" .
+                                           " AND er.employees_roles_id = t.employees_roles_id" .
+                                           " AND er.employees_id = '" . $employee_id . "'" .
+                                           " AND t.tariffs_id = '" . $tariffs_id . "'" .
+                                           " AND p.projects_start_date <= '" . $db_date . "'" .
+                                           " AND p.projects_end_date >= '" . $db_date . "'" .
+                                           " AND er.employees_roles_start_date <= '" . $db_date . "'" .
+                                           " AND er.employees_roles_end_date >= '" . $db_date . "'" .
+                                           " AND t.tariffs_start_date <= '" . $db_date . "'" .
+                                           " AND t.tariffs_end_date >= '" . $db_date . "'"); */
+        // The easy way: just validate against the obtained tariffs_id
+        $activity_query = $database->query("SELECT 1" .
+                                           " FROM " . TABLE_TARIFFS . " AS t" .
+                                           " WHERE t.tariffs_id = '" . $tariffs_id . "'" .
+                                           " AND t.tariffs_start_date <= '" . $db_date . "'" .
+                                           " AND t.tariffs_end_date >= '" . $db_date . "'");
+        $activity_result = $database->fetch_array($activity_query);
+        if (tep_not_null($activity_result)) {
+          // Activity is valid for given employee and date
+          return $former_activity_id;
+        } else {
+          // Activity is not valid for given employee and date
+          return -1;
+        }
+      } else {
+        // No former activity exists
+        return 0;
+      }
     }
   }
 ?>

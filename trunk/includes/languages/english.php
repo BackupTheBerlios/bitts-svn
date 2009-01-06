@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 08 december 2008
+ * Date        : 06 january 2009
  * Description : English language file
  */
 
@@ -120,6 +120,7 @@ define('TEXT_ACTIVITY_EXPENSES', 'Expenses (&euro;)');
 define('TEXT_ACTIVITY_TICKETNUMBER', 'Ticket nr.');
 define('TEXT_ACTIVITY_COMMENT', 'Remarks');
 define('TEXT_ACTIVITY_EDIT', 'Edit');
+define('TEXT_ACTIVITY_COPY', 'Copy last activity of previous (work-)day');
 define('TEXT_ACTIVITY_DELETE', 'Delete');
 define('TEXT_ACTIVITY_DELETE_QUESTION', 'Do you want to delete the activity above?');
 define('TEXT_ACTIVITY_DELETE_OK', 'Delete OK');
@@ -134,7 +135,9 @@ $ACTIVITY_ERROR_LEVEL = array (0  => '',
                                5  => 'Incorrect travel distance',
                                6  => 'Incorrect expenses',
                                7  => 'Ticket nr. is mandatory',
-                               32 => 'Exceeding calculated hours');
+                               32 => 'Exceeding calculated hours',
+                               33 => 'Activity not valid on selected date',
+                               64 => 'No usable data available');
 
 define('TEXT_CALENDAR_MONDAY', 'm');
 define('TEXT_CALENDAR_TUESDAY', 't');

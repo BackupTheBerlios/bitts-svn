@@ -3,13 +3,13 @@
  * CLASS FILE  : timesheet.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 september 2008
+ * Date        : 06 january 2009
  * Description : Timesheet class
  *
  */
 
   class timesheet {
-    private $timesheet_id, $start_date, $end_date, $locked, $employee_id, $activities;
+    private $timesheet_id, $start_date, $end_date, $locked, $employee_id, $activities, $former_activity;
 
     public function __construct($timesheet_id = 0, $employee_id = 0, $period = null) {
       $database = $_SESSION['database'];
@@ -79,6 +79,8 @@
             $total_expenses += $this->activities[$index]->expenses;
           }
           return $total_expenses;
+        case 'former_activity':
+          return $this->former_activity;
       }
       return null;
     }
@@ -154,6 +156,21 @@
       } else {
         return null;
       }
+    }
+
+    public function get_former_activity_id($employee_id, $selected_date = null) {
+      if (!tep_not_null($selected_date)) {
+        $selected_date = time();
+      }
+      $former_activity_id = activity::get_former_activity_id($employee_id, $selected_date);
+      if ($former_activity_id <= 0) {
+        // No activity exists or activity not valid for given employee & date
+        $this->former_activity = null;
+      } else {
+        // Activity exists and is valid for given employee and date
+        $this->former_activity = new activity($former_activity_id);
+      }
+      return $former_activity_id;
     }
   }
 ?>
