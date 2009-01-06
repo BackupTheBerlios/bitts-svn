@@ -251,6 +251,15 @@ TD.login_error {
   text-align : center;
 }
 
+TD.activity_error_low {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background: #00ff00;
+  color: #ffffff;
+  font-weight : bold;
+  text-align : center;
+}
+
 TD.activity_error_middle {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;

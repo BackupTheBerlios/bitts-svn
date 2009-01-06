@@ -104,7 +104,7 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
           </tr>
           <tr>
             <td align="center">
-              <?php if ($_POST['selected_date']!='' && true) {
+              <?php if ($_POST['selected_date']!='') {
                 echo tep_draw_form('activity_copy', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'copy_activity'), array('mPath', 'period', 'selected_date', 'activity_id'), 'hidden_field');
                 echo tep_image_submit('button_copy.gif', TEXT_ACTIVITY_COPY);
                 echo '</form>';
@@ -121,7 +121,7 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
         <table border="0" cellspacing="0" cellpadding="2" width="250" class="activity_entry">
           <?php if ($error_level > 0) { ?>
             <tr>
-              <td class="activity_error_<?php echo ($error_level<32?'high':'middle'); ?>" colspan="2">
+              <td class="activity_error_<?php echo ($error_level<64?($error_level<32?'high':'middle'):'low'); ?>" colspan="2">
                 <?php echo $ACTIVITY_ERROR_LEVEL[$error_level]; ?>
               </td>
             </tr>
