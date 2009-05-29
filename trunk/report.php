@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 01 december 2008
+ * Date        : 29 may 2009
  * Description : Data gathering and reporting functions
  */
 
@@ -129,8 +129,7 @@
       if ($_POST['per_employee']) {
         $projects_query_string .= 'ORDER BY cus.customers_id, pr.projects_id, rl.roles_id, emp.employees_id, units.units_id, act.activities_date';
       } else {
-        // Needs some work
-        $projects_query_string .= 'ORDER BY cus.customers_id, pr.projects_id, rl.roles_id, act.activities_date, emp.employees_id, units.units_id';
+        $projects_query_string .= 'ORDER BY cus.customers_id, pr.projects_id, rl.roles_id, units.units_id, act.activities_date, emp.employees_id';
       }
       $projects_query = $database->query($projects_query_string);
       $projects_array = array();
