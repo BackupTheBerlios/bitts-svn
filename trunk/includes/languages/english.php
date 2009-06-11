@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 06 january 2009
+ * Date        : 11 june 2009
  * Description : English language file
  */
 
@@ -69,9 +69,16 @@ define('BOX_MAINMENU_TIMEREGISTRATION', 'Time registration');
 define('BOX_MAINMENU_TIMEREGISTRATION_CALENDAR', 'Calendar');
 define('BOX_MAINMENU_ANALYSIS', 'Reports');
 define('BOX_MAINMENU_ADMINISTRATION', 'Admin');
-define('BOX_MAINMENU_ADMINISTRATION_PROJECTS', 'Manage projects');
-define('BOX_MAINMENU_ADMINISTRATION_CUSTOMERS', 'Manage customers');
-define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES', 'Manage employees');
+define('BOX_MAINMENU_ADMINISTRATION_CUSTOMERS', 'Customers');
+define('BOX_MAINMENU_ADMINISTRATION_BUSINESS_UNITS', 'Business Units');
+define('BOX_MAINMENU_ADMINISTRATION_PROJECTS', 'Projects');
+define('BOX_MAINMENU_ADMINISTRATION_CATEGORIES', 'Categories');
+define('BOX_MAINMENU_ADMINISTRATION_ROLES', 'Roles');
+define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES', 'Employees');
+define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES_ROLES', 'Employees-Roles');
+define('BOX_MAINMENU_ADMINISTRATION_UNITS', 'Units');
+define('BOX_MAINMENU_ADMINISTRATION_TARIFFS', 'Tariffs');
+define('BOX_MAINMENU_ADMINISTRATION_TIMESHEETS', 'Timesheets');
 
 define('BODY_TEXT_LOGIN', 'Login');
 define('BODY_TEXT_PASSWORD', 'Password');
@@ -205,6 +212,13 @@ define('REPORT_TABLE_HEADER_TOTAL', 'Total');
 define('REPORT_TABLE_HEADER_COMMENT', 'Comment');
 
 define('EXPORT_NAME_ACTIVITIES', 'Export activities');
+
+define('TEXT_CUSTOMER_NUMBER', 'Customernr');
+define('TEXT_CUSTOMER_NAME', 'Customer name');
+define('TEXT_CUSTOMER_BILLING_ADDRESS', 'Billing address');
+define('TEXT_CUSTOMER_BILLING_EMAIL', 'Billing e-mail');
+define('TEXT_CUSTOMER_BILLING_PHONE', 'Billing phone');
+define('TEXT_CUSTOMER_BILLING_FAX', 'Billing fax');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>

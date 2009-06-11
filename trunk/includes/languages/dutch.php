@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 06 january 2009
+ * Date        : 11 june 2009
  * Description : Dutch language file
  */
 
@@ -69,9 +69,16 @@ define('BOX_MAINMENU_TIMEREGISTRATION', 'Tijdregistratie');
 define('BOX_MAINMENU_TIMEREGISTRATION_CALENDAR', 'Kalender');
 define('BOX_MAINMENU_ANALYSIS', 'Rapportage');
 define('BOX_MAINMENU_ADMINISTRATION', 'Beheer');
-define('BOX_MAINMENU_ADMINISTRATION_PROJECTS', 'Beheer projecten');
-define('BOX_MAINMENU_ADMINISTRATION_CUSTOMERS', 'Beheer klanten');
-define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES', 'Beheer medewerkers');
+define('BOX_MAINMENU_ADMINISTRATION_CUSTOMERS', 'Debiteuren');
+define('BOX_MAINMENU_ADMINISTRATION_BUSINESS_UNITS', 'Business Units');
+define('BOX_MAINMENU_ADMINISTRATION_PROJECTS', 'Projecten');
+define('BOX_MAINMENU_ADMINISTRATION_CATEGORIES', 'Categorie&euml;n');
+define('BOX_MAINMENU_ADMINISTRATION_ROLES', 'Rollen');
+define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES', 'Medewerkers');
+define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES_ROLES', 'Medewerker-Rollen');
+define('BOX_MAINMENU_ADMINISTRATION_UNITS', 'Eenheden');
+define('BOX_MAINMENU_ADMINISTRATION_TARIFFS', 'Tarieven');
+define('BOX_MAINMENU_ADMINISTRATION_TIMESHEETS', 'Timesheets');
 
 define('BODY_TEXT_LOGIN', 'Login');
 define('BODY_TEXT_PASSWORD', 'Wachtwoord');
@@ -205,6 +212,13 @@ define('REPORT_TABLE_HEADER_TOTAL', 'Totaal');
 define('REPORT_TABLE_HEADER_COMMENT', 'Opmerkingen');
 
 define('EXPORT_NAME_ACTIVITIES', 'Export activiteiten');
+
+define('TEXT_CUSTOMER_NUMBER', 'Debiteurnr');
+define('TEXT_CUSTOMER_NAME', 'Debiteur naam');
+define('TEXT_CUSTOMER_BILLING_ADDRESS', 'Factuuradres');
+define('TEXT_CUSTOMER_BILLING_EMAIL', 'Facturatie e-mail');
+define('TEXT_CUSTOMER_BILLING_PHONE', 'Facturatie telefoonnr');
+define('TEXT_CUSTOMER_BILLING_FAX', 'Facturatie faxnr');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>

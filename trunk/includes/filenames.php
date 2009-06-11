@@ -3,7 +3,7 @@
  * CODE FILE   : filenames.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 24 september 2008
+ * Date        : 11 june 2009
  * Description : Definitions of filenames
  * 
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -20,7 +20,14 @@
   define('FILENAME_REPORT', 'report.php');
   define('FILENAME_EXPORT', 'export.php');
   define('FILENAME_ADMINISTRATION', 'administration.php');
-  define('FILENAME_ADMINISTRATION_PROJECTS', 'administration_projects.php');
   define('FILENAME_ADMINISTRATION_CUSTOMERS', 'administration_customers.php');
+  define('FILENAME_ADMINISTRATION_BUSINESS_UNITS', 'administration_business_units.php');
+  define('FILENAME_ADMINISTRATION_PROJECTS', 'administration_projects.php');
+  define('FILENAME_ADMINISTRATION_CATEGORIES', 'administration_categories.php');
+  define('FILENAME_ADMINISTRATION_ROLES', 'administration_roles.php');
   define('FILENAME_ADMINISTRATION_EMPLOYEES', 'administration_employees.php');
+  define('FILENAME_ADMINISTRATION_EMPLOYEES_ROLES', 'administration_employees_roles.php');
+  define('FILENAME_ADMINISTRATION_UNITS', 'administration_units.php');
+  define('FILENAME_ADMINISTRATION_TARIFFS', 'administration_tariffs.php');
+  define('FILENAME_ADMINISTRATION_TIMESHEETS', 'administration_timesheets.php');
 ?>
