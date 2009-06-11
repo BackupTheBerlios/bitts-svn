@@ -62,6 +62,16 @@ define('HEADER_TEXT_TIMEREGISTRATION', 'Tijdregistratie');
 define('HEADER_TEXT_TIMEREGISTRATION_CALENDAR', 'Kalender');
 define('HEADER_TEXT_ANALYSIS', 'Rapportage');
 define('HEADER_TEXT_ADMINISTRATION', 'Beheer');
+define('HEADER_TEXT_ADMINISTRATION_CUSTOMERS', 'Beheer Debiteuren');
+define('HEADER_TEXT_ADMINISTRATION_BUSINESS_UNITS', 'Beheer Business Units');
+define('HEADER_TEXT_ADMINISTRATION_PROJECTS', 'Beheer Projecten');
+define('HEADER_TEXT_ADMINISTRATION_CATEGORIES', 'Beheer Categorie&euml;n');
+define('HEADER_TEXT_ADMINISTRATION_ROLES', 'Beheer Rollen');
+define('HEADER_TEXT_ADMINISTRATION_EMPLOYEES', 'Beheer Medewerkers');
+define('HEADER_TEXT_ADMINISTRATION_EMPLOYEES_ROLES', 'Beheer Medewerker-Rollen');
+define('HEADER_TEXT_ADMINISTRATION_UNITS', 'Beheer Eenheden');
+define('HEADER_TEXT_ADMINISTRATION_TARIFFS', 'Beheer Tarieven');
+define('HEADER_TEXT_ADMINISTRATION_TIMESHEETS', 'Beheer Timesheets');
 
 define('BOX_HEADING_MAINMENU', 'Menu');
 define('BOX_MAINMENU_HOME', 'Home');

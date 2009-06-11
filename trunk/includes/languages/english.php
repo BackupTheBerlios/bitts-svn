@@ -62,6 +62,16 @@ define('HEADER_TEXT_TIMEREGISTRATION', 'Time registration');
 define('HEADER_TEXT_TIMEREGISTRATION_CALENDAR', 'Calendar');
 define('HEADER_TEXT_ANALYSIS', 'Reports');
 define('HEADER_TEXT_ADMINISTRATION', 'Administration');
+define('HEADER_TEXT_ADMINISTRATION_CUSTOMERS', 'Administration Customers');
+define('HEADER_TEXT_ADMINISTRATION_BUSINESS_UNITS', 'Administration Business Units');
+define('HEADER_TEXT_ADMINISTRATION_PROJECTS', 'Administration Projects');
+define('HEADER_TEXT_ADMINISTRATION_CATEGORIES', 'Administration Categories');
+define('HEADER_TEXT_ADMINISTRATION_ROLES', 'Administration Roles');
+define('HEADER_TEXT_ADMINISTRATION_EMPLOYEES', 'Administration Employees');
+define('HEADER_TEXT_ADMINISTRATION_EMPLOYEES_ROLES', 'Administration Employees-Roles');
+define('HEADER_TEXT_ADMINISTRATION_UNITS', 'Administration Units');
+define('HEADER_TEXT_ADMINISTRATION_TARIFFS', 'Administration Tariffs');
+define('HEADER_TEXT_ADMINISTRATION_TIMESHEETS', 'Administration Timesheets');
 
 define('BOX_HEADING_MAINMENU', 'Menu');
 define('BOX_MAINMENU_HOME', 'Home');
