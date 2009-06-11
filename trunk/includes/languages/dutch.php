@@ -106,6 +106,12 @@ $LOGIN_ERROR_LEVEL = array (0 => '',
                             2 => 'Wachtwoorden komen niet overeen',
                             3 => 'Het wachtwoord mag niet leeg zijn');
 
+define('TEXT_ENTRY_EDIT', 'Wijzigen');
+define('TEXT_ENTRY_DELETE', 'Verwijderen');
+define('TEXT_ENTRY_DELETE_QUESTION', 'Wilt u bovenstaande regel verwijderen?');
+define('TEXT_ENTRY_DELETE_OK', 'Verwijderen OK');
+define('TEXT_ENTRY_DELETE_CANCEL', 'Verwijderen annuleren');
+
 define('TEXT_TIMEREGISTRATION_BACK', 'Periode terug');
 define('TEXT_TIMEREGISTRATION_PERIOD', 'Periode : ');
 define('TEXT_TIMEREGISTRATION_FORWARD', 'Periode vooruit');
@@ -136,12 +142,7 @@ define('TEXT_ACTIVITY_TRAVELDISTANCE', 'Reisafstand (km)');
 define('TEXT_ACTIVITY_EXPENSES', 'Onkosten (&euro;)');
 define('TEXT_ACTIVITY_TICKETNUMBER', 'Ticket nr.');
 define('TEXT_ACTIVITY_COMMENT', 'Opmerkingen');
-define('TEXT_ACTIVITY_EDIT', 'Wijzigen');
 define('TEXT_ACTIVITY_COPY', 'Laatste activiteit van vorige (werk-)dag kopi&euml;ren');
-define('TEXT_ACTIVITY_DELETE', 'Verwijderen');
-define('TEXT_ACTIVITY_DELETE_QUESTION', 'Wilt u bovenstaande activiteit verwijderen?');
-define('TEXT_ACTIVITY_DELETE_OK', 'Verwijderen OK');
-define('TEXT_ACTIVITY_DELETE_CANCEL', 'Verwijderen annuleren');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $ACTIVITY_ERROR_LEVEL = array (0  => '',
@@ -223,12 +224,13 @@ define('REPORT_TABLE_HEADER_COMMENT', 'Opmerkingen');
 
 define('EXPORT_NAME_ACTIVITIES', 'Export activiteiten');
 
-define('TEXT_CUSTOMER_NUMBER', 'Debiteurnr');
-define('TEXT_CUSTOMER_NAME', 'Debiteur naam');
-define('TEXT_CUSTOMER_BILLING_ADDRESS', 'Factuuradres');
-define('TEXT_CUSTOMER_BILLING_EMAIL', 'Facturatie e-mail');
-define('TEXT_CUSTOMER_BILLING_PHONE', 'Facturatie telefoonnr');
-define('TEXT_CUSTOMER_BILLING_FAX', 'Facturatie faxnr');
+define('TEXT_ADMINISTRATION_CUSTOMER_NUMBER', 'Debiteurnr');
+define('TEXT_ADMINISTRATION_CUSTOMER_NAME', 'Debiteur naam');
+define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_ADDRESS', 'Factuuradres');
+define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_EMAIL', 'Facturatie e-mail');
+define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_PHONE', 'Facturatie telefoonnr');
+define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_FAX', 'Facturatie faxnr');
+define('TEXT_ADMINISTRATION_CUSTOMERLISTING_IS_EMPTY', 'Geen debiteuren aanwezig');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>

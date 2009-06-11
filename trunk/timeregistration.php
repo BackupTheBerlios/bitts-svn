@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 08 december 2008
+ * Date        : 11 june 2009
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -128,56 +128,56 @@
           </tr>
           <tr>
             <td>
-              <table border="0" width="100%" cellspacing="0" cellpadding="2" class="activityListing">
+              <table border="0" width="100%" cellspacing="0" cellpadding="2" class="entryListing">
                 <tr>
-                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_DAY; ?></td>
-                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_PROJECTNAME . '<br>' . TEXT_ACTIVITY_ROLENAME; ?></td>
-                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_AMOUNT; ?></td>
-                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_UNIT; ?></td>
-                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_TRAVELDISTANCE; ?></td>
-                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_EXPENSES; ?></td>
-                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_TICKETNUMBER; ?></td>
-                  <td class="activityListing-heading"><?php echo TEXT_ACTIVITY_COMMENT; ?></td>
-                  <td width="20" class="activityListing-heading">&nbsp;</td>
-                  <td width="20" class="activityListing-heading">&nbsp;</td>
+                  <td class="entryListing-heading"><?php echo TEXT_ACTIVITY_DAY; ?></td>
+                  <td class="entryListing-heading"><?php echo TEXT_ACTIVITY_PROJECTNAME . '<br>' . TEXT_ACTIVITY_ROLENAME; ?></td>
+                  <td class="entryListing-heading"><?php echo TEXT_ACTIVITY_AMOUNT; ?></td>
+                  <td class="entryListing-heading"><?php echo TEXT_ACTIVITY_UNIT; ?></td>
+                  <td class="entryListing-heading"><?php echo TEXT_ACTIVITY_TRAVELDISTANCE; ?></td>
+                  <td class="entryListing-heading"><?php echo TEXT_ACTIVITY_EXPENSES; ?></td>
+                  <td class="entryListing-heading"><?php echo TEXT_ACTIVITY_TICKETNUMBER; ?></td>
+                  <td class="entryListing-heading"><?php echo TEXT_ACTIVITY_COMMENT; ?></td>
+                  <td width="20" class="entryListing-heading">&nbsp;</td>
+                  <td width="20" class="entryListing-heading">&nbsp;</td>
                 </tr>
                 <?php if (!$_SESSION['timesheet']->empty) {
                   $odd_or_even = "odd";
                   for ($index = 0; $index < sizeof($_SESSION['timesheet']->activities); $index++) { ?>
-                    <tr class="activityListing-<?php echo $odd_or_even; ?>">
-                      <td class="activityListing-data"><?php echo strftime('%d', $_SESSION['timesheet']->activities[$index]->date); ?></td>
-                      <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->project_name.'<br>'.$_SESSION['timesheet']->activities[$index]->role_name; ?></td>
-                      <td class="activityListing-data"><?php echo tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->amount, 2); ?></td>
-                      <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->unit_name; ?></td>
-                      <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->travel_distance; ?></td>
-                      <td class="activityListing-data"><?php echo tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->expenses, 2); ?></td>
-                      <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->ticket_number; ?></td>
-                      <td class="activityListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->comment; ?></td>
-                      <td align="center" width="20" class="activityListing-data">
+                    <tr class="entryListing-<?php echo $odd_or_even; ?>">
+                      <td class="entryListing-data"><?php echo strftime('%d', $_SESSION['timesheet']->activities[$index]->date); ?></td>
+                      <td class="entryListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->project_name.'<br>'.$_SESSION['timesheet']->activities[$index]->role_name; ?></td>
+                      <td class="entryListing-data"><?php echo tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->amount, 2); ?></td>
+                      <td class="entryListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->unit_name; ?></td>
+                      <td class="entryListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->travel_distance; ?></td>
+                      <td class="entryListing-data"><?php echo tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->expenses, 2); ?></td>
+                      <td class="entryListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->ticket_number; ?></td>
+                      <td class="entryListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->comment; ?></td>
+                      <td align="center" width="20" class="entryListing-data">
                       <?php if (!$_SESSION['timesheet']->locked) {
                         echo tep_draw_form('edit_activity', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'enter_data','selected_date'=>$_SESSION['timesheet']->activities[$index]->date,'projects_id'=>$_SESSION['timesheet']->activities[$index]->project_id,'roles_id'=>$_SESSION['timesheet']->activities[$index]->role_id, 'activity_id'=>$_SESSION['timesheet']->activities[$index]->activity_id, 'activity_amount'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->amount, 2), 'original_activity_amount'=>$_SESSION['timesheet']->activities[$index]->amount, 'tariffs_id'=>$_SESSION['timesheet']->activities[$index]->tariff->tariff_id, 'activity_travel_distance'=>"".$_SESSION['timesheet']->activities[$index]->travel_distance, 'activity_expenses'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->expenses, 2), 'activity_ticket_number'=>$_SESSION['timesheet']->activities[$index]->ticket_number, 'activity_comment'=>$_SESSION['timesheet']->activities[$index]->comment), array('mPath','period'), 'hidden_field');
-                        echo tep_image_submit('edit.gif', TEXT_ACTIVITY_EDIT,'',DIR_WS_IMAGES);
+                        echo tep_image_submit('edit.gif', TEXT_ENTRY_EDIT,'',DIR_WS_IMAGES);
                         echo '</form>';
                       } ?>
                       </td>
-                      <td align="center" width="20" class="activityListing-data">
+                      <td align="center" width="20" class="entryListing-data">
                       <?php if (!$_SESSION['timesheet']->locked) {
                         echo tep_draw_form('delete_activity', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'delete_activity', 'activity_id'=>$_SESSION['timesheet']->activities[$index]->activity_id), array('mPath','period'), 'hidden_field');
-                        echo tep_image_submit('delete.gif', TEXT_ACTIVITY_DELETE,'',DIR_WS_IMAGES);
+                        echo tep_image_submit('delete.gif', TEXT_ENTRY_DELETE,'',DIR_WS_IMAGES);
                         echo '</form>';
                       } ?>
                       </td>
                     </tr>
                     <?php if ($_POST['action']=='delete_activity' && $_POST['activity_id']==$_SESSION['timesheet']->activities[$index]->activity_id) { ?>
                       <!-- Show OK and Cancel buttons below the activity-to-be-deleted -->
-                      <tr class="activityListing-<?php echo $odd_or_even; ?>">
-                        <td align="right" valign="middle" class="activityListing-data" colspan="10">
-                          <?php echo TEXT_ACTIVITY_DELETE_QUESTION; ?>&nbsp;
+                      <tr class="entryListing-<?php echo $odd_or_even; ?>">
+                        <td align="right" valign="middle" class="entryListing-data" colspan="10">
+                          <?php echo TEXT_ENTRY_DELETE_QUESTION; ?>&nbsp;
                           <?php echo tep_draw_form('delete_activity_confirm', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'delete_activity_confirmed'), array('mPath','period', 'activity_id'), 'hidden_field');
-                            echo tep_image_submit('button_ok.gif', TEXT_ACTIVITY_DELETE_OK, 'style="vertical-align:middle"'); ?>
+                            echo tep_image_submit('button_ok.gif', TEXT_ENTRY_DELETE_OK, 'style="vertical-align:middle"'); ?>
                           </form>&nbsp;
                           <?php echo tep_draw_form('delete_activity_cancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period'), 'hidden_field');
-                            echo tep_image_submit('button_cancel.gif', TEXT_ACTIVITY_DELETE_CANCEL, 'style="vertical-align:middle"'); ?>
+                            echo tep_image_submit('button_cancel.gif', TEXT_ENTRY_DELETE_CANCEL, 'style="vertical-align:middle"'); ?>
                           </form>
                         </td>
                       </tr>
@@ -185,8 +185,8 @@
                     $odd_or_even = ($odd_or_even == 'odd'?'even':'odd');
                   }
                 } else { ?>
-                  <tr class="activityListing-odd">
-                    <td class="activityListing-data" colspan="10">
+                  <tr class="entryListing-odd">
+                    <td class="entryListing-data" colspan="10">
                       <?php echo TEXT_TIMEREGISTRATION_IS_EMPTY; ?>
                     </td>
                   </tr>
@@ -198,7 +198,7 @@
             <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
           </tr>
           <tr>
-            <td align="right" valign="middle" class="activityListing-data">
+            <td align="right" valign="middle" class="entryListing-data">
               <?php if (!$_SESSION['timesheet']->locked && $_POST['action']!='timesheet_to_be_confirmed') {
                 // Confirm button enabled
                 echo tep_draw_form('pre_confirm_timesheet', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'timesheet_to_be_confirmed'), array('mPath','period'), 'hidden_field');

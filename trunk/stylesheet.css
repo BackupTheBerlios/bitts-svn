@@ -12,9 +12,9 @@
 .boxTitle { font-family: Verdana, Arial, sans-serif; font-size: 11px; font-weight: bold; }
 .boxText { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 .errorBox { font-family : Verdana, Arial, sans-serif; font-size : 10px; background: #ffb3b5; font-weight: bold; }
-.stockWarning { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #cc0033; }
-.productsNotifications { background: #f2fff7; }
-.orderEdit { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #70d250; text-decoration: underline; }
+/*.stockWarning { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #cc0033; }*/
+/*.productsNotifications { background: #f2fff7; }*/
+/*.orderEdit { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #70d250; text-decoration: underline; }*/
 .submitLink { font: inherit; color: inherit; text-decoration: inherit; background-color: transparent; border: none; padding: 0px; cursor: pointer; cursor: hand; }
 
 BODY {
@@ -138,12 +138,12 @@ TD.infoBox, SPAN.infoBox {
 
 /*** Box (midden) met producten (2x; even & oneven) ***/
 
-TR.accountHistory-odd, TR.addressBook-odd, TR.alsoPurchased-odd, TR.payment-odd, TR.activityListing-odd, TR.productReviews-odd, TR.upcomingProducts-odd, TR.shippingOptions-odd {
+TR.accountHistory-odd, TR.addressBook-odd, TR.alsoPurchased-odd, TR.payment-odd, TR.entryListing-odd, TR.productReviews-odd, TR.upcomingProducts-odd, TR.shippingOptions-odd {
   background: #f8f8f9;
   //background: #f0f0c0;
 }
 
-TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-even, TR.activityListing-even, TR.productReviews-even, TR.upcomingProducts-even, TR.shippingOptions-even {
+TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-even, TR.entryListing-even, TR.productReviews-even, TR.upcomingProducts-even, TR.shippingOptions-even {
   background: #f8f8f9;
   //background: #f0f0c0;
 }
@@ -161,7 +161,7 @@ TR.projectListing-green {
   background: #00ff00;
 }
 
-TABLE.projectListing, TABLE.activityListing, TABLE.calendar , TABLE.activity_entry, TABLE.report_listing{
+TABLE.projectListing, TABLE.entryListing, TABLE.calendar , TABLE.item_entry, TABLE.report_listing{
   border: 1px;
   border-style: solid;
   border-color: #b6b7cb;
@@ -169,7 +169,7 @@ TABLE.projectListing, TABLE.activityListing, TABLE.calendar , TABLE.activity_ent
   border-spacing: 1px;
 }
 
-.projectListing-heading, .activityListing-heading, .calendar-heading {
+.projectListing-heading, .entryListing-heading, .calendar-heading {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #b6b7cb;
@@ -178,7 +178,7 @@ TABLE.projectListing, TABLE.activityListing, TABLE.calendar , TABLE.activity_ent
   font-weight: bold;
 }
 
-TD.projectListing-data, TD.activityListing-data {
+TD.projectListing-data, TD.entryListing-data {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
 }
@@ -236,7 +236,7 @@ TD.large-calendar-notavailable {
   width: 50px;
 }
 
-TD.activity_entry, TD.report_listing {
+TD.item_entry, TD.report_listing {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #f8f8f9;
@@ -251,7 +251,7 @@ TD.login_error {
   text-align : center;
 }
 
-TD.activity_error_low {
+TD.entry_error_low {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #00ff00;
@@ -260,7 +260,7 @@ TD.activity_error_low {
   text-align : center;
 }
 
-TD.activity_error_middle {
+TD.entry_error_middle {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #ff7f00;
@@ -269,7 +269,7 @@ TD.activity_error_middle {
   text-align : center;
 }
 
-TD.activity_error_high {
+TD.entry_error_high {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #ff0000;

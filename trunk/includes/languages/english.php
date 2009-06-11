@@ -106,6 +106,12 @@ $LOGIN_ERROR_LEVEL = array (0 => '',
                             2 => 'Passwords do not match',
                             3 => 'Passwords can not be empty');
 
+define('TEXT_ENTRY_EDIT', 'Edit');
+define('TEXT_ENTRY_DELETE', 'Delete');
+define('TEXT_ENTRY_DELETE_QUESTION', 'Do you want to delete the entry above?');
+define('TEXT_ENTRY_DELETE_OK', 'Delete OK');
+define('TEXT_ENTRY_DELETE_CANCEL', 'Cancel delete');
+
 define('TEXT_TIMEREGISTRATION_BACK', 'Period back');
 define('TEXT_TIMEREGISTRATION_PERIOD', 'Period : ');
 define('TEXT_TIMEREGISTRATION_FORWARD', 'Period forward');
@@ -136,12 +142,7 @@ define('TEXT_ACTIVITY_TRAVELDISTANCE', 'Travel dist. (km)');
 define('TEXT_ACTIVITY_EXPENSES', 'Expenses (&euro;)');
 define('TEXT_ACTIVITY_TICKETNUMBER', 'Ticket nr.');
 define('TEXT_ACTIVITY_COMMENT', 'Remarks');
-define('TEXT_ACTIVITY_EDIT', 'Edit');
 define('TEXT_ACTIVITY_COPY', 'Copy last activity of previous (work-)day');
-define('TEXT_ACTIVITY_DELETE', 'Delete');
-define('TEXT_ACTIVITY_DELETE_QUESTION', 'Do you want to delete the activity above?');
-define('TEXT_ACTIVITY_DELETE_OK', 'Delete OK');
-define('TEXT_ACTIVITY_DELETE_CANCEL', 'Cancel delete');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $ACTIVITY_ERROR_LEVEL = array (0  => '',
@@ -223,12 +224,13 @@ define('REPORT_TABLE_HEADER_COMMENT', 'Comment');
 
 define('EXPORT_NAME_ACTIVITIES', 'Export activities');
 
-define('TEXT_CUSTOMER_NUMBER', 'Customernr');
-define('TEXT_CUSTOMER_NAME', 'Customer name');
-define('TEXT_CUSTOMER_BILLING_ADDRESS', 'Billing address');
-define('TEXT_CUSTOMER_BILLING_EMAIL', 'Billing e-mail');
-define('TEXT_CUSTOMER_BILLING_PHONE', 'Billing phone');
-define('TEXT_CUSTOMER_BILLING_FAX', 'Billing fax');
+define('TEXT_ADMINISTRATION_CUSTOMER_NUMBER', 'Customernr');
+define('TEXT_ADMINISTRATION_CUSTOMER_NAME', 'Customer name');
+define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_ADDRESS', 'Billing address');
+define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_EMAIL', 'Billing e-mail');
+define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_PHONE', 'Billing phone');
+define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_FAX', 'Billing fax');
+define('TEXT_ADMINISTRATION_CUSTOMERLISTING_IS_EMPTY', 'No customers available');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>
