@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 11 june 2009
+ * Date        : 12 june 2009
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -186,7 +186,7 @@
                   }
                 } else { ?>
                   <tr class="entryListing-odd">
-                    <td class="entryListing-data" colspan="10">
+                    <td class="entryListing-data" colspan="10" align="center">
                       <?php echo TEXT_TIMEREGISTRATION_IS_EMPTY; ?>
                     </td>
                   </tr>

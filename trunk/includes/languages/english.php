@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 11 june 2009
+ * Date        : 13 june 2009
  * Description : English language file
  */
 
@@ -106,9 +106,12 @@ $LOGIN_ERROR_LEVEL = array (0 => '',
                             2 => 'Passwords do not match',
                             3 => 'Passwords can not be empty');
 
+define('TEXT_ENTRY_NEW', 'New');
+define('TEXT_ENTRY_SAVE', 'Save');
+define('TEXT_ENTRY_CANCEL', 'Cancel');
 define('TEXT_ENTRY_EDIT', 'Edit');
 define('TEXT_ENTRY_DELETE', 'Delete');
-define('TEXT_ENTRY_DELETE_QUESTION', 'Do you want to delete the entry above?');
+define('TEXT_ENTRY_DELETE_QUESTION', 'Do you want to delete this entry?');
 define('TEXT_ENTRY_DELETE_OK', 'Delete OK');
 define('TEXT_ENTRY_DELETE_CANCEL', 'Cancel delete');
 
@@ -168,8 +171,6 @@ define('TEXT_CALENDAR_SUNDAY', 's');
 define('TEXT_ACTIVITY_ENTRY_SELECTED_DATE', 'Selected date: ');
 define('TEXT_ACTIVITY_ENTRY_NO_DATE_SELECTED', 'No date selected');
 define('TEXT_ACTIVITY_ENTRY_SELECT', 'Select');
-define('TEXT_ACTIVITY_ENTRY_SAVE', 'Save');
-define('TEXT_ACTIVITY_ENTRY_CANCEL', 'Cancel');
 
 define('TEXT_ANALYSIS_BACK', 'Period back');
 define('TEXT_ANALYSIS_PERIOD', 'Period : ');
@@ -224,13 +225,26 @@ define('REPORT_TABLE_HEADER_COMMENT', 'Comment');
 
 define('EXPORT_NAME_ACTIVITIES', 'Export activities');
 
-define('TEXT_ADMINISTRATION_CUSTOMER_NUMBER', 'Customernr');
-define('TEXT_ADMINISTRATION_CUSTOMER_NAME', 'Customer name');
-define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_ADDRESS', 'Billing address');
-define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_EMAIL', 'Billing e-mail');
-define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_PHONE', 'Billing phone');
-define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_FAX', 'Billing fax');
-define('TEXT_ADMINISTRATION_CUSTOMERLISTING_IS_EMPTY', 'No customers available');
+define('TEXT_CUSTOMERS_ID', 'Customernr');
+define('TEXT_CUSTOMERS_NAME', 'Customer name');
+define('TEXT_CUSTOMERS_BILLING_NAME1', 'Billing name 1');
+define('TEXT_CUSTOMERS_BILLING_NAME2', 'Billing name 2');
+define('TEXT_CUSTOMERS_BILLING_ADDRESS', 'Billing address');
+define('TEXT_CUSTOMERS_BILLING_POSTCODE', 'Billing postcode');
+define('TEXT_CUSTOMERS_BILLING_CITY', 'Billing city');
+define('TEXT_CUSTOMERS_BILLING_COUNTRY', 'Billing country');
+define('TEXT_CUSTOMERS_BILLING_EMAIL_ADDRESS', 'Billing e-mail');
+define('TEXT_CUSTOMERS_BILLING_PHONE', 'Billing phone');
+define('TEXT_CUSTOMERS_BILLING_FAX', 'Billing fax');
+define('TEXT_CUSTOMERS_LISTING_IS_EMPTY', 'No customers available');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$CUSTOMER_ERROR_LEVEL = array (0  => '',
+                               1  => 'Customersnumber is missing',
+                               2  => 'Incorrect customernumber',
+                               3  => 'Duplicate customernumber',
+                               4  => 'Customer name is missing',
+                               5  => 'Deletion not permitted, projects exist');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>

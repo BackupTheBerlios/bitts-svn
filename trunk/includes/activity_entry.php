@@ -3,7 +3,7 @@
  * CODE FILE   : activity_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 11 june 2009
+ * Date        : 12 june 2009
  * Description : Activity entry fields
  *               Data validation sequence
  *               Storing of entered data (via timesheet object)
@@ -214,7 +214,7 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
           <tr>
             <td align="right" class="item_entry" colspan="2">
               <?php if ($_POST['action']=='enter_data'||$_POST['action']=='save_data') {
-                echo tep_image_submit('button_save.gif', TEXT_ACTIVITY_ENTRY_SAVE);
+                echo tep_image_submit('button_save.gif', TEXT_ENTRY_SAVE);
                 echo '</form>';
               } else {
                 echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_save_disabled.gif');
@@ -222,7 +222,7 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
               echo '&nbsp;';
               if ($_POST['action']=='select_project'||$_POST['action']=='select_role'||$_POST['action']=='enter_data'||$_POST['action']=='save_data') {
                 echo tep_draw_form('fcancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period'), 'hidden_field');
-                echo tep_image_submit('button_cancel.gif', TEXT_ACTIVITY_ENTRY_CANCEL);
+                echo tep_image_submit('button_cancel.gif', TEXT_ENTRY_CANCEL);
                 echo '</form>';
               } else {
                 echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_cancel_disabled.gif');

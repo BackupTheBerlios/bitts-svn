@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 11 june 2009
+ * Date        : 13 june 2009
  * Description : Dutch language file
  */
 
@@ -106,9 +106,12 @@ $LOGIN_ERROR_LEVEL = array (0 => '',
                             2 => 'Wachtwoorden komen niet overeen',
                             3 => 'Het wachtwoord mag niet leeg zijn');
 
+define('TEXT_ENTRY_NEW', 'Nieuw');
+define('TEXT_ENTRY_SAVE', 'Opslaan');
+define('TEXT_ENTRY_CANCEL', 'Annuleren');
 define('TEXT_ENTRY_EDIT', 'Wijzigen');
 define('TEXT_ENTRY_DELETE', 'Verwijderen');
-define('TEXT_ENTRY_DELETE_QUESTION', 'Wilt u bovenstaande regel verwijderen?');
+define('TEXT_ENTRY_DELETE_QUESTION', 'Wilt u deze ingave verwijderen?');
 define('TEXT_ENTRY_DELETE_OK', 'Verwijderen OK');
 define('TEXT_ENTRY_DELETE_CANCEL', 'Verwijderen annuleren');
 
@@ -168,8 +171,6 @@ define('TEXT_CALENDAR_SUNDAY', 'z');
 define('TEXT_ACTIVITY_ENTRY_SELECTED_DATE', 'Geselecteerde datum: ');
 define('TEXT_ACTIVITY_ENTRY_NO_DATE_SELECTED', 'Geen datum geselecteerd');
 define('TEXT_ACTIVITY_ENTRY_SELECT', 'Selecteer');
-define('TEXT_ACTIVITY_ENTRY_SAVE', 'Opslaan');
-define('TEXT_ACTIVITY_ENTRY_CANCEL', 'Annuleren');
 
 define('TEXT_ANALYSIS_BACK', 'Periode terug');
 define('TEXT_ANALYSIS_PERIOD', 'Periode : ');
@@ -224,13 +225,26 @@ define('REPORT_TABLE_HEADER_COMMENT', 'Opmerkingen');
 
 define('EXPORT_NAME_ACTIVITIES', 'Export activiteiten');
 
-define('TEXT_ADMINISTRATION_CUSTOMER_NUMBER', 'Debiteurnr');
-define('TEXT_ADMINISTRATION_CUSTOMER_NAME', 'Debiteur naam');
-define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_ADDRESS', 'Factuuradres');
-define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_EMAIL', 'Facturatie e-mail');
-define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_PHONE', 'Facturatie telefoonnr');
-define('TEXT_ADMINISTRATION_CUSTOMER_BILLING_FAX', 'Facturatie faxnr');
-define('TEXT_ADMINISTRATION_CUSTOMERLISTING_IS_EMPTY', 'Geen debiteuren aanwezig');
+define('TEXT_CUSTOMERS_ID', 'Debiteurnr');
+define('TEXT_CUSTOMERS_NAME', 'Debiteur naam');
+define('TEXT_CUSTOMERS_BILLING_NAME1', 'Factuurnaam 1');
+define('TEXT_CUSTOMERS_BILLING_NAME2', 'Factuurnaam 2');
+define('TEXT_CUSTOMERS_BILLING_ADDRESS', 'Factuuradres');
+define('TEXT_CUSTOMERS_BILLING_POSTCODE', 'Facturatie postcode');
+define('TEXT_CUSTOMERS_BILLING_CITY', 'Facturatie plaats');
+define('TEXT_CUSTOMERS_BILLING_COUNTRY', 'Facturatie land');
+define('TEXT_CUSTOMERS_BILLING_EMAIL_ADDRESS', 'Facturatie e-mail');
+define('TEXT_CUSTOMERS_BILLING_PHONE', 'Facturatie telefoonnr');
+define('TEXT_CUSTOMERS_BILLING_FAX', 'Facturatie faxnr');
+define('TEXT_CUSTOMERS_LISTING_IS_EMPTY', 'Geen debiteuren aanwezig');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$CUSTOMER_ERROR_LEVEL = array (0  => '',
+                               1  => 'Debiteurnummer ontbreekt',
+                               2  => 'Debiteurnummer onjuist',
+                               3  => 'Duplicaat debiteurnummer',
+                               4  => 'Debiteur naam ontbreekt',
+                               5  => 'Verwijderen niet toegestaan, projecten aanwezig');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>

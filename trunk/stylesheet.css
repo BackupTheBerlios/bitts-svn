@@ -16,6 +16,7 @@
 /*.productsNotifications { background: #f2fff7; }*/
 /*.orderEdit { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #70d250; text-decoration: underline; }*/
 .submitLink { font: inherit; color: inherit; text-decoration: inherit; background-color: transparent; border: none; padding: 0px; cursor: pointer; cursor: hand; }
+input:disabled { color:#000000; }
 
 BODY {
   background: #ffffff;
@@ -144,8 +145,8 @@ TR.accountHistory-odd, TR.addressBook-odd, TR.alsoPurchased-odd, TR.payment-odd,
 }
 
 TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-even, TR.entryListing-even, TR.productReviews-even, TR.upcomingProducts-even, TR.shippingOptions-even {
-  background: #f8f8f9;
-  //background: #f0f0c0;
+  //background: #f8f8f9;
+  background: #f0f0c0;
 }
 
 TR.projectListing-red {
