@@ -133,7 +133,7 @@
                       <td class="entryListing-data"><?php echo $_SESSION['customer']->listing[$index]->id; ?></td>
                       <td class="entryListing-data"><?php echo $_SESSION['customer']->listing[$index]->name; ?></td>
                       <td class="entryListing-data"><?php echo $_SESSION['customer']->listing[$index]->billing_name1.'<br>'.$_SESSION['customer']->listing[$index]->billing_name2.'<br>'.$_SESSION['customer']->listing[$index]->billing_address.'<br>'.$_SESSION['customer']->listing[$index]->billing_postcode.'&nbsp;&nbsp;'.$_SESSION['customer']->listing[$index]->billing_city.'<br>'.$_SESSION['customer']->listing[$index]->billing_country; ?></td>
-                      <td class="entryListing-data"><?php echo $_SESSION['customer']->listing[$index]->billing_email_address; ?></td>
+                      <td class="entryListing-data"><?php echo tep_href_email_address($_SESSION['customer']->listing[$index]->billing_email_address); ?></td>
                       <td class="entryListing-data"><?php echo $_SESSION['customer']->listing[$index]->billing_phone; ?></td>
                       <td class="entryListing-data"><?php echo $_SESSION['customer']->listing[$index]->billing_fax; ?></td>
                       <td align="center" width="20" class="entryListing-data">

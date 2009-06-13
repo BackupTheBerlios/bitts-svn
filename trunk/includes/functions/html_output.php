@@ -83,6 +83,15 @@
   	return $retval;
   }
 
+  function tep_href_email_address($address) {
+    if (preg_match( "/^ [\d\w\/+!=#|$?%{^&}*`'~-] [\d\w\/\.+!=#|$?%{^&}*`'~-]*@ [A-Z0-9] [A-Z0-9.-]{1,61} [A-Z0-9]\. [A-Z]{2,6}$/ix", $address)) {
+      $retval = '<a href="mailto:' . $address . '">' . $address . '</a>';
+    } else {
+      $retval = $address;
+    }
+    return $retval;
+  }
+
   function tep_create_parameters($new_or_changed_parameters, $relevant_other_parameters = null, $output_type = 'string', $method = 'post') {
   	$result = '';
 

@@ -102,20 +102,22 @@
 
     public function save($id = 0, $name = '', $billing_name1 = '', $billing_name2 = '', $billing_address = '', $billing_postcode = '', $billing_city = '', $billing_country = '', $billing_email_address = '', $billing_phone = '', $billing_fax = '') {
       // Create new customer, fill and save it
-      $customer = new customer($id);
-      $customer->fill($name, $billing_name1, $billing_name2, $billing_address, $billing_postcode, $billing_city, $billing_country, $billing_email_address, $billing_phone, $billing_fax);
-      $customer->store();
-    }
-
-    public function store() {
-      $database = $_SESSION['database'];
-      // Insert a new entry if one does not exist or update the existing one
-      if (!$this->id_exists($this->id)) {
-        // The entry does not exist
-        $database->query("insert into " . TABLE_CUSTOMERS . " (customers_id, customers_name, customers_billing_name1, customers_billing_name2, customers_billing_address, customers_billing_postcode, customers_billing_city, customers_billing_country, customers_billing_email_address, customers_billing_phone, customers_billing_fax) values ('" . $this->id . "', '" . $this->name . "', '" . $this->billing_name1 . "', '" . $this->billing_name2 . "', '" . $this->billing_address . "', '" . $this->billing_postcode . "', '" . $this->billing_city . "', '" . $this->billing_country . "', '" . $this->billing_email_address . "', '" . $this->billing_phone . "', '" . $this->billing_fax . "')");
+      
+      if ($id != 0) {
+        // Create, fill and save customer
+        $customer = new customer($id);
+        $customer->fill($name, $billing_name1, $billing_name2, $billing_address, $billing_postcode, $billing_city, $billing_country, $billing_email_address, $billing_phone, $billing_fax);
+        $customer->save();
       } else {
-        // The entry exists, update the contents
-        $activity_query = $database->query("update " . TABLE_CUSTOMERS . " set customers_id='" . $this->id . "', customers_name='" . $this->name . "', customers_billing_name1='" . $this->billing_name1 . "', customers_billing_name2='" . $this->billing_name2 . "', customers_billing_address='" . $this->billing_address . "', customers_billing_postcode='" . $this->billing_postcode . "', customers_billing_city='" . $this->billing_city . "', customers_billing_country='" . $this->billing_country . "', customers_billing_email_address='" . $this->billing_email_address . "', customers_billing_phone='" . $this->billing_phone . "', customers_billing_fax='" . $this->billing_fax . "' where customers_id = '" . (int)$this->id . "'");
+        $database = $_SESSION['database'];
+        // Insert a new entry if one does not exist or update the existing one
+        if (!$this->id_exists($this->id)) {
+          // The entry does not exist
+          $database->query("insert into " . TABLE_CUSTOMERS . " (customers_id, customers_name, customers_billing_name1, customers_billing_name2, customers_billing_address, customers_billing_postcode, customers_billing_city, customers_billing_country, customers_billing_email_address, customers_billing_phone, customers_billing_fax) values ('" . $this->id . "', '" . $this->name . "', '" . $this->billing_name1 . "', '" . $this->billing_name2 . "', '" . $this->billing_address . "', '" . $this->billing_postcode . "', '" . $this->billing_city . "', '" . $this->billing_country . "', '" . $this->billing_email_address . "', '" . $this->billing_phone . "', '" . $this->billing_fax . "')");
+        } else {
+          // The entry exists, update the contents
+          $activity_query = $database->query("update " . TABLE_CUSTOMERS . " set customers_id='" . $this->id . "', customers_name='" . $this->name . "', customers_billing_name1='" . $this->billing_name1 . "', customers_billing_name2='" . $this->billing_name2 . "', customers_billing_address='" . $this->billing_address . "', customers_billing_postcode='" . $this->billing_postcode . "', customers_billing_city='" . $this->billing_city . "', customers_billing_country='" . $this->billing_country . "', customers_billing_email_address='" . $this->billing_email_address . "', customers_billing_phone='" . $this->billing_phone . "', customers_billing_fax='" . $this->billing_fax . "' where customers_id = '" . (int)$this->id . "'");
+        }
       }
     }
 
