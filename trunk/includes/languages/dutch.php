@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 13 june 2009
+ * Date        : 14 june 2009
  * Description : Dutch language file
  */
 
@@ -241,10 +241,28 @@ define('TEXT_CUSTOMERS_LISTING_IS_EMPTY', 'Geen debiteuren aanwezig');
 // errorlevels 32..63 == attention required
 $CUSTOMER_ERROR_LEVEL = array (0  => '',
                                1  => 'Debiteurnummer ontbreekt',
-                               2  => 'Debiteurnummer onjuist',
-                               3  => 'Duplicaat debiteurnummer',
-                               4  => 'Debiteur naam ontbreekt',
+                               2  => 'Debiteur naam ontbreekt',
+                               3  => 'Debiteurnummer onjuist',
+                               4  => 'Duplicaat debiteurnummer',
                                5  => 'Verwijderen niet toegestaan, projecten aanwezig');
+
+define('TEXT_EMPLOYEES_ID', 'Medewerkernr');
+define('TEXT_EMPLOYEES_LOGIN', 'Login');
+define('TEXT_EMPLOYEES_FULLNAME', 'Volledige naam');
+define('TEXT_EMPLOYEES_RESET_PASSWORD', 'Reset wachtwoord');
+define('TEXT_EMPLOYEES_IS_USER', 'Gebruiker');
+define('TEXT_EMPLOYEES_IS_ANALYST', 'Rapporteur');
+define('TEXT_EMPLOYEES_IS_ADMINISTRATOR', 'Beheerder');
+define('TEXT_EMPLOYEES_LISTING_IS_EMPTY', 'Geen medewerkers aanwezig');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$EMPLOYEE_ERROR_LEVEL = array (0  => '',
+                               1  => 'Medewerkernummer ontbreekt',
+                               2  => 'Login ontbreekt',
+                               3  => 'Volledige naam ontbreekt',
+                               4  => 'Medewerkernummer onjuist',
+                               5  => 'Duplicaat medewerkernummer',
+                               6  => 'Verwijderen niet toegestaan, medewerker-rollen aanwezig');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>

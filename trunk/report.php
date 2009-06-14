@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 29 may 2009
+ * Date        : 14 june 2009
  * Description : Data gathering and reporting functions
  */
 
@@ -71,7 +71,7 @@
       }
       // Now fill in the contents
       foreach ($employees_array as $employee) {
-        $table_contents[$index] = array($employee->employee_id, $employee->fullname);
+        $table_contents[$index] = array($employee->id, $employee->fullname);
         $column_count = 2;
         if ($_POST['show_user_rights']) {
           // Add to contents
@@ -82,11 +82,11 @@
         }
         if ($_POST['show_timesheet_info'] || $_POST['show_travel_distance_and_expenses']) {
           // In both cases you need the timesheet object
-          $timesheet = new timesheet(0, $employee->employee_id, $_POST['period']);
+          $timesheet = new timesheet(0, $employee->id, $_POST['period']);
         }
         if ($_POST['show_timesheet_info']) {
           // Add to contents
-          $table_contents[$index][$column_count] = ($timesheet->timesheet_id!=0?'X':'-');
+          $table_contents[$index][$column_count] = ($timesheet->id!=0?'X':'-');
           $table_contents[$index][$column_count + 1] = ($timesheet->locked?'X':'-');
           $column_count += 2;
         }

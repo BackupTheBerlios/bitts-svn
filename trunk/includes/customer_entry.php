@@ -3,10 +3,8 @@
  * CODE FILE   : customer_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 12 june 2009
+ * Date        : 14 june 2009
  * Description : Customer entry fields
- *               Data validation sequence
- *               Storing of entered data (via customer object)
  */
 ?>
   <!-- customer_entry //-->

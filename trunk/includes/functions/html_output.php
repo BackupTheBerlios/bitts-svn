@@ -3,7 +3,7 @@
  * CODE FILE   : html_output.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 06 november 2008
+ * Date        : 14 juni 2009
  * Description : html output functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -105,7 +105,12 @@
           // Retrieve and add parameter
           $result .= $key . '=' . $value;
         } elseif ($output_type == 'hidden_field') {
-          $result .= tep_draw_hidden_field($key, $value);
+          if (!(is_bool($value) && $value==false)) {
+            // Boolean value 'false' does not fit very well into these fields
+            // Solution is to just drop the value, after POSTing, these
+            // values read 'false' anyway.
+            $result .= tep_draw_hidden_field($key, $value);
+          }
         }
       }
     }
@@ -256,12 +261,12 @@
 
 ////
 // Output a selection field - alias function for tep_draw_checkbox_field() and tep_draw_radio_field()
-  function tep_draw_selection_field($name, $type, $value = '', $checked = false, $parameters = '') {
+  function tep_draw_selection_field($name, $type, $value = true, $checked = false, $parameters = '') {
     $selection = '<input style="vertical-align:middle;" type="' . tep_output_string($type) . '" name="' . tep_output_string($name) . '"';
 
-    if (tep_not_null($value)) $selection .= ' value="' . tep_output_string($value) . '"';
+    $selection .= ' value="' . ($value?'true':'false') . '"';
 
-    if ( ($checked == true) || ( isset($GLOBALS[$name]) && is_string($GLOBALS[$name]) && ( ($GLOBALS[$name] == 'on') || (isset($value) && (stripslashes($GLOBALS[$name]) == $value)) ) ) ) {
+    if ($checked || (tep_not_null($_POST[$name]) && $_POST[$name])) {
       $selection .= ' CHECKED';
     }
 
@@ -318,7 +323,7 @@
 
 ////
 // Output a form checkbox field
-  function tep_draw_checkbox_field($name, $value = '', $checked = false, $parameters = '') {
+  function tep_draw_checkbox_field($name, $value = true, $checked = false, $parameters = '') {
     return tep_draw_selection_field($name, 'checkbox', $value, $checked, $parameters);
   }
 

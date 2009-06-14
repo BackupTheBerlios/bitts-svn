@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 12 june 2009
+ * Date        : 14 june 2009
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -18,15 +18,15 @@
 
   // Create a new timesheet object with id == 0
   // If a timesheet already exists for this employee and period, the timesheet class will automatically
-  // retrieve the correct id and put this into $_SESSION['timesheet']->timesheet_id
-  $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, $_POST['period']);
+  // retrieve the correct id and put this into $_SESSION['timesheet']->id
+  $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->id, $_POST['period']);
 
   switch ($_POST['action']) {
     case '':
       $_POST['activity_id'] = 0;
       break;
     case 'save_data':
-      if ($_SESSION['timesheet']->timesheet_id == 0) {
+      if ($_SESSION['timesheet']->id == 0) {
         // Timesheet does not exist yet so a new one has to be created in db
         // This is required for the test if previous unconfirmed timesheets exist
         $_SESSION['timesheet']->save();
@@ -41,7 +41,7 @@
       $_POST['action'] = '';
       // Reload the timesheet object in order to
       // update the activity listing that follows
-      $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, $_POST['period']);
+      $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->id, $_POST['period']);
       break;
     case 'timesheet_to_be_confirmed':
       break;

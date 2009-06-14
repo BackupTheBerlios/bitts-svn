@@ -3,8 +3,10 @@
  * CODE FILE   : administration_customers.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 13 june 2009
+ * Date        : 14 june 2009
  * Description : Customer administration form
+ *               Data validation sequence
+ *               Storing of entered data (via customer object)
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
  *               http://www.oscommerce.com
@@ -31,15 +33,15 @@
       if ($_POST['customers_id'] == '') {
         $_POST['action'] = 'enter_data';
         $error_level = 1; // No customers_id
-      } else if (!customer::validate_id($_POST['customers_id'])) {
-        $_POST['action'] = 'enter_data';
-        $error_level = 2; // Invalid customers_id
-      } else if ($_POST['customers_status'] == 'new' && customer::id_exists($_POST['customers_id'])) {
-        $_POST['action'] = 'enter_data';
-        $error_level = 3; // Duplicate customers_id
       } else if ($_POST['customers_name'] == '') {
         $_POST['action'] = 'enter_data';
-        $error_level = 4; // No customers_name
+        $error_level = 2; // No customers_name
+      } else if (!$_SESSION['customer']->validate_id($_POST['customers_id'])) {
+        $_POST['action'] = 'enter_data';
+        $error_level = 3; // Invalid customers_id
+      } else if ($_POST['customers_status'] == 'new' && $_SESSION['customer']->id_exists($_POST['customers_id'])) {
+        $_POST['action'] = 'enter_data';
+        $error_level = 4; // Duplicate customers_id
       } else {
         // OK, entry can be saved
         $_SESSION['customer']->save($_POST['customers_id'],

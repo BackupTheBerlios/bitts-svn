@@ -3,8 +3,8 @@
  * CODE FILE   : index.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 05 december 2008
- * Description : .....
+ * Date        : 14 june 2009
+ * Description : Default (starting)page
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
  *               http://www.oscommerce.com
@@ -60,7 +60,7 @@
                       <tr>
                         <td align="right" class="boxText"><?php echo BODY_TEXT_EMPLOYEE_ID;?></td>
                         <td class="boxText">:</td>
-                        <td class="boxText"><?php echo $_SESSION['employee']->employee_id;?></td>
+                        <td class="boxText"><?php echo $_SESSION['employee']->id;?></td>
                       </tr>
                       <tr>
                         <td colspan="3"><?php echo tep_draw_separator('pixel_trans.gif', '100%', '5'); ?></td>

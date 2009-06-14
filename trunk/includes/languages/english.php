@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 13 june 2009
+ * Date        : 14 june 2009
  * Description : English language file
  */
 
@@ -240,11 +240,29 @@ define('TEXT_CUSTOMERS_LISTING_IS_EMPTY', 'No customers available');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $CUSTOMER_ERROR_LEVEL = array (0  => '',
-                               1  => 'Customersnumber is missing',
-                               2  => 'Incorrect customernumber',
-                               3  => 'Duplicate customernumber',
-                               4  => 'Customer name is missing',
+                               1  => 'Customernumber is missing',
+                               2  => 'Customer name is missing',
+                               3  => 'Incorrect customernumber',
+                               4  => 'Duplicate customernumber',
                                5  => 'Deletion not permitted, projects exist');
+
+define('TEXT_EMPLOYEES_ID', 'Employeenr');
+define('TEXT_EMPLOYEES_LOGIN', 'Login');
+define('TEXT_EMPLOYEES_FULLNAME', 'Full name');
+define('TEXT_EMPLOYEES_RESET_PASSWORD', 'Reset password');
+define('TEXT_EMPLOYEES_IS_USER', 'User');
+define('TEXT_EMPLOYEES_IS_ANALYST', 'Analyst');
+define('TEXT_EMPLOYEES_IS_ADMINISTRATOR', 'Administrator');
+define('TEXT_EMPLOYEES_LISTING_IS_EMPTY', 'No employees available');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$EMPLOYEE_ERROR_LEVEL = array (0  => '',
+                               1  => 'Employeenumber is missing',
+                               2  => 'Login is missing',
+                               3  => 'Full name is missing',
+                               4  => 'Incorrect employeenumber',
+                               5  => 'Duplicate employeenumber',
+                               6  => 'Deletion not permitted, employees-roles exist');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>

@@ -3,7 +3,7 @@
  * CLASS FILE  : customer.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 13 june 2009
+ * Date        : 14 june 2009
  * Description : Customer class
  *
  */
@@ -102,7 +102,7 @@
 
     public function save($id = 0, $name = '', $billing_name1 = '', $billing_name2 = '', $billing_address = '', $billing_postcode = '', $billing_city = '', $billing_country = '', $billing_email_address = '', $billing_phone = '', $billing_fax = '') {
       // Create new customer, fill and save it
-      
+
       if ($id != 0) {
         // Create, fill and save customer
         $customer = new customer($id);
@@ -149,7 +149,7 @@
       }
     }
 
-    public static function validate_id($value) {
+    public function validate_id($value) {
       $value = str_replace(",", ".", $value);
       $value = '0' . $value;
       return (substr_count($value, ".") == 0 &&
@@ -158,7 +158,7 @@
       return false;
     }
 
-    public static function id_exists($id) {
+    public function id_exists($id) {
       $database = $_SESSION['database'];
       $id = $database->prepare_input($id);
       $customer_query = $database->query("select 1 from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$id . "'");
