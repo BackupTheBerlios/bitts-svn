@@ -119,7 +119,7 @@
             <td>
               <table border="0" width="100%" cellspacing="0" cellpadding="2" class="entryListing">
                 <tr>
-                  <td class="entryListing-heading"><?php echo TEXT_CUSTOMERS_ID; ?></td>
+                  <td class="entryListing-heading" style="width:100px"><?php echo TEXT_CUSTOMERS_ID; ?></td>
                   <td class="entryListing-heading"><?php echo TEXT_CUSTOMERS_NAME; ?></td>
                   <td class="entryListing-heading"><?php echo TEXT_CUSTOMERS_BILLING_ADDRESS; ?></td>
                   <td class="entryListing-heading"><?php echo TEXT_CUSTOMERS_BILLING_EMAIL_ADDRESS; ?></td>
@@ -132,7 +132,7 @@
                   $odd_or_even = "odd";
                   for ($index = 0; $index < sizeof($_SESSION['customer']->listing); $index++) { ?>
                     <tr class="entryListing-<?php echo $odd_or_even; ?>" valign="top">
-                      <td class="entryListing-data"><?php echo $_SESSION['customer']->listing[$index]->id; ?></td>
+                      <td class="entryListing-data" style="width:100px"><?php echo $_SESSION['customer']->listing[$index]->id; ?></td>
                       <td class="entryListing-data"><?php echo $_SESSION['customer']->listing[$index]->name; ?></td>
                       <td class="entryListing-data"><?php echo $_SESSION['customer']->listing[$index]->billing_name1.'<br>'.$_SESSION['customer']->listing[$index]->billing_name2.'<br>'.$_SESSION['customer']->listing[$index]->billing_address.'<br>'.$_SESSION['customer']->listing[$index]->billing_postcode.'&nbsp;&nbsp;'.$_SESSION['customer']->listing[$index]->billing_city.'<br>'.$_SESSION['customer']->listing[$index]->billing_country; ?></td>
                       <td class="entryListing-data"><?php echo tep_href_email_address($_SESSION['customer']->listing[$index]->billing_email_address); ?></td>
