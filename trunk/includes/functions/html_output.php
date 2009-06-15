@@ -3,7 +3,7 @@
  * CODE FILE   : html_output.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 juni 2009
+ * Date        : 15 juni 2009
  * Description : html output functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -261,12 +261,12 @@
 
 ////
 // Output a selection field - alias function for tep_draw_checkbox_field() and tep_draw_radio_field()
-  function tep_draw_selection_field($name, $type, $value = true, $checked = false, $parameters = '') {
+  function tep_draw_selection_field($name, $type, $value = '', $checked = false, $parameters = '') {
     $selection = '<input style="vertical-align:middle;" type="' . tep_output_string($type) . '" name="' . tep_output_string($name) . '"';
 
-    $selection .= ' value="' . ($value?'true':'false') . '"';
+    $selection .= ' value="' . (is_bool($value)?($value?'true':'false'):$value) . '"';
 
-    if ($checked || (tep_not_null($_POST[$name]) && $_POST[$name])) {
+    if ($checked || (tep_not_null($_POST[$name]) && $_POST[$name]==$value)) {
       $selection .= ' CHECKED';
     }
 

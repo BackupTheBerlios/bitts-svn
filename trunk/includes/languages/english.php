@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 june 2009
+ * Date        : 15 june 2009
  * Description : English language file
  */
 
@@ -263,6 +263,16 @@ $EMPLOYEE_ERROR_LEVEL = array (0  => '',
                                4  => 'Incorrect employeenumber',
                                5  => 'Duplicate employeenumber',
                                6  => 'Deletion not permitted, employees-roles exist');
+
+define('TEXT_BUSINESS_UNITS_ID', 'BU nr');
+define('TEXT_BUSINESS_UNITS_NAME', 'Name');
+define('TEXT_BUSINESS_UNITS_IMAGE', 'Image');
+define('TEXT_BUSINESS_UNITS_IMAGE_POSITION', 'Position');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$BUSINESS_UNIT_ERROR_LEVEL = array (0  => '',
+                                    1  => 'Name is missing',
+                                    2  => 'Deletion not permitted, projects exist');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>

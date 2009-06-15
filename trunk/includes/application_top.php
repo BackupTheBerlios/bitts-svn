@@ -3,7 +3,7 @@
  * CODE FILE   : application_top.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 11 june 2008
+ * Date        : 15 june 2008
  * Description : .....
  *               .....
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -74,8 +74,10 @@
   require(DIR_WS_CLASSES . 'employee.php');
 
   // Include the project and related classes
-  require(DIR_WS_CLASSES . 'project.php');
   require(DIR_WS_CLASSES . 'customer.php');
+  require(DIR_WS_CLASSES . 'business_unit.php');
+  require(DIR_WS_CLASSES . 'project.php');
+  //require(DIR_WS_CLASSES . 'category.php');
   require(DIR_WS_CLASSES . 'role.php');
   require(DIR_WS_CLASSES . 'employee_role.php');
   require(DIR_WS_CLASSES . 'tariff.php');

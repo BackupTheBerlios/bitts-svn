@@ -3,7 +3,7 @@
  * CODE FILE   : administration_employees.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 june 2009
+ * Date        : 15 june 2009
  * Description : Employee administration form
  *               Data validation sequence
  *               Storing of entered data (via employee object)
@@ -18,7 +18,7 @@
   if (!tep_not_null($_SESSION['employee_login']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
 
-  // Create a new customer object with id == 0 (default)
+  // Create a new employee object with id == 0 (default)
   $_SESSION['administration_employee'] = new employee();
 
   // Reset error level
