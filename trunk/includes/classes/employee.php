@@ -3,7 +3,7 @@
  * CLASS FILE  : employee.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 june 2009
+ * Date        : 15 june 2009
  * Description : Employee class
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -183,7 +183,15 @@
         $this->id = $database->prepare_input($this->id);
         $employee_role_query = $database->query("select 1 from " . TABLE_EMPLOYEES_ROLES . " where employees_id = '" . (int)$this->id . "'");
         $employee_role_result = $database->fetch_array($employee_role_query);
-        return tep_not_null($employee_role_result);
+        if (!tep_not_null($employee_role_result)) {
+          // No employee_role found, try for a timesheet (just to be sure)
+          $timesheet_query = $database->query("select 1 from " . TABLE_TIMESHEETS . " where employees_id = '" . (int)$this->id . "'");
+          $timesheet_result = $database->fetch_array($timesheet_query);
+          return tep_not_null($timesheet_result);
+        } else {
+          // employee_role exists
+          return true;
+        }
       }
     }
 
