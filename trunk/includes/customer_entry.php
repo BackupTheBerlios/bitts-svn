@@ -156,4 +156,4 @@
       </td>
     </tr>
   </table>
-  <!-- activity_entry_eof //-->
+  <!-- customer_entry_eof //-->

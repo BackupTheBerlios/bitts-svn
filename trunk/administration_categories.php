@@ -1,10 +1,10 @@
 <?php
 /****************************************************************************
- * CODE FILE   : administration_business_units.php
+ * CODE FILE   : administration_categories.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
  * Date        : 16 june 2009
- * Description : Business Unit administration form
+ * Description : Category administration form
  *               Data validation sequence
  *               Storing of entered data (via business_unit object)
  *
@@ -27,16 +27,14 @@
       //
       // Check for data format and required fields
       // change action when not everything is filled-in
-      if ($_POST['business_units_name'] == '') {
+      if ($_POST['categories_name'] == '') {
         $_POST['action'] = 'enter_data';
-        $error_level = 1; // No business_units_name
+        $error_level = 1; // No categories_name
       } else {
         // OK, entry can be saved
-        $administration_business_unit = new business_unit($_POST['business_units_id']);
-        $administration_business_unit->fill($_POST['business_units_name'],
-                                            $_POST['business_units_image'],
-                                            $_POST['business_units_image_position']);
-        $administration_business_unit->save();
+        $administration_category = new category($_POST['categories_id']);
+        $administration_category->fill($_POST['categories_name']);
+        $administration_category->save();
 
         // Clear all values except mPath
         foreach($_POST as $key=>$value) {
@@ -48,22 +46,22 @@
       break;
     case 'delete_entry':
       // Check for dependencies
-      $administration_business_unit = new business_unit($_POST['business_units_id']);
-      if ($administration_business_unit->has_dependencies()) {
-        $error_level = 2; // Related project(s) exist
+      $administration_category = new category($_POST['categories_id']);
+      if ($administration_category->has_dependencies()) {
+        $error_level = 2; // Related role(s) exist
         $_POST['action'] = '';
       }
       break;
     case 'delete_entry_confirmed':
-      $administration_business_unit = new business_unit($_POST['business_units_id']);
-      $administration_business_unit->delete();
-      unset($_POST['business_units_id']);
+      $administration_category = new category($_POST['categories_id']);
+      $administration_category->delete();
+      unset($_POST['categories_id']);
       $_POST['action'] = '';
       break;
   }
 
-  // Create a new business_unit object with id == 0 (default)
-  $_SESSION['business_unit'] = new business_unit();
+  // Create a new category object with id == 0 (default)
+  $_SESSION['category'] = new category();
 
   // header //
   require(DIR_WS_INCLUDES . 'header.php'); ?>
@@ -84,15 +82,15 @@
             <td>
               <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td class="pageHeading"><?php echo HEADER_TEXT_ADMINISTRATION_BUSINESS_UNITS; ?></td>
-                  <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'networked_pueblo-64x64.png', HEADER_TEXT_ADMINISTRATION_BUSINESS_UNITS, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+                  <td class="pageHeading"><?php echo HEADER_TEXT_ADMINISTRATION_CATEGORIES; ?></td>
+                  <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'file_manager-64x64.png', HEADER_TEXT_ADMINISTRATION_CATEGORIES, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
                 </tr>
               </table>
             </td>
           </tr>
           <tr>
             <td align="center">
-              <?php require(DIR_WS_INCLUDES . 'business_unit_entry.php'); ?>
+              <?php require(DIR_WS_INCLUDES . 'category_entry.php'); ?>
             </td>
           </tr>
           <tr>
@@ -102,26 +100,22 @@
             <td>
               <table border="0" width="100%" cellspacing="0" cellpadding="2" class="entryListing">
                 <tr>
-                  <td class="entryListing-heading"><?php echo TEXT_BUSINESS_UNITS_NAME; ?></td>
-                  <td class="entryListing-heading"><?php echo TEXT_BUSINESS_UNITS_IMAGE; ?></td>
-                  <td class="entryListing-heading" style="text-align:center;width:75px"><?php echo TEXT_BUSINESS_UNITS_IMAGE_POSITION; ?></td>
+                  <td class="entryListing-heading"><?php echo TEXT_CATEGORIES_NAME; ?></td>
                   <td width="20" class="entryListing-heading">&nbsp;</td>
                   <td width="20" class="entryListing-heading">&nbsp;</td>
                 </tr>
-                <?php if (!$_SESSION['business_unit']->listing_empty) {
+                <?php if (!$_SESSION['category']->listing_empty) {
                   $odd_or_even = "odd";
-                  for ($index = 0; $index < sizeof($_SESSION['business_unit']->listing); $index++) { ?>
+                  for ($index = 0; $index < sizeof($_SESSION['category']->listing); $index++) { ?>
                     <tr class="entryListing-<?php echo $odd_or_even; ?>" valign="top">
-                      <td class="entryListing-data"><?php echo $_SESSION['business_unit']->listing[$index]->name; ?></td>
-                      <td class="entryListing-data"><?php echo $_SESSION['business_unit']->listing[$index]->image; ?></td>
-                      <td class="entryListing-data" style="text-align:center;width:75px"><?php echo $BUSINESS_UNITS_IMAGE_POSITION[$_SESSION['business_unit']->listing[$index]->image_position]; ?></td>
+                      <td class="entryListing-data"><?php echo $_SESSION['category']->listing[$index]->name; ?></td>
                       <td class="entryListing-data" style="width:20px;text-align:center">
-                        <?php echo tep_draw_form('edit_entry', tep_href_link(FILENAME_ADMINISTRATION_BUSINESS_UNITS)) . tep_create_parameters(array('action'=>'enter_data', 'business_units_id'=>$_SESSION['business_unit']->listing[$index]->id, 'business_units_name'=>$_SESSION['business_unit']->listing[$index]->name, 'business_units_image'=>$_SESSION['business_unit']->listing[$index]->image, 'business_units_image_position'=>$_SESSION['business_unit']->listing[$index]->image_position), array('mPath'), 'hidden_field');
+                        <?php echo tep_draw_form('edit_entry', tep_href_link(FILENAME_ADMINISTRATION_CATEGORIES)) . tep_create_parameters(array('action'=>'enter_data', 'categories_id'=>$_SESSION['category']->listing[$index]->id, 'categories_name'=>$_SESSION['category']->listing[$index]->name), array('mPath'), 'hidden_field');
                         echo tep_image_submit('edit.gif', TEXT_ENTRY_EDIT,'',DIR_WS_IMAGES);
                         echo '</form>'; ?>
                       </td>
                       <td class="entryListing-data" style="width:20px;text-align:center">
-                        <?php echo tep_draw_form('delete_entry', tep_href_link(FILENAME_ADMINISTRATION_BUSINESS_UNITS)) . tep_create_parameters(array('action'=>'delete_entry', 'business_units_id'=>$_SESSION['business_unit']->listing[$index]->id, 'business_units_name'=>$_SESSION['business_unit']->listing[$index]->name, 'business_units_image'=>$_SESSION['business_unit']->listing[$index]->image, 'business_units_image_position'=>$_SESSION['business_unit']->listing[$index]->image_position), array('mPath'), 'hidden_field');
+                        <?php echo tep_draw_form('delete_entry', tep_href_link(FILENAME_ADMINISTRATION_CATEGORIES)) . tep_create_parameters(array('action'=>'delete_entry', 'categories_id'=>$_SESSION['category']->listing[$index]->id, 'categories_name'=>$_SESSION['category']->listing[$index]->name), array('mPath'), 'hidden_field');
                         echo tep_image_submit('delete.gif', TEXT_ENTRY_DELETE,'',DIR_WS_IMAGES);
                         echo '</form>'; ?>
                       </td>
@@ -130,8 +124,8 @@
                   }
                 } else { ?>
                   <tr class="entryListing-odd">
-                    <td class="entryListing-data" colspan="5"  style="text-align:center">
-                      <?php echo TEXT_BUSINESS_UNITS_LISTING_IS_EMPTY; ?>
+                    <td class="entryListing-data" colspan="3"  style="text-align:center">
+                      <?php echo TEXT_CATEGORIES_LISTING_IS_EMPTY; ?>
                     </td>
                   </tr>
                 <?php } ?>

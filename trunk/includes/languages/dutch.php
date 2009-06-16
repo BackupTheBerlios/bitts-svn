@@ -256,15 +256,14 @@ define('TEXT_EMPLOYEES_IS_ADMINISTRATOR', 'Beheerder');
 define('TEXT_EMPLOYEES_LISTING_IS_EMPTY', 'Geen medewerkers aanwezig');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
-$EMPLOYEE_ERROR_LEVEL = array (0  => '',
-                               1  => 'Medewerkernummer ontbreekt',
-                               2  => 'Login ontbreekt',
-                               3  => 'Volledige naam ontbreekt',
-                               4  => 'Medewerkernummer onjuist',
-                               5  => 'Duplicaat medewerkernummer',
-                               6  => 'Verwijderen niet toegestaan, medewerker-rollen aanwezig');
+$EMPLOYEE_ERROR_LEVEL = array (0 => '',
+                               1 => 'Medewerkernummer ontbreekt',
+                               2 => 'Login ontbreekt',
+                               3 => 'Volledige naam ontbreekt',
+                               4 => 'Medewerkernummer onjuist',
+                               5 => 'Duplicaat medewerkernummer',
+                               6 => 'Verwijderen niet toegestaan, medew.-rollen/timesheets aanwezig');
 
-define('TEXT_BUSINESS_UNITS_ID', 'BU nr');
 define('TEXT_BUSINESS_UNITS_NAME', 'Naam');
 define('TEXT_BUSINESS_UNITS_IMAGE', 'Logo');
 define('TEXT_BUSINESS_UNITS_IMAGE_POSITION', 'Positie');
@@ -273,9 +272,24 @@ $BUSINESS_UNITS_IMAGE_POSITION = array ('L' => 'Links',
                                         'R' => 'Rechts');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
-$BUSINESS_UNIT_ERROR_LEVEL = array (0  => '',
-                                    1  => 'Naam ontbreekt',
-                                    2  => 'Verwijderen niet toegestaan, projecten aanwezig');
+$BUSINESS_UNIT_ERROR_LEVEL = array (0 => '',
+                                    1 => 'Naam ontbreekt',
+                                    2 => 'Verwijderen niet toegestaan, projecten aanwezig');
+
+define('TEXT_CATEGORIES_NAME', 'Naam');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$CATEGORY_ERROR_LEVEL = array (0 => '',
+                               1 => 'Naam ontbreekt',
+                               2 => 'Verwijderen niet toegestaan, rollen aanwezig');
+
+define('TEXT_UNITS_NAME', 'Naam');
+define('TEXT_UNITS_DESCRIPTION', 'Omschrijving');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$UNIT_ERROR_LEVEL = array (0 => '',
+                           1 => 'Naam ontbreekt',
+                           2 => 'Verwijderen niet toegestaan, tarieven aanwezig');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>

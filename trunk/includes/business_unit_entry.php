@@ -7,7 +7,7 @@
  * Description : Business Unit entry fields
  */
 ?>
-  <!-- customer_entry //-->
+  <!-- business_units_entry //-->
   <table border="0" cellspacing="0" cellpadding="2">
     <tr>
       <td>
@@ -99,4 +99,4 @@
       </td>
     </tr>
   </table>
-  <!-- activity_entry_eof //-->
+  <!-- business_units_entry_eof //-->

@@ -256,15 +256,14 @@ define('TEXT_EMPLOYEES_IS_ADMINISTRATOR', 'Administrator');
 define('TEXT_EMPLOYEES_LISTING_IS_EMPTY', 'No employees available');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
-$EMPLOYEE_ERROR_LEVEL = array (0  => '',
-                               1  => 'Employeenumber is missing',
-                               2  => 'Login is missing',
-                               3  => 'Full name is missing',
-                               4  => 'Incorrect employeenumber',
-                               5  => 'Duplicate employeenumber',
-                               6  => 'Deletion not permitted, employees-roles exist');
+$EMPLOYEE_ERROR_LEVEL = array (0 => '',
+                               1 => 'Employeenumber is missing',
+                               2 => 'Login is missing',
+                               3 => 'Full name is missing',
+                               4 => 'Incorrect employeenumber',
+                               5 => 'Duplicate employeenumber',
+                               6 => 'Deletion not permitted, empl.-roles/timesheets exist');
 
-define('TEXT_BUSINESS_UNITS_ID', 'BU nr');
 define('TEXT_BUSINESS_UNITS_NAME', 'Name');
 define('TEXT_BUSINESS_UNITS_IMAGE', 'Image');
 define('TEXT_BUSINESS_UNITS_IMAGE_POSITION', 'Position');
@@ -273,9 +272,24 @@ $BUSINESS_UNITS_IMAGE_POSITION = array ('L' => 'Left',
                                         'R' => 'Right');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
-$BUSINESS_UNIT_ERROR_LEVEL = array (0  => '',
-                                    1  => 'Name is missing',
-                                    2  => 'Deletion not permitted, projects exist');
+$BUSINESS_UNIT_ERROR_LEVEL = array (0 => '',
+                                    1 => 'Name is missing',
+                                    2 => 'Deletion not permitted, projects exist');
+
+define('TEXT_CATEGORIES_NAME', 'Name');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$CATEGORY_ERROR_LEVEL = array (0 => '',
+                               1 => 'Name is missing',
+                               2 => 'Deletion not permitted, roles exist');
+
+define('TEXT_UNITS_NAME', 'Name');
+define('TEXT_UNITS_DESCRIPTION', 'Description');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$UNIT_ERROR_LEVEL = array (0 => '',
+                           1 => 'Name is missing',
+                           2 => 'Deletion not permitted, tariffs exist');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>
