@@ -3,15 +3,18 @@
  * CODE FILE   : administration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 september 2008
+ * Date        : 16 june 2009
  * Description : Administration main form
  */
 
   // application_top //
   require('includes/application_top.php');
   // Check if user is logged in. If not, redirect to login page
-  if (!tep_not_null($_SESSION['employee_login']))
+  if (!tep_not_null($_SESSION['employee']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
+  // Check if the user is allowed to view this page
+  if (!$_SESSION['employee']->is_administrator)
+    tep_redirect(tep_href_link(FILENAME_DEFAULT));
 
   switch ($_POST['action']) {
   }

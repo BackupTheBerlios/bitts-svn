@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 june 2009
+ * Date        : 16 june 2009
  * Description : Data gathering and reporting functions
  */
 
@@ -13,8 +13,11 @@
   require(DIR_WS_CLASSES . 'pdf.php');
 
   // Check if user is logged in. If not, redirect to login page
-  if (!tep_not_null($_SESSION['employee_login']))
+  if (!tep_not_null($_SESSION['employee']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
+  // Check if the user is allowed to view this page
+  if (!$_SESSION['employee']->is_analyst)
+    tep_redirect(tep_href_link(FILENAME_DEFAULT));
 
   switch ($_POST['action']) {
     case 'report_employees':

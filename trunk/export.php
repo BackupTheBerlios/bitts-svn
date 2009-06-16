@@ -3,7 +3,7 @@
  * CODE FILE   : export.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 january 2009
+ * Date        : 16 june 2009
  * Description : Data gathering and export functions
  */
 
@@ -13,8 +13,11 @@
   require(DIR_WS_CLASSES . 'csv.php');
 
   // Check if user is logged in. If not, redirect to login page
-  if (!tep_not_null($_SESSION['employee_login']))
+  if (!tep_not_null($_SESSION['employee']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
+  // Check if the user is allowed to view this page
+  if (!$_SESSION['employee']->is_analyst)
+    tep_redirect(tep_href_link(FILENAME_DEFAULT));
 
     // Create a CSV object
     $csv = new CSV($_POST['action'] . '.csv', ';', ''); // Delimiters chosen to be ms-excel compatible

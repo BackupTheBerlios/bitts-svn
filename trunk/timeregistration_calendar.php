@@ -10,8 +10,11 @@
   // application_top //
   require('includes/application_top.php');
   // Check if user is logged in. If not, redirect to login page
-  if (!tep_not_null($_SESSION['employee_login']))
+  if (!tep_not_null($_SESSION['employee']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
+  // Check if the user is allowed to view this page
+  if (!$_SESSION['employee']->is_user)
+    tep_redirect(tep_href_link(FILENAME_DEFAULT));
 
   // Create a new timesheet object with id == 0
   // If a timesheet already exists for this employee and period, the timesheet class will automatically

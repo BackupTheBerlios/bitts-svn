@@ -3,15 +3,18 @@
  * CODE FILE   : analysis.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 29 may 2009
+ * Date        : 16 june 2009
  * Description : Reporting form
  */
 
   // application_top //
   require('includes/application_top.php');
   // Check if user is logged in. If not, redirect to login page
-  if (!tep_not_null($_SESSION['employee_login']))
+  if (!tep_not_null($_SESSION['employee']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
+  // Check if the user is allowed to view this page
+  if (!$_SESSION['employee']->is_analyst)
+    tep_redirect(tep_href_link(FILENAME_DEFAULT));
 
   switch ($_POST['action']) {
   }
