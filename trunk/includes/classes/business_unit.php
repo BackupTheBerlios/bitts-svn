@@ -3,7 +3,7 @@
  * CLASS FILE  : business_unit.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 15 june 2009
+ * Date        : 16 june 2009
  * Description : Business Unit class file
  */
 
@@ -62,7 +62,7 @@
       $business_units_array = array();
 
       $index = 0;
-      $business_units_query = $database->query("select business_units_id from " . TABLE_BUSINESS_UNITS . " order by business_units_id");
+      $business_units_query = $database->query("select business_units_id from " . TABLE_BUSINESS_UNITS . " order by business_units_name");
       while ($business_units_result = $database->fetch_array($business_units_query)) {
         $business_units_array[$index] = new business_unit($business_units_result['business_units_id']);
         $index++;
@@ -75,7 +75,7 @@
       $database = $_SESSION['database'];
       // Insert a new business_unit if one does not exist and retrieve the id
       if ($this->id == 0) {
-        // The activity does not exist
+        // The business_unit does not exist
         $database->query("insert into " . TABLE_BUSINESS_UNITS . " (business_units_name, business_units_image, business_units_image_position) values ('" . $this->name . "', '" . $this->image . "', '" . $this->image_position . "')");
         $this->id = $database->insert_id(); // The proper id is now known
       } else {

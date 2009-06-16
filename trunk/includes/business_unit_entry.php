@@ -3,7 +3,7 @@
  * CODE FILE   : business_unit_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 15 june 2009
+ * Date        : 16 june 2009
  * Description : Business Unit entry fields
  */
 ?>
@@ -30,7 +30,7 @@
               <?php echo tep_draw_input_field('business_units_name', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
             <td class="item_entry">&nbsp;</td>
-            <td class="item_entry">
+            <td class="item_entry" style="width:65px">
               <?php echo TEXT_BUSINESS_UNITS_IMAGE; ?>
             </td>
             <td class="item_entry" colspan="3" style="width:200px">
@@ -39,7 +39,7 @@
           </tr>
           <tr>
             <td class="item_entry" colspan="3">&nbsp;</td>
-            <td class="item_entry">
+            <td class="item_entry" style="width:65px">
               <?php echo TEXT_BUSINESS_UNITS_IMAGE_POSITION; ?>
             </td>
             <td class="item_entry" style="text-align:left">
@@ -49,14 +49,14 @@
               <?php echo tep_draw_radio_field('business_units_image_position', 'C', false, ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
             <td class="item_entry" style="text-align:right">
-              <?php echo tep_draw_radio_field('business_units_image_position', 'R', false, ($_POST['action']=='enter_data'?'':' disabled')); ?>
+              <?php echo tep_draw_radio_field('business_units_image_position', 'R', false, ($_POST['action']=='enter_data'?'':' disabled')); ?>&nbsp;
             </td>
           </tr>
           <tr>
             <td class="item_entry" colspan="4">&nbsp;</td>
-            <td class="item_entry" style="text-align:left">&nbsp;&nbsp;L</td>
-            <td class="item_entry" style="text-align:center">C</td>
-            <td class="item_entry" style="text-align:right">R&nbsp;&nbsp;</td>
+            <td class="item_entry" style="text-align:left"><?php echo $BUSINESS_UNITS_IMAGE_POSITION['L']; ?></td>
+            <td class="item_entry" style="text-align:center"><?php echo $BUSINESS_UNITS_IMAGE_POSITION['C']; ?></td>
+            <td class="item_entry" style="text-align:right"><?php echo $BUSINESS_UNITS_IMAGE_POSITION['R']; ?></td>
           </tr>
           <tr>
             <td class="item_entry" colspan="7">

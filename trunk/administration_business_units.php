@@ -3,7 +3,7 @@
  * CODE FILE   : administration_business_units.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 15 june 2009
+ * Date        : 16 june 2009
  * Description : Business Unit administration form
  *               Data validation sequence
  *               Storing of entered data (via business_unit object)
@@ -114,7 +114,7 @@
                     <tr class="entryListing-<?php echo $odd_or_even; ?>" valign="top">
                       <td class="entryListing-data"><?php echo $_SESSION['business_unit']->listing[$index]->name; ?></td>
                       <td class="entryListing-data"><?php echo $_SESSION['business_unit']->listing[$index]->image; ?></td>
-                      <td class="entryListing-data" style="text-align:center;width:75px"><?php echo $_SESSION['business_unit']->listing[$index]->image_position; ?></td>
+                      <td class="entryListing-data" style="text-align:center;width:75px"><?php echo $BUSINESS_UNITS_IMAGE_POSITION[$_SESSION['business_unit']->listing[$index]->image_position]; ?></td>
                       <td class="entryListing-data" style="width:20px;text-align:center">
                         <?php echo tep_draw_form('edit_entry', tep_href_link(FILENAME_ADMINISTRATION_BUSINESS_UNITS)) . tep_create_parameters(array('action'=>'enter_data', 'business_units_id'=>$_SESSION['business_unit']->listing[$index]->id, 'business_units_name'=>$_SESSION['business_unit']->listing[$index]->name, 'business_units_image'=>$_SESSION['business_unit']->listing[$index]->image, 'business_units_image_position'=>$_SESSION['business_unit']->listing[$index]->image_position), array('mPath'), 'hidden_field');
                         echo tep_image_submit('edit.gif', TEXT_ENTRY_EDIT,'',DIR_WS_IMAGES);

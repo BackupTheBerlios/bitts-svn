@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 15 june 2009
+ * Date        : 16 june 2009
  * Description : Dutch language file
  */
 
@@ -268,6 +268,9 @@ define('TEXT_BUSINESS_UNITS_ID', 'BU nr');
 define('TEXT_BUSINESS_UNITS_NAME', 'Naam');
 define('TEXT_BUSINESS_UNITS_IMAGE', 'Logo');
 define('TEXT_BUSINESS_UNITS_IMAGE_POSITION', 'Positie');
+$BUSINESS_UNITS_IMAGE_POSITION = array ('L' => 'Links',
+                                        'C' => 'Midden',
+                                        'R' => 'Rechts');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $BUSINESS_UNIT_ERROR_LEVEL = array (0  => '',
