@@ -26,14 +26,14 @@
             <td class="item_entry">
               <?php echo TEXT_BUSINESS_UNITS_NAME; ?>
             </td>
-            <td class="item_entry" style="width:200px">
+            <td class="item_entry" style="width:150px">
               <?php echo tep_draw_input_field('business_units_name', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
             <td class="item_entry">&nbsp;</td>
             <td class="item_entry" style="width:65px">
               <?php echo TEXT_BUSINESS_UNITS_IMAGE; ?>
             </td>
-            <td class="item_entry" colspan="3" style="width:200px">
+            <td class="item_entry" colspan="3" style="width:150px">
               <?php echo tep_draw_input_field('business_units_image', '', 'size="1" maxlength="32" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
           </tr>
