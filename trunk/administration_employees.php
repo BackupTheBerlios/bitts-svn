@@ -3,7 +3,7 @@
  * CODE FILE   : administration_employees.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 15 june 2009
+ * Date        : 16 june 2009
  * Description : Employee administration form
  *               Data validation sequence
  *               Storing of entered data (via employee object)
@@ -25,6 +25,11 @@
   $error_level = 0;
 
   switch ($_POST['action']) {
+    case 'enter_data':
+      if ($_POST['employees_status'] == 'new') {
+        $_POST['employees_id'] = $_SESSION['administration_employee']->get_next_id();
+      }
+      break;
     case 'save_data':
       // When action==save_data: verify entered data and save if OK / set errorlevel when NOK
       //

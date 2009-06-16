@@ -3,7 +3,7 @@
  * CODE FILE   : administration_customers.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 june 2009
+ * Date        : 16 june 2009
  * Description : Customer administration form
  *               Data validation sequence
  *               Storing of entered data (via customer object)
@@ -25,6 +25,11 @@
   $error_level = 0;
 
   switch ($_POST['action']) {
+    case 'enter_data':
+      if ($_POST['customers_status'] == 'new') {
+        $_POST['customers_id'] = $_SESSION['customer']->get_next_id();
+      }
+      break;
     case 'save_data':
       // When action==save_data: verify entered data and save if OK / set errorlevel when NOK
       //

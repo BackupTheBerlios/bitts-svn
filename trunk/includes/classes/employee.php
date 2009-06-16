@@ -3,7 +3,7 @@
  * CLASS FILE  : employee.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 15 june 2009
+ * Date        : 16 june 2009
  * Description : Employee class
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -210,6 +210,13 @@
       $employee_query = $database->query("select 1 from " . TABLE_EMPLOYEES . " where employees_id = '" . (int)$id . "'");
       $employee_result = $database->fetch_array($employee_query);
       return tep_not_null($employee_result);
+    }
+
+    public function get_next_id() {
+      $database = $_SESSION['database'];
+      $employee_query = $database->query("select max(employees_id)+1 as employees_next_id from " . TABLE_EMPLOYEES);
+      $employee_result = $database->fetch_array($employee_query);
+      return (int)$employee_result['employees_next_id'];
     }
   }
 ?>

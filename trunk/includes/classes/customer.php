@@ -3,7 +3,7 @@
  * CLASS FILE  : customer.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 june 2009
+ * Date        : 16 june 2009
  * Description : Customer class
  *
  */
@@ -164,6 +164,13 @@
       $customer_query = $database->query("select 1 from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$id . "'");
       $customer_result = $database->fetch_array($customer_query);
       return tep_not_null($customer_result);
+    }
+
+    public function get_next_id() {
+      $database = $_SESSION['database'];
+      $customer_query = $database->query("select max(customers_id)+1 as customers_next_id from " . TABLE_CUSTOMERS);
+      $customer_result = $database->fetch_array($customer_query);
+      return (int)$customer_result['customers_next_id'];
     }
   }
 ?>
