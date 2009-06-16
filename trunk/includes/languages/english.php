@@ -267,6 +267,7 @@ $EMPLOYEE_ERROR_LEVEL = array (0 => '',
 define('TEXT_BUSINESS_UNITS_NAME', 'Name');
 define('TEXT_BUSINESS_UNITS_IMAGE', 'Image');
 define('TEXT_BUSINESS_UNITS_IMAGE_POSITION', 'Position');
+define('TEXT_BUSINESS_UNITS_LISTING_IS_EMPTY', 'No business units available');
 $BUSINESS_UNITS_IMAGE_POSITION = array ('L' => 'Left',
                                         'C' => 'Center',
                                         'R' => 'Right');
@@ -277,6 +278,7 @@ $BUSINESS_UNIT_ERROR_LEVEL = array (0 => '',
                                     2 => 'Deletion not permitted, projects exist');
 
 define('TEXT_CATEGORIES_NAME', 'Name');
+define('TEXT_CATEGORIES_LISTING_IS_EMPTY', 'No categories available');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $CATEGORY_ERROR_LEVEL = array (0 => '',
@@ -285,6 +287,7 @@ $CATEGORY_ERROR_LEVEL = array (0 => '',
 
 define('TEXT_UNITS_NAME', 'Name');
 define('TEXT_UNITS_DESCRIPTION', 'Description');
+define('TEXT_UNITS_LISTING_IS_EMPTY', 'No units available');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $UNIT_ERROR_LEVEL = array (0 => '',

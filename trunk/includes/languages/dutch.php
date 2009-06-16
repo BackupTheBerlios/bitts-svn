@@ -267,6 +267,7 @@ $EMPLOYEE_ERROR_LEVEL = array (0 => '',
 define('TEXT_BUSINESS_UNITS_NAME', 'Naam');
 define('TEXT_BUSINESS_UNITS_IMAGE', 'Logo');
 define('TEXT_BUSINESS_UNITS_IMAGE_POSITION', 'Positie');
+define('TEXT_BUSINESS_UNITS_LISTING_IS_EMPTY', 'Geen business units aanwezig');
 $BUSINESS_UNITS_IMAGE_POSITION = array ('L' => 'Links',
                                         'C' => 'Midden',
                                         'R' => 'Rechts');
@@ -277,6 +278,7 @@ $BUSINESS_UNIT_ERROR_LEVEL = array (0 => '',
                                     2 => 'Verwijderen niet toegestaan, projecten aanwezig');
 
 define('TEXT_CATEGORIES_NAME', 'Naam');
+define('TEXT_CATEGORIES_LISTING_IS_EMPTY', 'Geen categorie&euml;n aanwezig');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $CATEGORY_ERROR_LEVEL = array (0 => '',
@@ -285,6 +287,7 @@ $CATEGORY_ERROR_LEVEL = array (0 => '',
 
 define('TEXT_UNITS_NAME', 'Naam');
 define('TEXT_UNITS_DESCRIPTION', 'Omschrijving');
+define('TEXT_UNITS_LISTING_IS_EMPTY', 'Geen eenheden aanwezig');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $UNIT_ERROR_LEVEL = array (0 => '',

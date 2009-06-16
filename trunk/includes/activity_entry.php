@@ -3,7 +3,7 @@
  * CODE FILE   : activity_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 12 june 2009
+ * Date        : 16 june 2009
  * Description : Activity entry fields
  *               Data validation sequence
  *               Storing of entered data (via timesheet object)
@@ -12,7 +12,7 @@
 // When action==save_data: verify entered data and save if OK / set errorlevel when NOK
 $error_level = 0;
 if ($_POST['action'] == 'copy_activity') {
-  $former_activity_id = $_SESSION['timesheet']->get_former_activity_id($_SESSION['employee']->employee_id, $_POST['selected_date']);
+  $former_activity_id = $_SESSION['timesheet']->get_former_activity_id($_SESSION['employee']->id, $_POST['selected_date']);
   switch ($former_activity_id) {
     case -1:
       // Activity data cannot be used on the selected date
@@ -86,7 +86,7 @@ if ($_POST['action'] == 'save_data') {
 
     // Reload the timesheet object in order to
     // update the activity listing below
-    $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, $_POST['period']);
+    $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->id, $_POST['period']);
   }
 }
 $_POST['error_level_history'] = $error_level;
@@ -142,7 +142,7 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
             <td class="item_entry">
               <?php echo tep_draw_form('project_selection', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'select_role'), array('mPath','period','selected_date', 'activity_id'), 'hidden_field');
               if ($_POST['action']=='select_project'||$_POST['action']=='select_role'||$_POST['action']=='enter_data'||$_POST['action']=='save_data') {
-                echo tep_html_select('projects_id', tep_get_partial_array(project::get_selectable_projects($_SESSION['employee']->employee_id, tep_strftime('%Y-%m-%d', $_POST['selected_date'])), 'projects_id', 'projects_name'), TRUE, $_POST['projects_id']);
+                echo tep_html_select('projects_id', tep_get_partial_array(project::get_selectable_projects($_SESSION['employee']->id, tep_strftime('%Y-%m-%d', $_POST['selected_date'])), 'projects_id', 'projects_name'), TRUE, $_POST['projects_id']);
               } else {
                 echo tep_html_select('projects_id', array(), FALSE);
               }
@@ -156,7 +156,7 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
             <td class="item_entry">
               <?php echo tep_draw_form('role_selection', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'enter_data'), array('mPath','period','selected_date', 'projects_id', 'activity_id'), 'hidden_field');
               if ($_POST['action']=='select_role'||$_POST['action']=='enter_data'||$_POST['action']=='save_data') {
-                echo tep_html_select('roles_id', tep_get_partial_array(role::get_selectable_roles($_SESSION['employee']->employee_id, tep_strftime('%Y-%m-%d', $_POST['selected_date']),$_POST['projects_id']), 'roles_id', 'roles_name'), TRUE, $_POST['roles_id']);
+                echo tep_html_select('roles_id', tep_get_partial_array(role::get_selectable_roles($_SESSION['employee']->id, tep_strftime('%Y-%m-%d', $_POST['selected_date']),$_POST['projects_id']), 'roles_id', 'roles_name'), TRUE, $_POST['roles_id']);
               } else {
                 echo tep_html_select('roles_id', array(), FALSE);
               }
@@ -173,7 +173,7 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
             <td class="item_entry">
               <?php echo tep_draw_input_field('activity_amount', '', 'size="1" maxlength="6" style="width: 20%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled'));
               if ($_POST['action']=='enter_data'||$_POST['action']=='save_data') {
-                echo tep_html_select('tariffs_id', tep_get_partial_array(tariff::get_selectable_tariffs($_SESSION['employee']->employee_id, tep_strftime('%Y-%m-%d', $_POST['selected_date']), $_POST['roles_id']), 'tariffs_id', 'units_name'), TRUE, $_POST['tariffs_id'], 'size="1" style="width: 80%"');
+                echo tep_html_select('tariffs_id', tep_get_partial_array(tariff::get_selectable_tariffs($_SESSION['employee']->id, tep_strftime('%Y-%m-%d', $_POST['selected_date']), $_POST['roles_id']), 'tariffs_id', 'units_name'), TRUE, $_POST['tariffs_id'], 'size="1" style="width: 80%"');
               } else {
                 echo tep_html_select('tariffs_id', array(), FALSE, 0, 'size="1" style="width: 80%"');
               }
