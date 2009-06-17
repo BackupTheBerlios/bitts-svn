@@ -3,7 +3,7 @@
  * CLASS FILE  : unit.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 june 2009
+ * Date        : 17 june 2009
  * Description : Unit class file
  */
 
@@ -15,8 +15,8 @@
       $this->id = $id;
       $this->listing = array();
 
-      if ($this->id != 0) {
-        $this->id = $database->prepare_input($this->id);
+      if ($id != 0) {
+        $id = $database->prepare_input($id);
 
         $units_query = $database->query("select units_name, units_description from " . TABLE_UNITS . " where units_id = '" . (int)$id . "'");
         $units_result = $database->fetch_array($units_query);

@@ -3,7 +3,7 @@
  * CLASS FILE  : customer.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 june 2009
+ * Date        : 17 june 2009
  * Description : Customer class
  *
  */
@@ -16,10 +16,10 @@
       $this->id = $id;
       $this->listing = array();
 
-      if ($this->id != 0) {
+      if ($id != 0) {
         // Retrieve customer by id
-        $this->id = $database->prepare_input($this->id);
-        $customer_query = $database->query("select customers_name, customers_billing_name1, customers_billing_name2, customers_billing_address, customers_billing_postcode, customers_billing_city, customers_billing_country, customers_billing_email_address, customers_billing_phone, customers_billing_fax from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$this->id . "'");
+        $id = $database->prepare_input($id);
+        $customer_query = $database->query("select customers_name, customers_billing_name1, customers_billing_name2, customers_billing_address, customers_billing_postcode, customers_billing_city, customers_billing_country, customers_billing_email_address, customers_billing_phone, customers_billing_fax from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$id . "'");
         $customer_result = $database->fetch_array($customer_query);
 
         if (tep_not_null($customer_result)) {

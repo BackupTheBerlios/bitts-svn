@@ -3,7 +3,7 @@
  * CLASS FILE  : business_unit.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 june 2009
+ * Date        : 17 june 2009
  * Description : Business Unit class file
  */
 
@@ -15,8 +15,8 @@
       $this->id = $id;
       $this->listing = array();
 
-      if ($this->id != 0) {
-        $this->id = $database->prepare_input($this->id);
+      if ($id != 0) {
+        $id = $database->prepare_input($id);
 
         $business_units_query = $database->query("select business_units_name, business_units_image, business_units_image_position from " . TABLE_BUSINESS_UNITS . " where business_units_id = '" . (int)$id . "'");
         $business_units_result = $database->fetch_array($business_units_query);

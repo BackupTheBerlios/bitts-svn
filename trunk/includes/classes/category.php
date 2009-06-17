@@ -3,7 +3,7 @@
  * CLASS FILE  : category.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 june 2009
+ * Date        : 17 june 2009
  * Description : Category class file
  */
 
@@ -15,8 +15,8 @@
       $this->id = $id;
       $this->listing = array();
 
-      if ($this->id != 0) {
-        $this->id = $database->prepare_input($this->id);
+      if ($id != 0) {
+        $id = $database->prepare_input($id);
 
         $categories_query = $database->query("select categories_name from " . TABLE_CATEGORIES . " where categories_id = '" . (int)$id . "'");
         $categories_result = $database->fetch_array($categories_query);
