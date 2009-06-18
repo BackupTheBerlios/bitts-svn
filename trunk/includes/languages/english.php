@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 june 2009
+ * Date        : 18 june 2009
  * Description : English language file
  */
 
@@ -126,15 +126,34 @@ define('TEXT_TIMEREGISTRATION_CONFIRM_OK', 'Confirm OK');
 define('TEXT_TIMEREGISTRATION_CONFIRM_CANCEL', 'Cancel confirm');
 define('TEXT_TIMEREGISTRATION_CALENDAR_DESCRIPTION', 'Overview registered amounts per day:');
 
-define('TEXT_PROJECT_NAME', 'Project name');
-define('TEXT_PROJECT_START_DATE', 'Start date');
-define('TEXT_PROJECT_END_DATE', 'End date');
-define('TEXT_PROJECT_CALCULATED_HOURS', 'Calculated hours');
-define('TEXT_PROJECT_PERIOD', 'Calculation period');
-define('TEXT_PROJECT_PERIOD_BILLINGPERIOD', 'Per billing period');
-define('TEXT_PROJECT_PERIOD_ENTIREPROJECT', 'Entire project');
-define('TEXT_PROJECT_HOURS_USED', 'Used hours');
-define('TEXT_PROJECT_HOURS_USED_PERCENTAGE', 'Used hours (%)');
+define('TEXT_PROJECTS_NAME', 'Project name');
+define('TEXT_PROJECTS_DESCRIPTION', 'Description');
+define('TEXT_PROJECTS_CUSTOMERS_CONTACT_NAME', 'Contact customer');
+define('TEXT_PROJECTS_CUSTOMERS_REFERENCE', 'Reference customer');
+define('TEXT_PROJECTS_START_DATE', 'Start date');
+define('TEXT_PROJECTS_END_DATE', 'End date');
+define('TEXT_PROJECTS_CALCULATED_HOURS', 'Calculated hours');
+define('TEXT_PROJECTS_PERIOD', 'Calculation period');
+$PROJECTS_CALCULATED_HOURS_PERIOD = array ('B' => 'Per billing period',
+                                           'E' => 'Entire project');
+define('TEXT_PROJECTS_HOURS_USED', 'Used hours');
+define('TEXT_PROJECTS_HOURS_USED_PERCENTAGE', 'Used hours (%)');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$PROJECT_ERROR_LEVEL = array (0  => '',
+                              1  => 'Project name is missing',
+                              2  => 'Start date is missing',
+                              3  => 'Business Unit is missing',
+                              4  => 'Customer is missing',
+                              5  => 'Incorrect date',
+                              6  => 'Incorrect calculated hours',
+                              7  => 'Empl-Role end date before new start date',
+                              8  => 'Tariff end date before new start date',
+                              9  => 'Activities between old and new start date',
+                              10 => 'Empl-Role start date before new end date',
+                              11 => 'Tariff start date after new end date',
+                              12 => 'Activities between old and new end date',
+                              13 => 'Deletion not permitted, roles exist');
 
 define('TEXT_ACTIVITY_DAY', 'Day');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');
@@ -225,8 +244,9 @@ define('REPORT_TABLE_HEADER_COMMENT', 'Comment');
 
 define('EXPORT_NAME_ACTIVITIES', 'Export activities');
 
+define('TEXT_CUSTOMERS', 'Customer');
 define('TEXT_CUSTOMERS_ID', 'Customernr');
-define('TEXT_CUSTOMERS_NAME', 'Customer name');
+define('TEXT_CUSTOMERS_NAME', 'Name');
 define('TEXT_CUSTOMERS_BILLING_NAME1', 'Billing name 1');
 define('TEXT_CUSTOMERS_BILLING_NAME2', 'Billing name 2');
 define('TEXT_CUSTOMERS_BILLING_ADDRESS', 'Billing address');
@@ -264,6 +284,7 @@ $EMPLOYEE_ERROR_LEVEL = array (0 => '',
                                5 => 'Duplicate employeenumber',
                                6 => 'Deletion not permitted, empl.-roles/timesheets exist');
 
+define('TEXT_BUSINESS_UNITS', 'Business Unit');
 define('TEXT_BUSINESS_UNITS_NAME', 'Name');
 define('TEXT_BUSINESS_UNITS_IMAGE', 'Image');
 define('TEXT_BUSINESS_UNITS_IMAGE_POSITION', 'Position');

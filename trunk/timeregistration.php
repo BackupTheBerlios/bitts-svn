@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 june 2009
+ * Date        : 18 june 2009
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -109,7 +109,7 @@
             <td align="center">
               <table border="0px" width="20%" cellspacing="0" cellpadding="3" class="infoBoxContents">
                 <tr>
-                  <td align="center" class="boxText"><?php echo tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($_SESSION['timesheet']->start_date)) . '&nbsp;&nbsp;-&nbsp;&nbsp;' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($_SESSION['timesheet']->end_date)); ?></td>
+                  <td align="center" class="boxText"><?php echo tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date)) . '&nbsp;&nbsp;-&nbsp;&nbsp;' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->end_date)); ?></td>
                 </tr>
               </table>
             </td>

@@ -3,61 +3,159 @@
  * CLASS FILE  : project.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 08 december 2008
+ * Date        : 18 june 2009
  * Description : Project class
  */
 
   class project {
-    private $project_id, $business_unit, $customer, $name, $description, $customers_contact_name, $customers_reference, $start_date, $end_date, $calculated_hours, $roles, $role_count;
+    private $id, $business_unit, $customer, $name, $description, $customers_contact_name, $customers_reference, $start_date, $end_date, $calculated_hours, $calculated_hours_period, $roles, $listing;
 
-    public function __construct($project_id = '', $role_object = '') {
+    public function __construct($id = 0, $role_object = null) {
       $database = $_SESSION['database'];
-      $this->project_id = $project_id;
+      $this->id = $id;
       $this->roles = array();
-      $this->role_count = 0;
+      $this->listing = array();
 
-      if (tep_not_null($project_id)) {
-        $this->project_id = $database->prepare_input($this->project_id);
+      if ($id != 0) {
+        $id = $database->prepare_input($id);
 
-        $project_query = $database->query("select business_units_id, customers_id, projects_name, projects_description, projects_customers_contact_name, projects_customers_reference, projects_start_date, projects_end_date, projects_calculated_hours from " . TABLE_PROJECTS . " where projects_id = '" . (int)$project_id . "'");
-        $project_result = $database->fetch_array($project_query);
+        $projects_query = $database->query("select projects_name, projects_description, projects_customers_contact_name, projects_customers_reference, projects_start_date, projects_end_date, projects_calculated_hours, projects_calculated_hours_period, business_units_id, customers_id from " . TABLE_PROJECTS . " where projects_id = '" . (int)$id . "'");
+        $projects_result = $database->fetch_array($projects_query);
 
-        $this->business_unit = new business_unit($project_result['business_units_id']);
-        $this->customer = new customer($project_result['customers_id']);
-        $this->name = $project_result['projects_name'];
-        $this->description = $project_result['projects_description'];
-        $this->customers_contact_name = $project_result['projects_customers_contact_name'];
-        $this->customers_reference = $project_result['projects_customers_reference'];
-        $this->start_date = $project_result['projects_start_date'];
-        $this->end_date = $project_result['projects_end_date'];
-        $this->calculated_hours = $project_result['projects_calculated_hours'];
-
-        // Retrieve specific role or all available roles for this project
-        if (tep_not_null($role_object)) {
-          $this->add_role($role_object);
-        } else {
-          $this->roles = role::get_array($this->project_id);
-          // Determine size of array $this->roles (#nodes) and put this value into $child_count
+        if (tep_not_null($projects_result)) {
+          // Project exists
+          $this->fill($projects_result['projects_name'],
+                      $projects_result['projects_description'],
+                      $projects_result['projects_customers_contact_name'],
+                      $projects_result['projects_customers_reference'],
+                      tep_datetouts(DATE_FORMAT_DATABASE, $projects_result['projects_start_date']),
+                      ($projects_result['projects_end_date']!='2099-12-31'?tep_datetouts(DATE_FORMAT_DATABASE, $projects_result['projects_end_date']):0),
+                      $projects_result['projects_calculated_hours'],
+                      $projects_result['projects_calculated_hours_period'],
+                      $projects_result['business_units_id'],
+                      $projects_result['customers_id']);
+          // Retrieve specific role or all available roles for this project
+          if (tep_not_null($role_object)) {
+            $this->roles[sizeof($this->roles)] = $role_object;
+          } else {
+            $temp_role = new role(); // Create a default role (id==0)
+            $this->roles = $temp_role->get_array($this->id);
+          }
         }
+      } else {
+        // We probably created an empty project object to retrieve the entire project listing
+        $this->listing = $this->get_array();
       }
     }
 
     public function __get($varname) {
       switch ($varname) {
-        case 'name':
+        case 'id':
+          return $this->id;
+      	case 'name':
           return $this->name;
-      	case 'role_count':
-          return $this->role_count;
+      	case 'description':
+          return $this->description;
+        case 'customers_contact_name':
+          return $this->customers_contact_name;
+        case 'customers_reference':
+          return $this->customers_reference;
+        case 'start_date': // In uts
+          return $this->start_date;
+        case 'end_date': // In uts
+          return $this->end_date;
+        case 'calculated_hours':
+          return $this->calculated_hours;
+        case 'calculated_hours_period':
+          return $this->calculated_hours_period;
+        case 'business_unit':
+          return $this->business_unit;
+        case 'customer':
+          return $this->customer;
+        case 'roles':
+          return $this->roles;
+        case 'listing':
+          return $this->listing;
+        case 'listing_empty':
+          return sizeof($this->listing) == 0;
       }
       return null;
     }
 
-    private function add_role($role_object = '') {
-      if (tep_not_null($role_object)) {
-        $this->roles[$this->role_count] = $role_object;
-        $this->role_count++;
+    public function fill($name = '', $description = '', $customers_contact_name = '', $customers_reference = '', $start_date = 0, $end_date = 0, $calculated_hours = 0, $calculated_hours_period = 'E', $business_units_id = 0, $customers_id = 0) {
+        $this->name = $name;
+        $this->description = $description;
+        $this->customers_contact_name = $customers_contact_name;
+        $this->customers_reference = $customers_reference;
+        $this->start_date = $start_date;
+        $this->end_date = $end_date;
+        $this->calculated_hours = $calculated_hours;
+        $this->calculated_hours_period = $calculated_hours_period;
+        $this->business_unit = new business_unit($business_units_id);
+        $this->customer = new customer($customers_id);
+    }
+
+    private function get_array() {
+      $database = $_SESSION['database'];
+      $projects_array = array();
+
+      $index = 0;
+      $projects_query = $database->query("select projects_id from " . TABLE_PROJECTS . " order by projects_name");
+      while ($projects_result = $database->fetch_array($projects_query)) {
+        $projects_array[$index] = new project($projects_result['projects_id']);
+        $index++;
+      }
+
+      return $projects_array;
+    }
+
+    public function save() {
+      $database = $_SESSION['database'];
+      // Insert a new project if one does not exist and retrieve the id
+      if ($this->id == 0) {
+        // The project does not exist
+        $database->query("insert into " . TABLE_PROJECTS . " (projects_name, projects_description, projects_customers_contact_name, projects_customers_reference, projects_start_date, projects_end_date, projects_calculated_hours, projects_calculated_hours_period, business_units_id, customers_id) values ('" . $this->name . "', '" . $this->description . "', '" . $this->customers_contact_name . "', '" . $this->customers_reference . "', '" . tep_strftime(DATE_FORMAT_DATABASE, $this->start_date) . "', '" . ($this->end_date!=0?tep_strftime(DATE_FORMAT_DATABASE, $this->end_date):'2099-12-31') . "', '" . $this->calculated_hours . "', '" . $this->business_unit->id . "', '" . $this->customer->id . "')");
+        $this->id = $database->insert_id(); // The proper id is now known
+      } else {
+        // The project exists, update the contents
+        $units_query = $database->query("update " . TABLE_PROJECTS . " set projects_name='" . $this->name . "', projects_description='" . $this->description . "', projects_customers_contact_name='" . $this->customers_contact_name . "', projects_customers_reference='" . $this->customers_reference . "', projects_start_date='" . tep_strftime(DATE_FORMAT_DATABASE, $this->start_date) . "', projects_end_date='" . ($this->end_date!=0?tep_strftime(DATE_FORMAT_DATABASE, $this->end_date):'2099-12-31') . "', projects_calculated_hours='" . $this->calculated_hours . "', projects_calculated_hours_period='" . $this->calculated_hours_period . "', business_units_id='" . $this->business_unit->id . "', customers_id='" . $this->customer->id . "' where projects_id = '" . (int)$this->id . "'");
       }
     }
+
+    public function delete() {
+      $database = $_SESSION['database'];
+      $projects_query = $database->query("delete from " . TABLE_PROJECTS . " where projects_id = '" . (int)$this->id . "'");
+      // Reset id, otherwise one might think this project (still) exists in db
+      $this->id = 0;
+    }
+
+    public function has_dependencies() {
+      $database = $_SESSION['database'];
+      $this->id = $database->prepare_input($this->id);
+      $roles_query = $database->query("select 1 from " . TABLE_ROLES . " where projects_id = '" . (int)$this->id . "'");
+      $roles_result = $database->fetch_array($roles_query);
+      return tep_not_null($roles_result);
+    }
+
+    public function validate_hours($value) {
+      $value = str_replace(",", ".", $value);
+      $value = '0' . $value;
+      return (substr_count($value, ".") == 0 &&
+              is_numeric($value) &&
+              (int)$value >= 0);
+    }
+
+
+
+
+
+
+
+
+    /******************************************************************************************/
+    /***** The following static functions have to be reviewed to minimize the use of them *****/
+    /***** TODO: Check if they can be replaced by non-static version                      *****/
+    /******************************************************************************************/
 
     public static function get_selected_tree($tariff_id = '') {
       $role = role::get_selected_tree($tariff_id);

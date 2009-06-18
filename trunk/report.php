@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 june 2009
+ * Date        : 18 june 2009
  * Description : Data gathering and reporting functions
  */
 
@@ -32,7 +32,7 @@
       $pdf->Ln();
       if ($_POST['show_timesheet_info'] || $_POST['show_travel_distance_and_expenses']) {
         $pdf->Cell(30, 6, REPORT_TEXT_PERIOD, 0, 0, 'L');
-        $pdf->Cell(100, 6, $_POST['period'] . '  (' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts(tep_periodstartdate($_POST['period']))) . ' - ' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts(tep_periodenddate($_POST['period']))) . ')', 0, 0, 'L');
+        $pdf->Cell(100, 6, $_POST['period'] . '  (' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', tep_periodstartdate($_POST['period']))) . ' - ' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', tep_periodenddate($_POST['period']))) . ')', 0, 0, 'L');
         $pdf->Ln();
       }
       $pdf->Ln(6);
@@ -161,7 +161,7 @@
           }
           $pdf->InvoiceHeader($projects_result['business_units_image'],
                               $projects_result['customers_name'],
-                              tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($projects_result['timesheets_start_date'])) . ' - ' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($projects_result['timesheets_end_date'])),
+                              tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $projects_result['timesheets_start_date'])) . ' - ' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $projects_result['timesheets_end_date'])),
                               $projects_result['projects_name'],
                               $projects_result['roles_name'],
                               ($_POST['per_employee']?$projects_result['employees_fullname']:''));
@@ -189,7 +189,7 @@
           $units_id = $projects_result['units_id'];
         }
         // And we're off creating the table contents
-        $pdf->InvoiceTableContents(tep_datetouts($projects_result['activities_date']),
+        $pdf->InvoiceTableContents(tep_datetouts('%Y-%m-%d', $projects_result['activities_date']),
                                    $projects_result['employees_fullname'],
                                    $projects_result['activities_amount'],
                                    $projects_result['units_name'],

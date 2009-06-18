@@ -3,17 +3,17 @@
  * CODE FILE   : calendar.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 september 2008
+ * Date        : 18 june 2009
  * Description : Calendar control
  *
  */
 
-  $calendar_start = (int)strftime('%Y%m%d', tep_datetouts($_SESSION['timesheet']->start_date));
-  $calendar_end = (int)strftime('%Y%m%d', tep_datetouts($_SESSION['timesheet']->end_date));
+  $calendar_start = (int)strftime('%Y%m%d', tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date));
+  $calendar_end = (int)strftime('%Y%m%d', tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->end_date));
 
   // Determine start day index
-  $calendar_day_index = (int)strftime('%u', tep_datetouts($_SESSION['timesheet']->start_date)) - 1;
-  $calendar_day = (int)strftime('%d', tep_datetouts($_SESSION['timesheet']->start_date));
+  $calendar_day_index = (int)strftime('%u', tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date)) - 1;
+  $calendar_day = (int)strftime('%d', tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date));
 ?>
   <!-- calendar_control //-->
   <table border="0" cellspacing="0" cellpadding="2" class="calendar">
@@ -37,9 +37,9 @@
           </tr>
           <tr>
         <?php }
-        echo tep_draw_form('select_day_'.$calendar_day, tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('mPath'=>'21','selected_date'=>tep_datetouts($_SESSION['timesheet']->start_date, $calendar_day - 1),'action'=>'select_project'), array('period', 'activity_id'), 'hidden_field'); ?>
+        echo tep_draw_form('select_day_'.$calendar_day, tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('mPath'=>'21','selected_date'=>tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date, $calendar_day - 1),'action'=>'select_project'), array('period', 'activity_id'), 'hidden_field'); ?>
           <td class="<?php echo ($colindex%7 >= 0 && $colindex%7 <= 4?'calendar-weekday':'calendar-weekend') ?>" align="center">
-            <?php //echo '<a href=' . tep_href_link(FILENAME_TIMEREGISTRATION, tep_create_parameters(array('mPath'=>'21','selected_date'=>tep_datetouts($_SESSION['timesheet']->start_date, $calendar_day - 1),'action'=>'select_project'), array('period', 'activity_id'))) . '>' . $calendar_day . '</a>';
+            <?php //echo '<a href=' . tep_href_link(FILENAME_TIMEREGISTRATION, tep_create_parameters(array('mPath'=>'21','selected_date'=>tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date, $calendar_day - 1),'action'=>'select_project'), array('period', 'activity_id'))) . '>' . $calendar_day . '</a>';
             echo tep_href_submit($calendar_day); ?>
           </td>
         </form>

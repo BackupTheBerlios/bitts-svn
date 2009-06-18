@@ -3,7 +3,7 @@
  * CLASS FILE  : timesheet.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 june 2009
+ * Date        : 18 june 2009
  * Description : Timesheet class
  *
  */
@@ -50,7 +50,7 @@
         case 'id':
           return $this->id;
       	case 'period':
-          return tep_datetoperiod($this->start_date);
+          return tep_datetoperiod(DATE_FORMAT_DATABASE, $this->start_date);
         case 'start_date':
           return $this->start_date;
         case 'end_date':
@@ -132,7 +132,7 @@
     public function get_total_amount_per_day() {
       $total_amount_per_day = array();
       // Fill the array with zero-hours
-      $last_day_of_the_month = (int)strftime('%d', tep_datetouts($this->end_date));
+      $last_day_of_the_month = (int)strftime('%d', tep_datetouts('%Y-%m-%d', $this->end_date));
       for ($day_index = 1; $day_index <= $last_day_of_the_month; $day_index++) {
         $total_amount_per_day[$day_index] = 0.00;
       }
@@ -152,7 +152,7 @@
                                                           " order by timesheets_start_date");
       $oldest_unconfirmed_period_result = $database->fetch_array($oldest_unconfirmed_period_query);
       if (tep_not_null($oldest_unconfirmed_period_result)) {
-        return tep_datetoperiod($oldest_unconfirmed_period_result['timesheets_start_date']);
+        return tep_datetoperiod(DATE_FORMAT_DATABASE, $oldest_unconfirmed_period_result['timesheets_start_date']);
       } else {
         return null;
       }

@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 september 2008
+ * Date        : 18 june 2009
  * Description : Overview of total hours per day in a calender
  */
 
@@ -18,8 +18,8 @@
 
   // Create a new timesheet object with id == 0
   // If a timesheet already exists for this employee and period, the timesheet class will automatically
-  // retrieve the correct id and put this into $_SESSION['timesheet']->timesheet_id
-  $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->employee_id, $_POST['period']);
+  // retrieve the correct id and put this into $_SESSION['timesheet']->id
+  $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->id, $_POST['period']);
 
   // Check if there are unconfirmed timesheets available with timesheets_end_date previous to today
   // If so, create an info message
@@ -76,7 +76,7 @@
             <td align="center">
               <table border="0px" width="20%" cellspacing="0" cellpadding="3" class="infoBoxContents">
                 <tr>
-                  <td align="center" class="boxText"><?php echo tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($_SESSION['timesheet']->start_date)) . '&nbsp;&nbsp;-&nbsp;&nbsp;' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($_SESSION['timesheet']->end_date)); ?></td>
+                  <td align="center" class="boxText"><?php echo tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date)) . '&nbsp;&nbsp;-&nbsp;&nbsp;' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->end_date)); ?></td>
                 </tr>
               </table>
             </td>
@@ -93,12 +93,12 @@
           <tr>
             <td align="center">
               <!-- large_calendar //-->
-              <?php $calendar_start = (int)strftime('%Y%m%d', tep_datetouts($_SESSION['timesheet']->start_date));
-              $calendar_end = (int)strftime('%Y%m%d', tep_datetouts($_SESSION['timesheet']->end_date));
+              <?php $calendar_start = (int)strftime('%Y%m%d', tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date));
+              $calendar_end = (int)strftime('%Y%m%d', tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->end_date));
 
               // Determine start day index
-              $calendar_day_index = (int)strftime('%u', tep_datetouts($_SESSION['timesheet']->start_date)) - 1;
-              $calendar_day = (int)strftime('%d', tep_datetouts($_SESSION['timesheet']->start_date));
+              $calendar_day_index = (int)strftime('%u', tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date)) - 1;
+              $calendar_day = (int)strftime('%d', tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date));
 
               // Get the day totals
               $total_amount_per_day = $_SESSION['timesheet']->get_total_amount_per_day(); ?>

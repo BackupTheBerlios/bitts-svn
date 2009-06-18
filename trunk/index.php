@@ -3,7 +3,7 @@
  * CODE FILE   : index.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 june 2009
+ * Date        : 18 june 2009
  * Description : Default (starting)page
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -100,23 +100,23 @@
             <td>
               <table border="0" width="100%" cellspacing="0" cellpadding="2" class="projectListing">
                 <tr>
-                  <td class="projectListing-heading"><?php echo TEXT_PROJECT_NAME; ?></td>
-                  <td class="projectListing-heading"><?php echo TEXT_PROJECT_START_DATE; ?></td>
-                  <td class="projectListing-heading"><?php echo TEXT_PROJECT_END_DATE; ?></td>
-                  <td class="projectListing-heading"><?php echo TEXT_PROJECT_CALCULATED_HOURS; ?></td>
-                  <td class="projectListing-heading"><?php echo TEXT_PROJECT_PERIOD; ?></td>
-                  <td class="projectListing-heading"><?php echo TEXT_PROJECT_HOURS_USED; ?></td>
-                  <td class="projectListing-heading"><?php echo TEXT_PROJECT_HOURS_USED_PERCENTAGE; ?></td>
+                  <td class="projectListing-heading"><?php echo TEXT_PROJECTS_NAME; ?></td>
+                  <td class="projectListing-heading"><?php echo TEXT_PROJECTS_START_DATE; ?></td>
+                  <td class="projectListing-heading"><?php echo TEXT_PROJECTS_END_DATE; ?></td>
+                  <td class="projectListing-heading"><?php echo TEXT_PROJECTS_CALCULATED_HOURS; ?></td>
+                  <td class="projectListing-heading"><?php echo TEXT_PROJECTS_CALCULATED_HOURS_PERIOD; ?></td>
+                  <td class="projectListing-heading"><?php echo TEXT_PROJECTS_HOURS_USED; ?></td>
+                  <td class="projectListing-heading"><?php echo TEXT_PROJECTS_HOURS_USED_PERCENTAGE; ?></td>
                 </tr>
                 <?php $project_array = project::get_project_listing(mktime()); // Current date in Unix timestamp
                 for ($index = 0; $index < sizeof($project_array); $index++) {
                   $projects_calculated_hours_used_percentage = ($project_array[$index]['projects_calculated_hours']!=0?round(($project_array[$index]['projects_calculated_hours_used']/$project_array[$index]['projects_calculated_hours'])*100).'%':BODY_TEXT_NOT_APPLICABLE); ?>
                   <tr class="projectListing-<?php echo ($projects_calculated_hours_used_percentage>=100?'red':($projects_calculated_hours_used_percentage>=75?'orange':'green'));?>">
                     <td class="projectListing-data"><?php echo $project_array[$index]['projects_name']; ?></td>
-                    <td class="projectListing-data"><?php echo tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($project_array[$index]['projects_start_date'])); ?></td>
-                    <td class="projectListing-data"><?php echo ($project_array[$index]['projects_end_date']!='2099-12-31'?tep_strftime(DATE_FORMAT_SHORT, tep_datetouts($project_array[$index]['projects_end_date'])):BODY_TEXT_NOT_APPLICABLE); ?></td>
+                    <td class="projectListing-data"><?php echo tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $project_array[$index]['projects_start_date'])); ?></td>
+                    <td class="projectListing-data"><?php echo ($project_array[$index]['projects_end_date']!='2099-12-31'?tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $project_array[$index]['projects_end_date'])):BODY_TEXT_NOT_APPLICABLE); ?></td>
                     <td class="projectListing-data"><?php echo ($project_array[$index]['projects_calculated_hours']!=0?$project_array[$index]['projects_calculated_hours']:BODY_TEXT_NOT_APPLICABLE); ?></td>
-                    <td class="projectListing-data"><?php echo ($project_array[$index]['projects_calculated_hours']!=0?($project_array[$index]['projects_calculated_hours_period']=='E'?TEXT_PROJECT_PERIOD_ENTIREPROJECT:TEXT_PROJECT_PERIOD_BILLINGPERIOD):BODY_TEXT_NOT_APPLICABLE); ?></td>
+                    <td class="projectListing-data"><?php echo ($project_array[$index]['projects_calculated_hours']!=0?$PROJECTS_CALCULATED_HOURS_PERIOD[$project_array[$index]['projects_calculated_hours_period']]:BODY_TEXT_NOT_APPLICABLE); ?></td>
                     <td class="projectListing-data"><?php echo tep_number_db_to_user($project_array[$index]['projects_calculated_hours_used'], 2); ?></td>
                     <td class="projectListing-data"><?php echo $projects_calculated_hours_used_percentage; ?></td>
                   </tr>

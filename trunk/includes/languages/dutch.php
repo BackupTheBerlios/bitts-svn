@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 june 2009
+ * Date        : 18 june 2009
  * Description : Dutch language file
  */
 
@@ -126,15 +126,34 @@ define('TEXT_TIMEREGISTRATION_CONFIRM_OK', 'Bevestigen OK');
 define('TEXT_TIMEREGISTRATION_CONFIRM_CANCEL', 'Bevestigen annuleren');
 define('TEXT_TIMEREGISTRATION_CALENDAR_DESCRIPTION', 'Overzicht geboekte aantallen per dag:');
 
-define('TEXT_PROJECT_NAME', 'Project naam');
-define('TEXT_PROJECT_START_DATE', 'Start datum');
-define('TEXT_PROJECT_END_DATE', 'Eind datum');
-define('TEXT_PROJECT_CALCULATED_HOURS', 'Gebudgetteerde uren');
-define('TEXT_PROJECT_PERIOD', 'Meetperiode');
-define('TEXT_PROJECT_PERIOD_BILLINGPERIOD', 'Per billing periode');
-define('TEXT_PROJECT_PERIOD_ENTIREPROJECT', 'Volledig project');
-define('TEXT_PROJECT_HOURS_USED', 'Gebruikte uren');
-define('TEXT_PROJECT_HOURS_USED_PERCENTAGE', 'Gebruikte uren (%)');
+define('TEXT_PROJECTS_NAME', 'Project naam');
+define('TEXT_PROJECTS_DESCRIPTION', 'Omschrijving');
+define('TEXT_PROJECTS_CUSTOMERS_CONTACT_NAME', 'Contactpersoon klant');
+define('TEXT_PROJECTS_CUSTOMERS_REFERENCE', 'Referentie klant');
+define('TEXT_PROJECTS_START_DATE', 'Start datum');
+define('TEXT_PROJECTS_END_DATE', 'Eind datum');
+define('TEXT_PROJECTS_CALCULATED_HOURS', 'Gebudgetteerde uren');
+define('TEXT_PROJECTS_CALCULATED_HOURS_PERIOD', 'Meetperiode');
+$PROJECTS_CALCULATED_HOURS_PERIOD = array ('B' => 'Per billing periode',
+                                           'E' => 'Volledig project');
+define('TEXT_PROJECTS_HOURS_USED', 'Gebruikte uren');
+define('TEXT_PROJECTS_HOURS_USED_PERCENTAGE', 'Gebruikte uren (%)');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$PROJECT_ERROR_LEVEL = array (0  => '',
+                              1  => 'Project naam ontbreekt',
+                              2  => 'Start datum ontbreekt',
+                              3  => 'Business Unit ontbreekt',
+                              4  => 'Debiteur ontbreekt',
+                              5  => 'Datum onjuist',
+                              6  => 'Gebudgetteerde uren onjuist',
+                              7  => 'Medew-Rol eind datum voor nieuwe start datum',
+                              8  => 'Tarief eind datum voor nieuwe start datum',
+                              9  => 'Activiteiten tussen oude en nieuwe start datum',
+                              10 => 'Medew-Rol start datum voor nieuwe eind datum',
+                              11 => 'Tarief start datum na nieuwe eind datum',
+                              12 => 'Activiteiten tussen oude en nieuwe eind datum',
+                              13 => 'Verwijderen niet toegestaan, rollen aanwezig');
 
 define('TEXT_ACTIVITY_DAY', 'Dag');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');
@@ -225,8 +244,9 @@ define('REPORT_TABLE_HEADER_COMMENT', 'Opmerkingen');
 
 define('EXPORT_NAME_ACTIVITIES', 'Export activiteiten');
 
+define('TEXT_CUSTOMERS', 'Debiteur');
 define('TEXT_CUSTOMERS_ID', 'Debiteurnr');
-define('TEXT_CUSTOMERS_NAME', 'Debiteur naam');
+define('TEXT_CUSTOMERS_NAME', 'Naam');
 define('TEXT_CUSTOMERS_BILLING_NAME1', 'Factuurnaam 1');
 define('TEXT_CUSTOMERS_BILLING_NAME2', 'Factuurnaam 2');
 define('TEXT_CUSTOMERS_BILLING_ADDRESS', 'Factuuradres');
@@ -264,6 +284,7 @@ $EMPLOYEE_ERROR_LEVEL = array (0 => '',
                                5 => 'Duplicaat medewerkernummer',
                                6 => 'Verwijderen niet toegestaan, medew.-rollen/timesheets aanwezig');
 
+define('TEXT_BUSINESS_UNITS', 'Business Unit');
 define('TEXT_BUSINESS_UNITS_NAME', 'Naam');
 define('TEXT_BUSINESS_UNITS_IMAGE', 'Logo');
 define('TEXT_BUSINESS_UNITS_IMAGE_POSITION', 'Positie');

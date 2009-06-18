@@ -3,20 +3,19 @@
  * CLASS FILE  : role.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 25 september 2008
+ * Date        : 17 june 2009
  * Description : Role class
- *               .....
  */
 
   class role {
-    private $role_id, $project_id, $name, $description, $mandatory_ticket_entry, $employees_roles;
+    private $role_id, $project_id, $name, $description, $mandatory_ticket_entry, $employees_roles, $listing;
 
-    function role($role_id = '', $child_object = '') {
+    function role($role_id = 0, $employee_role_object = null) {
       $database = $_SESSION['database'];
       $this->role_id = $role_id;
       $this->employees_roles = array();
 
-      if (tep_not_null($this->role_id)) {
+      if ($role_id != 0) {
         $this->role_id = $database->prepare_input($this->role_id);
 
         $role_query = $database->query("select projects_id, roles_name, roles_description, roles_mandatory_ticket_entry from " . TABLE_ROLES . " where roles_id = '" . (int)$this->role_id . "'");
@@ -28,8 +27,8 @@
         $this->mandatory_ticket_entry = ($role_result['roles_mandatory_ticket_entry'] == 1);
 
         // Retrieve specific employee_role or all employees_roles for this role
-        if (tep_not_null($child_object)) {
-          $this->employees_roles[0] = $child_object;
+        if (tep_not_null($employee_role_object)) {
+          $this->employees_roles[0] = $employee_role_object;
         } else {
           $this->employees_roles = employee_role::get_array($this->role_id);
         }
@@ -48,24 +47,31 @@
           return $this->description;
         case 'mandatory_ticket_entry':
           return $this->mandatory_ticket_entry;
+        case 'listing':
+          return $this->listing;
+        case 'listing_empty':
+          return sizeof($this->listing) == 0;
       }
       return null;
     }
 
-    public static function get_array($project_id = '') {
-      $role_array = array();
+    public function get_array($projects_id = 0) {
+      $database = $_SESSION['database'];
+      $roles_array = array();
 
-      if (tep_not_null($project_id)) {
-        $index = 0;
-        $project_id = tep_db_prepare_input($project_id);
-        $roles_query = tep_db_query("select role_id from " . TABLE_ROLES . " where project_id = '" . (int)$project_id . "'");
-        while ($roles_result = tep_db_fetch_array($roles_query)) {
-          $role_array[$index] = new role($roles_result['role_id']);
-          $index++;
-        }
+      $selection_criterium = '';
+      if ($projects_id != 0) {
+        $projects_id = $database->prepare_input($projects_id);
+        $selection_criterium = " where projects_id = '" . (int)$project_id . "'";
+      }
+      $index = 0;
+      $roles_query = $database->query("select roles_id from " . TABLE_ROLES . $selection_criterium);
+      while ($roles_result = $database->fetch_array($roles_query)) {
+        $role_array[$index] = new role($roles_result['roles_id']);
+        $index++;
       }
 
-      return $role_array;
+      return $roles_array;
     }
 
     public static function get_selected_tree($tariff_id = '') {

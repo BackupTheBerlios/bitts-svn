@@ -3,7 +3,7 @@
  * CODE FILE   : analysis.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 june 2009
+ * Date        : 18 june 2009
  * Description : Reporting form
  */
 
@@ -72,7 +72,7 @@
             <td align="center">
               <table border="0px" width="20%" cellspacing="0" cellpadding="3" class="infoBoxContents">
                 <tr>
-                  <td align="center" class="boxText"><?php echo tep_strftime(DATE_FORMAT_SHORT, tep_datetouts(tep_periodstartdate($_POST['period']))) . '&nbsp;&nbsp;-&nbsp;&nbsp;' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts(tep_periodenddate($_POST['period']))); ?></td>
+                  <td align="center" class="boxText"><?php echo tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', tep_periodstartdate($_POST['period']))) . '&nbsp;&nbsp;-&nbsp;&nbsp;' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', tep_periodenddate($_POST['period']))); ?></td>
                 </tr>
               </table>
             </td>

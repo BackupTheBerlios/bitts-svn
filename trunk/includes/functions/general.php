@@ -3,7 +3,7 @@
  * CLASS FILE  : general.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 october 2008
+ * Date        : 18 june 2009
  * Description : General functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -29,10 +29,10 @@
     return $tepstrftime;
   }
 
-  // Formatted period from formatted datatime
-  function tep_datetoperiod($formatted_date = null) {
-  	if (isset($formatted_date))
-  	  return strftime('%Y-%m', tep_datetouts($formatted_date));
+  // Formatted period from formatted datetime
+  function tep_datetoperiod($format = null, $date = null) {
+  	if (isset($format) && isset($date))
+  	  return strftime('%Y-%m', tep_datetouts($format, $date));
   	else
   	  return strftime('%Y-%m');
   }
@@ -54,13 +54,104 @@
     return strftime('%Y-%m-%d', mktime(0, 0, 0, $month + 1, 0, $year));
   }
 
-  // UNIX timestamp from formatted datetime
-  function tep_datetouts($formatted_date, $offset_in_days = 0) {
-    $year = (int)substr($formatted_date, 0, 4);
-    $month = (int)substr($formatted_date, 5, 2);
-    $day = (int)substr($formatted_date, 8, 2) + $offset_in_days;
+  // Test date by format
+  function tep_testdate($format, $date) {
+    // Available formats:
+    // '%Y-%m-%d'
+    // '%d-%m-%Y'
+    // '%m-%d-%Y'
+    $date_array = explode('-', $date);
+    if (sizeof($date_array) != 3) {
+      return false;
+    }
 
-    return mktime(0, 0, 0, $month, $day, $year);
+    switch ($format) {
+      case '%Y-%m-%d':
+        $year = (int)$date_array[0];
+        $month = (int)$date_array[1];
+        $day = (int)$date_array[2];
+        break;
+      case '%d-%m-%Y':
+        $day = (int)$date_array[0];
+        $month = (int)$date_array[1];
+        $year = (int)$date_array[2];
+        break;
+      case '%m-%d-%Y':
+        $month = (int)$date_array[0];
+        $day = (int)$date_array[1];
+        $year = (int)$date_array[2];
+        break;
+      default:
+        return false;
+    }
+
+    if ($year<1970 || $year>2099)
+      return false;
+
+    if ($day<1)
+      return false;
+
+    if (($month=1 || $month=3 || $month=5 || $month=7 || $month=8 || $month=10 || $month=12) && $day>31)
+      return false;
+
+    if (($month=4 || $month=6 || $month=9 || $month=11) && $day>30)
+      return false;
+
+    if ($month=2 && ((!tep_is_leap_year($year) && $day>28) || (tep_is_leap_year($year) && $day>29)))
+      return false;
+
+    // All seems to be in order
+    return true;
+  }
+
+  ////
+  // Check if year is a leap year
+  function tep_is_leap_year($year) {
+    if ($year % 100 == 0) {
+      if ($year % 400 == 0) return true;
+    } else {
+      if (($year % 4) == 0) return true;
+    }
+
+    return false;
+  }
+
+  // UNIX timestamp from formatted datetime
+  function tep_datetouts($format, $date, $offset_in_days = 0) {
+    // Available formats:
+    // '%Y-%m-%d'
+    // '%d-%m-%Y'
+    // '%m-%d-%Y'
+    $format_ok=false;
+    $date_array = explode('-', $date);
+    if (sizeof($date_array) != 3) {
+      return false;
+    }
+
+    switch ($format) {
+      case '%Y-%m-%d':
+        $year = (int)$date_array[0];
+        $month = (int)$date_array[1];
+        $day = (int)$date_array[2];
+        $format_ok=true;
+        break;
+      case '%d-%m-%Y':
+        $day = (int)$date_array[0];
+        $month = (int)$date_array[1];
+        $year = (int)$date_array[2];
+        $format_ok=true;
+        break;
+      case '%m-%d-%Y':
+        $month = (int)$date_array[0];
+        $day = (int)$date_array[1];
+        $year = (int)$date_array[2];
+        $format_ok=true;
+        break;
+    }
+
+    $day += $offset_in_days;
+
+    return ($format_ok?mktime(0, 0, 0, $month, $day, $year):0);
   }
 
   // Return previous/next period
@@ -81,18 +172,12 @@
   }
 
   function tep_not_null($value) {
-    if (is_array($value)) {
-      if (sizeof($value) > 0) {
-        return true;
-      } else {
-        return false;
-      }
+    if (is_object($value)) {
+      return !is_null($value);
+    } else if (is_array($value)) {
+      return (sizeof($value) > 0);
     } else {
-      if (($value != '') && (strtolower($value) != 'null') && (strlen(trim($value)) > 0)) {
-        return true;
-      } else {
-        return false;
-      }
+      return (($value != '') && (strtolower($value) != 'null') && (strlen(trim($value)) > 0));
     }
   }
 
@@ -481,72 +566,6 @@
     $date_array = array($year, $month, $day);
 
     return true;
-  }
-
-////
-// Check if year is a leap year
-  function tep_is_leap_year($year) {
-    if ($year % 100 == 0) {
-      if ($year % 400 == 0) return true;
-    } else {
-      if (($year % 4) == 0) return true;
-    }
-
-    return false;
-  }
-
-////
-// Return table heading with sorting capabilities
-  function tep_create_sort_heading($sortby, $colnum, $heading) {
-    global $PHP_SELF;
-
-    $sort_prefix = '';
-    $sort_suffix = '';
-
-    if ($sortby) {
-      $sort_prefix = '<a href="' . tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('page', 'info', 'sort')) . 'page=1&sort=' . $colnum . ($sortby == $colnum . 'a' ? 'd' : 'a')) . '" title="' . tep_output_string(TEXT_SORT_PRODUCTS . ($sortby == $colnum . 'd' || substr($sortby, 0, 1) != $colnum ? TEXT_ASCENDINGLY : TEXT_DESCENDINGLY) . TEXT_BY . $heading) . '" class="productListing-heading">' ;
-      $sort_suffix = (substr($sortby, 0, 1) == $colnum ? (substr($sortby, 1, 1) == 'a' ? '+' : '-') : '') . '</a>';
-    }
-
-    return $sort_prefix . $heading . $sort_suffix;
-  }
-
-////
-// Recursively go through the categories and retreive all parent categories IDs
-// TABLES: categories
-  function tep_get_parent_categories(&$categories, $categories_id) {
-    $parent_categories_query = tep_db_query("select parent_id from " . TABLE_CATEGORIES . " where categories_id = '" . (int)$categories_id . "'");
-    while ($parent_categories = tep_db_fetch_array($parent_categories_query)) {
-      if ($parent_categories['parent_id'] == 0) return true;
-      $categories[sizeof($categories)] = $parent_categories['parent_id'];
-      if ($parent_categories['parent_id'] != $categories_id) {
-        tep_get_parent_categories($categories, $parent_categories['parent_id']);
-      }
-    }
-  }
-
-////
-// Construct a category path to the product
-// TABLES: products_to_categories
-  function tep_get_product_path($products_id) {
-    $cPath = '';
-
-    $category_query = tep_db_query("select p2c.categories_id from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_TO_CATEGORIES . " p2c where p.products_id = '" . (int)$products_id . "' and p.products_status = '1' and p.products_id = p2c.products_id limit 1");
-    if (tep_db_num_rows($category_query)) {
-      $category = tep_db_fetch_array($category_query);
-
-      $categories = array();
-      tep_get_parent_categories($categories, $category['categories_id']);
-
-      $categories = array_reverse($categories);
-
-      $cPath = implode('_', $categories);
-
-      if (tep_not_null($cPath)) $cPath .= '_';
-      $cPath .= $category['categories_id'];
-    }
-
-    return $cPath;
   }
 
   function tep_create_random_value($length, $type = 'mixed') {

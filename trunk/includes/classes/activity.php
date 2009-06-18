@@ -3,7 +3,7 @@
  * CLASS FILE  : activity.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 06 january 2009
+ * Date        : 18 june 2009
  * Description : Activity class
  *
  */
@@ -23,7 +23,7 @@
 
         if (tep_not_null($activity_result)) {
           // Activity exists
-          $this->fill(tep_datetouts($activity_result['activities_date']),
+          $this->fill(tep_datetouts('%Y-%m-%d', $activity_result['activities_date']),
                       $activity_result['activities_amount'],
                       $activity_result['tariffs_id'],
                       $activity_result['activities_travel_distance'],
