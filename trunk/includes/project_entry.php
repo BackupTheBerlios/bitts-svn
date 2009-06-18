@@ -3,7 +3,7 @@
  * CODE FILE   : project_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 june 2009
+ * Date        : 19 june 2009
  * Description : Project entry fields
  */
 ?>
@@ -92,14 +92,24 @@
               <?php echo TEXT_BUSINESS_UNITS; ?>
             </td>
             <td class="item_entry">
-              <?php echo tep_draw_input_field('projects_business_units_id', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
+              <?php if ($_POST['action']=='enter_data') {
+                $temp_business_unit = new business_unit();
+                echo tep_html_select('projects_business_units_id', $temp_business_unit->listing_names, true, $_POST['projects_business_units_id'], 'size="1" maxlength="64" style="width: 100%"');
+              } else {
+                echo tep_html_select('projects_business_units_id', array(), false);
+              } ?>
             </td>
             <td class="item_entry">&nbsp;</td>
             <td class="item_entry">
               <?php echo TEXT_CUSTOMERS; ?>
             </td>
             <td class="item_entry">
-              <?php echo tep_draw_input_field('projects_customers_id', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
+              <?php if ($_POST['action']=='enter_data') {
+                $temp_customer = new customer();
+                echo tep_html_select('projects_customers_id', $temp_customer->listing_names, true, $_POST['projects_customers_id'], 'size="1" maxlength="64" style="width: 100%"');
+              } else {
+                echo tep_html_select('projects_customers_id', array(), false);
+              } ?>
             </td>
           </tr>
           <tr>

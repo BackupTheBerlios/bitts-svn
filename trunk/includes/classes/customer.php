@@ -3,7 +3,7 @@
  * CLASS FILE  : customer.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 17 june 2009
+ * Date        : 19 june 2009
  * Description : Customer class
  *
  */
@@ -69,6 +69,18 @@
           return $this->listing;
         case 'listing_empty':
           return sizeof($this->listing) == 0;
+        case 'listing_names':
+          $key_array = array();
+          $value_array = array();
+          $result_array = array();
+          for ($index=0; $index<sizeof($this->listing); $index++) {
+            array_push($key_array, $this->listing[$index]->id);
+            array_push($value_array, $this->listing[$index]->name);
+          }
+          // Only combine arrays if they contain any values
+          if (sizeof($key_array)!=0)
+            $result_array = array_combine($key_array, $value_array);
+          return $result_array;
       }
       return null;
     }
@@ -91,7 +103,7 @@
       $customer_array = array();
 
       $index = 0;
-      $customers_query = $database->query("select customers_id from " . TABLE_CUSTOMERS . " order by customers_id");
+      $customers_query = $database->query("select customers_id from " . TABLE_CUSTOMERS . " order by customers_name");
       while ($customers_result = $database->fetch_array($customers_query)) {
         $customer_array[$index] = new customer($customers_result['customers_id']);
         $index++;

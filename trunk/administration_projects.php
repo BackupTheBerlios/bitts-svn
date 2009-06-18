@@ -3,7 +3,7 @@
  * CODE FILE   : administration_projects.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 june 2009
+ * Date        : 19 june 2009
  * Description : Project administration form
  *               Data validation sequence
  *               Storing of entered data (via business_unit object)
@@ -63,8 +63,6 @@
       } else if ($_POST['projects_customers_id'] == '') {
         $_POST['action'] = 'enter_data';
         $error_level = 4; // No customers_id
-// ***** VALIDATION OF BOTH ENTERED DATES STILL HAS TO BE DONE *********** //
-// ***** ERROR_LEVEL WILL BE 5 WHEN THIS FAILS *************************** //
       } else if (!tep_testdate(DATE_FORMAT_SHORT, $_POST['projects_start_date_display']) || (tep_not_null($_POST['projects_end_date_display']) && !tep_testdate(DATE_FORMAT_SHORT, $_POST['projects_end_date_display']))) {
         $_POST['action'] = 'enter_data';
         $error_level = 5; // Incorrect format of entered date

@@ -3,7 +3,7 @@
  * CLASS FILE  : project.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 june 2009
+ * Date        : 19 june 2009
  * Description : Project class
  */
 
@@ -114,7 +114,7 @@
       // Insert a new project if one does not exist and retrieve the id
       if ($this->id == 0) {
         // The project does not exist
-        $database->query("insert into " . TABLE_PROJECTS . " (projects_name, projects_description, projects_customers_contact_name, projects_customers_reference, projects_start_date, projects_end_date, projects_calculated_hours, projects_calculated_hours_period, business_units_id, customers_id) values ('" . $this->name . "', '" . $this->description . "', '" . $this->customers_contact_name . "', '" . $this->customers_reference . "', '" . tep_strftime(DATE_FORMAT_DATABASE, $this->start_date) . "', '" . ($this->end_date!=0?tep_strftime(DATE_FORMAT_DATABASE, $this->end_date):'2099-12-31') . "', '" . $this->calculated_hours . "', '" . $this->business_unit->id . "', '" . $this->customer->id . "')");
+        $database->query("insert into " . TABLE_PROJECTS . " (projects_name, projects_description, projects_customers_contact_name, projects_customers_reference, projects_start_date, projects_end_date, projects_calculated_hours, projects_calculated_hours_period, business_units_id, customers_id) values ('" . $this->name . "', '" . $this->description . "', '" . $this->customers_contact_name . "', '" . $this->customers_reference . "', '" . tep_strftime(DATE_FORMAT_DATABASE, $this->start_date) . "', '" . ($this->end_date!=0?tep_strftime(DATE_FORMAT_DATABASE, $this->end_date):'2099-12-31') . "', '" . $this->calculated_hours . "', '" . $this->calculated_hours_period . "', '" . $this->business_unit->id . "', '" . $this->customer->id . "')");
         $this->id = $database->insert_id(); // The proper id is now known
       } else {
         // The project exists, update the contents

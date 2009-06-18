@@ -88,16 +88,13 @@
     if ($year<1970 || $year>2099)
       return false;
 
-    if ($day<1)
+    if ($day<1 || $day>31)
       return false;
 
-    if (($month=1 || $month=3 || $month=5 || $month=7 || $month=8 || $month=10 || $month=12) && $day>31)
+    if ($month==2 && ((!tep_is_leap_year($year) && $day>28) || (tep_is_leap_year($year) && $day>29)))
       return false;
 
-    if (($month=4 || $month=6 || $month=9 || $month=11) && $day>30)
-      return false;
-
-    if ($month=2 && ((!tep_is_leap_year($year) && $day>28) || (tep_is_leap_year($year) && $day>29)))
+    if (($month==4 || $month==6 || $month==9 || $month==11) && $day>30)
       return false;
 
     // All seems to be in order
