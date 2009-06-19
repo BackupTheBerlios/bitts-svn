@@ -41,14 +41,14 @@
             <td class="item_entry">
               <?php echo TEXT_PROJECTS_CUSTOMERS_CONTACT_NAME; ?>
             </td>
-            <td class="item_entry">
+            <td class="item_entry" width="150">
               <?php echo tep_draw_input_field('projects_customers_contact_name', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
             <td class="item_entry">&nbsp;</td>
             <td class="item_entry">
               <?php echo TEXT_PROJECTS_CUSTOMERS_REFERENCE; ?>
             </td>
-            <td class="item_entry">
+            <td class="item_entry" width="150">
               <?php echo tep_draw_input_field('projects_customers_reference', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
           </tr>
@@ -56,14 +56,14 @@
             <td class="item_entry">
               <?php echo TEXT_PROJECTS_START_DATE; ?>
             </td>
-            <td class="item_entry">
+            <td class="item_entry" width="150">
               <?php echo tep_draw_input_field('projects_start_date_display', '', 'size="1" maxlength="10" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
             <td class="item_entry">&nbsp;</td>
             <td class="item_entry">
               <?php echo TEXT_PROJECTS_END_DATE; ?>
             </td>
-            <td class="item_entry">
+            <td class="item_entry" width="150">
               <?php echo tep_draw_input_field('projects_end_date_display', '', 'size="1" maxlength="10" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
           </tr>
@@ -71,30 +71,30 @@
             <td class="item_entry">
               <?php echo TEXT_PROJECTS_CALCULATED_HOURS; ?>
             </td>
-            <td class="item_entry">
+            <td class="item_entry" width="150">
               <?php echo tep_draw_input_field('projects_calculated_hours', '', 'size="1" maxlength="10" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
             <td class="item_entry">&nbsp;</td>
             <td class="item_entry">
               <?php echo TEXT_PROJECTS_CALCULATED_HOURS_PERIOD; ?>
             </td>
-            <td class="item_entry">
+            <td class="item_entry" width="150">
               <?php echo tep_draw_radio_field('projects_calculated_hours_period', 'E', false, ($_POST['action']=='enter_data'?'':' disabled')).'&nbsp;'.$PROJECTS_CALCULATED_HOURS_PERIOD['E']; ?>
             </td>
           </tr>
           <tr>
             <td class="item_entry" colspan="4">&nbsp;</td>
-            <td class="item_entry">
+            <td class="item_entry" width="150">
               <?php echo tep_draw_radio_field('projects_calculated_hours_period', 'B', false, ($_POST['action']=='enter_data'?'':' disabled')).'&nbsp;'.$PROJECTS_CALCULATED_HOURS_PERIOD['B']; ?>
             </td>
           <tr>
             <td class="item_entry">
               <?php echo TEXT_BUSINESS_UNITS; ?>
             </td>
-            <td class="item_entry">
-              <?php if ($_POST['action']=='enter_data') {
+            <td class="item_entry" width="150">
+              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='delete_entry') {
                 $temp_business_unit = new business_unit();
-                echo tep_html_select('projects_business_units_id', $temp_business_unit->listing_names, true, $_POST['projects_business_units_id'], 'size="1" maxlength="64" style="width: 100%"');
+                echo tep_html_select('projects_business_units_id', tep_get_partial_array($temp_business_unit->listing, 'id', 'name'), $_POST['action']=='enter_data', $_POST['projects_business_units_id'], 'size="1" maxlength="64" style="width: 100%"');
               } else {
                 echo tep_html_select('projects_business_units_id', array(), false);
               } ?>
@@ -103,10 +103,10 @@
             <td class="item_entry">
               <?php echo TEXT_CUSTOMERS; ?>
             </td>
-            <td class="item_entry">
-              <?php if ($_POST['action']=='enter_data') {
+            <td class="item_entry" width="150">
+              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='delete_entry') {
                 $temp_customer = new customer();
-                echo tep_html_select('projects_customers_id', $temp_customer->listing_names, true, $_POST['projects_customers_id'], 'size="1" maxlength="64" style="width: 100%"');
+                echo tep_html_select('projects_customers_id', tep_get_partial_array($temp_customer->listing, 'id', 'name'), $_POST['action']=='enter_data', $_POST['projects_customers_id'], 'size="1" maxlength="64" style="width: 100%"');
               } else {
                 echo tep_html_select('projects_customers_id', array(), false);
               } ?>

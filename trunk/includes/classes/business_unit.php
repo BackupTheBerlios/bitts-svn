@@ -47,18 +47,6 @@
           return $this->listing;
         case 'listing_empty':
           return sizeof($this->listing) == 0;
-        case 'listing_names':
-          $key_array = array();
-          $value_array = array();
-          $result_array = array();
-          for ($index=0; $index<sizeof($this->listing); $index++) {
-            array_push($key_array, $this->listing[$index]->id);
-            array_push($value_array, $this->listing[$index]->name);
-          }
-          // Only combine arrays if they contain any values
-          if (sizeof($key_array)!=0)
-            $result_array = array_combine($key_array, $value_array);
-          return $result_array;
       }
       return null;
     }

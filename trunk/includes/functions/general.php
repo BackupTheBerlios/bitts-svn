@@ -3,7 +3,7 @@
  * CLASS FILE  : general.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 june 2009
+ * Date        : 19 june 2009
  * Description : General functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -183,8 +183,13 @@
     $value_array = array();
     $result_array = array();
     foreach ($array as $row) {
-      array_push($key_array, $row[$key]);
-      array_push($value_array, $row[$value]);
+      if (is_object($row)) {
+        array_push($key_array, $row->$key);
+        array_push($value_array, $row->$value);
+      } else {
+        array_push($key_array, $row[$key]);
+        array_push($value_array, $row[$value]);
+      }
     }
     // Only combine arrays if they contain any values
     if (sizeof($key_array)!=0)

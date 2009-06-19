@@ -30,7 +30,9 @@
   switch ($_POST['action']) {
     case 'enter_data':
       // Format dates (from uts to display)
-      $_POST['projects_start_date_display'] = tep_strftime(DATE_FORMAT_SHORT, $_POST['projects_start_date']);
+      if (isset($_POST['projects_start_date'])) {
+        $_POST['projects_start_date_display'] = tep_strftime(DATE_FORMAT_SHORT, $_POST['projects_start_date']);
+      }
       if ($_POST['projects_end_date'] != 0) {
         $_POST['projects_end_date_display'] = tep_strftime(DATE_FORMAT_SHORT, $_POST['projects_end_date']);
       } else {
