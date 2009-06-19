@@ -154,7 +154,7 @@ $PROJECT_ERROR_LEVEL = array (0  => '',
                               7  => 'Medew-Rol eind datum voor nieuwe start datum',
                               8  => 'Tarief eind datum voor nieuwe start datum',
                               9  => 'Activiteiten tussen oude en nieuwe start datum',
-                              10 => 'Medew-Rol start datum voor nieuwe eind datum',
+                              10 => 'Medew-Rol start datum na nieuwe eind datum',
                               11 => 'Tarief start datum na nieuwe eind datum',
                               12 => 'Activiteiten tussen oude en nieuwe eind datum',
                               13 => 'Verwijderen niet toegestaan, rollen aanwezig');

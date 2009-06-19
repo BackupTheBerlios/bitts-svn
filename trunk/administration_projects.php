@@ -128,7 +128,7 @@
           /*******************************************/
           if ($_POST['projects_end_date'] != $administration_project->end_date) {
             // End date has changed
-            if (($_POST['projects_end_date'] > $administration_project->end_date) && ($administration_project->end_date != 0)) {
+            if ((($_POST['projects_end_date'] > $administration_project->end_date) && $administration_project->end_date != 0) || $_POST['projects_end_date'] == 0) {
               // End date after original end date
               if ($_POST['question_er2'] == 'ASKED') {
                 if ($_POST['question_er2_answer'] == true) {
@@ -202,7 +202,7 @@
         }
         if ($_POST['question_er2_answer']) {
           // Update employees_roles with new end date
-          if (($_POST['projects_end_date'] > $administration_project->end_date) && ($administration_project->end_date != 0)) {
+          if ((($_POST['projects_end_date'] > $administration_project->end_date) && $administration_project->end_date != 0) || $_POST['projects_end_date'] == 0) {
             $employees_roles_array = $administration_project->has_employees_roles('employees_roles_end_date', '=', tep_strftime(DATE_FORMAT_DATABASE, $administration_project->end_date));
           } else {
             $employees_roles_array = $administration_project->has_employees_roles('employees_roles_start_date', '<=', ($_POST['projects_end_date']!=0?tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']):'2099-12-31'), 'AND', 'employees_roles_end_date', '>', ($_POST['projects_end_date']!=0?tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']):'2099-12-31'));
@@ -214,13 +214,13 @@
         }
         if ($_POST['question_t2_answer']) {
           // Update tariffs with new end date
-          if (($_POST['projects_end_date'] > $administration_project->end_date) && ($administration_project->end_date != 0)) {
+          if ((($_POST['projects_end_date'] > $administration_project->end_date) && $administration_project->end_date != 0) || $_POST['projects_end_date'] == 0) {
             $tariffs_array = $administration_project->has_tariffs('tariffs_end_date', '=', tep_strftime(DATE_FORMAT_DATABASE, $administration_project->end_date));
           } else {
             $tariffs_array = $administration_project->has_tariffs('tariffs_start_date', '<=', ($_POST['projects_end_date']!=0?tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']):'2099-12-31'), 'AND', 'tariffs_end_date', '>', ($_POST['projects_end_date']!=0?tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']):'2099-12-31'));
           }
           for ($index=0; $index<sizeof($tariffs_array); $index++) {
-            $tariffs_array[$index]->start_date = $_POST['projects_end_date'];
+            $tariffs_array[$index]->end_date = $_POST['projects_end_date'];
             $tariffs_array[$index]->save();
           }
         }

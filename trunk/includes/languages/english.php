@@ -154,7 +154,7 @@ $PROJECT_ERROR_LEVEL = array (0  => '',
                               7  => 'Empl-Role end date before new start date',
                               8  => 'Tariff end date before new start date',
                               9  => 'Activities between old and new start date',
-                              10 => 'Empl-Role start date before new end date',
+                              10 => 'Empl-Role start date after new end date',
                               11 => 'Tariff start date after new end date',
                               12 => 'Activities between old and new end date',
                               13 => 'Deletion not permitted, roles exist');
