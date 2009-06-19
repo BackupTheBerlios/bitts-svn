@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 june 2009
+ * Date        : 19 june 2009
  * Description : English language file
  */
 
@@ -138,6 +138,10 @@ $PROJECTS_CALCULATED_HOURS_PERIOD = array ('B' => 'Per billing period',
                                            'E' => 'Entire project');
 define('TEXT_PROJECTS_HOURS_USED', 'Used hours');
 define('TEXT_PROJECTS_HOURS_USED_PERCENTAGE', 'Used hours (%)');
+define('TEXT_PROJECTS_QUESTION_ER1', 'Change start date employees-roles');
+define('TEXT_PROJECTS_QUESTION_T1', 'Change start date tariffs');
+define('TEXT_PROJECTS_QUESTION_ER2', 'Change end date employees-roles');
+define('TEXT_PROJECTS_QUESTION_T2', 'Change end date tariffs');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $PROJECT_ERROR_LEVEL = array (0  => '',

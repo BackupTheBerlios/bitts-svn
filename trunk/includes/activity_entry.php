@@ -3,7 +3,7 @@
  * CODE FILE   : activity_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 june 2009
+ * Date        : 19 june 2009
  * Description : Activity entry fields
  *               Data validation sequence
  *               Storing of entered data (via timesheet object)
@@ -28,10 +28,10 @@ if ($_POST['action'] == 'copy_activity') {
     default:
       // Retrieve activity details
       $_POST['activity_id'] = 0;
-      $_POST['projects_id'] = $_SESSION['timesheet']->former_activity->project_id;
-      $_POST['roles_id'] = $_SESSION['timesheet']->former_activity->role_id;
+      $_POST['projects_id'] = $_SESSION['timesheet']->former_activity->projects_id;
+      $_POST['roles_id'] = $_SESSION['timesheet']->former_activity->roles_id;
       $_POST['activity_amount'] = tep_number_db_to_user($_SESSION['timesheet']->former_activity->amount, 2);
-      $_POST['tariffs_id'] = $_SESSION['timesheet']->former_activity->tariff->tariff_id;
+      $_POST['tariffs_id'] = $_SESSION['timesheet']->former_activity->tariff->id;
       $_POST['activity_travel_distance'] = "" . $_SESSION['timesheet']->former_activity->travel_distance;
       $_POST['activity_expenses'] = tep_number_db_to_user($_SESSION['timesheet']->former_activity->expenses, 2);
       $_POST['activity_ticket_number'] = $_SESSION['timesheet']->former_activity->ticket_number;

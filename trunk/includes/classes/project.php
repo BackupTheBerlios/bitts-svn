@@ -36,7 +36,9 @@
                       $projects_result['customers_id']);
           // Retrieve specific role or all available roles for this project
           if (tep_not_null($role_object)) {
-            $this->roles[sizeof($this->roles)] = $role_object;
+            if (is_object($role_object)) {
+              $this->roles[sizeof($this->roles)] = $role_object;
+            }
           } else {
             $temp_role = new role(); // Create a default role (id==0)
             $this->roles = $temp_role->get_array($this->id);
@@ -102,7 +104,7 @@
       $index = 0;
       $projects_query = $database->query("select projects_id from " . TABLE_PROJECTS . " order by projects_name");
       while ($projects_result = $database->fetch_array($projects_query)) {
-        $projects_array[$index] = new project($projects_result['projects_id']);
+        $projects_array[$index] = new project($projects_result['projects_id'], 'dummy');
         $index++;
       }
 
@@ -145,6 +147,20 @@
               (int)$value >= 0);
     }
 
+    public function has_employees_roles($column_name1, $comparison1, $value1, $delimiter = '', $column_name2 = '', $comparison2 = '', $value2 = '') {
+      $role = new role();
+      return $role->has_employees_roles($this->id, $column_name1, $comparison1, $value1, $delimiter, $column_name2, $comparison2, $value2);
+    }
+
+    public function has_tariffs($column_name1, $comparison1, $value1, $delimiter = '', $column_name2 = '', $comparison2 = '', $value2 = '') {
+      $role = new role();
+      return $role->has_tariffs($this->id, $column_name1, $comparison1, $value1, $delimiter, $column_name2, $comparison2, $value2);
+    }
+
+    public function has_activities($column_name1, $comparison1, $value1, $delimiter = '', $column_name2 = '', $comparison2 = '', $value2 = '') {
+      $role = new role();
+      return $role->has_activities($this->id, $column_name1, $comparison1, $value1, $delimiter, $column_name2, $comparison2, $value2);
+    }
 
 
 
@@ -157,8 +173,8 @@
     /***** TODO: Check if they can be replaced by non-static version                      *****/
     /******************************************************************************************/
 
-    public static function get_selected_tree($tariff_id = '') {
-      $role = role::get_selected_tree($tariff_id);
+    public static function get_selected_tree($tariffs_id = '') {
+      $role = role::get_selected_tree($tariffs_id);
       $project = new project($role->get_parent_id(), $role);
       return $project;
     }
@@ -185,11 +201,11 @@
       return $project_array;
     }
 
-    public static function get_project_name($project_id = '') {
+    public static function get_project_name($id = '') {
       $database = $_SESSION['database'];
-      $project_query = $database->query("select projects_name from " . TABLE_PROJECTS . " where projects_id = '" . $project_id . "'");
-      $project_result = $database->fetch_array($project_query);
-      return $project_result['projects_name'];
+      $projects_query = $database->query("select projects_name from " . TABLE_PROJECTS . " where projects_id = '" . $id . "'");
+      $projects_result = $database->fetch_array($projects_query);
+      return $projects_result['projects_name'];
     }
 
     public static function get_project_listing($date = 0) {

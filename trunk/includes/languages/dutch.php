@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 june 2009
+ * Date        : 19 june 2009
  * Description : Dutch language file
  */
 
@@ -138,6 +138,10 @@ $PROJECTS_CALCULATED_HOURS_PERIOD = array ('B' => 'Per billing periode',
                                            'E' => 'Volledig project');
 define('TEXT_PROJECTS_HOURS_USED', 'Gebruikte uren');
 define('TEXT_PROJECTS_HOURS_USED_PERCENTAGE', 'Gebruikte uren (%)');
+define('TEXT_PROJECTS_QUESTION_ER1', 'Start datum medewerker-rollen wijzigen');
+define('TEXT_PROJECTS_QUESTION_T1', 'Start datum tarieven wijzigen');
+define('TEXT_PROJECTS_QUESTION_ER2', 'Eind datum medewerker-rollen wijzigen');
+define('TEXT_PROJECTS_QUESTION_T2', 'Eind datum tarieven wijzigen');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $PROJECT_ERROR_LEVEL = array (0  => '',

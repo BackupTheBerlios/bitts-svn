@@ -3,7 +3,7 @@
  * CLASS FILE  : activity.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 june 2009
+ * Date        : 19 june 2009
  * Description : Activity class
  *
  */
@@ -41,12 +41,12 @@
           return $this->activity_id;
       	case 'date':
           return $this->date;
-      	case 'project_id':
-          return $this->tariff->project_id;
+      	case 'projects_id':
+          return $this->tariff->projects_id;
       	case 'project_name':
           return $this->tariff->project_name;
-        case 'role_id':
-          return $this->tariff->role_id;
+        case 'roles_id':
+          return $this->tariff->roles_id;
         case 'role_name':
           return $this->tariff->role_name;
         case 'tariff':
@@ -86,15 +86,31 @@
       return $activity_array;
     }
 
-    public function fill($date = 0, $amount = 0, $tariff_id = '', $travel_distance = 0, $expenses = 0, $ticket_number = '', $comment = '', $timesheet_id = 0) {
+    public function fill($date = 0, $amount = 0, $tariffs_id = '', $travel_distance = 0, $expenses = 0, $ticket_number = '', $comment = '', $timesheet_id = 0) {
       $this->date = $date;
       $this->amount = $this->format('amount', $amount);
-      $this->tariff = new tariff($tariff_id);
+      $this->tariff = new tariff($tariffs_id);
       $this->travel_distance = $this->format('travel_distance', $travel_distance);
       $this->expenses = $this->format('expenses', $expenses);
       $this->ticket_number = $ticket_number;
       $this->comment = $comment;
       $this->timesheet_id = $timesheet_id;
+    }
+
+    public function get_activities($parents_id, $column_name1, $comparison1, $value1, $delimiter, $column_name2, $comparison2, $value2) {
+      $database = $_SESSION['database'];
+      $activities_array = array();
+
+      if (tep_not_null($parents_id)) {
+        $index = 0;
+        $activities_query = $database->query("select activities_id from " . TABLE_ACTIVITIES . " where tariffs_id in (" . $parents_id . ") and " . $column_name1 . " " . $comparison1 . " '" . $value1 . "'" . (tep_not_null($delimiter)?' ' . $delimiter . " " . $column_name2 . " " . $comparison2 . " '" . $value2 . "'":''));
+        while ($activities_result = $database->fetch_array($activities_query)) {
+          $activities_array[$index] = new activity($activities_result['activities_id']);
+          $index++;
+        }
+      }
+
+      return $activities_array;
     }
 
     public static function validate($name, $value) {
@@ -154,8 +170,8 @@
       return false;
     }
 
-    public static function ticket_entry_is_required($tariff_id) {
-      return tariff::ticket_entry_is_required($tariff_id);
+    public static function ticket_entry_is_required($tariffs_id) {
+      return tariff::ticket_entry_is_required($tariffs_id);
     }
 
     public function save() {
@@ -163,11 +179,11 @@
       // Insert a new activity if one does not exist and retrieve the id
       if ($this->activity_id == 0) {
         // The activity does not exist
-        $database->query("insert into " . TABLE_ACTIVITIES . " (activities_date, activities_amount, tariffs_id, activities_travel_distance, activities_expenses, activities_ticket_number, activities_comment, timesheets_id) values ('" . tep_strftime(DATE_FORMAT_DATABASE, $this->date) . "', '" . $this->amount . "', '" . $this->tariff->tariff_id . "', '" . $this->travel_distance . "', '" . $this->expenses . "', '" . $this->ticket_number . "', '" . $this->comment . "', '" . $this->timesheet_id . "')");
+        $database->query("insert into " . TABLE_ACTIVITIES . " (activities_date, activities_amount, tariffs_id, activities_travel_distance, activities_expenses, activities_ticket_number, activities_comment, timesheets_id) values ('" . tep_strftime(DATE_FORMAT_DATABASE, $this->date) . "', '" . $this->amount . "', '" . $this->tariff->id . "', '" . $this->travel_distance . "', '" . $this->expenses . "', '" . $this->ticket_number . "', '" . $this->comment . "', '" . $this->timesheet_id . "')");
         $this->activity_id = $database->insert_id(); // The proper id is now known
       } else {
         // The activity exists, update the contents
-        $activity_query = $database->query("update " . TABLE_ACTIVITIES . " set activities_date='" . tep_strftime(DATE_FORMAT_DATABASE, $this->date) . "', activities_amount='" . $this->amount . "', tariffs_id='" . $this->tariff->tariff_id . "', activities_travel_distance='" . $this->travel_distance . "', activities_expenses='" . $this->expenses . "', activities_ticket_number='" . $this->ticket_number . "', activities_comment='" . $this->comment . "' where activities_id = '" . (int)$this->activity_id . "'");
+        $activity_query = $database->query("update " . TABLE_ACTIVITIES . " set activities_date='" . tep_strftime(DATE_FORMAT_DATABASE, $this->date) . "', activities_amount='" . $this->amount . "', tariffs_id='" . $this->tariff->id . "', activities_travel_distance='" . $this->travel_distance . "', activities_expenses='" . $this->expenses . "', activities_ticket_number='" . $this->ticket_number . "', activities_comment='" . $this->comment . "' where activities_id = '" . (int)$this->activity_id . "'");
       }
     }
 

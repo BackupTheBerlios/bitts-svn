@@ -3,7 +3,7 @@
  * CODE FILE   : html_output.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 15 juni 2009
+ * Date        : 19 june 2009
  * Description : html output functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -105,7 +105,7 @@
           // Retrieve and add parameter
           $result .= $key . '=' . $value;
         } elseif ($output_type == 'hidden_field') {
-          if (!(is_bool($value) && $value==false)) {
+          if (!(is_bool($value) && $value==false) && tep_not_null($value)) {
             // Boolean value 'false' does not fit very well into these fields
             // Solution is to just drop the value, after POSTing, these
             // values read 'false' anyway.

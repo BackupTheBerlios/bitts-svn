@@ -19,8 +19,8 @@
               </td>
             </tr>
           <?php }
-          if ($_POST['action']=='enter_data') {
-            echo tep_draw_form('project_entry', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array('action'=>'save_data'), array('mPath', 'projects_id'), 'hidden_field');
+          if ($_POST['action']=='enter_data' || $_POST['action']=='save_data') {
+            echo tep_draw_form('project_entry', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array('action'=>'save_data'), array('mPath', 'projects_id', 'projects_name', 'projects_description', 'projects_customers_contact_name', 'projects_customers_reference', 'projects_start_date', 'projects_start_date_display', 'projects_end_date', 'projects_end_date_display', 'projects_calculated_hours', 'projects_calculated_hours_period', 'projects_business_units_id', 'projects_customers_id', 'question_er1_answer', 'question_t1_answer', 'question_er2_answer', 'question_t2_answer'), 'hidden_field');
           } ?>
           <tr>
             <td class="item_entry">
@@ -92,7 +92,7 @@
               <?php echo TEXT_BUSINESS_UNITS; ?>
             </td>
             <td class="item_entry" width="150">
-              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='delete_entry') {
+              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='save_data' || $_POST['action']=='delete_entry') {
                 $temp_business_unit = new business_unit();
                 echo tep_html_select('projects_business_units_id', tep_get_partial_array($temp_business_unit->listing, 'id', 'name'), $_POST['action']=='enter_data', $_POST['projects_business_units_id'], 'size="1" maxlength="64" style="width: 100%"');
               } else {
@@ -104,7 +104,7 @@
               <?php echo TEXT_CUSTOMERS; ?>
             </td>
             <td class="item_entry" width="150">
-              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='delete_entry') {
+              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='save_data' || $_POST['action']=='delete_entry') {
                 $temp_customer = new customer();
                 echo tep_html_select('projects_customers_id', tep_get_partial_array($temp_customer->listing, 'id', 'name'), $_POST['action']=='enter_data', $_POST['projects_customers_id'], 'size="1" maxlength="64" style="width: 100%"');
               } else {
@@ -112,6 +112,41 @@
               } ?>
             </td>
           </tr>
+          <?php if (isset($_POST['question_er1']) || isset($_POST['question_t1']) || isset($_POST['question_er2']) || isset($_POST['question_t2'])) { ?>
+            <tr>
+              <td class="item_entry" colspan="5">
+                <?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
+              </td>
+            </tr>
+            <?php if (isset($_POST['question_er1'])) { ?>
+              <tr>
+                <td class="item_entry" colspan="5" style="text-align:right">
+                  <?php echo TEXT_PROJECTS_QUESTION_ER1 . tep_draw_checkbox_field('question_er1_answer', true, false, ($_POST['question_er1']=='ASK'?'':' disabled')) . tep_draw_hidden_field('question_er1', 'ASKED'); ?>
+                </td>
+              </tr>
+            <?php }
+            if (isset($_POST['question_t1'])) { ?>
+              <tr>
+                <td class="item_entry" colspan="5" style="text-align:right">
+                  <?php echo TEXT_PROJECTS_QUESTION_T1 . tep_draw_checkbox_field('question_t1_answer', true, false, ($_POST['question_t1']=='ASK'?'':' disabled')) . tep_draw_hidden_field('question_t1', 'ASKED'); ?>
+                </td>
+              </tr>
+            <?php }
+            if (isset($_POST['question_er2'])) { ?>
+              <tr>
+                <td class="item_entry" colspan="5" style="text-align:right">
+                  <?php echo TEXT_PROJECTS_QUESTION_ER2 . tep_draw_checkbox_field('question_er2_answer', true, false, ($_POST['question_er2']=='ASK'?'':' disabled')) . tep_draw_hidden_field('question_er2', 'ASKED'); ?>
+                </td>
+              </tr>
+            <?php }
+            if (isset($_POST['question_t2'])) { ?>
+              <tr>
+                <td class="item_entry" colspan="5" style="text-align:right">
+                  <?php echo TEXT_PROJECTS_QUESTION_T2 . tep_draw_checkbox_field('question_t2_answer', true, false, ($_POST['question_t2']=='ASK'?'':' disabled')) . tep_draw_hidden_field('question_t2', 'ASKED'); ?>
+                </td>
+              </tr>
+            <?php }
+          } ?>
           <tr>
             <td class="item_entry" colspan="5">
               <?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
@@ -119,7 +154,7 @@
           </tr>
           <tr>
             <td align="left" class="item_entry">
-              <?php if ($_POST['action']!='enter_data'&&$_POST['action']!='delete_entry') {
+              <?php if ($_POST['action']!='enter_data'&&$_POST['action']!='save_data'&&$_POST['action']!='delete_entry') {
                 echo tep_draw_form('fnew', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array('action'=>'enter_data', 'projects_calculated_hours_period'=>'E'), array('mPath'), 'hidden_field');
                 echo tep_image_submit('button_new.gif', TEXT_ENTRY_NEW, 'style="vertical-align:middle"');
                 echo '</form>';
@@ -128,7 +163,7 @@
               } ?>
             </td>
             <td align="right" class="item_entry" colspan="4">
-              <?php if ($_POST['action']=='enter_data') {
+              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='save_data') {
                 echo tep_image_submit('button_save.gif', TEXT_ENTRY_SAVE, 'style="vertical-align:middle"');
                 echo '</form>';
               } else if ($_POST['action']=='delete_entry') {
@@ -140,7 +175,7 @@
                 echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_save_disabled.gif', null, null, null, 'style="vertical-align:middle"');
               }
               echo '&nbsp;';
-              if ($_POST['action']=='enter_data'||$_POST['action']=='delete_entry') {
+              if ($_POST['action']=='enter_data' || $_POST['action']=='save_data' || $_POST['action']=='delete_entry') {
                 echo tep_draw_form('fcancel', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array(), array('mPath'), 'hidden_field');
                 echo tep_image_submit('button_cancel.gif', TEXT_ENTRY_CANCEL, 'style="vertical-align:middle"');
                 echo '</form>';
