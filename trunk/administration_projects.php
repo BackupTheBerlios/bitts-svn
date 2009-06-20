@@ -3,10 +3,10 @@
  * CODE FILE   : administration_projects.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 june 2009
+ * Date        : 20 june 2009
  * Description : Project administration form
  *               Data validation sequence
- *               Storing of entered data (via business_unit object)
+ *               Storing of entered data (via project object)
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
  *               http://www.oscommerce.com
@@ -226,7 +226,6 @@
         }
 
         // Finally save the project
-        $administration_project = new project($_POST['projects_id']);
         $administration_project->fill($_POST['projects_name'],
                                       $_POST['projects_description'],
                                       $_POST['projects_customers_contact_name'],
