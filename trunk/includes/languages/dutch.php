@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 june 2009
+ * Date        : 20 june 2009
  * Description : Dutch language file
  */
 
@@ -126,6 +126,7 @@ define('TEXT_TIMEREGISTRATION_CONFIRM_OK', 'Bevestigen OK');
 define('TEXT_TIMEREGISTRATION_CONFIRM_CANCEL', 'Bevestigen annuleren');
 define('TEXT_TIMEREGISTRATION_CALENDAR_DESCRIPTION', 'Overzicht geboekte aantallen per dag:');
 
+define('TEXT_PROJECTS', 'Projecten');
 define('TEXT_PROJECTS_NAME', 'Project naam');
 define('TEXT_PROJECTS_DESCRIPTION', 'Omschrijving');
 define('TEXT_PROJECTS_CUSTOMERS_CONTACT_NAME', 'Contactpersoon klant');
@@ -142,6 +143,7 @@ define('TEXT_PROJECTS_QUESTION_ER1', 'Start datum medewerker-rollen wijzigen');
 define('TEXT_PROJECTS_QUESTION_T1', 'Start datum tarieven wijzigen');
 define('TEXT_PROJECTS_QUESTION_ER2', 'Eind datum medewerker-rollen wijzigen');
 define('TEXT_PROJECTS_QUESTION_T2', 'Eind datum tarieven wijzigen');
+define('TEXT_PROJECTS_LISTING_IS_EMPTY', 'Geen projecten aanwezig');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $PROJECT_ERROR_LEVEL = array (0  => '',
@@ -151,13 +153,26 @@ $PROJECT_ERROR_LEVEL = array (0  => '',
                               4  => 'Debiteur ontbreekt',
                               5  => 'Datum onjuist',
                               6  => 'Gebudgetteerde uren onjuist',
-                              7  => 'Medew-Rol eind datum voor nieuwe start datum',
-                              8  => 'Tarief eind datum voor nieuwe start datum',
+                              7  => 'Medewerker-Rollen aanwezig voor nieuwe start datum',
+                              8  => 'Tarieven aanwezig voor nieuwe start datum',
                               9  => 'Activiteiten tussen oude en nieuwe start datum',
-                              10 => 'Medew-Rol start datum na nieuwe eind datum',
-                              11 => 'Tarief start datum na nieuwe eind datum',
-                              12 => 'Activiteiten tussen oude en nieuwe eind datum',
+                              10 => 'Medewerker-Rollen aanwezig na nieuwe eind datum',
+                              11 => 'Tarieven aanwezig na nieuwe eind datum',
+                              12 => 'Activiteiten aanwezig tussen oude en nieuwe eind datum',
                               13 => 'Verwijderen niet toegestaan, rollen aanwezig');
+
+define('TEXT_ROLES', 'Rol');
+define('TEXT_ROLES_NAME', 'Naam');
+define('TEXT_ROLES_DESCRIPTION', 'Omschrijving');
+define('TEXT_ROLES_MANDATORY_TICKET_ENTRY', 'Ticketnr verplicht');
+define('TEXT_ROLES_CATEGORY', 'Categorie');
+define('TEXT_ROLES_LISTING_IS_EMPTY', 'Geen rollen aanwezig');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$ROLE_ERROR_LEVEL = array (0 => '',
+                           1 => 'Rol naam ontbreekt',
+                           2 => 'Categorie ontbreekt',
+                           3 => 'Verwijderen niet toegestaan, medewerker-rollen aanwezig');
 
 define('TEXT_ACTIVITY_DAY', 'Dag');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');
@@ -302,6 +317,7 @@ $BUSINESS_UNIT_ERROR_LEVEL = array (0 => '',
                                     1 => 'Naam ontbreekt',
                                     2 => 'Verwijderen niet toegestaan, projecten aanwezig');
 
+define('TEXT_CATEGORIES', 'Categorie');
 define('TEXT_CATEGORIES_NAME', 'Naam');
 define('TEXT_CATEGORIES_LISTING_IS_EMPTY', 'Geen categorie&euml;n aanwezig');
 // Errorlevels  1..31 == severe error

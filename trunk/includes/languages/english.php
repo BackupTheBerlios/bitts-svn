@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 june 2009
+ * Date        : 20 june 2009
  * Description : English language file
  */
 
@@ -126,6 +126,7 @@ define('TEXT_TIMEREGISTRATION_CONFIRM_OK', 'Confirm OK');
 define('TEXT_TIMEREGISTRATION_CONFIRM_CANCEL', 'Cancel confirm');
 define('TEXT_TIMEREGISTRATION_CALENDAR_DESCRIPTION', 'Overview registered amounts per day:');
 
+define('TEXT_PROJECTS', 'Projects');
 define('TEXT_PROJECTS_NAME', 'Project name');
 define('TEXT_PROJECTS_DESCRIPTION', 'Description');
 define('TEXT_PROJECTS_CUSTOMERS_CONTACT_NAME', 'Contact customer');
@@ -142,6 +143,7 @@ define('TEXT_PROJECTS_QUESTION_ER1', 'Change start date employees-roles');
 define('TEXT_PROJECTS_QUESTION_T1', 'Change start date tariffs');
 define('TEXT_PROJECTS_QUESTION_ER2', 'Change end date employees-roles');
 define('TEXT_PROJECTS_QUESTION_T2', 'Change end date tariffs');
+define('TEXT_PROJECTS_LISTING_IS_EMPTY', 'No projects available');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $PROJECT_ERROR_LEVEL = array (0  => '',
@@ -151,13 +153,26 @@ $PROJECT_ERROR_LEVEL = array (0  => '',
                               4  => 'Customer is missing',
                               5  => 'Incorrect date',
                               6  => 'Incorrect calculated hours',
-                              7  => 'Empl-Role end date before new start date',
-                              8  => 'Tariff end date before new start date',
-                              9  => 'Activities between old and new start date',
-                              10 => 'Empl-Role start date after new end date',
-                              11 => 'Tariff start date after new end date',
-                              12 => 'Activities between old and new end date',
+                              7  => 'Employees-Roles exist before new start date',
+                              8  => 'Tariffs exist before new start date',
+                              9  => 'Activities exist between old and new start date',
+                              10 => 'Employees-Roles exist after new end date',
+                              11 => 'Tariffs exist after new end date',
+                              12 => 'Activities exist between old and new end date',
                               13 => 'Deletion not permitted, roles exist');
+
+define('TEXT_ROLES', 'Role');
+define('TEXT_ROLES_NAME', 'Name');
+define('TEXT_ROLES_DESCRIPTION', 'Description');
+define('TEXT_ROLES_MANDATORY_TICKET_ENTRY', 'Mandatory ticketnr');
+define('TEXT_ROLES_CATEGORY', 'Category');
+define('TEXT_ROLES_LISTING_IS_EMPTY', 'No roles available');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$ROLE_ERROR_LEVEL = array (0 => '',
+                           1 => 'Role name is missing',
+                           2 => 'Category is missing',
+                           3 => 'Deletion not permitted, employees-roles exist');
 
 define('TEXT_ACTIVITY_DAY', 'Day');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');
@@ -302,6 +317,7 @@ $BUSINESS_UNIT_ERROR_LEVEL = array (0 => '',
                                     1 => 'Name is missing',
                                     2 => 'Deletion not permitted, projects exist');
 
+define('TEXT_CATEGORIES', 'Category');
 define('TEXT_CATEGORIES_NAME', 'Name');
 define('TEXT_CATEGORIES_LISTING_IS_EMPTY', 'No categories available');
 // Errorlevels  1..31 == severe error

@@ -290,6 +290,7 @@ A.pageResults:hover {
 }
 
 TD.pageHeading, DIV.pageHeading {
+  padding: 0;
   font-family: Verdana, Arial, sans-serif;
   font-size: 20px;
   font-weight: bold;
