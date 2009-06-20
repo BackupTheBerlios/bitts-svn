@@ -3,7 +3,7 @@
  * CODE FILE   : employee_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 june 2009
+ * Date        : 20 june 2009
  * Description : Employee entry fields
  */
 ?>
@@ -20,7 +20,7 @@
             </tr>
           <?php }
           if ($_POST['action']=='enter_data') {
-            echo tep_draw_form('customer_entry', tep_href_link(FILENAME_ADMINISTRATION_EMPLOYEES)) . tep_create_parameters(array('action'=>'save_data'), array('mPath', 'employees_id', 'employees_status'), 'hidden_field');
+            echo tep_draw_form('employee_entry', tep_href_link(FILENAME_ADMINISTRATION_EMPLOYEES)) . tep_create_parameters(array('action'=>'save_data'), array('mPath', 'employees_id', 'employees_status'), 'hidden_field');
           } ?>
           <tr>
             <td class="item_entry">
