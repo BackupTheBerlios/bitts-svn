@@ -174,6 +174,19 @@ $ROLE_ERROR_LEVEL = array (0 => '',
                            2 => 'Category is missing',
                            3 => 'Deletion not permitted, employees-roles exist');
 
+define('TEXT_EMPLOYEES_ROLES', 'Employee-Role');
+define('TEXT_EMPLOYEES_ROLES_START_DATE', 'Start date');
+define('TEXT_EMPLOYEES_ROLES_END_DATE', 'End date');
+define('TEXT_EMPLOYEES_ROLES_LISTING_IS_EMPTY', 'No employee-roles available');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$EMPLOYEE_ROLE_ERROR_LEVEL = array (0 => '',
+                                    1 => 'Role is missing',
+                                    2 => 'Employee is missing',
+                                    3 => 'Start date is missing',
+                                    4 => 'Incorrect date',
+                                    5 => 'Deletion not permitted, tariffs exist');
+
 define('TEXT_ACTIVITY_DAY', 'Day');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');
 define('TEXT_ACTIVITY_ROLENAME', 'Role');
@@ -285,6 +298,7 @@ $CUSTOMER_ERROR_LEVEL = array (0  => '',
                                4  => 'Duplicate customernumber',
                                5  => 'Deletion not permitted, projects exist');
 
+define('TEXT_EMPLOYEES', 'Employee');
 define('TEXT_EMPLOYEES_ID', 'Employeenr');
 define('TEXT_EMPLOYEES_LOGIN', 'Login');
 define('TEXT_EMPLOYEES_FULLNAME', 'Full name');

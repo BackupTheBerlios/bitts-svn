@@ -10,7 +10,7 @@
   class role {
     private $id, $name, $description, $mandatory_ticket_entry, $projects_id, $category, $employees_roles, $listing;
 
-    public function __construct($id = 0, $projects_id = 0) {
+    public function __construct($id = 0, $child_or_projects_id = null) {
       $database = $_SESSION['database'];
       $this->id = $id;
       $this->employees_roles = array();
@@ -27,9 +27,19 @@
                     ($roles_result['roles_mandatory_ticket_entry'] == 1),
                     $roles_result['projects_id'],
                     $roles_result['categories_id']);
+
+        // Retrieve specific employee_role or all employees_roles for this employee_role
+        if (tep_not_null($child_or_projects_id)) {
+          if (is_object($child_or_projects_id)) {
+            $this->employees_roles[0] = $child_or_projects_id;
+          }
+        } else {
+          $temp_employee_role = new employee_role();
+          $this->employees_roles = $temp_employee_role->get_array($this->id);
+        }
       } else {
         // We probably created an empty role object to retrieve the entire role listing
-        $this->listing = $this->get_array($projects_id);
+        $this->listing = $this->get_array($child_or_projects_id);
       }
     }
 
@@ -71,14 +81,14 @@
       if ($projects_id != 0) {
         $projects_id = $database->prepare_input($projects_id);
         $selection_criterium = " where projects_id = '" . (int)$projects_id . "'";
-      }
-      $index = 0;
-      $roles_query = $database->query("select roles_id from " . TABLE_ROLES . $selection_criterium . " order by roles_name");
-      while ($roles_result = $database->fetch_array($roles_query)) {
-        $roles_array[$index] = new role($roles_result['roles_id']);
-        $index++;
-      }
-
+      //} // Temporarily removed for speed purposes
+        $index = 0;
+        $roles_query = $database->query("select roles_id from " . TABLE_ROLES . $selection_criterium . " order by roles_name");
+        while ($roles_result = $database->fetch_array($roles_query)) {
+          $roles_array[$index] = new role($roles_result['roles_id'], 'dummy');
+          $index++;
+        }
+      } // Temporarily added for speed purposes
       return $roles_array;
     }
 
