@@ -53,13 +53,13 @@
       if ($_POST['roles_id'] == '') {
         $_POST['action'] = 'enter_data';
         $error_level = 1; // No roles_id
-      } if ($_POST['employees_id'] == '') {
+      } else if ($_POST['employees_id'] == '') {
         $_POST['action'] = 'enter_data';
         $error_level = 2; // No employees_id
-      } if ($_POST['employees_roles_start_date_display'] == '') {
+      } else if ($_POST['employees_roles_start_date_display'] == '') {
         $_POST['action'] = 'enter_data';
         $error_level = 3; // No start_date
-      } else if (!tep_testdate(DATE_FORMAT_SHORT, $_POST['employees_roles_start_date_display']) || (tep_not_null($_POST['employees_roles_end_date_display']) && !tep_testdate(DATE_FORMAT_SHORT, $_POST['employees_roles_end_date_display']))) {
+      } else if (!tep_testdate(DATE_FORMAT_SHORT, $_POST['employees_roles_start_date_display']) || (tep_not_null($_POST['employees_roles_end_date_display']) && !tep_testdate(DATE_FORMAT_SHORT, $_POST['employees_roles_end_date_display'])) || (($_POST['employees_roles_start_date'] > $_POST['employees_roles_end_date']) && ($_POST['employees_roles_end_date'] != 0))) {
         $_POST['action'] = 'enter_data';
         $error_level = 4; // Incorrect format of entered date
       } else {

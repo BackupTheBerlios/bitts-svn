@@ -24,7 +24,7 @@
           } ?>
           <tr>
             <td class="item_entry">
-              <?php echo TEXT_ROLES_NAME; ?>
+              <?php echo TEXT_ROLES; ?>
             </td>
             <td class="item_entry" style="width:150px">
               <?php if ($_POST['action']=='enter_data' || $_POST['action']=='delete_entry') {
@@ -36,7 +36,7 @@
             </td>
             <td class="item_entry">&nbsp;</td>
             <td class="item_entry">
-              <?php echo TEXT_EMPLOYEES_FULLNAME; ?>
+              <?php echo TEXT_EMPLOYEES; ?>
             </td>
             <td class="item_entry" style="width:150px">
               <?php if ($_POST['action']=='enter_data' || $_POST['action']=='delete_entry') {

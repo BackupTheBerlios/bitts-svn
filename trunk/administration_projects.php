@@ -65,7 +65,7 @@
       } else if ($_POST['projects_customers_id'] == '') {
         $_POST['action'] = 'enter_data';
         $error_level = 4; // No customers_id
-      } else if (!tep_testdate(DATE_FORMAT_SHORT, $_POST['projects_start_date_display']) || (tep_not_null($_POST['projects_end_date_display']) && !tep_testdate(DATE_FORMAT_SHORT, $_POST['projects_end_date_display']))) {
+      } else if (!tep_testdate(DATE_FORMAT_SHORT, $_POST['projects_start_date_display']) || (tep_not_null($_POST['projects_end_date_display']) && !tep_testdate(DATE_FORMAT_SHORT, $_POST['projects_end_date_display'])) || (($_POST['projects_start_date'] > $_POST['projects_end_date']) && ($_POST['projects_end_date'] != 0))) {
         $_POST['action'] = 'enter_data';
         $error_level = 5; // Incorrect format of entered date
       } else if (!$_SESSION['project']->validate_hours($_POST['projects_calculated_hours'])) {
