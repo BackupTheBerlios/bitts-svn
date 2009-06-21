@@ -106,6 +106,8 @@
           }
           $employees_roles_listing .= ''.$employees_roles_result['employees_roles_id'];
         }
+      } else {
+        $employees_roles_listing = $this->id;
       }
 
       $tariff = new tariff();
@@ -124,6 +126,8 @@
           }
           $employees_roles_listing .= ''.$employees_roles_result['employees_roles_id'];
         }
+      } else {
+        $employees_roles_listing = $this->id;
       }
 
       $tariff = new tariff();
@@ -178,9 +182,21 @@
 
     public function has_dependencies() {
       $database = $_SESSION['database'];
-      $this->id = $database->prepare_input($this->id);
-      $tariffs_query = $database->query("select 1 from " . TABLE_TARIFFS . " where employees_roles_id = '" . (int)$this->id . "'");
+      $id = $database->prepare_input($this->id);
+      $tariffs_query = $database->query("select 1 from " . TABLE_TARIFFS . " where employees_roles_id = '" . (int)$id . "'");
       $tariffs_result = $database->fetch_array($tariffs_query);
+      return tep_not_null($tariffs_result);
+    }
+
+    public function has_duplicates($start_date, $end_date) {
+      $database = $_SESSION['database'];
+      $duplicates_query = $database->query("select 1 from " . TABLE_EMPLOYEES_ROLES .
+                                           " where employees_roles_id != " . $this->id .
+                                           " and roles_id = " . $this->roles_id .
+                                           " and employees_id = " . $this->employees_id .
+                                           " and employees_roles_start_date <= '" . ($end_date!=0?tep_strftime(DATE_FORMAT_DATABASE, $this->end_date):'2099-12-31') . "'" .
+                                           " and employees_roles_end_date >= '" . tep_strftime(DATE_FORMAT_DATABASE, $start_date) . "'");
+      $duplicates_result = $database->fetch_array($duplicates_query);
       return tep_not_null($tariffs_result);
     }
 

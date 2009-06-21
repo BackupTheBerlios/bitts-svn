@@ -20,16 +20,16 @@
             </tr>
           <?php }
           if ($_POST['action']=='enter_data') {
-            echo tep_draw_form('employee_role_entry', tep_href_link(FILENAME_ADMINISTRATION_EMPLOYEES_ROLES)) . tep_create_parameters(array('action'=>'save_data'), array('mPath', 'employees_roles_id', 'projects_id'), 'hidden_field');
+            echo tep_draw_form('employee_role_entry', tep_href_link(FILENAME_ADMINISTRATION_EMPLOYEES_ROLES)) . tep_create_parameters(array('action'=>'save_data'), array('mPath', 'employees_roles_id', 'employees_roles_start_date', 'employees_roles_start_date_display', 'employees_roles_end_date', 'employees_roles_end_date_display', 'roles_id', 'employees_id', 'projects_id', 'question_t1_answer', 'question_t2_answer'), 'hidden_field');
           } ?>
           <tr>
             <td class="item_entry">
-              <?php echo TEXT_ROLES_NAME; ?>
+              <?php echo TEXT_ROLES_NAME.$_POST['employees_roles_id']; ?>
             </td>
             <td class="item_entry" style="width:150px">
               <?php if ($_POST['action']=='enter_data' || $_POST['action']=='delete_entry') {
                 $temp_role = new role(0, $_POST['projects_id']);
-                echo tep_html_select('roles_id', tep_get_partial_array($temp_role->listing, 'id', 'name'), $_POST['action']=='enter_data', $_POST['roles_id'], 'size="1" maxlength="20" style="width: 100%"');
+                echo tep_html_select('roles_id', tep_get_partial_array($temp_role->listing, 'id', 'name'), $_POST['action']=='enter_data' && !tep_not_null($_POST['employees_roles_id']), $_POST['roles_id'], 'size="1" maxlength="20" style="width: 100%"');
               } else {
                 echo tep_html_select('roles_id', array(), false);
               } ?>
@@ -41,7 +41,7 @@
             <td class="item_entry" style="width:150px">
               <?php if ($_POST['action']=='enter_data' || $_POST['action']=='delete_entry') {
                 $temp_employee = new employee();
-                echo tep_html_select('employees_id', tep_get_partial_array($temp_employee->listing, 'id', 'fullname'), $_POST['action']=='enter_data', $_POST['employees_id'], 'size="1" maxlength="20" style="width: 100%"');
+                echo tep_html_select('employees_id', tep_get_partial_array($temp_employee->listing, 'id', 'fullname'), $_POST['action']=='enter_data' && !tep_not_null($_POST['employees_roles_id']), $_POST['employees_id'], 'size="1" maxlength="20" style="width: 100%"');
               } else {
                 echo tep_html_select('employees_id', array(), false);
               } ?>
@@ -62,6 +62,27 @@
               <?php echo tep_draw_input_field('employees_roles_end_date_display', '', 'size="1" maxlength="10" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
           </tr>
+          <?php if (isset($_POST['question_t1']) || isset($_POST['question_t2'])) { ?>
+            <tr>
+              <td class="item_entry" colspan="5">
+                <?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
+              </td>
+            </tr>
+            <?php if (isset($_POST['question_t1'])) { ?>
+              <tr>
+                <td class="item_entry" colspan="5" style="text-align:right">
+                  <?php echo TEXT_EMPLOYEES_ROLES_QUESTION_T1 . tep_draw_checkbox_field('question_t1_answer', true, false, ($_POST['question_t1']=='ASK'?'':' disabled')) . tep_draw_hidden_field('question_t1', 'ASKED'); ?>
+                </td>
+              </tr>
+            <?php }
+            if (isset($_POST['question_t2'])) { ?>
+              <tr>
+                <td class="item_entry" colspan="5" style="text-align:right">
+                  <?php echo TEXT_EMPLOYEES_ROLES_QUESTION_T2 . tep_draw_checkbox_field('question_t2_answer', true, false, ($_POST['question_t2']=='ASK'?'':' disabled')) . tep_draw_hidden_field('question_t2', 'ASKED'); ?>
+                </td>
+              </tr>
+            <?php }
+          } ?>
           <tr>
             <td class="item_entry" colspan="5">
               <?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>

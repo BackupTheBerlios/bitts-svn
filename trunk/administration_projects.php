@@ -3,7 +3,7 @@
  * CODE FILE   : administration_projects.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 20 june 2009
+ * Date        : 21 june 2009
  * Description : Project administration form
  *               Data validation sequence
  *               Storing of entered data (via project object)
@@ -146,18 +146,18 @@
               }
             } else {
               // End date before original end date
-              if (tep_not_null($administration_project->has_employees_roles('employees_roles_start_date', '>', ($_POST['projects_end_date']!=0?tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']):'2099-12-31')))) {
+              if (tep_not_null($administration_project->has_employees_roles('employees_roles_start_date', '>', tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date'])))) {
                 $_POST['action'] = 'enter_data';
                 $error_level = 10; // MR start date after new end date
                 break;
-              } else if (tep_not_null($administration_project->has_employees_roles('employees_roles_start_date', '<=', ($_POST['projects_end_date']!=0?tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']):'2099-12-31'), 'AND', 'employees_roles_end_date', '>', ($_POST['projects_end_date']!=0?tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']):'2099-12-31')))) {
+              } else if (tep_not_null($administration_project->has_employees_roles('employees_roles_start_date', '<=', tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']), 'AND', 'employees_roles_end_date', '>', tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date'])))) {
                 $_POST['question_er2_answer'] = true; // Employees-Roles end date will change
                 // Check tariffs
                 if (tep_not_null($administration_project->has_tariffs('tariffs_start_date', '>', tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date'])))) {
                   $_POST['action'] = 'enter_data';
                   $error_level = 11; // Tariff start date after new end date
                   break;
-                } else if (tep_not_null($administration_project->has_tariffs('tariffs_start_date', '<=', ($_POST['projects_end_date']!=0?tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']):'2099-12-31'), 'AND', 'tariffs_end_date', '>', ($_POST['projects_end_date']!=0?tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']):'2099-12-31')))) {
+                } else if (tep_not_null($administration_project->has_tariffs('tariffs_start_date', '<=', tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']), 'AND', 'tariffs_end_date', '>', tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date'])))) {
                   $_POST['question_t2_answer'] = true; // Tariffs end date will change
                   // Check if activities exist before new end date
                   if (tep_not_null($administration_project->has_activities('activities_date', '>', tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date'])))) {
@@ -205,7 +205,7 @@
           if ((($_POST['projects_end_date'] > $administration_project->end_date) && $administration_project->end_date != 0) || $_POST['projects_end_date'] == 0) {
             $employees_roles_array = $administration_project->has_employees_roles('employees_roles_end_date', '=', tep_strftime(DATE_FORMAT_DATABASE, $administration_project->end_date));
           } else {
-            $employees_roles_array = $administration_project->has_employees_roles('employees_roles_start_date', '<=', ($_POST['projects_end_date']!=0?tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']):'2099-12-31'), 'AND', 'employees_roles_end_date', '>', ($_POST['projects_end_date']!=0?tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']):'2099-12-31'));
+            $employees_roles_array = $administration_project->has_employees_roles('employees_roles_start_date', '<=', tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']), 'AND', 'employees_roles_end_date', '>', tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']));
           }
           for ($index=0; $index<sizeof($employees_roles_array); $index++) {
             $employees_roles_array[$index]->end_date = $_POST['projects_end_date'];
@@ -217,7 +217,7 @@
           if ((($_POST['projects_end_date'] > $administration_project->end_date) && $administration_project->end_date != 0) || $_POST['projects_end_date'] == 0) {
             $tariffs_array = $administration_project->has_tariffs('tariffs_end_date', '=', tep_strftime(DATE_FORMAT_DATABASE, $administration_project->end_date));
           } else {
-            $tariffs_array = $administration_project->has_tariffs('tariffs_start_date', '<=', ($_POST['projects_end_date']!=0?tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']):'2099-12-31'), 'AND', 'tariffs_end_date', '>', ($_POST['projects_end_date']!=0?tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']):'2099-12-31'));
+            $tariffs_array = $administration_project->has_tariffs('tariffs_start_date', '<=', tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']), 'AND', 'tariffs_end_date', '>', tep_strftime(DATE_FORMAT_DATABASE, $_POST['projects_end_date']));
           }
           for ($index=0; $index<sizeof($tariffs_array); $index++) {
             $tariffs_array[$index]->end_date = $_POST['projects_end_date'];
