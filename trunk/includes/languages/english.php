@@ -196,6 +196,26 @@ $EMPLOYEE_ROLE_ERROR_LEVEL = array (0  => '',
                                     11 => 'Activities exist between old and new end date',
                                     12 => 'Deletion not permitted, tariffs exist');
 
+define('TEXT_TARIFFS', 'Tarief');
+define('TEXT_TARIFFS_AMOUNT', 'Amount');
+define('TEXT_TARIFFS_START_DATE', 'Start date');
+define('TEXT_TARIFFS_END_DATE', 'End date');
+define('TEXT_TARIFFS_LISTING_IS_EMPTY', 'No tariffs available');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$TARIFF_ERROR_LEVEL = array (0  => '',
+                             1  => 'Amount is missing',
+                             2  => 'Unit is missing',
+                             3  => 'Start date is missing',
+                             4  => 'Incorrect amount',
+                             5  => 'Incorrect date',
+                             6  => 'Start date before employee-role start date',
+                             7  => 'End date after employee-role end date',
+                             8  => 'Duplicate entries found',
+                             9  => 'Activities exist between old and new start date',
+                             10 => 'Activities exist between old and new end date',
+                             11 => 'Deletion not permitted, activities exist');
+
 define('TEXT_ACTIVITY_DAY', 'Day');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');
 define('TEXT_ACTIVITY_ROLENAME', 'Role');
@@ -349,6 +369,7 @@ $CATEGORY_ERROR_LEVEL = array (0 => '',
                                1 => 'Name is missing',
                                2 => 'Deletion not permitted, roles exist');
 
+define('TEXT_UNITS', 'Unit');
 define('TEXT_UNITS_NAME', 'Name');
 define('TEXT_UNITS_DESCRIPTION', 'Description');
 define('TEXT_UNITS_LISTING_IS_EMPTY', 'No units available');

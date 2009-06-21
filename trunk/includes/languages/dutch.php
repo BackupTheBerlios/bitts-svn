@@ -196,6 +196,26 @@ $EMPLOYEE_ROLE_ERROR_LEVEL = array (0  => '',
                                     11 => 'Activiteiten aanwezig tussen oude en nieuwe eind datum',
                                     12 => 'Verwijderen niet toegestaan, tarieven aanwezig');
 
+define('TEXT_TARIFFS', 'Tarief');
+define('TEXT_TARIFFS_AMOUNT', 'Bedrag');
+define('TEXT_TARIFFS_START_DATE', 'Start datum');
+define('TEXT_TARIFFS_END_DATE', 'Eind datum');
+define('TEXT_TARIFFS_LISTING_IS_EMPTY', 'Geen tarieven aanwezig');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$TARIFF_ERROR_LEVEL = array (0  => '',
+                             1  => 'Bedrag ontbreekt',
+                             2  => 'Eenheid ontbreekt',
+                             3  => 'Start datum ontbreekt',
+                             4  => 'Bedrag onjuist',
+                             5  => 'Datum onjuist',
+                             6  => 'Start datum voor medewerker-rol start datum',
+                             7  => 'Eind datum na medewerker-rol eind datum',
+                             8  => 'Duplicaten aangetroffen',
+                             9  => 'Activiteiten tussen oude en nieuwe start datum',
+                             10 => 'Activiteiten aanwezig tussen oude en nieuwe eind datum',
+                             11 => 'Verwijderen niet toegestaan, activiteiten aanwezig');
+
 define('TEXT_ACTIVITY_DAY', 'Dag');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');
 define('TEXT_ACTIVITY_ROLENAME', 'Rol');
@@ -349,6 +369,7 @@ $CATEGORY_ERROR_LEVEL = array (0 => '',
                                1 => 'Naam ontbreekt',
                                2 => 'Verwijderen niet toegestaan, rollen aanwezig');
 
+define('TEXT_UNITS', 'Eenheid');
 define('TEXT_UNITS_NAME', 'Naam');
 define('TEXT_UNITS_DESCRIPTION', 'Omschrijving');
 define('TEXT_UNITS_LISTING_IS_EMPTY', 'Geen eenheden aanwezig');

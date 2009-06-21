@@ -3,7 +3,7 @@
  * CODE FILE   : administration_roles.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 20 june 2009
+ * Date        : 21 june 2009
  * Description : Role administration form
  *               Data validation sequence
  *               Storing of entered data (via role object)
@@ -115,7 +115,7 @@
                         <td class="item_entry">
                           <?php echo tep_draw_form('project_selection', tep_href_link(FILENAME_ADMINISTRATION_ROLES)) . tep_create_parameters(array(), array('mPath'), 'hidden_field');
                           $temp_project = new project();
-                          echo tep_html_select('projects_id', tep_get_partial_array($temp_project->listing, 'id', 'name'), true, (tep_not_null($_POST['projects_id'])?$_POST['projects_id']:'select_none'), 'onChange="this.form.submit();" size="'.sizeof($temp_project->listing).'" style="width: 100%"');
+                          echo tep_html_select('projects_id', tep_get_partial_array($temp_project->listing, 'id', 'name'), true, (tep_not_null($_POST['projects_id'])?$_POST['projects_id']:'select_none'), 'onChange="this.form.submit();" size="'.(sizeof($temp_project->listing)>1?(sizeof($temp_project->listing)<25?sizeof($temp_project->listing):25):2).'" style="width: 100%"');
                           ?>
                           </form>
                         </td>

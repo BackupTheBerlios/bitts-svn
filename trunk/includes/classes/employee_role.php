@@ -47,13 +47,15 @@
       switch ($varname) {
       	case 'id':
           return $this->id;
-      	case 'roles_id':
+        case 'name':
+          return $this->role->name . ' : ' . $this->employee->fullname . ' (' . tep_strftime(DATE_FORMAT_SHORT, $this->start_date) . ' ' . ($this->end_date!=0?tep_strftime(DATE_FORMAT_SHORT, $this->end_date):'&#8734;') . ')';
+        case 'roles_id':
           return $this->role->id;
       	case 'role':
           return $this->role;
         case 'employee':
           return $this->employee;
-       	case 'start_date':
+        case 'start_date':
           return $this->start_date;
       	case 'end_date':
       	  return $this->end_date;
@@ -188,16 +190,16 @@
       return tep_not_null($tariffs_result);
     }
 
-    public function has_duplicates($start_date, $end_date) {
+    public function has_duplicates($start_date, $end_date, $roles_id, $employees_id) {
       $database = $_SESSION['database'];
       $duplicates_query = $database->query("select 1 from " . TABLE_EMPLOYEES_ROLES .
-                                           " where employees_roles_id != " . $this->id .
-                                           " and roles_id = " . $this->roles_id .
-                                           " and employees_id = " . $this->employee->id .
+                                           " where employees_roles_id != " . (tep_not_null($this->id)?$this->id:0) .
+                                           " and roles_id = " . $roles_id .
+                                           " and employees_id = " . $employees_id .
                                            " and employees_roles_start_date <= '" . ($end_date!=0?tep_strftime(DATE_FORMAT_DATABASE, $end_date):'2099-12-31') . "'" .
                                            " and employees_roles_end_date >= '" . tep_strftime(DATE_FORMAT_DATABASE, $start_date) . "'");
       $duplicates_result = $database->fetch_array($duplicates_query);
-      return tep_not_null($tariffs_result);
+      return tep_not_null($duplicates_result);
     }
 
     public static function get_selectable_tree($employee_id = '') {

@@ -90,7 +90,7 @@
           </tr>
           <tr>
             <td class="item_entry" style="text-align:left">
-              <?php if ($_POST['action'] != 'enter_data' && $_POST['action']!='save_data' && $_POST['action'] != 'delete_entry') {
+              <?php if (tep_not_null($_POST['projects_id']) && $_POST['action'] != 'enter_data' && $_POST['action']!='save_data' && $_POST['action'] != 'delete_entry') {
                 echo tep_draw_form('fnew', tep_href_link(FILENAME_ADMINISTRATION_EMPLOYEES_ROLES)) . tep_create_parameters(array('action'=>'enter_data'), array('mPath', 'projects_id'), 'hidden_field');
                 echo tep_image_submit('button_new.gif', TEXT_ENTRY_NEW, 'style="vertical-align:middle"');
                 echo '</form>';

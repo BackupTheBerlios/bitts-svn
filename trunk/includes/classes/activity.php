@@ -3,7 +3,7 @@
  * CLASS FILE  : activity.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 june 2009
+ * Date        : 21 june 2009
  * Description : Activity class
  *
  */
@@ -54,7 +54,7 @@
         case 'amount':
           return $this->amount;
         case 'unit_name':
-          return $this->tariff->unit_name;
+          return $this->tariff->unit->name;
         case 'travel_distance':
           return $this->travel_distance;
         case 'expenses':
