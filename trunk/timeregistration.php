@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 june 2009
+ * Date        : 21 june 2009
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -22,6 +22,9 @@
   // Create a new timesheet object with id == 0
   // If a timesheet already exists for this employee and period, the timesheet class will automatically
   // retrieve the correct id and put this into $_SESSION['timesheet']->id
+  if (!tep_not_null($_POST['period'])) {
+    $_POST['period'] = tep_datetoperiod();
+  }
   $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->id, $_POST['period']);
 
   switch ($_POST['action']) {
