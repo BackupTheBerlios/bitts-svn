@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 20 june 2009
+ * Date        : 21 june 2009
  * Description : Dutch language file
  */
 
@@ -180,12 +180,19 @@ define('TEXT_EMPLOYEES_ROLES_END_DATE', 'Eind datum');
 define('TEXT_EMPLOYEES_ROLES_LISTING_IS_EMPTY', 'Geen medewerker-rollen aanwezig');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
-$EMPLOYEE_ROLE_ERROR_LEVEL = array (0 => '',
-                                    1 => 'Rol ontbreekt',
-                                    2 => 'Medewerker ontbreekt',
-                                    3 => 'Start datum ontbreekt',
-                                    4 => 'Datum onjuist',
-                                    5 => 'Verwijderen niet toegestaan, tarieven aanwezig');
+$EMPLOYEE_ROLE_ERROR_LEVEL = array (0  => '',
+                                    1  => 'Rol ontbreekt',
+                                    2  => 'Medewerker ontbreekt',
+                                    3  => 'Start datum ontbreekt',
+                                    4  => 'Datum onjuist',
+                                    5  => 'Start datum voor project start datum',
+                                    6  => 'Eind datum na project eind datum',
+                                    7  => 'Duplicaten aangetroffen',
+                                    8  => 'Tarieven aanwezig voor nieuwe start datum',
+                                    9  => 'Activiteiten tussen oude en nieuwe start datum',
+                                    10 => 'Tarieven aanwezig na nieuwe eind datum',
+                                    11 => 'Activiteiten aanwezig tussen oude en nieuwe eind datum',
+                                    12 => 'Verwijderen niet toegestaan, tarieven aanwezig');
 
 define('TEXT_ACTIVITY_DAY', 'Dag');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');

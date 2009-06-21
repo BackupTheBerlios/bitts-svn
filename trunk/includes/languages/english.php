@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 20 june 2009
+ * Date        : 21 june 2009
  * Description : English language file
  */
 
@@ -180,12 +180,19 @@ define('TEXT_EMPLOYEES_ROLES_END_DATE', 'End date');
 define('TEXT_EMPLOYEES_ROLES_LISTING_IS_EMPTY', 'No employee-roles available');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
-$EMPLOYEE_ROLE_ERROR_LEVEL = array (0 => '',
-                                    1 => 'Role is missing',
-                                    2 => 'Employee is missing',
-                                    3 => 'Start date is missing',
-                                    4 => 'Incorrect date',
-                                    5 => 'Deletion not permitted, tariffs exist');
+$EMPLOYEE_ROLE_ERROR_LEVEL = array (0  => '',
+                                    1  => 'Role is missing',
+                                    2  => 'Employee is missing',
+                                    3  => 'Start date is missing',
+                                    4  => 'Incorrect date',
+                                    5  => 'Start date before project start date',
+                                    6  => 'End date after project end date',
+                                    7  => 'Duplicate entries found',
+                                    8  => 'Tariffs exist before new start date',
+                                    9  => 'Activities exist between old and new start date',
+                                    10 => 'Tariffs exist after new end date',
+                                    11 => 'Activities exist between old and new end date',
+                                    12 => 'Deletion not permitted, tariffs exist');
 
 define('TEXT_ACTIVITY_DAY', 'Day');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');

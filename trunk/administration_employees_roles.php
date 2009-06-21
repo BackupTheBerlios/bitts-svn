@@ -199,7 +199,7 @@
       // Check for dependencies
       $administration_employee_role = new employee_role($_POST['employees_roles_id']);
       if ($administration_employee_role->has_dependencies()) {
-        $error_level = 5; // Related tariff(s) exist
+        $error_level = 12; // Related tariff(s) exist
         $_POST['action'] = '';
       }
       // Format dates (from uts to display)
