@@ -69,9 +69,9 @@
           $_POST['action'] = 'enter_data';
           $error_level = 5; // Start date before project start date
           break;
-        } else if (($_POST['employees_roles_end_date'] > $temp_project->end_date && $temp_project->end_date != 0) || ($_POST['employees_roles_end_date'] == 0 && $temp_project->start_date != 0)) {
+        } else if (($_POST['employees_roles_end_date'] > $temp_project->end_date && $temp_project->end_date != 0) || ($_POST['employees_roles_end_date'] == 0 && $temp_project->end_date != 0)) {
           $_POST['action'] = 'enter_data';
-          $error_level = 6; // Start date after project end date
+          $error_level = 6; // End date after project end date
           break;
         }
 

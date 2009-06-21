@@ -177,6 +177,8 @@ $ROLE_ERROR_LEVEL = array (0 => '',
 define('TEXT_EMPLOYEES_ROLES', 'Medewerker-Rol');
 define('TEXT_EMPLOYEES_ROLES_START_DATE', 'Start datum');
 define('TEXT_EMPLOYEES_ROLES_END_DATE', 'Eind datum');
+define('TEXT_EMPLOYEES_ROLES_QUESTION_T1', 'Start datum tarieven wijzigen');
+define('TEXT_EMPLOYEES_ROLES_QUESTION_T2', 'Eind datum tarieven wijzigen');
 define('TEXT_EMPLOYEES_ROLES_LISTING_IS_EMPTY', 'Geen medewerker-rollen aanwezig');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required

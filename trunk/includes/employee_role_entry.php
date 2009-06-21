@@ -3,7 +3,7 @@
  * CODE FILE   : employee_role_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 20 june 2009
+ * Date        : 21 june 2009
  * Description : Employee-Role entry fields
  */
 ?>
@@ -19,7 +19,7 @@
               </td>
             </tr>
           <?php }
-          if ($_POST['action']=='enter_data') {
+          if ($_POST['action']=='enter_data' || $_POST['action']=='save_data') {
             echo tep_draw_form('employee_role_entry', tep_href_link(FILENAME_ADMINISTRATION_EMPLOYEES_ROLES)) . tep_create_parameters(array('action'=>'save_data'), array('mPath', 'employees_roles_id', 'employees_roles_start_date', 'employees_roles_start_date_display', 'employees_roles_end_date', 'employees_roles_end_date_display', 'roles_id', 'employees_id', 'projects_id', 'question_t1_answer', 'question_t2_answer'), 'hidden_field');
           } ?>
           <tr>
@@ -27,7 +27,7 @@
               <?php echo TEXT_ROLES; ?>
             </td>
             <td class="item_entry" style="width:150px">
-              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='delete_entry') {
+              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='save_data' || $_POST['action']=='delete_entry') {
                 $temp_role = new role(0, $_POST['projects_id']);
                 echo tep_html_select('roles_id', tep_get_partial_array($temp_role->listing, 'id', 'name'), $_POST['action']=='enter_data' && !tep_not_null($_POST['employees_roles_id']), $_POST['roles_id'], 'size="1" maxlength="20" style="width: 100%"');
               } else {
@@ -39,7 +39,7 @@
               <?php echo TEXT_EMPLOYEES; ?>
             </td>
             <td class="item_entry" style="width:150px">
-              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='delete_entry') {
+              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='save_data' || $_POST['action']=='delete_entry') {
                 $temp_employee = new employee();
                 echo tep_html_select('employees_id', tep_get_partial_array($temp_employee->listing, 'id', 'fullname'), $_POST['action']=='enter_data' && !tep_not_null($_POST['employees_roles_id']), $_POST['employees_id'], 'size="1" maxlength="20" style="width: 100%"');
               } else {
@@ -90,7 +90,7 @@
           </tr>
           <tr>
             <td class="item_entry" style="text-align:left">
-              <?php if (tep_not_null($_POST['projects_id']) && $_POST['action'] != 'enter_data' && $_POST['action'] != 'delete_entry') {
+              <?php if ($_POST['action'] != 'enter_data' && $_POST['action']!='save_data' && $_POST['action'] != 'delete_entry') {
                 echo tep_draw_form('fnew', tep_href_link(FILENAME_ADMINISTRATION_EMPLOYEES_ROLES)) . tep_create_parameters(array('action'=>'enter_data'), array('mPath', 'projects_id'), 'hidden_field');
                 echo tep_image_submit('button_new.gif', TEXT_ENTRY_NEW, 'style="vertical-align:middle"');
                 echo '</form>';
@@ -99,7 +99,7 @@
               } ?>
             </td>
             <td class="item_entry" colspan="4" style="text-align:right">
-              <?php if ($_POST['action']=='enter_data') {
+              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='save_data') {
                 echo tep_image_submit('button_save.gif', TEXT_ENTRY_SAVE, 'style="vertical-align:middle"');
                 echo '</form>';
               } else if ($_POST['action']=='delete_entry') {
@@ -111,7 +111,7 @@
                 echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_save_disabled.gif', null, null, null, 'style="vertical-align:middle"');
               }
               echo '&nbsp;';
-              if ($_POST['action'] == 'enter_data' || $_POST['action'] == 'delete_entry') {
+              if ($_POST['action'] == 'enter_data' || $_POST['action']=='save_data' || $_POST['action'] == 'delete_entry') {
                 echo tep_draw_form('fcancel', tep_href_link(FILENAME_ADMINISTRATION_EMPLOYEES_ROLES)) . tep_create_parameters(array(), array('mPath', 'projects_id'), 'hidden_field');
                 echo tep_image_submit('button_cancel.gif', TEXT_ENTRY_CANCEL, 'style="vertical-align:middle"');
                 echo '</form>';

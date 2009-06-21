@@ -139,10 +139,10 @@ $PROJECTS_CALCULATED_HOURS_PERIOD = array ('B' => 'Per billing period',
                                            'E' => 'Entire project');
 define('TEXT_PROJECTS_HOURS_USED', 'Used hours');
 define('TEXT_PROJECTS_HOURS_USED_PERCENTAGE', 'Used hours (%)');
-define('TEXT_PROJECTS_QUESTION_ER1', 'Change start date employees-roles');
-define('TEXT_PROJECTS_QUESTION_T1', 'Change start date tariffs');
-define('TEXT_PROJECTS_QUESTION_ER2', 'Change end date employees-roles');
-define('TEXT_PROJECTS_QUESTION_T2', 'Change end date tariffs');
+define('TEXT_PROJECTS_QUESTION_ER1', 'Change employees-roles start date');
+define('TEXT_PROJECTS_QUESTION_T1', 'Change tariffs start date');
+define('TEXT_PROJECTS_QUESTION_ER2', 'Change employees-roles end date');
+define('TEXT_PROJECTS_QUESTION_T2', 'Change tariffs end date');
 define('TEXT_PROJECTS_LISTING_IS_EMPTY', 'No projects available');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
@@ -177,6 +177,8 @@ $ROLE_ERROR_LEVEL = array (0 => '',
 define('TEXT_EMPLOYEES_ROLES', 'Employee-Role');
 define('TEXT_EMPLOYEES_ROLES_START_DATE', 'Start date');
 define('TEXT_EMPLOYEES_ROLES_END_DATE', 'End date');
+define('TEXT_EMPLOYEES_ROLES_QUESTION_T1', 'Change tariffs start date');
+define('TEXT_EMPLOYEES_ROLES_QUESTION_T2', 'Change tariffs end date');
 define('TEXT_EMPLOYEES_ROLES_LISTING_IS_EMPTY', 'No employee-roles available');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required

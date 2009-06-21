@@ -3,7 +3,7 @@
  * CLASS FILE  : employee_role.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 20 june 2009
+ * Date        : 21 june 2009
  * Description : Employee_role class
  */
 
@@ -193,8 +193,8 @@
       $duplicates_query = $database->query("select 1 from " . TABLE_EMPLOYEES_ROLES .
                                            " where employees_roles_id != " . $this->id .
                                            " and roles_id = " . $this->roles_id .
-                                           " and employees_id = " . $this->employees_id .
-                                           " and employees_roles_start_date <= '" . ($end_date!=0?tep_strftime(DATE_FORMAT_DATABASE, $this->end_date):'2099-12-31') . "'" .
+                                           " and employees_id = " . $this->employee->id .
+                                           " and employees_roles_start_date <= '" . ($end_date!=0?tep_strftime(DATE_FORMAT_DATABASE, $end_date):'2099-12-31') . "'" .
                                            " and employees_roles_end_date >= '" . tep_strftime(DATE_FORMAT_DATABASE, $start_date) . "'");
       $duplicates_result = $database->fetch_array($duplicates_query);
       return tep_not_null($tariffs_result);
