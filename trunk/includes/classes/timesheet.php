@@ -3,45 +3,54 @@
  * CLASS FILE  : timesheet.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 june 2009
+ * Date        : 21 june 2009
  * Description : Timesheet class
  *
  */
 
   class timesheet {
-    private $id, $start_date, $end_date, $locked, $employees_id, $activities, $former_activity;
+    private $id, $start_date, $end_date, $locked, $employees_id, $activities, $former_activity, $listing;
 
-    public function __construct($id = 0, $employees_id = 0, $period = null) {
+    public function __construct($id = 0, $employees_id = 0, $period = null, $include_activities = true) {
       $database = $_SESSION['database'];
       $this->id = $id;
       $this->activities = array();
+      $this->listing = array();
 
       if ($this->id != 0) {
         // Retrieve timesheet by id
         $this->id = $database->prepare_input($this->id);
-        $timesheet_query = $database->query("select timesheets_id, timesheets_start_date, timesheets_end_date, employees_id from " . TABLE_TIMESHEETS . " where timesheets_id = '" . (int)$this->id . "'");
-      } else {
+        $timesheet_query = $database->query("select timesheets_id, timesheets_start_date, timesheets_end_date, timesheets_locked, employees_id from " . TABLE_TIMESHEETS . " where timesheets_id = '" . (int)$this->id . "'");
+      } else if ($employees_id != 0 && tep_not_null($period)) {
         // Timesheet might exist but we do not know the id
       	// Try to retrieve the timesheet for the given employee and period
         $this->employees_id = $database->prepare_input($employees_id);
       	$this->start_date = $database->prepare_input(tep_periodstartdate($period));
         $timesheet_query = $database->query("select timesheets_id, timesheets_start_date, timesheets_end_date, timesheets_locked, employees_id from " . TABLE_TIMESHEETS . " where employees_id = '" . (int)$this->employees_id . "' and timesheets_start_date = '" . $this->start_date . "'");
-      }
-      $timesheet_result = $database->fetch_array($timesheet_query);
-
-      if (tep_not_null($timesheet_result)) {
-        // Timesheet exists
-        $this->id = $timesheet_result['timesheets_id'];
-      	$this->fill($timesheet_result['timesheets_start_date'],
-                    $timesheet_result['timesheets_end_date'],
-                    ($timesheet_result['timesheets_locked'] == 1),
-                    $timesheet_result['employees_id']);
-
-        // Retrieve all activities for this timesheet (if any exist)
-        $this->activities = activity::get_array($this->id);
       } else {
-      	// Timesheet does not exist, fill with the given values
-      	$this->fill(tep_periodstartdate($period), tep_periodenddate($period), false, $employees_id);
+        // We probably created an empty timesheet object to retrieve the entire timesheet listing for a given employee
+        $this->listing = $this->get_array($employees_id);
+      }
+
+      if (($this->id != 0) || ($employees_id != 0 && tep_not_null($period))) {
+        $timesheet_result = $database->fetch_array($timesheet_query);
+
+        if (tep_not_null($timesheet_result)) {
+          // Timesheet exists
+          $this->id = $timesheet_result['timesheets_id'];
+      	  $this->fill($timesheet_result['timesheets_start_date'],
+                      $timesheet_result['timesheets_end_date'],
+                      ($timesheet_result['timesheets_locked'] == 1),
+                      $timesheet_result['employees_id']);
+
+          // Retrieve all activities for this timesheet (if any exist)
+          if ($include_activities) {
+            $this->activities = activity::get_array($this->id);
+          }
+        } else {
+          // Timesheet does not exist, fill a new one with the given values
+      	  $this->fill(tep_periodstartdate($period), tep_periodenddate($period), false, $employees_id);
+        }
       }
     }
 
@@ -81,8 +90,28 @@
           return $total_expenses;
         case 'former_activity':
           return $this->former_activity;
+        case 'listing':
+          return $this->listing;
+        case 'listing_empty':
+          return sizeof($this->listing) == 0;
       }
       return null;
+    }
+
+    private function get_array($employees_id = 0) {
+      $database = $_SESSION['database'];
+      $timesheets_array = array();
+
+      if ($employees_id != 0) {
+        $index = 0;
+        $employees_id = $database->prepare_input($employees_id);
+        $timesheets_query = $database->query("select timesheets_id from " . TABLE_TIMESHEETS . " where employees_id in (" . $employees_id . ") order by timesheets_start_date desc");
+        while ($timesheets_result = $database->fetch_array($timesheets_query)) {
+          $timesheets_array[$index] = new timesheet($timesheets_result['timesheets_id'], 0, null, false);
+          $index++;
+        }
+      }
+      return $timesheets_array;
     }
 
     public function fill($start_date = '0000-00-00 00:00:00', $end_date = '0000-00-00 00:00:00', $locked = false, $employees_id = 0) {
@@ -126,6 +155,11 @@
 
     public function confirm() {
       $this->locked = true;
+      $this->save();
+    }
+
+    public function unlock() {
+      $this->locked = false;
       $this->save();
     }
 

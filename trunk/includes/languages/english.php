@@ -216,6 +216,14 @@ $TARIFF_ERROR_LEVEL = array (0  => '',
                              10 => 'Activities exist between old and new end date',
                              11 => 'Deletion not permitted, activities exist');
 
+define('TEXT_TIMESHEETS_PERIOD', 'Period');
+define('TEXT_TIMESHEETS_START_DATE', 'Start date');
+define('TEXT_TIMESHEETS_END_DATE', 'Eind date');
+define('TEXT_TIMESHEETS_LOCK', 'Lock');
+define('TEXT_TIMESHEETS_UNLOCK', 'Unlock');
+define('TEXT_TIMESHEETS_UNCONFIRMED', 'Unconfirmed');
+define('TEXT_TIMESHEETS_LISTING_IS_EMPTY', 'No timesheets available');
+
 define('TEXT_ACTIVITY_DAY', 'Day');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');
 define('TEXT_ACTIVITY_ROLENAME', 'Role');

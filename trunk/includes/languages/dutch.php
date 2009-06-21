@@ -216,6 +216,14 @@ $TARIFF_ERROR_LEVEL = array (0  => '',
                              10 => 'Activiteiten aanwezig tussen oude en nieuwe eind datum',
                              11 => 'Verwijderen niet toegestaan, activiteiten aanwezig');
 
+define('TEXT_TIMESHEETS_PERIOD', 'Periode');
+define('TEXT_TIMESHEETS_START_DATE', 'Start datum');
+define('TEXT_TIMESHEETS_END_DATE', 'Eind datum');
+define('TEXT_TIMESHEETS_LOCK', 'Vergrendel');
+define('TEXT_TIMESHEETS_UNLOCK', 'Ontgrendel');
+define('TEXT_TIMESHEETS_UNCONFIRMED', 'Onbevestigd');
+define('TEXT_TIMESHEETS_LISTING_IS_EMPTY', 'Geen timesheets aanwezig');
+
 define('TEXT_ACTIVITY_DAY', 'Dag');
 define('TEXT_ACTIVITY_PROJECTNAME', 'Project');
 define('TEXT_ACTIVITY_ROLENAME', 'Rol');

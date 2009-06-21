@@ -50,7 +50,7 @@
                                    $_POST['categories_id']);
         $administration_role->save();
 
-        // Clear all values except mPath
+        // Clear all values except mPath and projects_id
         foreach($_POST as $key=>$value) {
           if ($key != 'mPath' && $key != 'projects_id') {
             unset($_POST[$key]);
