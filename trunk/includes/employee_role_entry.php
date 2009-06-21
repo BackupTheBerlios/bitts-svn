@@ -24,7 +24,7 @@
           } ?>
           <tr>
             <td class="item_entry">
-              <?php echo TEXT_ROLES_NAME.$_POST['employees_roles_id']; ?>
+              <?php echo TEXT_ROLES_NAME; ?>
             </td>
             <td class="item_entry" style="width:150px">
               <?php if ($_POST['action']=='enter_data' || $_POST['action']=='delete_entry') {
