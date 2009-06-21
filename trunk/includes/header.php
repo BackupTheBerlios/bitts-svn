@@ -3,7 +3,7 @@
  * CODE FILE   : header.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 september 2008
+ * Date        : 21 june 2009
  * Description : Header file
  *               Contains html declarations and parameters
  *               Creates error- and/or info message on top of page
