@@ -125,7 +125,7 @@
                       </tr>
                       <tr>
                     <?php } ?>
-                    <td class="<?php echo ($counter==$today?'large-calendar-today':($colindex%7 >= 0 && $colindex%7 <= 4?($counter<$today&&$total_amount_per_day[$calendar_day]<8?'large-calendar-weekday-minimum-not-met':'large-calendar-weekday'):'large-calendar-weekend')) ?>">
+                    <td class="<?php echo ($counter==$today?'large-calendar-today':($colindex%7 >= 0 && $colindex%7 <= 4?($counter<$today&&$total_amount_per_day[$calendar_day]<MINIMUM_HOURS_PER_DAY?'large-calendar-weekday-minimum-not-met':'large-calendar-weekday'):'large-calendar-weekend')) ?>">
                       <?php echo '<b>' . $calendar_day . '</b><br>&nbsp;<br>' . ($total_amount_per_day[$calendar_day]!=0?tep_number_db_to_user($total_amount_per_day[$calendar_day], 2):'&nbsp;') . '<br>&nbsp;'; ?>
                     </td>
                   <?php }
