@@ -3,7 +3,7 @@
  * CLASS FILE  : timesheet.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 june 2009
+ * Date        : 23 june 2009
  * Description : Timesheet class
  *
  */
@@ -205,6 +205,17 @@
         $this->former_activity = new activity($former_activity_id);
       }
       return $former_activity_id;
+    }
+
+    public function hours_complete() {
+      $total_amount_per_day = $this->get_total_amount_per_day();
+      for ($index=1; $index<=sizeof($total_amount_per_day); $index++) {
+        $day_of_the_week = date('w', mktime(null, null, null, substr($this->start_date,5,2), $index, substr($this->start_date,0,4)));
+        if ($total_amount_per_day[$index] < MINIMUM_HOURS_PER_DAY && $day_of_the_week != 0 && $day_of_the_week != 6) {
+          return false;
+        }
+      }
+      return true;
     }
   }
 ?>

@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 21 june 2009
+ * Date        : 23 june 2009
  * Description : Dutch language file
  */
 
@@ -122,6 +122,7 @@ define('TEXT_TIMEREGISTRATION_LOCKED', 'Deze periode is bevestigd en kan niet me
 define('TEXT_TIMEREGISTRATION_IS_EMPTY', 'Geen activiteiten aanwezig');
 define('TEXT_TIMEREGISTRATION_CONFIRM', 'Bevestig deze periode. LET OP: Hierna zijn wijzigingen niet meer mogelijk!');
 define('TEXT_TIMEREGISTRATION_CONFIRM_QUESTION', 'Wilt u deze periode bevestigen?');
+define('TEXT_TIMEREGISTRATION_CONFIRM_QUESTION_MINIMUM_HOURS_NOT_MET', 'Minimum aantal uren niet gehaald, wilt u deze periode toch bevestigen?');
 define('TEXT_TIMEREGISTRATION_CONFIRM_OK', 'Bevestigen OK');
 define('TEXT_TIMEREGISTRATION_CONFIRM_CANCEL', 'Bevestigen annuleren');
 define('TEXT_TIMEREGISTRATION_CALENDAR_DESCRIPTION', 'Overzicht geboekte aantallen per dag:');

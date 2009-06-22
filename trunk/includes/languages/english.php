@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 21 june 2009
+ * Date        : 23 june 2009
  * Description : English language file
  */
 
@@ -122,6 +122,7 @@ define('TEXT_TIMEREGISTRATION_LOCKED', 'This period has been confirmed and canno
 define('TEXT_TIMEREGISTRATION_IS_EMPTY', 'No activities available');
 define('TEXT_TIMEREGISTRATION_CONFIRM', 'Confirm this period. NOTE: After this, changes cannot be made!');
 define('TEXT_TIMEREGISTRATION_CONFIRM_QUESTION', 'Do you want to confirm this period?');
+define('TEXT_TIMEREGISTRATION_CONFIRM_QUESTION_MINIMUM_HOURS_NOT_MET', 'Minimum hours not met, do you want to confirm this period anyway?');
 define('TEXT_TIMEREGISTRATION_CONFIRM_OK', 'Confirm OK');
 define('TEXT_TIMEREGISTRATION_CONFIRM_CANCEL', 'Cancel confirm');
 define('TEXT_TIMEREGISTRATION_CALENDAR_DESCRIPTION', 'Overview registered amounts per day:');

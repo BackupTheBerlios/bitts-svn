@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 june 2009
+ * Date        : 23 june 2009
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -218,7 +218,7 @@
                 </form>&nbsp;
               <?php } else if ($_POST['action']=='timesheet_to_be_confirmed') { ?>
                 <!-- Show OK and Cancel buttons below the timesheet-to-be-confirmed -->
-                <?php echo TEXT_TIMEREGISTRATION_CONFIRM_QUESTION; ?>&nbsp;
+                <?php echo ($_SESSION['timesheet']->hours_complete()?TEXT_TIMEREGISTRATION_CONFIRM_QUESTION:'<b><font color="#ff0000">'.TEXT_TIMEREGISTRATION_CONFIRM_QUESTION_MINIMUM_HOURS_NOT_MET.'</font></b>'); ?>&nbsp;
                 <?php echo tep_draw_form('confirm_timesheet', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'timesheet_confirmed'), array('mPath','period','sort_order'), 'hidden_field');
                   echo tep_image_submit('button_ok.gif', TEXT_TIMEREGISTRATION_CONFIRM_OK, 'style="vertical-align:middle"'); ?>
                 </form>&nbsp;
