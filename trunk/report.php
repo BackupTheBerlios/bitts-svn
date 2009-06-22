@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 june 2009
+ * Date        : 22 june 2009
  * Description : Data gathering and reporting functions
  */
 
@@ -106,7 +106,7 @@
     case 'report_projects':
       $database = $_SESSION['database'];
       // *** Create pdf object ***
-      if ($_POST['per_employee']) {
+      if ($_POST['per_employee']||$_POST['current_employee']) {
         $pdf = new PDF(); // Create a portrait pdf
       } else {
         $pdf = new PDF('L'); // All the others should be landscape
@@ -129,7 +129,10 @@
                                'AND cus.customers_id = pr.customers_id ' .
                                'AND bu.business_units_id = pr.business_units_id) ' .
                                'WHERE ts.timesheets_start_date = "' . $periodstartdate . '" ';
-      if ($_POST['per_employee']) {
+      if ($_POST['current_employee']) {
+        $projects_query_string .= 'AND emp.employees_id = ' . $_SESSION['employee']->id . ' ';
+      }
+      if ($_POST['per_employee'] || $_POST['current_employee']) {
         $projects_query_string .= 'ORDER BY cus.customers_id, pr.projects_id, rl.roles_id, emp.employees_id, units.units_id, act.activities_date';
       } else {
         $projects_query_string .= 'ORDER BY cus.customers_id, pr.projects_id, rl.roles_id, units.units_id, act.activities_date, emp.employees_id';
@@ -164,7 +167,7 @@
                               tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $projects_result['timesheets_start_date'])) . ' - ' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $projects_result['timesheets_end_date'])),
                               $projects_result['projects_name'],
                               $projects_result['roles_name'],
-                              ($_POST['per_employee']?$projects_result['employees_fullname']:''));
+                              ($_POST['per_employee']||$_POST['current_employee']?$projects_result['employees_fullname']:''));
           $units_id = ''; // To trigger a new table header later on
         }
         if ($units_id != $projects_result['units_id']) {
@@ -175,7 +178,7 @@
           }
           // Create a new table header
           $pdf->InvoiceTableHeader($projects_result['units_name'] . ($_POST['per_employee']&&$_POST['show_tariff']?REPORT_TABLE_HEADER_IS_TARIFF.tep_number_db_to_user($projects_result['tariffs_amount'], 2):''),
-                                   $_POST['per_employee'],
+                                   $_POST['per_employee']||$_POST['current_employee'],
                                    $_POST['show_tariff'],
                                    $_POST['show_travel_distance'],
                                    $_POST['show_expenses'],

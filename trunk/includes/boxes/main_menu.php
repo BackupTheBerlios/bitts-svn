@@ -20,7 +20,7 @@
   new infoBoxHeading($info_box_contents, true, true);
 
   $info_box_contents = array();
-  $info_box_contents[] = array('text' => tep_draw_form('menu_11', tep_href_link(FILENAME_DEFAULT)) . tep_create_parameters(array('mPath'=>'11'), null, 'hidden_field') . tep_href_submit(BOX_MAINMENU_HOME, 'submitLinkInfoBoxContents', ($_POST['mPath']=='11'||$_POST['mPath']==''?'style="font-weight:bold;cursor:default" disabled':'')) . '</form><br>' .
+  $info_box_contents[] = array('text' => tep_draw_form('menu_11', tep_href_link(FILENAME_DEFAULT)) . tep_create_parameters(array('mPath'=>'11'), array('period'), 'hidden_field') . tep_href_submit(BOX_MAINMENU_HOME, 'submitLinkInfoBoxContents', ($_POST['mPath']=='11'||$_POST['mPath']==''?'style="font-weight:bold;cursor:default" disabled':'')) . '</form><br>' .
                                          '<br>' .
                                          tep_draw_form('menu_21', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('mPath'=>'21'), array('period', 'selected_date', 'action'), 'hidden_field') . tep_href_submit(BOX_MAINMENU_TIMEREGISTRATION, 'submitLinkInfoBoxContents', ($_SESSION['employee']->is_user?($_POST['mPath']=='21'?'style="font-weight:bold;cursor:default" disabled':''):'style="cursor:default" disabled')) . '</form><br>' .
                                          ($_POST['mPath']=='21'||$_POST['mPath']=='22'?'' . 

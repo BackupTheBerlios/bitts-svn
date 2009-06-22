@@ -79,14 +79,14 @@ if ($_POST['action'] == 'save_data') {
 
     // Clear all values except mPath and period
     foreach($_POST as $key=>$value) {
-      if ($key != 'mPath' && $key != 'period') {
+      if ($key != 'mPath' && $key != 'period' && $key != 'sort_order') {
         $_POST[$key] = '';
       }
     }
 
     // Reload the timesheet object in order to
     // update the activity listing below
-    $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->id, $_POST['period']);
+    $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->id, $_POST['period'], true, $_POST['sort_order']);
   }
 }
 $_POST['error_level_history'] = $error_level;

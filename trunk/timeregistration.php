@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 21 june 2009
+ * Date        : 22 june 2009
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -214,8 +214,8 @@
               <?php if (!$_SESSION['timesheet']->locked && $_POST['action']!='timesheet_to_be_confirmed') {
                 // Confirm button enabled
                 echo tep_draw_form('pre_confirm_timesheet', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'timesheet_to_be_confirmed'), array('mPath','period','sort_order'), 'hidden_field');
-                echo tep_image_submit('button_confirm.gif', TEXT_TIMEREGISTRATION_CONFIRM); ?>
-                </form>
+                echo tep_image_submit('button_confirm.gif', TEXT_TIMEREGISTRATION_CONFIRM, 'style="vertical-align:middle"'); ?>
+                </form>&nbsp;
               <?php } else if ($_POST['action']=='timesheet_to_be_confirmed') { ?>
                 <!-- Show OK and Cancel buttons below the timesheet-to-be-confirmed -->
                 <?php echo TEXT_TIMEREGISTRATION_CONFIRM_QUESTION; ?>&nbsp;
@@ -224,11 +224,14 @@
                 </form>&nbsp;
                 <?php echo tep_draw_form('confirm_timesheet_cancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period','sort_order'), 'hidden_field');
                   echo tep_image_submit('button_cancel.gif', TEXT_TIMEREGISTRATION_CONFIRM_CANCEL, 'style="vertical-align:middle"'); ?>
-                </form>
+                </form>&nbsp;
               <?php } else {
                 // Confirm button disabled
-                echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_confirm_disabled.gif');
-              } ?>
+                echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_confirm_disabled.gif', null, null, null, 'style="vertical-align:middle"') . '&nbsp;&nbsp;&nbsp;';
+              } 
+              echo tep_draw_form('report_projects', tep_href_link(FILENAME_REPORT), 'post') . tep_create_parameters(array('action'=>'report_projects','current_employee'=>true,'show_travel_distance'=>true,'show_expenses'=>true,'show_comment'=>true,'show_signature'=>true), array('mPath','period','sort_order'), 'hidden_field');
+              echo tep_image_submit('button_pdf.gif', TEXT_TIMEREGISTRATION_CONFIRM, 'style="vertical-align:middle"'); ?>
+              </form>
             </td>
           </tr>
           <tr>
