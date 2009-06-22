@@ -143,7 +143,7 @@
                   <td class="projectListing-heading"><?php echo TEXT_PROJECTS_HOURS_USED; ?></td>
                   <td class="projectListing-heading"><?php echo TEXT_PROJECTS_HOURS_USED_PERCENTAGE; ?></td>
                 </tr>
-                <?php $project_array = project::get_project_listing(tep_datetouts('%Y-%m-%d', tep_periodenddate($_POST['period']))); // Period end date in Unix timestamp
+                <?php $project_array = project::get_project_listing(tep_datetouts('%Y-%m-%d', tep_periodstartdate($_POST['period'])), tep_datetouts('%Y-%m-%d', tep_periodenddate($_POST['period']))); // Period end date in Unix timestamp
                 for ($index = 0; $index < sizeof($project_array); $index++) {
                   $projects_calculated_hours_used_percentage = ($project_array[$index]['projects_calculated_hours']!=0?round(($project_array[$index]['projects_calculated_hours_used']/$project_array[$index]['projects_calculated_hours'])*100).'%':BODY_TEXT_NOT_APPLICABLE); ?>
                   <tr class="projectListing-<?php echo ($projects_calculated_hours_used_percentage>=100?'red':($projects_calculated_hours_used_percentage>=75?'orange':'green'));?>">
