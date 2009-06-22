@@ -3,7 +3,7 @@
  * CODE FILE   : activity_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 june 2009
+ * Date        : 22 june 2009
  * Description : Activity entry fields
  *               Data validation sequence
  *               Storing of entered data (via timesheet object)
@@ -105,7 +105,7 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
           <tr>
             <td align="center">
               <?php if ($_POST['selected_date']!='') {
-                echo tep_draw_form('activity_copy', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'copy_activity'), array('mPath', 'period', 'selected_date', 'activity_id'), 'hidden_field');
+                echo tep_draw_form('activity_copy', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'copy_activity'), array('mPath', 'period', 'sort_order', 'selected_date', 'activity_id'), 'hidden_field');
                 echo tep_image_submit('button_copy.gif', TEXT_ACTIVITY_COPY);
                 echo '</form>';
               } else {
@@ -140,7 +140,7 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
               <?php echo TEXT_ACTIVITY_PROJECTNAME; ?>
             </td>
             <td class="item_entry">
-              <?php echo tep_draw_form('project_selection', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'select_role'), array('mPath','period','selected_date', 'activity_id'), 'hidden_field');
+              <?php echo tep_draw_form('project_selection', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'select_role'), array('mPath','period','sort_order','selected_date', 'activity_id'), 'hidden_field');
               if ($_POST['action']=='select_project'||$_POST['action']=='select_role'||$_POST['action']=='enter_data'||$_POST['action']=='save_data') {
                 echo tep_html_select('projects_id', tep_get_partial_array(project::get_selectable_projects($_SESSION['employee']->id, tep_strftime('%Y-%m-%d', $_POST['selected_date'])), 'projects_id', 'projects_name'), TRUE, $_POST['projects_id']);
               } else {
@@ -154,7 +154,7 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
               <?php echo TEXT_ACTIVITY_ROLENAME; ?>
             </td>
             <td class="item_entry">
-              <?php echo tep_draw_form('role_selection', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'enter_data'), array('mPath','period','selected_date', 'projects_id', 'activity_id'), 'hidden_field');
+              <?php echo tep_draw_form('role_selection', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'enter_data'), array('mPath','period','sort_order','selected_date', 'projects_id', 'activity_id'), 'hidden_field');
               if ($_POST['action']=='select_role'||$_POST['action']=='enter_data'||$_POST['action']=='save_data') {
                 echo tep_html_select('roles_id', tep_get_partial_array(role::get_selectable_roles($_SESSION['employee']->id, tep_strftime('%Y-%m-%d', $_POST['selected_date']),$_POST['projects_id']), 'roles_id', 'roles_name'), TRUE, $_POST['roles_id']);
               } else {
@@ -164,7 +164,7 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
             </td>
           </tr>
           <?php if ($_POST['action']=='enter_data'||$_POST['action']=='save_data') {
-            echo tep_draw_form('activity_entry', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'save_data'), array('mPath','period','selected_date','projects_id','roles_id', 'activity_id', 'error_level_history', 'previous_activity_amount', 'original_activity_amount'), 'hidden_field');
+            echo tep_draw_form('activity_entry', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'save_data'), array('mPath','period','sort_order','selected_date','projects_id','roles_id', 'activity_id', 'error_level_history', 'previous_activity_amount', 'original_activity_amount'), 'hidden_field');
           } ?>
           <tr>
             <td class="item_entry">
@@ -221,7 +221,7 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
               }
               echo '&nbsp;';
               if ($_POST['action']=='select_project'||$_POST['action']=='select_role'||$_POST['action']=='enter_data'||$_POST['action']=='save_data') {
-                echo tep_draw_form('fcancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period'), 'hidden_field');
+                echo tep_draw_form('fcancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period','sort_order'), 'hidden_field');
                 echo tep_image_submit('button_cancel.gif', TEXT_ENTRY_CANCEL);
                 echo '</form>';
               } else {

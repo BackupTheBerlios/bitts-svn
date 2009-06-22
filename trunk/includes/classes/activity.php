@@ -3,7 +3,7 @@
  * CLASS FILE  : activity.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 21 june 2009
+ * Date        : 22 june 2009
  * Description : Activity class
  *
  */
@@ -69,14 +69,18 @@
       return null;
     }
 
-    public static function get_array($timesheet_id = '') {
+    public static function get_array($timesheet_id = 0, $sort_order = 'activities_date asc') {
       $database = $_SESSION['database'];
       $activity_array = array();
 
       if (tep_not_null($timesheet_id)) {
         $index = 0;
         $timesheet_id = $database->prepare_input($timesheet_id);
-        $activities_query = $database->query("select activities_id from " . TABLE_ACTIVITIES . " where timesheets_id = '" . (int)$timesheet_id . "' order by activities_date");
+        $activities_query = $database->query("select activities_id from " . TABLE_ACTIVITIES . " a" .
+                                             " inner join (" . TABLE_PROJECTS . " p, " . TABLE_ROLES . " r, " . TABLE_EMPLOYEES_ROLES . " er, " . TABLE_TARIFFS . " t)" . 
+                                             " on (p.projects_id=r.projects_id and r.roles_id=er.roles_id and er.employees_roles_id=t.employees_roles_id and t.tariffs_id=a.tariffs_id)" .
+                                             " where timesheets_id = '" . (int)$timesheet_id . "'" .
+                                             " order by " . $sort_order);
         while ($activities_result = $database->fetch_array($activities_query)) {
           $activity_array[$index] = new activity($activities_result['activities_id']);
           $index++;

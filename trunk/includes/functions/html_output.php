@@ -3,7 +3,7 @@
  * CODE FILE   : html_output.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 june 2009
+ * Date        : 22 june 2009
  * Description : html output functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -201,9 +201,9 @@
 
 ////
 // The HTML form submit text wrapper function
-  function tep_href_submit($text, $parameters = '') {
+  function tep_href_submit($text, $class = 'submitLinkInfoBoxContents', $parameters = '') {
     // <a href="#" onclick="parentNode.submit()" ' . $parameters . '>' . $text . '</a>
-    $href_submit = '<input type="submit" class="submitLink" value="' . $text . '"';
+    $href_submit = '<input type="submit" class="' . $class . '" value="' . $text . '"';
     if (tep_not_null($parameters)) $href_submit .= ' ' . $parameters;
     $href_submit .= '>';
     return $href_submit;

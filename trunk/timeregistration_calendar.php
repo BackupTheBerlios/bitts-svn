@@ -19,7 +19,7 @@
   // Create a new timesheet object with id == 0
   // If a timesheet already exists for this employee and period, the timesheet class will automatically
   // retrieve the correct id and put this into $_SESSION['timesheet']->id
-  $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->id, $_POST['period']);
+  $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->id, $_POST['period'], true, 'activities_date asc');
 
   // Check if there are unconfirmed timesheets available with timesheets_end_date previous to today
   // If so, create an info message

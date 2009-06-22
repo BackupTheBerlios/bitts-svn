@@ -3,7 +3,7 @@
  * CLASS FILE  : timesheet.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 21 june 2009
+ * Date        : 22 june 2009
  * Description : Timesheet class
  *
  */
@@ -11,7 +11,7 @@
   class timesheet {
     private $id, $start_date, $end_date, $locked, $employees_id, $activities, $former_activity, $listing;
 
-    public function __construct($id = 0, $employees_id = 0, $period = null, $include_activities = true) {
+    public function __construct($id = 0, $employees_id = 0, $period = null, $include_activities = true, $sort_order = 'timesheets_start_date desc') {
       $database = $_SESSION['database'];
       $this->id = $id;
       $this->activities = array();
@@ -29,7 +29,7 @@
         $timesheet_query = $database->query("select timesheets_id, timesheets_start_date, timesheets_end_date, timesheets_locked, employees_id from " . TABLE_TIMESHEETS . " where employees_id = '" . (int)$this->employees_id . "' and timesheets_start_date = '" . $this->start_date . "'");
       } else {
         // We probably created an empty timesheet object to retrieve the entire timesheet listing for a given employee
-        $this->listing = $this->get_array($employees_id);
+        $this->listing = $this->get_array($employees_id, $sort_order); // When timesheets_id == 0, $sort_order determines the timesheet listing
       }
 
       if (($this->id != 0) || ($employees_id != 0 && tep_not_null($period))) {
@@ -45,7 +45,7 @@
 
           // Retrieve all activities for this timesheet (if any exist)
           if ($include_activities) {
-            $this->activities = activity::get_array($this->id);
+            $this->activities = activity::get_array($this->id, $sort_order); // When timesheets_id != 0 / employees_id and period are set, $sort_order determines the activity listing
           }
         } else {
           // Timesheet does not exist, fill a new one with the given values
@@ -98,14 +98,14 @@
       return null;
     }
 
-    private function get_array($employees_id = 0) {
+    private function get_array($employees_id = 0, $sort_order = 'timesheets_start_date desc') {
       $database = $_SESSION['database'];
       $timesheets_array = array();
 
       if ($employees_id != 0) {
         $index = 0;
         $employees_id = $database->prepare_input($employees_id);
-        $timesheets_query = $database->query("select timesheets_id from " . TABLE_TIMESHEETS . " where employees_id in (" . $employees_id . ") order by timesheets_start_date desc");
+        $timesheets_query = $database->query("select timesheets_id from " . TABLE_TIMESHEETS . " where employees_id in (" . $employees_id . ") order by " . $sort_order);
         while ($timesheets_result = $database->fetch_array($timesheets_query)) {
           $timesheets_array[$index] = new timesheet($timesheets_result['timesheets_id'], 0, null, false);
           $index++;

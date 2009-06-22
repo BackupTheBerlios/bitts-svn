@@ -25,7 +25,13 @@
   if (!tep_not_null($_POST['period'])) {
     $_POST['period'] = tep_datetoperiod();
   }
-  $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->id, $_POST['period']);
+
+  // Make sure there is a sort order to start with
+  if (!tep_not_null($_POST['sort_order'])) {
+    $_POST['sort_order'] = 'activities_date asc';
+  }
+
+  $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->id, $_POST['period'], true, $_POST['sort_order']);
 
   switch ($_POST['action']) {
     case '':
@@ -47,7 +53,7 @@
       $_POST['action'] = '';
       // Reload the timesheet object in order to
       // update the activity listing that follows
-      $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->id, $_POST['period']);
+      $_SESSION['timesheet'] = new timesheet(0, $_SESSION['employee']->id, $_POST['period'], true, $_POST['sort_order']);
       break;
     case 'timesheet_to_be_confirmed':
       break;
@@ -136,8 +142,8 @@
             <td>
               <table border="0" width="100%" cellspacing="0" cellpadding="2" class="entryListing">
                 <tr>
-                  <td class="entryListing-heading"><?php echo TEXT_ACTIVITY_DAY; ?></td>
-                  <td class="entryListing-heading"><?php echo TEXT_ACTIVITY_PROJECTNAME . '<br>' . TEXT_ACTIVITY_ROLENAME; ?></td>
+                  <td class="entryListing-heading"><?php echo tep_draw_form('sort_activities_date', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('sort_order'=>($_POST['sort_order']=='activities_date asc'?'activities_date desc':'activities_date asc')), array('mPath','period'), 'hidden_field') . tep_href_submit(TEXT_ACTIVITY_DAY, 'submitLinkInfoBoxHeading') . ($_POST['sort_order']=='activities_date asc'?tep_image(DIR_WS_IMAGES . 'triangle_down.png'):($_POST['sort_order']=='activities_date desc'?tep_image(DIR_WS_IMAGES . 'triangle_up.png'):tep_draw_separator('pixel_trans.gif', '9', '9'))) . '</form>'; ?></td>
+                  <td class="entryListing-heading"><?php echo tep_draw_form('sort_projects_name', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('sort_order'=>($_POST['sort_order']=='projects_name asc'?'projects_name desc':'projects_name asc')), array('mPath','period'), 'hidden_field') . tep_href_submit(TEXT_ACTIVITY_PROJECTNAME, 'submitLinkInfoBoxHeading') . ($_POST['sort_order']=='projects_name asc'?tep_image(DIR_WS_IMAGES . 'triangle_down.png'):($_POST['sort_order']=='projects_name desc'?tep_image(DIR_WS_IMAGES . 'triangle_up.png'):tep_draw_separator('pixel_trans.gif', '9', '9'))) . '</form><br>&nbsp;' . TEXT_ACTIVITY_ROLENAME; ?></td>
                   <td class="entryListing-heading"><?php echo TEXT_ACTIVITY_AMOUNT; ?></td>
                   <td class="entryListing-heading"><?php echo TEXT_ACTIVITY_UNIT; ?></td>
                   <td class="entryListing-heading"><?php echo TEXT_ACTIVITY_TRAVELDISTANCE; ?></td>
@@ -161,14 +167,14 @@
                       <td class="entryListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->comment; ?></td>
                       <td align="center" width="20" class="entryListing-data">
                       <?php if (!$_SESSION['timesheet']->locked) {
-                        echo tep_draw_form('edit_activity', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'enter_data','selected_date'=>$_SESSION['timesheet']->activities[$index]->date,'projects_id'=>$_SESSION['timesheet']->activities[$index]->projects_id,'roles_id'=>$_SESSION['timesheet']->activities[$index]->roles_id, 'activity_id'=>$_SESSION['timesheet']->activities[$index]->activity_id, 'activity_amount'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->amount, 2), 'original_activity_amount'=>$_SESSION['timesheet']->activities[$index]->amount, 'tariffs_id'=>$_SESSION['timesheet']->activities[$index]->tariff->id, 'activity_travel_distance'=>"".$_SESSION['timesheet']->activities[$index]->travel_distance, 'activity_expenses'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->expenses, 2), 'activity_ticket_number'=>$_SESSION['timesheet']->activities[$index]->ticket_number, 'activity_comment'=>$_SESSION['timesheet']->activities[$index]->comment), array('mPath','period'), 'hidden_field');
+                        echo tep_draw_form('edit_activity', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'enter_data','selected_date'=>$_SESSION['timesheet']->activities[$index]->date,'projects_id'=>$_SESSION['timesheet']->activities[$index]->projects_id,'roles_id'=>$_SESSION['timesheet']->activities[$index]->roles_id, 'activity_id'=>$_SESSION['timesheet']->activities[$index]->activity_id, 'activity_amount'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->amount, 2), 'original_activity_amount'=>$_SESSION['timesheet']->activities[$index]->amount, 'tariffs_id'=>$_SESSION['timesheet']->activities[$index]->tariff->id, 'activity_travel_distance'=>"".$_SESSION['timesheet']->activities[$index]->travel_distance, 'activity_expenses'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->expenses, 2), 'activity_ticket_number'=>$_SESSION['timesheet']->activities[$index]->ticket_number, 'activity_comment'=>$_SESSION['timesheet']->activities[$index]->comment), array('mPath','period','sort_order'), 'hidden_field');
                         echo tep_image_submit('edit.gif', TEXT_ENTRY_EDIT,'',DIR_WS_IMAGES);
                         echo '</form>';
                       } ?>
                       </td>
                       <td align="center" width="20" class="entryListing-data">
                       <?php if (!$_SESSION['timesheet']->locked) {
-                        echo tep_draw_form('delete_activity', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'delete_activity', 'activity_id'=>$_SESSION['timesheet']->activities[$index]->activity_id), array('mPath','period'), 'hidden_field');
+                        echo tep_draw_form('delete_activity', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'delete_activity', 'activity_id'=>$_SESSION['timesheet']->activities[$index]->activity_id), array('mPath','period','sort_order'), 'hidden_field');
                         echo tep_image_submit('delete.gif', TEXT_ENTRY_DELETE,'',DIR_WS_IMAGES);
                         echo '</form>';
                       } ?>
@@ -179,10 +185,10 @@
                       <tr class="entryListing-<?php echo $odd_or_even; ?>">
                         <td align="right" valign="middle" class="entryListing-data" colspan="10">
                           <?php echo TEXT_ENTRY_DELETE_QUESTION; ?>&nbsp;
-                          <?php echo tep_draw_form('delete_activity_confirm', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'delete_activity_confirmed'), array('mPath','period', 'activity_id'), 'hidden_field');
+                          <?php echo tep_draw_form('delete_activity_confirm', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'delete_activity_confirmed'), array('mPath','period','sort_order','activity_id'), 'hidden_field');
                             echo tep_image_submit('button_ok.gif', TEXT_ENTRY_DELETE_OK, 'style="vertical-align:middle"'); ?>
                           </form>&nbsp;
-                          <?php echo tep_draw_form('delete_activity_cancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period'), 'hidden_field');
+                          <?php echo tep_draw_form('delete_activity_cancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period','sort_order'), 'hidden_field');
                             echo tep_image_submit('button_cancel.gif', TEXT_ENTRY_DELETE_CANCEL, 'style="vertical-align:middle"'); ?>
                           </form>
                         </td>
@@ -207,16 +213,16 @@
             <td align="right" valign="middle" class="entryListing-data">
               <?php if (!$_SESSION['timesheet']->locked && $_POST['action']!='timesheet_to_be_confirmed') {
                 // Confirm button enabled
-                echo tep_draw_form('pre_confirm_timesheet', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'timesheet_to_be_confirmed'), array('mPath','period'), 'hidden_field');
+                echo tep_draw_form('pre_confirm_timesheet', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'timesheet_to_be_confirmed'), array('mPath','period','sort_order'), 'hidden_field');
                 echo tep_image_submit('button_confirm.gif', TEXT_TIMEREGISTRATION_CONFIRM); ?>
                 </form>
               <?php } else if ($_POST['action']=='timesheet_to_be_confirmed') { ?>
                 <!-- Show OK and Cancel buttons below the timesheet-to-be-confirmed -->
                 <?php echo TEXT_TIMEREGISTRATION_CONFIRM_QUESTION; ?>&nbsp;
-                <?php echo tep_draw_form('confirm_timesheet', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'timesheet_confirmed'), array('mPath','period'), 'hidden_field');
+                <?php echo tep_draw_form('confirm_timesheet', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'timesheet_confirmed'), array('mPath','period','sort_order'), 'hidden_field');
                   echo tep_image_submit('button_ok.gif', TEXT_TIMEREGISTRATION_CONFIRM_OK, 'style="vertical-align:middle"'); ?>
                 </form>&nbsp;
-                <?php echo tep_draw_form('confirm_timesheet_cancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period'), 'hidden_field');
+                <?php echo tep_draw_form('confirm_timesheet_cancel', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array(), array('mPath','period','sort_order'), 'hidden_field');
                   echo tep_image_submit('button_cancel.gif', TEXT_TIMEREGISTRATION_CONFIRM_CANCEL, 'style="vertical-align:middle"'); ?>
                 </form>
               <?php } else {
