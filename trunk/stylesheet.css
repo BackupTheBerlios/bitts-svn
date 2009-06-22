@@ -203,6 +203,15 @@ TD.calendar-weekend {
   vertical-align: top;
 }
 
+TD.calendar-today {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background: #008fc3;
+  color: #ffffff;
+  text-align: center;
+  vertical-align: top;
+}
+
 TD.calendar-notavailable {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
@@ -221,11 +230,33 @@ TD.large-calendar-weekday {
   width: 50px;
 }
 
+TD.large-calendar-weekday-minimum-not-met {
+  border: 1px solid #561684;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background: #f8f8f9;
+  color: #ff0000;
+  text-align: center;
+  vertical-align: top;
+  width: 50px;
+}
+
 TD.large-calendar-weekend {
   border: 1px solid #561684;
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #b6b7cb;
+  text-align: center;
+  vertical-align: top;
+  width: 50px;
+}
+
+TD.large-calendar-today {
+  border: 1px solid #561684;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  background: #008fc3;
+  color: #ffffff;
   text-align: center;
   vertical-align: top;
   width: 50px;

@@ -10,6 +10,7 @@
 
   $calendar_start = (int)strftime('%Y%m%d', tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date));
   $calendar_end = (int)strftime('%Y%m%d', tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->end_date));
+  $today = (int)strftime('%Y%m%d');
 
   // Determine start day index
   $calendar_day_index = (int)strftime('%u', tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date)) - 1;
@@ -38,7 +39,7 @@
           <tr>
         <?php }
         echo tep_draw_form('select_day_'.$calendar_day, tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('mPath'=>'21','selected_date'=>tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date, $calendar_day - 1),'action'=>'select_project'), array('period', 'sort_order', 'activity_id'), 'hidden_field'); ?>
-          <td class="<?php echo ($colindex%7 >= 0 && $colindex%7 <= 4?'calendar-weekday':'calendar-weekend') ?>" align="center">
+          <td class="<?php echo ($counter==$today?'calendar-today':($colindex%7 >= 0 && $colindex%7 <= 4?'calendar-weekday':'calendar-weekend')) ?>" align="center">
             <?php //echo '<a href=' . tep_href_link(FILENAME_TIMEREGISTRATION, tep_create_parameters(array('mPath'=>'21','selected_date'=>tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date, $calendar_day - 1),'action'=>'select_project'), array('period', 'activity_id'))) . '>' . $calendar_day . '</a>';
             echo tep_href_submit($calendar_day); ?>
           </td>

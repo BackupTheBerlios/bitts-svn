@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 june 2009
+ * Date        : 22 june 2009
  * Description : Overview of total hours per day in a calender
  */
 
@@ -95,6 +95,7 @@
               <!-- large_calendar //-->
               <?php $calendar_start = (int)strftime('%Y%m%d', tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date));
               $calendar_end = (int)strftime('%Y%m%d', tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->end_date));
+              $today = (int)strftime('%Y%m%d');
 
               // Determine start day index
               $calendar_day_index = (int)strftime('%u', tep_datetouts('%Y-%m-%d', $_SESSION['timesheet']->start_date)) - 1;
@@ -124,7 +125,7 @@
                       </tr>
                       <tr>
                     <?php } ?>
-                    <td class="<?php echo ($colindex%7 >= 0 && $colindex%7 <= 4?'large-calendar-weekday':'large-calendar-weekend') ?>">
+                    <td class="<?php echo ($counter==$today?'large-calendar-today':($colindex%7 >= 0 && $colindex%7 <= 4?($counter<$today&&$total_amount_per_day[$calendar_day]<8?'large-calendar-weekday-minimum-not-met':'large-calendar-weekday'):'large-calendar-weekend')) ?>">
                       <?php echo '<b>' . $calendar_day . '</b><br>&nbsp;<br>' . ($total_amount_per_day[$calendar_day]!=0?tep_number_db_to_user($total_amount_per_day[$calendar_day], 2):'&nbsp;') . '<br>&nbsp;'; ?>
                     </td>
                   <?php }
