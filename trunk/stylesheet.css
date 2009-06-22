@@ -16,7 +16,7 @@
 /*.productsNotifications { background: #f2fff7; }*/
 /*.orderEdit { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #70d250; text-decoration: underline; }*/
 .submitLinkHeaderNavigation { font-family: Verdana, Arial, sans-serif; font-size: 10px; font-weight : bold; color: #ffffff; text-decoration: inherit; background-color: transparent; border: none; padding: 0px; cursor: pointer; cursor: hand; text-align: center;}
-.submitLinkInfoBoxHeading { font: inherit; color: inherit; text-decoration: inherit; background-color: transparent; border: none; padding: 0px; cursor: pointer; cursor: hand; text-align: left;}
+.submitLinkInfoBoxHeading { font-family: Verdana, Arial, sans-serif; font-size: 10px; font-weight: bold; color: #ffffff; text-decoration: inherit; background-color: transparent; border: none; padding: 0px; cursor: pointer; cursor: hand; text-align: left;}
 .submitLinkInfoBoxContents { font: inherit; color: inherit; text-decoration: inherit; background-color: transparent; border: none; padding: 0px; cursor: pointer; cursor: hand; text-align: left;}
 input:disabled { color:#000000; }
 select:disabled { color:#000000; }
