@@ -269,6 +269,7 @@ define('TEXT_BUTTON_PDF', 'Maak .pdf bestand');
 define('TEXT_BUTTON_CSV', 'Exporteer naar .csv bestand');
 define('REPORT_NAME_EMPLOYEES', 'Overzicht medewerkers');
 define('REPORT_NAME_PROJECTS', 'Overzicht projecten');
+define('REPORT_NAME_CONSOLIDATED_PROJECTS_PER_EMPLOYEE', 'Geconsolideerd overzicht per medewerker');
 define('REPORT_NAME_TIMESHEETS', 'Overzicht urenstaten');
 define('REPORT_EMPLOYEES_ID', 'nr');
 define('REPORT_EMPLOYEES_FULLNAME', 'Naam');

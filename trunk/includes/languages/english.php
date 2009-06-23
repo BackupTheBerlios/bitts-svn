@@ -269,6 +269,7 @@ define('TEXT_BUTTON_PDF', 'Create .pdf file');
 define('TEXT_BUTTON_CSV', 'Export to .csv file');
 define('REPORT_NAME_EMPLOYEES', 'Overview employees');
 define('REPORT_NAME_PROJECTS', 'Overview projects');
+define('REPORT_NAME_CONSOLIDATED_PROJECTS_PER_EMPLOYEE', 'Consolidated overview per employee');
 define('REPORT_NAME_TIMESHEETS', 'Overview timesheets');
 define('REPORT_EMPLOYEES_ID', 'nr');
 define('REPORT_EMPLOYEES_FULLNAME', 'Name');

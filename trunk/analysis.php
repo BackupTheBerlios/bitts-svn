@@ -3,7 +3,7 @@
  * CODE FILE   : analysis.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 june 2009
+ * Date        : 23 june 2009
  * Description : Reporting form
  */
 
@@ -120,6 +120,21 @@
                             echo tep_draw_checkbox_field('show_comment', true, true) . REPORT_CHECKBOX_SHOW_COMMENTS . '<br>';
                             echo tep_draw_checkbox_field('show_signature', true, false) . REPORT_CHECKBOX_SHOW_SIGNATURE; ?>
                           </td>
+                        </tr>
+                      </table>
+                    </form>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <?php echo tep_draw_form('report_consolidated_projects_per_employee', tep_href_link(FILENAME_REPORT), 'post') . tep_create_parameters(array('action'=>'report_consolidated_projects_per_employee'), array('period'), 'hidden_field'); ?>
+                      <table border="0" width="100%" cellspacing="0" cellpadding="10" class="report_listing">
+                        <tr>
+                          <td colspan="2" class="boxTitle"><?php echo REPORT_NAME_CONSOLIDATED_PROJECTS_PER_EMPLOYEE; ?></td>
+                        </tr>
+                        <tr>
+                          <td valign="top" width="65"><?php echo tep_image_submit('button_pdf.gif', TEXT_BUTTON_PDF); ?></td>
+                          <td>&nbsp;</td>
                         </tr>
                       </table>
                     </form>

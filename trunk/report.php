@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 june 2009
+ * Date        : 23 june 2009
  * Description : Data gathering and reporting functions
  */
 
@@ -216,7 +216,14 @@
         }
       }
       break;
-    case 'report_timesheets':
+    case 'report_consolidated_projects':
+      $database = $_SESSION['database'];
+      // *** Create pdf object ***
+      $pdf = new PDF('L'); // All the others should be landscape
+      $pdf->SetTitle(REPORT_NAME_CONSOLIDATED_PROJECTS);
+      $pdf->SetAuthor(TITLE);
+      $pdf->AddPage();
+      // Contents have to be determined
       break;
     default:
       // *** Create pdf object ***
