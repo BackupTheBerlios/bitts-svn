@@ -3,7 +3,7 @@
  * CODE FILE   : administration_customers.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 21 june 2009
+ * Date        : 23 june 2009
  * Description : Customer administration form
  *               Data validation sequence
  *               Storing of entered data (via customer object)
@@ -44,7 +44,7 @@
       } else if ($_POST['customers_name'] == '') {
         $_POST['action'] = 'enter_data';
         $error_level = 2; // No customers_name
-      } else if (!$_SESSION['customer']->validate_id($_POST['customers_id'])) {
+      } else if ($_POST['customers_status'] == 'new' && !$_SESSION['customer']->validate_id($_POST['customers_id'])) {
         $_POST['action'] = 'enter_data';
         $error_level = 3; // Invalid customers_id
       } else if ($_POST['customers_status'] == 'new' && $_SESSION['customer']->id_exists($_POST['customers_id'])) {

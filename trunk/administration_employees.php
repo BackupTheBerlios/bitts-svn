@@ -3,7 +3,7 @@
  * CODE FILE   : administration_employees.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 20 june 2009
+ * Date        : 23 june 2009
  * Description : Employee administration form
  *               Data validation sequence
  *               Storing of entered data (via employee object)
@@ -47,7 +47,7 @@
       } else if ($_POST['employees_fullname'] == '') {
         $_POST['action'] = 'enter_data';
         $error_level = 3; // No employees_fullname
-      } else if (!$_SESSION['administration_employee']->validate_id($_POST['employees_id'])) {
+      } else if ($_POST['employees_status'] == 'new' && !$_SESSION['administration_employee']->validate_id($_POST['employees_id'])) {
         $_POST['action'] = 'enter_data';
         $error_level = 4; // Invalid employees_id
       } else if ($_POST['employees_status'] == 'new' && $_SESSION['administration_employee']->id_exists($_POST['employees_id'])) {
