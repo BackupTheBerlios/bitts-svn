@@ -230,7 +230,7 @@
                 echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_confirm_disabled.gif', null, null, null, 'style="vertical-align:middle"') . '&nbsp;&nbsp;&nbsp;';
               } 
               echo tep_draw_form('report_projects', tep_href_link(FILENAME_REPORT), 'post') . tep_create_parameters(array('action'=>'report_projects','current_employee'=>true,'show_travel_distance'=>true,'show_expenses'=>true,'show_comment'=>true,'show_signature'=>true), array('mPath','period','sort_order'), 'hidden_field');
-              echo tep_image_submit('button_pdf.gif', TEXT_TIMEREGISTRATION_CONFIRM, 'style="vertical-align:middle"'); ?>
+              echo tep_image_submit('button_pdf.gif', TEXT_BUTTON_PDF, 'style="vertical-align:middle"'); ?>
               </form>
             </td>
           </tr>
