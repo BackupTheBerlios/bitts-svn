@@ -216,7 +216,7 @@
         }
       }
       break;
-    case 'report_consolidated_projects':
+    case 'report_consolidated_projects_per_employee':
       $database = $_SESSION['database'];
       // *** Create pdf object ***
       $pdf = new PDF('L'); // All the others should be landscape
