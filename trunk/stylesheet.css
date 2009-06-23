@@ -1,20 +1,17 @@
-/*
-  $Id: stylesheet.css,v 1.56 2003/06/30 20:04:02 hpdl Exp $
-
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-
-  Copyright (c) 2003 osCommerce
-
-  Released under the GNU General Public License
-*/
+/****************************************************************************
+ * CODE FILE   : stylesheet.css
+ * Project     : BitTS - BART it TimeSheet
+ * Author(s)   : Erwin Beukhof
+ * Date        : 23 june 2009
+ * Description : Stylesheet
+ *
+ *               Framework: osCommerce, Open Source E-Commerce Solutions
+ *               http://www.oscommerce.com
+ */
 
 .boxTitle { font-family: Verdana, Arial, sans-serif; font-size: 11px; font-weight: bold; }
 .boxText { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 .errorBox { font-family : Verdana, Arial, sans-serif; font-size : 10px; background: #ffb3b5; font-weight: bold; }
-/*.stockWarning { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #cc0033; }*/
-/*.productsNotifications { background: #f2fff7; }*/
-/*.orderEdit { font-family : Verdana, Arial, sans-serif; font-size : 10px; color: #70d250; text-decoration: underline; }*/
 .submitLinkHeaderNavigation { font-family: Verdana, Arial, sans-serif; font-size: 10px; font-weight : bold; color: #ffffff; text-decoration: inherit; background-color: transparent; border: none; padding: 0px; cursor: pointer; cursor: hand; text-align: center;}
 .submitLinkInfoBoxHeading { font-family: Verdana, Arial, sans-serif; font-size: 10px; font-weight: bold; color: #ffffff; text-decoration: inherit; background-color: transparent; border: none; padding: 0px; cursor: pointer; cursor: hand; text-align: left;}
 .submitLinkInfoBoxContents { font: inherit; color: inherit; text-decoration: inherit; background-color: transparent; border: none; padding: 0px; cursor: pointer; cursor: hand; text-align: left;}
@@ -144,11 +141,9 @@ TD.infoBox, SPAN.infoBox {
 
 TR.accountHistory-odd, TR.addressBook-odd, TR.alsoPurchased-odd, TR.payment-odd, TR.entryListing-odd, TR.productReviews-odd, TR.upcomingProducts-odd, TR.shippingOptions-odd {
   background: #f8f8f9;
-  //background: #f0f0c0;
 }
 
 TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-even, TR.entryListing-even, TR.productReviews-even, TR.upcomingProducts-even, TR.shippingOptions-even {
-  //background: #f8f8f9;
   background: #f0f0c0;
 }
 
@@ -161,7 +156,6 @@ TR.projectListing-orange {
 }
 
 TR.projectListing-green {
-  //background: #f8f8f9;
   background: #00ff00;
 }
 
@@ -169,7 +163,6 @@ TABLE.projectListing, TABLE.entryListing, TABLE.calendar , TABLE.item_entry, TAB
   border: 1px;
   border-style: solid;
   border-color: #b6b7cb;
-  //border-color: #080545;
   border-spacing: 1px;
 }
 
@@ -177,7 +170,6 @@ TABLE.projectListing, TABLE.entryListing, TABLE.calendar , TABLE.item_entry, TAB
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #b6b7cb;
-  //background: #080545;
   color: #FFFFFF;
   font-weight: bold;
 }
