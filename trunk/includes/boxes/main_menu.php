@@ -3,7 +3,7 @@
  * CODE FILE   : main_menu.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 june 2009
+ * Date        : 24 june 2009
  * Description : Main navigation menu
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -22,11 +22,11 @@
   $info_box_contents = array();
   $info_box_contents[] = array('text' => tep_draw_form('menu_100', tep_href_link(FILENAME_DEFAULT)) . tep_create_parameters(array('mPath'=>'100'), array('period'), 'hidden_field') . tep_href_submit(BOX_MAINMENU_HOME, 'submitLinkInfoBoxContents', ($_POST['mPath']=='100'||$_POST['mPath']==''?'style="font-weight:bold;cursor:default" disabled':'')) . '</form><br>' .
                                          '<br>' .
-                                         tep_draw_form('menu_200', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('mPath'=>'200'), array('period', 'selected_date', 'action'), 'hidden_field') . tep_href_submit(BOX_MAINMENU_TIMEREGISTRATION, 'submitLinkInfoBoxContents', ($_SESSION['employee']->is_user?($_POST['mPath']=='200'?'style="font-weight:bold;cursor:default" disabled':''):'style="cursor:default" disabled')) . '</form><br>' .
+                                         tep_draw_form('menu_200', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('mPath'=>'200'), array('period'), 'hidden_field') . tep_href_submit(BOX_MAINMENU_TIMEREGISTRATION, 'submitLinkInfoBoxContents', ($_SESSION['employee']->is_user?($_POST['mPath']=='200'?'style="font-weight:bold;cursor:default" disabled':''):'style="cursor:default" disabled')) . '</form><br>' .
                                          (substr($_POST['mPath'], 0, 1) == '2'?'' . 
                                            tep_draw_form('menu_210', tep_href_link(FILENAME_TIMEREGISTRATION_CALENDAR)) . tep_create_parameters(array('mPath'=>'210'), array('period'), 'hidden_field') . '&nbsp;&nbsp;&nbsp;' . tep_href_submit(BOX_MAINMENU_TIMEREGISTRATION_CALENDAR, 'submitLinkInfoBoxContents', ($_SESSION['employee']->is_user?($_POST['mPath']=='210'?'style="font-weight:bold;cursor:default" disabled':''):'style="cursor:default" disabled')) . '</form><br>':'') .
                                          tep_draw_form('menu_300', tep_href_link(FILENAME_ANALYSIS)) . tep_create_parameters(array('mPath'=>'300'), array('period'), 'hidden_field') . tep_href_submit(BOX_MAINMENU_ANALYSIS, 'submitLinkInfoBoxContents', ($_SESSION['employee']->is_analyst?($_POST['mPath']=='300'?'style="font-weight:bold;cursor:default" disabled':''):'style="cursor:default" disabled')) . '</form><br>' .
-                                         tep_draw_form('menu_400', tep_href_link(FILENAME_ADMINISTRATION)) . tep_create_parameters(array('mPath'=>'400'), array('period', 'selected_date', 'action'), 'hidden_field') . tep_href_submit(BOX_MAINMENU_ADMINISTRATION, 'submitLinkInfoBoxContents', ($_SESSION['employee']->is_administrator?($_POST['mPath']=='400'?'style="font-weight:bold;cursor:default" disabled':''):'style="cursor:default" disabled')) . '</form>' .
+                                         tep_draw_form('menu_400', tep_href_link(FILENAME_ADMINISTRATION)) . tep_create_parameters(array('mPath'=>'400'), array('period'), 'hidden_field') . tep_href_submit(BOX_MAINMENU_ADMINISTRATION, 'submitLinkInfoBoxContents', ($_SESSION['employee']->is_administrator?($_POST['mPath']=='400'?'style="font-weight:bold;cursor:default" disabled':''):'style="cursor:default" disabled')) . '</form>' .
                                          (substr($_POST['mPath'], 0, 1) == '4'?'<br>' .
                                            tep_draw_form('menu_410', tep_href_link(FILENAME_ADMINISTRATION)) . tep_create_parameters(array('mPath'=>'410'), null, 'hidden_field') . '&nbsp;&nbsp;&nbsp;' . tep_href_submit(BOX_MAINMENU_ADMINISTRATION_GENERAL, 'submitLinkInfoBoxContents', ($_SESSION['employee']->is_administrator?($_POST['mPath']=='410'?'style="font-weight:bold;cursor:default" disabled':''):'style="cursor:default" disabled')) . '</form><br>' .
                                            (substr($_POST['mPath'], 0, 2) == '41'?'' .
