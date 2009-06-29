@@ -3,7 +3,7 @@
  * CODE FILE   : administration_customers.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 june 2009
+ * Date        : 29 june 2009
  * Description : Customer administration form
  *               Data validation sequence
  *               Storing of entered data (via customer object)
@@ -18,7 +18,7 @@
   if (!tep_not_null($_SESSION['employee']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
   // Check if the user is allowed to view this page
-  if (!$_SESSION['employee']->is_administrator)
+  if (!$_SESSION['employee']->employee_right->right['administration'])
     tep_redirect(tep_href_link(FILENAME_DEFAULT));
 
   // Create a new customer object with id == 0 (default)

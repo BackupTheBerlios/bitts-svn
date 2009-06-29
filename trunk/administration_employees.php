@@ -3,7 +3,7 @@
  * CODE FILE   : administration_employees.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 june 2009
+ * Date        : 29 june 2009
  * Description : Employee administration form
  *               Data validation sequence
  *               Storing of entered data (via employee object)
@@ -18,7 +18,7 @@
   if (!tep_not_null($_SESSION['employee']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
   // Check if the user is allowed to view this page
-  if (!$_SESSION['employee']->is_administrator)
+  if (!$_SESSION['employee']->employee_right->right['administration'])
     tep_redirect(tep_href_link(FILENAME_DEFAULT));
 
   // Create a new employee object with id == 0 (default)
@@ -47,12 +47,15 @@
       } else if ($_POST['employees_fullname'] == '') {
         $_POST['action'] = 'enter_data';
         $error_level = 3; // No employees_fullname
+      } else if ($_POST['employees_rights_id'] == '') {
+        $_POST['action'] = 'enter_data';
+        $error_level = 4; // No employee_right
       } else if ($_POST['employees_status'] == 'new' && !$_SESSION['administration_employee']->validate_id($_POST['employees_id'])) {
         $_POST['action'] = 'enter_data';
-        $error_level = 4; // Invalid employees_id
+        $error_level = 5; // Invalid employees_id
       } else if ($_POST['employees_status'] == 'new' && $_SESSION['administration_employee']->id_exists($_POST['employees_id'])) {
         $_POST['action'] = 'enter_data';
-        $error_level = 5; // Duplicate employees_id
+        $error_level = 6; // Duplicate employees_id
       } else {
         // OK, entry can be saved
         // If password has to be resetted, do so
@@ -63,9 +66,7 @@
         $_SESSION['administration_employee']->save($_POST['employees_id'],
                                                    $_POST['employees_login'],
                                                    $_POST['employees_fullname'],
-                                                   $_POST['employees_is_user'],
-                                                   $_POST['employees_is_analyst'],
-                                                   $_POST['employees_is_administrator']);
+                                                   $_POST['employees_rights_id']);
 
         // Clear all values except mPath
         foreach($_POST as $key=>$value) {
@@ -78,7 +79,7 @@
     case 'delete_entry':
       // Check for dependencies
       if ($_SESSION['administration_employee']->has_dependencies($_POST['employees_id'])) {
-        $error_level = 6; // Related employees_role(s) and/or timesheet(s) exist
+        $error_level = 7; // Related employees_role(s) and/or timesheet(s) exist
         $_POST['action'] = '';
       }
       break;
@@ -133,9 +134,12 @@
                   <td class="entryListing-heading" style="width:100px"><?php echo TEXT_EMPLOYEES_ID; ?></td>
                   <td class="entryListing-heading"><?php echo TEXT_EMPLOYEES_LOGIN; ?></td>
                   <td class="entryListing-heading"><?php echo TEXT_EMPLOYEES_FULLNAME; ?></td>
-                  <td class="entryListing-heading" style="width:75px;text-align:center"><?php echo TEXT_EMPLOYEES_IS_USER; ?></td>
-                  <td class="entryListing-heading" style="width:75px;text-align:center"><?php echo TEXT_EMPLOYEES_IS_ANALYST; ?></td>
-                  <td class="entryListing-heading" style="width:75px;text-align:center"><?php echo TEXT_EMPLOYEES_IS_ADMINISTRATOR; ?></td>
+                  <td class="entryListing-heading"><?php echo TEXT_EMPLOYEES_RIGHTS; ?></td>
+                  <td class="entryListing-heading" style="width:75px;text-align:center"><?php echo TEXT_EMPLOYEES_RIGHTS_LOGIN; ?></td>
+                  <td class="entryListing-heading" style="width:75px;text-align:center"><?php echo TEXT_EMPLOYEES_RIGHTS_PROJECTLISTING; ?></td>
+                  <td class="entryListing-heading" style="width:75px;text-align:center"><?php echo TEXT_EMPLOYEES_RIGHTS_TIMEREGISTRATION; ?></td>
+                  <td class="entryListing-heading" style="width:75px;text-align:center"><?php echo TEXT_EMPLOYEES_RIGHTS_ANALYSIS; ?></td>
+                  <td class="entryListing-heading" style="width:75px;text-align:center"><?php echo TEXT_EMPLOYEES_RIGHTS_ADMINISTRATION; ?></td>
                   <td width="20" class="entryListing-heading">&nbsp;</td>
                   <td width="20" class="entryListing-heading">&nbsp;</td>
                 </tr>
@@ -146,34 +150,49 @@
                       <td class="entryListing-data" style="width:100px"><?php echo $_SESSION['administration_employee']->listing[$index]->id; ?></td>
                       <td class="entryListing-data"><?php echo $_SESSION['administration_employee']->listing[$index]->login; ?></td>
                       <td class="entryListing-data"><?php echo $_SESSION['administration_employee']->listing[$index]->fullname; ?></td>
+                      <td class="entryListing-data"><?php echo $_SESSION['administration_employee']->listing[$index]->employee_right->name; ?></td>
                       <td class="entryListing-data" style="width:75px;text-align:center">
-                        <?php if($_SESSION['administration_employee']->listing[$index]->is_user) {
-                          echo tep_image(DIR_WS_IMAGES . 'plus.gif', TEXT_EMPLOYEES_IS_USER, null, null, 'style="vertical-align:middle"');
+                        <?php if($_SESSION['administration_employee']->listing[$index]->employee_right->right['login']) {
+                          echo tep_image(DIR_WS_IMAGES . 'plus.gif', TEXT_EMPLOYEES_RIGHTS_LOGIN, null, null, 'style="vertical-align:middle"');
                         } else {
                           echo tep_draw_separator('pixel_trans.gif', '16', '16');
                         } ?>
                       </td>
                       <td class="entryListing-data" style="width:75px;text-align:center">
-                        <?php if($_SESSION['administration_employee']->listing[$index]->is_analyst) {
-                          echo tep_image(DIR_WS_IMAGES . 'plus.gif', TEXT_EMPLOYEES_IS_ANALYST, null, null, 'style="vertical-align:middle"');
+                        <?php if($_SESSION['administration_employee']->listing[$index]->employee_right->right['projectlisting']) {
+                          echo tep_image(DIR_WS_IMAGES . 'plus.gif', TEXT_EMPLOYEES_RIGHTS_PROJECTLISTING, null, null, 'style="vertical-align:middle"');
                         } else {
                           echo tep_draw_separator('pixel_trans.gif', '16', '16');
                         } ?>
                       </td>
                       <td class="entryListing-data" style="width:75px;text-align:center">
-                        <?php if($_SESSION['administration_employee']->listing[$index]->is_administrator) {
-                          echo tep_image(DIR_WS_IMAGES . 'plus.gif', TEXT_EMPLOYEES_IS_ADMINISTRATOR, null, null, 'style="vertical-align:middle"');
+                        <?php if($_SESSION['administration_employee']->listing[$index]->employee_right->right['timeregistration']) {
+                          echo tep_image(DIR_WS_IMAGES . 'plus.gif', TEXT_EMPLOYEES_RIGHTS_TIMEREGISTRATION, null, null, 'style="vertical-align:middle"');
+                        } else {
+                          echo tep_draw_separator('pixel_trans.gif', '16', '16');
+                        } ?>
+                      </td>
+                      <td class="entryListing-data" style="width:75px;text-align:center">
+                        <?php if($_SESSION['administration_employee']->listing[$index]->employee_right->right['analysis']) {
+                          echo tep_image(DIR_WS_IMAGES . 'plus.gif', TEXT_EMPLOYEES_RIGHTS_ANALYSIS, null, null, 'style="vertical-align:middle"');
+                        } else {
+                          echo tep_draw_separator('pixel_trans.gif', '16', '16');
+                        } ?>
+                      </td>
+                      <td class="entryListing-data" style="width:75px;text-align:center">
+                        <?php if($_SESSION['administration_employee']->listing[$index]->employee_right->right['administration']) {
+                          echo tep_image(DIR_WS_IMAGES . 'plus.gif', TEXT_EMPLOYEES_RIGHTS_ADMINISTRATION, null, null, 'style="vertical-align:middle"');
                         } else {
                           echo tep_draw_separator('pixel_trans.gif', '16', '16');
                         } ?>
                       </td>
                       <td class="entryListing-data" style="width:20px;text-align:center">
-                        <?php echo tep_draw_form('edit_entry', tep_href_link(FILENAME_ADMINISTRATION_EMPLOYEES)) . tep_create_parameters(array('action'=>'enter_data', 'employees_status'=>'existing', 'employees_id'=>$_SESSION['administration_employee']->listing[$index]->id, 'employees_login'=>$_SESSION['administration_employee']->listing[$index]->login, 'employees_fullname'=>$_SESSION['administration_employee']->listing[$index]->fullname, 'employees_is_user'=>$_SESSION['administration_employee']->listing[$index]->is_user, 'employees_is_analyst'=>$_SESSION['administration_employee']->listing[$index]->is_analyst, 'employees_is_administrator'=>$_SESSION['administration_employee']->listing[$index]->is_administrator), array('mPath'), 'hidden_field');
+                        <?php echo tep_draw_form('edit_entry', tep_href_link(FILENAME_ADMINISTRATION_EMPLOYEES)) . tep_create_parameters(array('action'=>'enter_data', 'employees_status'=>'existing', 'employees_id'=>$_SESSION['administration_employee']->listing[$index]->id, 'employees_login'=>$_SESSION['administration_employee']->listing[$index]->login, 'employees_fullname'=>$_SESSION['administration_employee']->listing[$index]->fullname, 'employees_rights_id'=>$_SESSION['administration_employee']->listing[$index]->employee_right->id), array('mPath'), 'hidden_field');
                         echo tep_image_submit('edit.gif', TEXT_ENTRY_EDIT,'',DIR_WS_IMAGES);
                         echo '</form>'; ?>
                       </td>
                       <td class="entryListing-data" style="width:20px;text-align:center">
-                        <?php echo tep_draw_form('delete_entry', tep_href_link(FILENAME_ADMINISTRATION_EMPLOYEES)) . tep_create_parameters(array('action'=>'delete_entry', 'employees_id'=>$_SESSION['administration_employee']->listing[$index]->id, 'employees_login'=>$_SESSION['administration_employee']->listing[$index]->login, 'employees_fullname'=>$_SESSION['administration_employee']->listing[$index]->fullname, 'employees_is_user'=>$_SESSION['administration_employee']->listing[$index]->is_user, 'employees_is_analyst'=>$_SESSION['administration_employee']->listing[$index]->is_analyst, 'employees_is_administrator'=>$_SESSION['administration_employee']->listing[$index]->is_administrator), array('mPath'), 'hidden_field');
+                        <?php echo tep_draw_form('delete_entry', tep_href_link(FILENAME_ADMINISTRATION_EMPLOYEES)) . tep_create_parameters(array('action'=>'delete_entry', 'employees_id'=>$_SESSION['administration_employee']->listing[$index]->id, 'employees_login'=>$_SESSION['administration_employee']->listing[$index]->login, 'employees_fullname'=>$_SESSION['administration_employee']->listing[$index]->fullname, 'employees_rights_id'=>$_SESSION['administration_employee']->listing[$index]->employee_right->id), array('mPath'), 'hidden_field');
                         echo tep_image_submit('delete.gif', TEXT_ENTRY_DELETE,'',DIR_WS_IMAGES);
                         echo '</form>'; ?>
                       </td>
@@ -182,7 +201,7 @@
                   }
                 } else { ?>
                   <tr class="entryListing-odd">
-                    <td class="entryListing-data" colspan="8"  style="text-align:center">
+                    <td class="entryListing-data" colspan="11"  style="text-align:center">
                       <?php echo TEXT_EMPLOYEES_LISTING_IS_EMPTY; ?>
                     </td>
                   </tr>

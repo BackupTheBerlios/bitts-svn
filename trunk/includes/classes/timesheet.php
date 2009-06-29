@@ -3,7 +3,7 @@
  * CLASS FILE  : timesheet.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 june 2009
+ * Date        : 29 june 2009
  * Description : Timesheet class
  *
  */

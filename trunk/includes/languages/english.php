@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 june 2009
+ * Date        : 29 june 2009
  * Description : English language file
  */
 
@@ -97,9 +97,7 @@ define('BODY_TEXT_PASSWORD', 'Password');
 define('BODY_TEXT_PASSWORD_VERIFY', 'Repeat password');
 define('BODY_TEXT_FULLNAME', 'Full name');
 define('BODY_TEXT_EMPLOYEE_ID', 'Personnel number');
-define('BODY_TEXT_IS_USER', 'Is user');
-define('BODY_TEXT_IS_ANALYST', 'Is reporter');
-define('BODY_TEXT_IS_ADMINISTRATOR', 'Is admin');
+define('BODY_TEXT_EMPLOYEE_RIGHT_NAME', 'Profile');
 define('BODY_TEXT_YES', 'Yes');
 define('BODY_TEXT_NO', 'No');
 define('BODY_TEXT_NOT_APPLICABLE', 'n/a');
@@ -275,9 +273,11 @@ define('REPORT_NAME_CONSOLIDATED_PROJECTS_PER_EMPLOYEE', 'Consolidated overview 
 define('REPORT_NAME_TIMESHEETS', 'Overview timesheets');
 define('REPORT_EMPLOYEES_ID', 'nr');
 define('REPORT_EMPLOYEES_FULLNAME', 'Name');
-define('REPORT_EMPLOYEES_IS_USER', 'User');
-define('REPORT_EMPLOYEES_IS_ANALYST', 'Analyst');
-define('REPORT_EMPLOYEES_IS_ADMINISTRATOR', 'Admin');
+define('REPORT_EMPLOYEES_LOGIN', 'Login');
+define('REPORT_EMPLOYEES_PROJECTLISTING', 'Projectlst');
+define('REPORT_EMPLOYEES_TIMEREGISTRATION', 'Timereg');
+define('REPORT_EMPLOYEES_ANALYSIS', 'Analysis');
+define('REPORT_EMPLOYEES_ADMINISTRATION', 'Admin');
 define('REPORT_EMPLOYEES_TIMESHEET_AVAILABLE', 'Timesheet');
 define('REPORT_EMPLOYEES_TIMESHEET_LOCKED', 'Locked');
 define('REPORT_EMPLOYEES_TRAVEL_DISTANCE', 'Travel dist.(km)');
@@ -339,14 +339,18 @@ $CUSTOMER_ERROR_LEVEL = array (0  => '',
                                4  => 'Duplicate customernumber',
                                5  => 'Deletion not permitted, projects exist');
 
+define('TEXT_EMPLOYEES_RIGHTS', 'Profile');
+define('TEXT_EMPLOYEES_RIGHTS_LOGIN', 'Login');
+define('TEXT_EMPLOYEES_RIGHTS_PROJECTLISTING', 'Projectlst');
+define('TEXT_EMPLOYEES_RIGHTS_TIMEREGISTRATION', 'Timereg');
+define('TEXT_EMPLOYEES_RIGHTS_ANALYSIS', 'Analysis');
+define('TEXT_EMPLOYEES_RIGHTS_ADMINISTRATION', 'Admin');
+
 define('TEXT_EMPLOYEES', 'Employee');
 define('TEXT_EMPLOYEES_ID', 'Employeenr');
 define('TEXT_EMPLOYEES_LOGIN', 'Login');
 define('TEXT_EMPLOYEES_FULLNAME', 'Full name');
 define('TEXT_EMPLOYEES_RESET_PASSWORD', 'Reset password');
-define('TEXT_EMPLOYEES_IS_USER', 'User');
-define('TEXT_EMPLOYEES_IS_ANALYST', 'Analyst');
-define('TEXT_EMPLOYEES_IS_ADMINISTRATOR', 'Administrator');
 define('TEXT_EMPLOYEES_LISTING_IS_EMPTY', 'No employees available');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
@@ -354,9 +358,10 @@ $EMPLOYEE_ERROR_LEVEL = array (0 => '',
                                1 => 'Employeenumber is missing',
                                2 => 'Login is missing',
                                3 => 'Full name is missing',
-                               4 => 'Incorrect employeenumber',
-                               5 => 'Duplicate employeenumber',
-                               6 => 'Deletion not permitted, empl.-roles/timesheets exist');
+                               4 => 'Profile is missing',
+                               5 => 'Incorrect employeenumber',
+                               6 => 'Duplicate employeenumber',
+                               7 => 'Deletion not permitted, empl.-roles/timesheets exist');
 
 define('TEXT_BUSINESS_UNITS', 'Business Unit');
 define('TEXT_BUSINESS_UNITS_NAME', 'Name');

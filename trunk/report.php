@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 june 2009
+ * Date        : 29 june 2009
  * Description : Data gathering and reporting functions
  */
 
@@ -16,7 +16,7 @@
   if (!tep_not_null($_SESSION['employee']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
   // Check if the user is allowed to view this page
-  if (!$_SESSION['employee']->is_analyst)
+  if (!$_SESSION['employee']->employee_right->right['analysis'])
     tep_redirect(tep_href_link(FILENAME_DEFAULT));
 
   switch ($_POST['action']) {
@@ -45,14 +45,18 @@
       $column_count = 2;
       if ($_POST['show_user_rights']) {
         // Add to header
-        $table_header[$column_count] = REPORT_EMPLOYEES_IS_USER;
-        $table_header[$column_count + 1] = REPORT_EMPLOYEES_IS_ANALYST;
-        $table_header[$column_count + 2] = REPORT_EMPLOYEES_IS_ADMINISTRATOR;
+        $table_header[$column_count] = REPORT_EMPLOYEES_LOGIN;
+        $table_header[$column_count + 1] = REPORT_EMPLOYEES_PROJECTLISTING;
+        $table_header[$column_count + 2] = REPORT_EMPLOYEES_TIMEREGISTRATION;
+        $table_header[$column_count + 3] = REPORT_EMPLOYEES_ANALYSIS;
+        $table_header[$column_count + 4] = REPORT_EMPLOYEES_ADMINISTRATION;
         // Add to orientation
         $table_contents_orientation[$column_count] = 'C';
         $table_contents_orientation[$column_count + 1] = 'C';
         $table_contents_orientation[$column_count + 2] = 'C';
-        $column_count += 3;
+        $table_contents_orientation[$column_count + 3] = 'C';
+        $table_contents_orientation[$column_count + 4] = 'C';
+        $column_count += 5;
       }
       if ($_POST['show_timesheet_info']) {
         // Add to header
@@ -78,10 +82,12 @@
         $column_count = 2;
         if ($_POST['show_user_rights']) {
           // Add to contents
-          $table_contents[$index][$column_count] = ($employee->is_user?'X':'-');
-          $table_contents[$index][$column_count + 1] = ($employee->is_analyst?'X':'-');
-          $table_contents[$index][$column_count + 2] = ($employee->is_administrator?'X':'-');
-          $column_count += 3;
+          $table_contents[$index][$column_count] = ($employee->employee_right->right['login']?'X':'-');
+          $table_contents[$index][$column_count + 1] = ($employee->employee_right->right['projectlisting']?'X':'-');
+          $table_contents[$index][$column_count + 2] = ($employee->employee_right->right['timeregistration']?'X':'-');
+          $table_contents[$index][$column_count + 3] = ($employee->employee_right->right['analysis']?'X':'-');
+          $table_contents[$index][$column_count + 4] = ($employee->employee_right->right['administration']?'X':'-');
+          $column_count += 5;
         }
         if ($_POST['show_timesheet_info'] || $_POST['show_travel_distance_and_expenses']) {
           // In both cases you need the timesheet object

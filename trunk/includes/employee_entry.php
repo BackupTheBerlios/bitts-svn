@@ -3,7 +3,7 @@
  * CODE FILE   : employee_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 20 june 2009
+ * Date        : 29 june 2009
  * Description : Employee entry fields
  */
 ?>
@@ -31,10 +31,10 @@
             </td>
             <td class="item_entry">&nbsp;</td>
             <td class="item_entry">
-              <?php echo TEXT_EMPLOYEES_IS_USER; ?>
+              <?php echo TEXT_EMPLOYEES_RESET_PASSWORD; ?>
             </td>
             <td class="item_entry" style="text-align:right;width:25px">
-              <?php echo tep_draw_checkbox_field('employees_is_user', true, false, ($_POST['action']=='enter_data'?'':' disabled')); ?>
+              <?php echo tep_draw_checkbox_field('employees_reset_password', true, false, (($_POST['action']=='enter_data'&&$_POST['employees_status']!='new')?'':' disabled')); ?>
             </td>
           </tr>
           <tr>
@@ -44,13 +44,7 @@
             <td class="item_entry" style="width:200px">
               <?php echo tep_draw_input_field('employees_login', '', 'size="1" maxlength="16" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
-            <td class="item_entry">&nbsp;</td>
-            <td class="item_entry">
-              <?php echo TEXT_EMPLOYEES_IS_ANALYST; ?>
-            </td>
-            <td class="item_entry" style="text-align:right;width:25px">
-              <?php echo tep_draw_checkbox_field('employees_is_analyst', true, false, ($_POST['action']=='enter_data'?'':' disabled')); ?>
-            </td>
+            <td class="item_entry" colspan="3">&nbsp;</td>
           </tr>
           <tr>
             <td class="item_entry">
@@ -59,27 +53,21 @@
             <td class="item_entry" style="width:200px">
               <?php echo tep_draw_input_field('employees_fullname', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
-            <td class="item_entry">&nbsp;</td>
-            <td class="item_entry">
-              <?php echo TEXT_EMPLOYEES_IS_ADMINISTRATOR; ?>
-            </td>
-            <td class="item_entry" style="text-align:right;width:25px">
-              <?php echo tep_draw_checkbox_field('employees_is_administrator', true, false, ($_POST['action']=='enter_data'?'':' disabled')); ?>
-            </td>
-          </tr>
-          <tr>
-            <td class="item_entry" colspan="5">
-              <?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
-            </td>
-          </tr>
-          <tr>
             <td class="item_entry" colspan="3">&nbsp;</td>
+          </tr>
+          <tr>
             <td class="item_entry">
-              <?php echo TEXT_EMPLOYEES_RESET_PASSWORD; ?>
+              <?php echo TEXT_EMPLOYEES_RIGHTS; ?>
             </td>
-            <td class="item_entry" style="text-align:right;width:25px">
-              <?php echo tep_draw_checkbox_field('employees_reset_password', true, false, (($_POST['action']=='enter_data'&&$_POST['employees_status']!='new')?'':' disabled')); ?>
+            <td class="item_entry" style="width:200px">
+              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='delete_entry') {
+                $temp_employee_right = new employee_right();
+                echo tep_html_select('employees_rights_id', tep_get_partial_array($temp_employee_right->listing, 'id', 'name'), $_POST['action']=='enter_data', $_POST['employees_rights_id'], 'size="1" maxlength="64" style="width: 100%"');
+              } else {
+                echo tep_html_select('employees_rights_id', array(), false);
+              } ?>
             </td>
+            <td class="item_entry" colspan="3">&nbsp;</td>
           </tr>
           <tr>
             <td class="item_entry" colspan="5">

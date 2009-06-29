@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 june 2009
+ * Date        : 29 june 2009
  * Description : Dutch language file
  */
 
@@ -97,9 +97,7 @@ define('BODY_TEXT_PASSWORD', 'Wachtwoord');
 define('BODY_TEXT_PASSWORD_VERIFY', 'Herhaal wachtwoord');
 define('BODY_TEXT_FULLNAME', 'Volledige naam');
 define('BODY_TEXT_EMPLOYEE_ID', 'Personeelsnummer');
-define('BODY_TEXT_IS_USER', 'Is gebruiker');
-define('BODY_TEXT_IS_ANALYST', 'Is rapporteur');
-define('BODY_TEXT_IS_ADMINISTRATOR', 'Is beheerder');
+define('BODY_TEXT_EMPLOYEE_RIGHT_NAME', 'Profiel');
 define('BODY_TEXT_YES', 'Ja');
 define('BODY_TEXT_NO', 'Nee');
 define('BODY_TEXT_NOT_APPLICABLE', 'n.v.t.');
@@ -275,9 +273,11 @@ define('REPORT_NAME_CONSOLIDATED_PROJECTS_PER_EMPLOYEE', 'Geconsolideerd overzic
 define('REPORT_NAME_TIMESHEETS', 'Overzicht urenstaten');
 define('REPORT_EMPLOYEES_ID', 'nr');
 define('REPORT_EMPLOYEES_FULLNAME', 'Naam');
-define('REPORT_EMPLOYEES_IS_USER', 'Gebruiker');
-define('REPORT_EMPLOYEES_IS_ANALYST', 'Analist');
-define('REPORT_EMPLOYEES_IS_ADMINISTRATOR', 'Admin');
+define('REPORT_EMPLOYEES_LOGIN', 'Inloggen');
+define('REPORT_EMPLOYEES_PROJECTLISTING', 'Projectlst');
+define('REPORT_EMPLOYEES_TIMEREGISTRATION', 'Urenadm');
+define('REPORT_EMPLOYEES_ANALYSIS', 'Analyse');
+define('REPORT_EMPLOYEES_ADMINISTRATION', 'Admin');
 define('REPORT_EMPLOYEES_TIMESHEET_AVAILABLE', 'Timesheet');
 define('REPORT_EMPLOYEES_TIMESHEET_LOCKED', 'Bevestigd');
 define('REPORT_EMPLOYEES_TRAVEL_DISTANCE', 'Reisafstand (km)');
@@ -339,14 +339,18 @@ $CUSTOMER_ERROR_LEVEL = array (0  => '',
                                4  => 'Duplicaat debiteurnummer',
                                5  => 'Verwijderen niet toegestaan, projecten aanwezig');
 
+define('TEXT_EMPLOYEES_RIGHTS', 'Profiel');
+define('TEXT_EMPLOYEES_RIGHTS_LOGIN', 'Inloggen');
+define('TEXT_EMPLOYEES_RIGHTS_PROJECTLISTING', 'Projectlst');
+define('TEXT_EMPLOYEES_RIGHTS_TIMEREGISTRATION', 'Urenadm');
+define('TEXT_EMPLOYEES_RIGHTS_ANALYSIS', 'Analyse');
+define('TEXT_EMPLOYEES_RIGHTS_ADMINISTRATION', 'Admin');
+
 define('TEXT_EMPLOYEES', 'Medewerker');
 define('TEXT_EMPLOYEES_ID', 'Medewerkernr');
 define('TEXT_EMPLOYEES_LOGIN', 'Login');
 define('TEXT_EMPLOYEES_FULLNAME', 'Volledige naam');
 define('TEXT_EMPLOYEES_RESET_PASSWORD', 'Reset wachtwoord');
-define('TEXT_EMPLOYEES_IS_USER', 'Gebruiker');
-define('TEXT_EMPLOYEES_IS_ANALYST', 'Rapporteur');
-define('TEXT_EMPLOYEES_IS_ADMINISTRATOR', 'Beheerder');
 define('TEXT_EMPLOYEES_LISTING_IS_EMPTY', 'Geen medewerkers aanwezig');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
@@ -354,9 +358,10 @@ $EMPLOYEE_ERROR_LEVEL = array (0 => '',
                                1 => 'Medewerkernummer ontbreekt',
                                2 => 'Login ontbreekt',
                                3 => 'Volledige naam ontbreekt',
-                               4 => 'Medewerkernummer onjuist',
-                               5 => 'Duplicaat medewerkernummer',
-                               6 => 'Verwijderen niet toegestaan, medew.-rollen/timesheets aanwezig');
+                               4 => 'Profiel ontbreekt',
+                               5 => 'Medewerkernummer onjuist',
+                               6 => 'Duplicaat medewerkernummer',
+                               7 => 'Verwijderen niet toegestaan, medew.-rollen/timesheets aanwezig');
 
 define('TEXT_BUSINESS_UNITS', 'Business Unit');
 define('TEXT_BUSINESS_UNITS_NAME', 'Naam');
