@@ -3,15 +3,13 @@
  * CLASS FILE  : employee.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 29 june 2009
+ * Date        : 30 june 2009
  * Description : Employee class
  *
- *               Framework: osCommerce, Open Source E-Commerce Solutions
- *               http://www.oscommerce.com
  */
 
   class employee {
-    private $id, $login, $fullname, $employee_right, $listing;
+    private $id, $login, $fullname, $profile, $listing;
 
     public function __construct($selection = '', $select_by = 'employees_id') {
       $this->listing = array();
@@ -20,13 +18,13 @@
         $database = $_SESSION['database'];
         $selection = $database->prepare_input($selection);
 
-        $employee_query = $database->query("select employees_id, employees_login, employees_fullname, employees_password, employees_rights_id from " . TABLE_EMPLOYEES . " where " . $select_by . " = '" . $selection . "'");
+        $employee_query = $database->query("select employees_id, employees_login, employees_fullname, employees_password, profiles_id from " . TABLE_EMPLOYEES . " where " . $select_by . " = '" . $selection . "'");
         $employee_result = $database->fetch_array($employee_query);
 
         $this->fill($employee_result['employees_id'],
                     $employee_result['employees_login'],
                     $employee_result['employees_fullname'],
-                    $employee_result['employees_rights_id']);
+                    $employee_result['profiles_id']);
       } else {
         // We probably created an empty Employee object to retrieve the entire employee listing
         $this->id = 0;
@@ -42,8 +40,8 @@
           return $this->login;
         case 'fullname':
           return $this->fullname;
-        case 'employee_right':
-          return $this->employee_right;
+        case 'profile':
+          return $this->profile;
         case 'listing':
           return $this->listing;
         case 'listing_empty':
@@ -52,21 +50,22 @@
       return null;
     }
 
-    public function fill($id = 0, $login = '', $fullname = '', $employees_rights_id = 0) {
+    public function fill($id = 0, $login = '', $fullname = '', $profiles_id = 0) {
       $this->id = $id;
       $this->login = $login;
       $this->fullname = $fullname;
-      $this->employee_right = new employee_right($employees_rights_id);
+      $this->profile = new profile($profiles_id);
     }
 
     public static function verify_login($login = '', $password = '') {
       if (tep_not_null($login) && tep_not_null($password)) {
         $database = $_SESSION['database'];
-        $employee_query = 'select 1 from ' . TABLE_EMPLOYEES . ' e, ' . TABLE_EMPLOYEES_RIGHTS . ' er';
-        $employee_query .= " where e.employees_rights_id = er.employees_rights_id";
+        $employee_query  = "select 1 from " . TABLE_EMPLOYEES . " e";
+        $employee_query .= " inner join (" . TABLE_PROFILES . " p)";
+        $employee_query .= " on (e.profiles_id = p.profiles_id)";
         $employee_query .= " and e.employees_login = '" . $login . "'";
         $employee_query .= " and e.employees_password = password('" . $password . "')";
-        $employee_query .= ' and er.employees_rights_login = 1';
+        $employee_query .= ' and p.profiles_rights_login = 1';
         $employee_query = $database->query($employee_query);
         if ($employee_result = $database->fetch_array($employee_query)) {
           return TRUE;
@@ -78,11 +77,12 @@
     public static function password_is_empty($login = '') {
       if (tep_not_null($login)) {
         $database = $_SESSION['database'];
-        $employee_query = 'select employees_password from ' . TABLE_EMPLOYEES . ' e, ' . TABLE_EMPLOYEES_RIGHTS . ' er';
-        $employee_query .= " where e.employees_rights_id = er.employees_rights_id";
-        $employee_query .= " and employees_login = '" . $login . "'";
-        $employee_query .= " and employees_password = ''";
-        $employee_query .= ' and er.employees_rights_login = 1';
+        $employee_query  = "select e.employees_password from " . TABLE_EMPLOYEES . " e";
+        $employee_query .= " inner join (" . TABLE_PROFILES . " p)";
+        $employee_query .= " on (e.profiles_id = p.profiles_id)";
+        $employee_query .= " and e.employees_login = '" . $login . "'";
+        $employee_query .= " and e.employees_password = ''";
+        $employee_query .= " and p.profiles_rights_login = 1";
         $employee_query = $database->query($employee_query);
         if ($employee_result = $database->fetch_array($employee_query)) {
           return TRUE;
@@ -120,12 +120,13 @@
       $employee_array = array();
 
       $index = 0;
-      $employee_query_string = "select employees_id from " . TABLE_EMPLOYEES . ' e, ' . TABLE_EMPLOYEES_RIGHTS . ' er';
-      $employee_query_string .= " where e.employees_rights_id = er.employees_rights_id";
+      $employee_query_string  = "select e.employees_id from " . TABLE_EMPLOYEES . " e";
+      $employee_query_string .= " inner join (" . TABLE_PROFILES . " p)";
+      $employee_query_string .= " on (e.profiles_id = p.profiles_id)";
       if (!$show_all_employees) {
-        $employee_query_string .= ' and er.employees_rights_login = 1';
+        $employee_query_string .= ' and p.profiles_rights_login = 1';
       }
-      $employee_query_string .= " order by employees_id";
+      $employee_query_string .= " order by e.employees_id";
       $employee_query = $database->query($employee_query_string);
       while ($employee_result = $database->fetch_array($employee_query)) {
         $employee_array[$index] = new employee($employee_result['employees_id']);
@@ -134,22 +135,22 @@
       return $employee_array;
     }
 
-    public function save($id = 0, $login = '', $fullname = '', $employees_rights_id = 0) {
+    public function save($id = 0, $login = '', $fullname = '', $profiles_id = 0) {
       // Check if this operation is requested to the default object
       if ($id != 0) {
         // Create, fill and save the employee
         $employee = new employee($id);
-        $employee->fill($id, $login, $fullname, $employees_rights_id);
+        $employee->fill($id, $login, $fullname, $profiles_id);
         $employee->save();
       } else {
         $database = $_SESSION['database'];
         // Insert a new entry if one does not exist or update the existing one
         if (!$this->id_exists($this->id)) {
           // The entry does not exist
-          $database->query("insert into " . TABLE_EMPLOYEES . " (employees_id, employees_login, employees_fullname, employees_rights_id) values ('" . $this->id . "', '" . $this->login . "', '" . $this->fullname . "', '" . $this->employee_right->id . "')");
+          $database->query("insert into " . TABLE_EMPLOYEES . " (employees_id, employees_login, employees_fullname, profiles_id) values ('" . $this->id . "', '" . $this->login . "', '" . $this->fullname . "', '" . $this->profile->id . "')");
         } else {
           // The entry exists, update the contents
-          $activity_query = $database->query("update " . TABLE_EMPLOYEES . " set employees_id='" . $this->id . "', employees_login='" . $this->login . "', employees_fullname='" . $this->fullname . "', employees_rights_id='" . $this->employee_right->id . "' where employees_id = '" . (int)$this->id . "'");
+          $activity_query = $database->query("update " . TABLE_EMPLOYEES . " set employees_id='" . $this->id . "', employees_login='" . $this->login . "', employees_fullname='" . $this->fullname . "', profiles_id='" . $this->profile->id . "' where employees_id = '" . (int)$this->id . "'");
         }
       }
     }

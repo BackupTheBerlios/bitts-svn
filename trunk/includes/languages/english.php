@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 29 june 2009
+ * Date        : 01 july 2009
  * Description : English language file
  */
 
@@ -97,7 +97,7 @@ define('BODY_TEXT_PASSWORD', 'Password');
 define('BODY_TEXT_PASSWORD_VERIFY', 'Repeat password');
 define('BODY_TEXT_FULLNAME', 'Full name');
 define('BODY_TEXT_EMPLOYEE_ID', 'Personnel number');
-define('BODY_TEXT_EMPLOYEE_RIGHT_NAME', 'Profile');
+define('BODY_TEXT_PROFILE', 'Profile');
 define('BODY_TEXT_YES', 'Yes');
 define('BODY_TEXT_NO', 'No');
 define('BODY_TEXT_NOT_APPLICABLE', 'n/a');
@@ -339,12 +339,12 @@ $CUSTOMER_ERROR_LEVEL = array (0  => '',
                                4  => 'Duplicate customernumber',
                                5  => 'Deletion not permitted, projects exist');
 
-define('TEXT_EMPLOYEES_RIGHTS', 'Profile');
-define('TEXT_EMPLOYEES_RIGHTS_LOGIN', 'Login');
-define('TEXT_EMPLOYEES_RIGHTS_PROJECTLISTING', 'Projectlst');
-define('TEXT_EMPLOYEES_RIGHTS_TIMEREGISTRATION', 'Timereg');
-define('TEXT_EMPLOYEES_RIGHTS_ANALYSIS', 'Analysis');
-define('TEXT_EMPLOYEES_RIGHTS_ADMINISTRATION', 'Admin');
+define('TEXT_PROFILES_RIGHTS', 'Profile');
+define('TEXT_PROFILES_RIGHTS_LOGIN', 'Login');
+define('TEXT_PROFILES_RIGHTS_PROJECTLISTING', 'Projectlst');
+define('TEXT_PROFILES_RIGHTS_TIMEREGISTRATION', 'Timereg');
+define('TEXT_PROFILES_RIGHTS_ANALYSIS', 'Analysis');
+define('TEXT_PROFILES_RIGHTS_ADMINISTRATION', 'Admin');
 
 define('TEXT_EMPLOYEES', 'Employee');
 define('TEXT_EMPLOYEES_ID', 'Employeenr');

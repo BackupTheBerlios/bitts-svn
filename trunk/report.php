@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 29 june 2009
+ * Date        : 01 july 2009
  * Description : Data gathering and reporting functions
  */
 
@@ -15,8 +15,8 @@
   // Check if user is logged in. If not, redirect to login page
   if (!tep_not_null($_SESSION['employee']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
-  // Check if the user is allowed to view this page
-  if (!$_SESSION['employee']->employee_right->right['analysis'])
+  // Check if the user is allowed to view this page (either analyst or employees trying to print their own project report)
+  if (!($_SESSION['employee']->profile->right['analysis'] || ($_SESSION['employee']->profile->right['timeregistration'] && $_POST['action']=='report_projects' && $_POST['current_employee'])))
     tep_redirect(tep_href_link(FILENAME_DEFAULT));
 
   switch ($_POST['action']) {
@@ -82,11 +82,11 @@
         $column_count = 2;
         if ($_POST['show_user_rights']) {
           // Add to contents
-          $table_contents[$index][$column_count] = ($employee->employee_right->right['login']?'X':'-');
-          $table_contents[$index][$column_count + 1] = ($employee->employee_right->right['projectlisting']?'X':'-');
-          $table_contents[$index][$column_count + 2] = ($employee->employee_right->right['timeregistration']?'X':'-');
-          $table_contents[$index][$column_count + 3] = ($employee->employee_right->right['analysis']?'X':'-');
-          $table_contents[$index][$column_count + 4] = ($employee->employee_right->right['administration']?'X':'-');
+          $table_contents[$index][$column_count] = ($employee->profile->right['login']?'X':'-');
+          $table_contents[$index][$column_count + 1] = ($employee->profile->right['projectlisting']?'X':'-');
+          $table_contents[$index][$column_count + 2] = ($employee->profile->right['timeregistration']?'X':'-');
+          $table_contents[$index][$column_count + 3] = ($employee->profile->right['analysis']?'X':'-');
+          $table_contents[$index][$column_count + 4] = ($employee->profile->right['administration']?'X':'-');
           $column_count += 5;
         }
         if ($_POST['show_timesheet_info'] || $_POST['show_travel_distance_and_expenses']) {

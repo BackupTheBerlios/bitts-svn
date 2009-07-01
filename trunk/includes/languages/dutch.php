@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 29 june 2009
+ * Date        : 01 july 2009
  * Description : Dutch language file
  */
 
@@ -97,7 +97,7 @@ define('BODY_TEXT_PASSWORD', 'Wachtwoord');
 define('BODY_TEXT_PASSWORD_VERIFY', 'Herhaal wachtwoord');
 define('BODY_TEXT_FULLNAME', 'Volledige naam');
 define('BODY_TEXT_EMPLOYEE_ID', 'Personeelsnummer');
-define('BODY_TEXT_EMPLOYEE_RIGHT_NAME', 'Profiel');
+define('BODY_TEXT_PROFILE', 'Profiel');
 define('BODY_TEXT_YES', 'Ja');
 define('BODY_TEXT_NO', 'Nee');
 define('BODY_TEXT_NOT_APPLICABLE', 'n.v.t.');
@@ -339,12 +339,12 @@ $CUSTOMER_ERROR_LEVEL = array (0  => '',
                                4  => 'Duplicaat debiteurnummer',
                                5  => 'Verwijderen niet toegestaan, projecten aanwezig');
 
-define('TEXT_EMPLOYEES_RIGHTS', 'Profiel');
-define('TEXT_EMPLOYEES_RIGHTS_LOGIN', 'Inloggen');
-define('TEXT_EMPLOYEES_RIGHTS_PROJECTLISTING', 'Projectlst');
-define('TEXT_EMPLOYEES_RIGHTS_TIMEREGISTRATION', 'Urenadm');
-define('TEXT_EMPLOYEES_RIGHTS_ANALYSIS', 'Analyse');
-define('TEXT_EMPLOYEES_RIGHTS_ADMINISTRATION', 'Admin');
+define('TEXT_PROFILE', 'Profiel');
+define('TEXT_PROFILES_RIGHTS_LOGIN', 'Inloggen');
+define('TEXT_PROFILES_RIGHTS_PROJECTLISTING', 'Projectlst');
+define('TEXT_PROFILES_RIGHTS_TIMEREGISTRATION', 'Urenadm');
+define('TEXT_PROFILES_RIGHTS_ANALYSIS', 'Analyse');
+define('TEXT_PROFILES_RIGHTS_ADMINISTRATION', 'Admin');
 
 define('TEXT_EMPLOYEES', 'Medewerker');
 define('TEXT_EMPLOYEES_ID', 'Medewerkernr');

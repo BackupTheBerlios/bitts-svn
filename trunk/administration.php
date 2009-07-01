@@ -3,7 +3,7 @@
  * CODE FILE   : administration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 29 june 2009
+ * Date        : 01 july 2009
  * Description : Administration main form
  */
 
@@ -13,7 +13,7 @@
   if (!tep_not_null($_SESSION['employee']))
     tep_redirect(tep_href_link(FILENAME_LOGIN));
   // Check if the user is allowed to view this page
-  if (!$_SESSION['employee']->employee_right->right['administration'])
+  if (!$_SESSION['employee']->profile->right['administration'])
     tep_redirect(tep_href_link(FILENAME_DEFAULT));
 
   switch ($_POST['action']) {

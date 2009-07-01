@@ -3,7 +3,7 @@
  * CODE FILE   : employee_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 29 june 2009
+ * Date        : 30 june 2009
  * Description : Employee entry fields
  */
 ?>
@@ -57,14 +57,14 @@
           </tr>
           <tr>
             <td class="item_entry">
-              <?php echo TEXT_EMPLOYEES_RIGHTS; ?>
+              <?php echo TEXT_PROFILE; ?>
             </td>
             <td class="item_entry" style="width:200px">
               <?php if ($_POST['action']=='enter_data' || $_POST['action']=='delete_entry') {
-                $temp_employee_right = new employee_right();
-                echo tep_html_select('employees_rights_id', tep_get_partial_array($temp_employee_right->listing, 'id', 'name'), $_POST['action']=='enter_data', $_POST['employees_rights_id'], 'size="1" maxlength="64" style="width: 100%"');
+                $temp_profile = new profile();
+                echo tep_html_select('profiles_id', tep_get_partial_array($temp_profile->listing, 'id', 'name'), $_POST['action']=='enter_data', $_POST['profiles_id'], 'size="1" maxlength="32" style="width: 100%"');
               } else {
-                echo tep_html_select('employees_rights_id', array(), false);
+                echo tep_html_select('profiles_id', array(), false);
               } ?>
             </td>
             <td class="item_entry" colspan="3">&nbsp;</td>

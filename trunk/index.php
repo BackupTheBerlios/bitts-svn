@@ -3,7 +3,7 @@
  * CODE FILE   : index.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 29 june 2009
+ * Date        : 01 july 2009
  * Description : Default (starting)page
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -67,9 +67,9 @@
                         <td class="boxText"><?php echo $_SESSION['employee']->id;?></td>
                       </tr>
                       <tr>
-                        <td align="right" class="boxText"><?php echo BODY_TEXT_EMPLOYEE_RIGHT_NAME;?></td>
+                        <td align="right" class="boxText"><?php echo BODY_TEXT_PROFILE;?></td>
                         <td class="boxText">:</td>
-                        <td class="boxText"><?php echo $_SESSION['employee']->employee_right->name;?></td>
+                        <td class="boxText"><?php echo $_SESSION['employee']->profile->name;?></td>
                       </tr>
                     </table>
                   </td>
@@ -77,7 +77,7 @@
               </table>
             </td>
           </tr>
-          <?php if ($_SESSION['employee']->employee_right->right['projectlisting']) { ?>
+          <?php if ($_SESSION['employee']->profile->right['projectlisting']) { ?>
             <tr>
               <td>
                 <table border="0" width="100%" cellspacing="0" cellpadding="0">
