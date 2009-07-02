@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 01 july 2009
+ * Date        : 02 july 2009
  * Description : Dutch language file
  */
 
@@ -67,6 +67,7 @@ define('HEADER_TEXT_ADMINISTRATION_BUSINESS_UNITS', 'Beheer Business Units');
 define('HEADER_TEXT_ADMINISTRATION_PROJECTS', 'Beheer Projecten');
 define('HEADER_TEXT_ADMINISTRATION_CATEGORIES', 'Beheer Categorie&euml;n');
 define('HEADER_TEXT_ADMINISTRATION_ROLES', 'Beheer Rollen');
+define('HEADER_TEXT_ADMINISTRATION_PROFILES', 'Beheer Profielen');
 define('HEADER_TEXT_ADMINISTRATION_EMPLOYEES', 'Beheer Medewerkers');
 define('HEADER_TEXT_ADMINISTRATION_EMPLOYEES_ROLES', 'Beheer Medewerker-Rollen');
 define('HEADER_TEXT_ADMINISTRATION_UNITS', 'Beheer Eenheden');
@@ -80,6 +81,7 @@ define('BOX_MAINMENU_TIMEREGISTRATION_CALENDAR', 'Kalender');
 define('BOX_MAINMENU_ANALYSIS', 'Rapportage');
 define('BOX_MAINMENU_ADMINISTRATION', 'Beheer');
 define('BOX_MAINMENU_ADMINISTRATION_GENERAL', 'Algemeen');
+define('BOX_MAINMENU_ADMINISTRATION_PROFILES', 'Profielen');
 define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES', 'Medewerkers');
 define('BOX_MAINMENU_ADMINISTRATION_TIMESHEETS', 'Timesheets');
 define('BOX_MAINMENU_ADMINISTRATION_SYSTEM', 'Systeem');
@@ -340,11 +342,18 @@ $CUSTOMER_ERROR_LEVEL = array (0  => '',
                                5  => 'Verwijderen niet toegestaan, projecten aanwezig');
 
 define('TEXT_PROFILE', 'Profiel');
+define('TEXT_PROFILES_NAME', 'Naam');
 define('TEXT_PROFILES_RIGHTS_LOGIN', 'Inloggen');
 define('TEXT_PROFILES_RIGHTS_PROJECTLISTING', 'Projectlst');
 define('TEXT_PROFILES_RIGHTS_TIMEREGISTRATION', 'Urenadm');
 define('TEXT_PROFILES_RIGHTS_ANALYSIS', 'Analyse');
 define('TEXT_PROFILES_RIGHTS_ADMINISTRATION', 'Admin');
+define('TEXT_PROFILES_LISTING_IS_EMPTY', 'Geen profielen aanwezig');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$PROFILE_ERROR_LEVEL = array (0 => '',
+                              1 => 'Profielnummer ontbreekt',
+                              2 => 'Verwijderen niet toegestaan, medewerkers aanwezig');
 
 define('TEXT_EMPLOYEES', 'Medewerker');
 define('TEXT_EMPLOYEES_ID', 'Medewerkernr');

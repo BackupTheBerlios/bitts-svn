@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 01 july 2009
+ * Date        : 02 july 2009
  * Description : English language file
  */
 
@@ -67,6 +67,7 @@ define('HEADER_TEXT_ADMINISTRATION_BUSINESS_UNITS', 'Administration Business Uni
 define('HEADER_TEXT_ADMINISTRATION_PROJECTS', 'Administration Projects');
 define('HEADER_TEXT_ADMINISTRATION_CATEGORIES', 'Administration Categories');
 define('HEADER_TEXT_ADMINISTRATION_ROLES', 'Administration Roles');
+define('HEADER_TEXT_ADMINISTRATION_PROFILES', 'Administration Profiles');
 define('HEADER_TEXT_ADMINISTRATION_EMPLOYEES', 'Administration Employees');
 define('HEADER_TEXT_ADMINISTRATION_EMPLOYEES_ROLES', 'Administration Employees-Roles');
 define('HEADER_TEXT_ADMINISTRATION_UNITS', 'Administration Units');
@@ -80,6 +81,7 @@ define('BOX_MAINMENU_TIMEREGISTRATION_CALENDAR', 'Calendar');
 define('BOX_MAINMENU_ANALYSIS', 'Reports');
 define('BOX_MAINMENU_ADMINISTRATION', 'Admin');
 define('BOX_MAINMENU_ADMINISTRATION_GENERAL', 'General');
+define('BOX_MAINMENU_ADMINISTRATION_PROFILES', 'Profiles');
 define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES', 'Employees');
 define('BOX_MAINMENU_ADMINISTRATION_TIMESHEETS', 'Timesheets');
 define('BOX_MAINMENU_ADMINISTRATION_SYSTEM', 'System');
@@ -339,12 +341,19 @@ $CUSTOMER_ERROR_LEVEL = array (0  => '',
                                4  => 'Duplicate customernumber',
                                5  => 'Deletion not permitted, projects exist');
 
-define('TEXT_PROFILES_RIGHTS', 'Profile');
+define('TEXT_PROFILE', 'Profile');
+define('TEXT_PROFILES_NAME', 'Name');
 define('TEXT_PROFILES_RIGHTS_LOGIN', 'Login');
 define('TEXT_PROFILES_RIGHTS_PROJECTLISTING', 'Projectlst');
 define('TEXT_PROFILES_RIGHTS_TIMEREGISTRATION', 'Timereg');
 define('TEXT_PROFILES_RIGHTS_ANALYSIS', 'Analysis');
 define('TEXT_PROFILES_RIGHTS_ADMINISTRATION', 'Admin');
+define('TEXT_PROFILES_LISTING_IS_EMPTY', 'No employees available');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$PROFILE_ERROR_LEVEL = array (0 => '',
+                              1 => 'Profile name is missing',
+                              2 => 'Deletion not permitted, employees exist');
 
 define('TEXT_EMPLOYEES', 'Employee');
 define('TEXT_EMPLOYEES_ID', 'Employeenr');
