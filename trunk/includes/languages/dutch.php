@@ -352,7 +352,7 @@ define('TEXT_PROFILES_LISTING_IS_EMPTY', 'Geen profielen aanwezig');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $PROFILE_ERROR_LEVEL = array (0 => '',
-                              1 => 'Profielnummer ontbreekt',
+                              1 => 'Profielnaam ontbreekt',
                               2 => 'Verwijderen niet toegestaan, medewerkers aanwezig');
 
 define('TEXT_EMPLOYEES', 'Medewerker');

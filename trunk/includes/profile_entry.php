@@ -94,7 +94,7 @@
                 echo '</form>';
               } else if ($_POST['action']=='delete_entry') {
                 echo TEXT_ENTRY_DELETE_QUESTION . '&nbsp;';
-                echo tep_draw_form('delete_entry_confirm', tep_href_link(FILENAME_ADMINISTRATION_PROFILES)) . tep_create_parameters(array('action'=>'delete_entry_confirmed'), array('mPath', 'projects_id'), 'hidden_field');
+                echo tep_draw_form('delete_entry_confirm', tep_href_link(FILENAME_ADMINISTRATION_PROFILES)) . tep_create_parameters(array('action'=>'delete_entry_confirmed'), array('mPath', 'profiles_id'), 'hidden_field');
                 echo tep_image_submit('button_ok.gif', TEXT_ENTRY_DELETE_OK, 'style="vertical-align:middle"');
                 echo '</form>';
               } else {
