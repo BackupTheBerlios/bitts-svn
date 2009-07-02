@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 01 july 2009
+ * Date        : 02 july 2009
  * Description : Data gathering and reporting functions
  */
 
@@ -91,7 +91,7 @@
         }
         if ($_POST['show_timesheet_info'] || $_POST['show_travel_distance_and_expenses']) {
           // In both cases you need the timesheet object
-          $timesheet = new timesheet(0, $employee->id, $_POST['period']);
+          $timesheet = new timesheet(0, $employee->id, $_POST['period'], true, 'activities_date asc');
         }
         if ($_POST['show_timesheet_info']) {
           // Add to contents

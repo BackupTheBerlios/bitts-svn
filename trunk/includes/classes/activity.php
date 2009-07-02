@@ -3,7 +3,7 @@
  * CLASS FILE  : activity.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 june 2009
+ * Date        : 02 july 2009
  * Description : Activity class
  *
  */
@@ -77,9 +77,9 @@
         $index = 0;
         $timesheet_id = $database->prepare_input($timesheet_id);
         $activities_query = $database->query("select activities_id from " . TABLE_ACTIVITIES . " a" .
-                                             " inner join (" . TABLE_PROJECTS . " p, " . TABLE_ROLES . " r, " . TABLE_EMPLOYEES_ROLES . " er, " . TABLE_TIMESHEETS . " ts, " . TABLE_TARIFFS . " t)" . 
-                                             " on (p.projects_id=r.projects_id and r.roles_id=er.roles_id and er.employees_roles_id=t.employees_roles_id and a.timesheets_id=ts.timesheets_id and t.tariffs_id=a.tariffs_id)" .
-                                             " where ts.timesheets_id = '" . (int)$timesheet_id . "'" .
+                                             " inner join (" . TABLE_PROJECTS . " p, " . TABLE_ROLES . " r, " . TABLE_EMPLOYEES_ROLES . " er, " . TABLE_TARIFFS . " t)" . 
+                                             " on (p.projects_id=r.projects_id and r.roles_id=er.roles_id and er.employees_roles_id=t.employees_roles_id and t.tariffs_id=a.tariffs_id)" .
+                                             " where a.timesheets_id = '" . (int)$timesheet_id . "'" .
                                              " order by " . $sort_order);
         while ($activities_result = $database->fetch_array($activities_query)) {
           $activity_array[$index] = new activity($activities_result['activities_id']);
