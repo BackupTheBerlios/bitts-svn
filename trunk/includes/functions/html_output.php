@@ -3,7 +3,7 @@
  * CODE FILE   : html_output.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 june 2009
+ * Date        : 03 july 2009
  * Description : html output functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -19,12 +19,12 @@
     }
 
     if ($connection == 'NONSSL') {
-      $link = HTTP_SERVER . DIR_WS_CATALOG;
+      $link = HTTP_SERVER . DIR_WS_APPLICATION;
     } elseif ($connection == 'SSL') {
       if (ENABLE_SSL == true) {
-        $link = HTTPS_SERVER . DIR_WS_CATALOG;
+        $link = HTTPS_SERVER . DIR_WS_APPLICATION;
       } else {
-        $link = HTTP_SERVER . DIR_WS_CATALOG;
+        $link = HTTP_SERVER . DIR_WS_APPLICATION;
       }
     } else {
       die('</td></tr></table></td></tr></table><br><br><font color="#ff0000"><b>Error!</b></font><br><br><b>Unable to determine connection method on a link!<br><br>Known methods: NONSSL SSL</b><br><br>');

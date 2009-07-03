@@ -3,7 +3,7 @@
  * CODE FILE   : header.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 june 2009
+ * Date        : 03 july 2009
  * Description : Header file
  *               Contains html declarations and parameters
  *               Creates error- and/or info message on top of page
@@ -17,7 +17,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
     <title><?php echo TITLE; ?></title>
-    <base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>">
+    <base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_APPLICATION; ?>">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <link rel="shortcut icon" href="<?php echo DIR_WS_IMAGES ?>favicon.ico" type="image/x-icon">
   </head>

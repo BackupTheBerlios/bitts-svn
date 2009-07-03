@@ -3,7 +3,7 @@
  * CODE FILE   : configuration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 17 december 2007
+ * Date        : 03 july 2009
  * Description : Configuration parameters.
  *               Semi-permanent and basic configuration parameters are placed
  *               here.
@@ -14,13 +14,11 @@
 
   // define the project version
   define('PROJECT_NAME', 'BitTS');
-  define('PROJECT_VERSION', 'v0.1a');
+  define('PROJECT_VERSION', 'v0.9');
 
   // Define the webserver and path parameters
   define('HTTP_SERVER', 'http://localhost'); // eg, http://localhost - should not be empty for productive servers
-  //define('HTTP_SERVER', 'http://192.168.24.162'); // eg, http://localhost - should not be empty for productive servers
   define('HTTPS_SERVER', 'https://localhost'); // eg, https://localhost - should not be empty for productive servers
-  //define('HTTPS_SERVER', 'https://192.168.24.162'); // eg, https://localhost - should not be empty for productive servers
   define('ENABLE_SSL', true); // secure webserver for application?
   define('HTTP_COOKIE_DOMAIN', 'localhost');
   define('HTTPS_COOKIE_DOMAIN', 'localhost');
@@ -28,7 +26,7 @@
   define('HTTPS_COOKIE_PATH', '/bitts/');
 
   // * DIR_WS_* = Webserver directories (virtual/URL)
-  define('DIR_WS_CATALOG', '/bitts/');
+  define('DIR_WS_APPLICATION', '/bitts/');
   define('DIR_WS_IMAGES', 'images/');
   define('DIR_WS_ICONS', DIR_WS_IMAGES . 'icons/');
   define('DIR_WS_INCLUDES', 'includes/');
@@ -38,9 +36,9 @@
   define('DIR_WS_LANGUAGES', DIR_WS_INCLUDES . 'languages/');
 
   // * DIR_FS_* = Filesystem directories (local/physical)
-  define('DIR_FS_CATALOG', '/srv/www/htdocs/bitts/');
-  define('DIR_FS_DOWNLOAD', DIR_FS_CATALOG . 'download/');
-  define('DIR_FS_DOWNLOAD_PUBLIC', DIR_FS_CATALOG . 'pub/');
+  define('DIR_FS_APPLICATION', '/srv/www/htdocs/bitts/');
+  define('DIR_FS_BACKUP', DIR_FS_APPLICATION . 'backup/');
+  define('DIR_FS_CACHE', DIR_FS_APPLICATION . 'cache/');
 
   // define our database connection
   define('DB_SERVER_NAME', 'localhost'); // eg, localhost - should not be empty for productive servers
