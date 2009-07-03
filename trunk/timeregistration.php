@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 01 july 2009
+ * Date        : 03 july 2009
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -97,7 +97,7 @@
           </tr>
           <tr>
             <td align="center">
-              <table border="0" width="15%" cellspacing="0" cellpadding="1" class="infoBox">
+              <table border="0" width="16%" cellspacing="0" cellpadding="1" class="infoBox">
                 <tr>
                   <?php echo tep_draw_form('period_back', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('period'=>tep_next_period($_SESSION['timesheet']->period, -1)), array('mPath'), 'hidden_field'); ?>
                     <td align="left" class="infoBoxHeading">

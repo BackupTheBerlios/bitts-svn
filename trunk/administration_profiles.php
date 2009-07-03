@@ -3,10 +3,10 @@
  * CODE FILE   : administration_profiles.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 02 july 2009
+ * Date        : 03 july 2009
  * Description : Profile administration form
  *               Data validation sequence
- *               Storing of entered data (via business_unit object)
+ *               Storing of entered data (via profile object)
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
  *               http://www.oscommerce.com
