@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 02 july 2009
+ * Date        : 03 july 2009
  * Description : Data gathering and reporting functions
  */
 
@@ -122,7 +122,7 @@
       $pdf->AddPage();
 
       $periodstartdate = $database->prepare_input(tep_periodstartdate($_POST['period']));
-      $projects_query_string = 'SELECT ts.timesheets_start_date, ts.timesheets_end_date, cus.customers_id, cus.customers_name, bu.business_units_image, pr.projects_id, pr.projects_name, rl.roles_id, rl.roles_name, rl.roles_mandatory_ticket_entry, act.activities_date, emp.employees_id, emp.employees_fullname, act.activities_amount, units.units_id, units.units_name, tar.tariffs_amount, act.activities_travel_distance, act.activities_expenses, act.activities_ticket_number, act.activities_expenses + (act.activities_amount * tar.tariffs_amount) AS total, act.activities_comment ' .
+      $projects_query_string = 'SELECT ts.timesheets_start_date, ts.timesheets_end_date, cus.customers_id, cus.customers_name, bu.business_units_image, bu.business_units_image_position, pr.projects_id, pr.projects_name, rl.roles_id, rl.roles_name, rl.roles_mandatory_ticket_entry, act.activities_date, emp.employees_id, emp.employees_fullname, act.activities_amount, units.units_id, units.units_name, tar.tariffs_amount, act.activities_travel_distance, act.activities_expenses, act.activities_ticket_number, act.activities_expenses + (act.activities_amount * tar.tariffs_amount) AS total, act.activities_comment ' .
                                'FROM ' . TABLE_TIMESHEETS . ' AS ts ' .
                                'INNER JOIN (' . TABLE_EMPLOYEES . ' AS emp, ' . TABLE_ACTIVITIES . ' AS act, ' . TABLE_UNITS . ', ' . TABLE_TARIFFS . ' AS tar, ' . TABLE_EMPLOYEES_ROLES . ' AS er, ' . TABLE_ROLES . ' AS rl, ' . TABLE_PROJECTS . ' AS pr, ' . TABLE_CUSTOMERS . ' AS cus, ' . TABLE_BUSINESS_UNITS . ' AS bu) ' .
                                'ON (ts.employees_id = emp.employees_id ' .
@@ -169,6 +169,7 @@
             $pdf->AddPage();
           }
           $pdf->InvoiceHeader($projects_result['business_units_image'],
+                              $projects_result['business_units_image_position'],
                               $projects_result['customers_name'],
                               tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $projects_result['timesheets_start_date'])) . ' - ' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $projects_result['timesheets_end_date'])),
                               $projects_result['projects_name'],
