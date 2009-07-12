@@ -95,7 +95,7 @@
               <?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
             </td>
             <td class="item_entry" colspan="3" style="width:150px">
-              <?php echo tep_draw_separator('pixel_trans.gif', '100%', '10'); ?>
+              <?php echo tep_draw_separator('pixel_trans.gif', '150', '10'); ?>
             </td>
             <td class="item_entry" style="width:65px">
               <?php echo tep_draw_separator('pixel_trans.gif', '65', '10'); ?>
