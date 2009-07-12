@@ -51,11 +51,11 @@
                 <?php echo tep_draw_input_field('business_units_image_upload', '', 'style="position:relative; text-align:right; -moz-opacity:0; filter:alpha(opacity:0); opacity:0" onchange="copyValue(\'business_units_image_displayname\', this.value);"' . ($_POST['action']=='enter_data'?'':' disabled'), 'file'); ?>
                 <div>
                   <?php echo tep_draw_input_field('business_units_image_displayname', '', 'size="1" style="width:150px; z-index:1; position:absolute; top:0px; left:0px" readonly' . ($_POST['action']=='enter_data'?'':' disabled')) .
-                  tep_image(DIR_WS_IMAGES . '/pixel_f8f8f9.gif', null, '5', '22', 'border="none" style="z-index:1; position:absolute; top:0px; left:150px"');
+                  tep_image(DIR_WS_IMAGES . '/pixel_f8f8f9.gif', null, '4', '22', 'border="none" style="z-index:1; position:absolute; top:0px; left:150px"');
                   if ($_POST['action']=='enter_data') {
-                    echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_browse.gif', null, null, null, 'style="vertical-align:middle; z-index:-1; position:absolute; top:0px; left:155px"');
+                    echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_browse.gif', null, null, null, 'style="vertical-align:middle; z-index:-1; position:absolute; top:0px; left:154px"');
                   } else {
-                    echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_browse_disabled.gif', null, null, null, 'style="vertical-align:middle; z-index:-1; position:absolute; top:0px; left:155px"');
+                    echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_browse_disabled.gif', null, null, null, 'style="vertical-align:middle; z-index:-1; position:absolute; top:0px; left:154px"');
                   } ?>
                 </div>
               </div>
