@@ -40,7 +40,7 @@
               <?php echo TEXT_BUSINESS_UNITS_IMAGE; ?>
             </td>
             <td class="item_entry" colspan="3" style="width: 150px">
-              <?php echo $_POST['business_units_image']; ?>
+              <?php echo $_POST['business_units_image']; ?>&nbsp;
             </td>
             <td class="item_entry" style="width:65px">&nbsp;</td>
           </tr>
@@ -75,14 +75,14 @@
             <td class="item_entry" style="text-align:right">
               <?php echo tep_draw_radio_field('business_units_image_position', 'R', false, ($_POST['action']=='enter_data'?'':' disabled')); ?>&nbsp;
             </td>
-            <td class="item_entry">&nbsp;</td>
+            <td class="item_entry" style="width:65px">&nbsp;</td>
           </tr>
           <tr>
             <td class="item_entry" colspan="4">&nbsp;</td>
             <td class="item_entry" style="text-align:left"><?php echo $BUSINESS_UNITS_IMAGE_POSITION['L']; ?></td>
             <td class="item_entry" style="text-align:center"><?php echo $BUSINESS_UNITS_IMAGE_POSITION['C']; ?></td>
             <td class="item_entry" style="text-align:right"><?php echo $BUSINESS_UNITS_IMAGE_POSITION['R']; ?></td>
-            <td class="item_entry">&nbsp;</td>
+            <td class="item_entry" style="width:65px">&nbsp;</td>
           </tr>
           <tr>
             <td class="item_entry" colspan="8">
