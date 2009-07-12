@@ -17,7 +17,7 @@
   <table border="0" cellspacing="0" cellpadding="2">
     <tr>
       <td>
-        <table border="1" cellspacing="0" cellpadding="2" class="item_entry">
+        <table border="0" cellspacing="0" cellpadding="2" class="item_entry">
           <?php if ($error_level > 0) { ?>
             <tr>
               <td class="entry_error_<?php echo ($error_level<64?($error_level<32?'high':'middle'):'low'); ?>" colspan="8">
@@ -40,11 +40,9 @@
               <?php echo TEXT_BUSINESS_UNITS_IMAGE; ?>
             </td>
             <td class="item_entry" colspan="3" style="width: 150px">
-              <?php echo $_POST['business_units_image']; ?>&nbsp;
+              <?php echo $_POST['business_units_image']; ?>
             </td>
-            <td class="item_entry" style="width:65px">
-              <?php echo tep_draw_separator('pixel_trans.gif', '65', '10'); ?>
-            </td>
+            <td class="item_entry" style="width:65px">&nbsp;</td>
           </tr>
           <tr>
             <td class="item_entry" colspan="4">&nbsp;</td>
@@ -53,11 +51,11 @@
                 <?php echo tep_draw_input_field('business_units_image_upload', '', 'style="position:relative; text-align:right; -moz-opacity:0; filter:alpha(opacity:0); opacity:0" onchange="copyValue(\'business_units_image_displayname\', this.value);"' . ($_POST['action']=='enter_data'?'':' disabled'), 'file'); ?>
                 <div>
                   <?php echo tep_draw_input_field('business_units_image_displayname', '', 'size="1" style="width:150px; z-index:1; position:absolute; top:0px; left:0px" readonly' . ($_POST['action']=='enter_data'?'':' disabled')) .
-                  tep_image(DIR_WS_IMAGES . '/pixel_f8f8f9.gif', null, '5', '22', 'border="none" style="z-index:1; position:absolute; top:0px; left:150px"');
+                  tep_image(DIR_WS_IMAGES . '/pixel_f8f8f9.gif', null, '6', '22', 'border="none" style="z-index:1; position:absolute; top:0px; left:150px"');
                   if ($_POST['action']=='enter_data') {
-                    echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_browse.gif', null, null, null, 'style="vertical-align:middle; z-index:-1; position:absolute; top:0px; left:155px"');
+                    echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_browse.gif', null, null, null, 'style="vertical-align:middle; z-index:-1; position:absolute; top:0px; left:156px"');
                   } else {
-                    echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_browse_disabled.gif', null, null, null, 'style="vertical-align:middle; z-index:-1; position:absolute; top:0px; left:155px"');
+                    echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_browse_disabled.gif', null, null, null, 'style="vertical-align:middle; z-index:-1; position:absolute; top:0px; left:156px"');
                   } ?>
                 </div>
               </div>
@@ -77,18 +75,14 @@
             <td class="item_entry" style="text-align:right">
               <?php echo tep_draw_radio_field('business_units_image_position', 'R', false, ($_POST['action']=='enter_data'?'':' disabled')); ?>&nbsp;
             </td>
-            <td class="item_entry" style="width:65px">
-              <?php echo tep_draw_separator('pixel_trans.gif', '65', '10'); ?>
-            </td>
+            <td class="item_entry" style="width:65px">&nbsp;</td>
           </tr>
           <tr>
             <td class="item_entry" colspan="4">&nbsp;</td>
             <td class="item_entry" style="text-align:left"><?php echo $BUSINESS_UNITS_IMAGE_POSITION['L']; ?></td>
             <td class="item_entry" style="text-align:center"><?php echo $BUSINESS_UNITS_IMAGE_POSITION['C']; ?></td>
             <td class="item_entry" style="text-align:right"><?php echo $BUSINESS_UNITS_IMAGE_POSITION['R']; ?></td>
-            <td class="item_entry" style="width:65px">
-              <?php echo tep_draw_separator('pixel_trans.gif', '65', '10'); ?>
-            </td>
+            <td class="item_entry" style="width:65px">&nbsp;</td>
           </tr>
           <tr>
             <td class="item_entry" colspan="4">
