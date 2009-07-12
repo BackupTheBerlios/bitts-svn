@@ -17,7 +17,7 @@
   <table border="0" cellspacing="0" cellpadding="2">
     <tr>
       <td>
-        <table border="1" cellspacing="0" cellpadding="2" class="item_entry">
+        <table border="0" cellspacing="0" cellpadding="2" class="item_entry">
           <?php if ($error_level > 0) { ?>
             <tr>
               <td class="entry_error_<?php echo ($error_level<64?($error_level<32?'high':'middle'):'low'); ?>" colspan="8">
