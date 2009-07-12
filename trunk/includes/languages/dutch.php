@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 02 july 2009
+ * Date        : 12 july 2009
  * Description : Dutch language file
  */
 
@@ -384,7 +384,12 @@ $BUSINESS_UNITS_IMAGE_POSITION = array ('L' => 'Links',
 // errorlevels 32..63 == attention required
 $BUSINESS_UNIT_ERROR_LEVEL = array (0 => '',
                                     1 => 'Naam ontbreekt',
-                                    2 => 'Verwijderen niet toegestaan, projecten aanwezig');
+                                    2 => 'Bestandstype onjuist',
+                                    3 => 'Doellocatie niet schrijfbaar',
+                                    4 => 'Doellocatie niet aanwezig',
+                                    5 => 'Geen bestand ge-upload',
+                                    6 => 'Bestand niet opgeslagen',
+                                    7 => 'Verwijderen niet toegestaan, projecten aanwezig');
 
 define('TEXT_CATEGORIES', 'Categorie');
 define('TEXT_CATEGORIES_NAME', 'Naam');

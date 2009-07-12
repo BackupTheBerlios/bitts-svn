@@ -3,7 +3,7 @@
  * CODE FILE   : administration_business_units.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 01 july 2009
+ * Date        : 12 july 2009
  * Description : Business Unit administration form
  *               Data validation sequence
  *               Storing of entered data (via business_unit object)
@@ -35,6 +35,27 @@
         $error_level = 1; // No business_units_name
       } else {
         // OK, entry can be saved
+        // First take care of the image (if specified)
+        if (tep_not_null($_POST['business_units_image_displayname'])) {
+          include(DIR_WS_CLASSES . 'upload.php');
+          $business_units_image = new upload('business_units_image_upload', DIR_FS_IMAGES, null, array('png','gif','jpg','bmp'));
+          $error_level = $business_units_image->parse();
+          if ($error_level > 0) {
+            // Filetype not allowed, destination not writeable, destination does not exist or no file uploaded
+            $_POST['action'] = 'enter_data';
+            $_POST['business_units_image_displayname'] = '';
+            break;
+          }
+          if (!$business_units_image->save()) {
+            $_POST['action'] = 'enter_data';
+            $_POST['business_units_image_displayname'] = '';
+            $error_level = 6; // File not saved
+            break;
+          } else {
+            $_POST['business_units_image'] = $business_units_image->filename;
+          }
+        }
+        // Now save the other data
         $administration_business_unit = new business_unit($_POST['business_units_id']);
         $administration_business_unit->fill($_POST['business_units_name'],
                                             $_POST['business_units_image'],
@@ -53,7 +74,7 @@
       // Check for dependencies
       $administration_business_unit = new business_unit($_POST['business_units_id']);
       if ($administration_business_unit->has_dependencies()) {
-        $error_level = 2; // Related project(s) exist
+        $error_level = 7; // Related project(s) exist
         $_POST['action'] = '';
       }
       break;

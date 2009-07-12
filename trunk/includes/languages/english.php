@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 02 july 2009
+ * Date        : 12 july 2009
  * Description : English language file
  */
 
@@ -384,7 +384,12 @@ $BUSINESS_UNITS_IMAGE_POSITION = array ('L' => 'Left',
 // errorlevels 32..63 == attention required
 $BUSINESS_UNIT_ERROR_LEVEL = array (0 => '',
                                     1 => 'Name is missing',
-                                    2 => 'Deletion not permitted, projects exist');
+                                    2 => 'Filetype not allowed',
+                                    3 => 'Destination not writeable',
+                                    4 => 'Destination does not exist',
+                                    5 => 'No file uploaded',
+                                    6 => 'File not saved',
+                                    7 => 'Deletion not permitted, projects exist');
 
 define('TEXT_CATEGORIES', 'Category');
 define('TEXT_CATEGORIES_NAME', 'Name');
