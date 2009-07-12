@@ -75,14 +75,18 @@
             <td class="item_entry" style="text-align:right">
               <?php echo tep_draw_radio_field('business_units_image_position', 'R', false, ($_POST['action']=='enter_data'?'':' disabled')); ?>&nbsp;
             </td>
-            <td class="item_entry" style="width:65px">&nbsp;</td>
+            <td class="item_entry" style="width:65px">
+              <?php echo tep_draw_separator('pixel_trans.gif', '65', '10'); ?>
+            </td>
           </tr>
           <tr>
             <td class="item_entry" colspan="4">&nbsp;</td>
             <td class="item_entry" style="text-align:left"><?php echo $BUSINESS_UNITS_IMAGE_POSITION['L']; ?></td>
             <td class="item_entry" style="text-align:center"><?php echo $BUSINESS_UNITS_IMAGE_POSITION['C']; ?></td>
             <td class="item_entry" style="text-align:right"><?php echo $BUSINESS_UNITS_IMAGE_POSITION['R']; ?></td>
-            <td class="item_entry" style="width:65px">&nbsp;</td>
+            <td class="item_entry" style="width:65px">
+              <?php echo tep_draw_separator('pixel_trans.gif', '65', '10'); ?>
+            </td>
           </tr>
           <tr>
             <td class="item_entry" colspan="8">
