@@ -3,7 +3,7 @@
  * CODE FILE   : upload.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 12 july 2009
+ * Date        : 13 july 2009
  * Description : Upload class
  */
 
@@ -58,11 +58,8 @@
                       'tmp_name' => $_FILES[$this->uploadelementname]['tmp_name']);
       }
 
-      echo 'about to check extension array size';
       if ( tep_not_null($file['tmp_name']) && ($file['tmp_name'] != 'none') && is_uploaded_file($file['tmp_name']) ) {
-        echo 'check extension array size';
         if (sizeof($this->allowed_extensions) > 0) {
-          echo 'check extension itself';
           if (!in_array(strtolower(substr($file['name'], strrpos($file['name'], '.')+1)), $this->allowed_extensions)) {
             // Filetype not allowed
             return 2;

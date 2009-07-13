@@ -3,7 +3,7 @@
  * CODE FILE   : administration_business_units.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 12 july 2009
+ * Date        : 13 july 2009
  * Description : Business Unit administration form
  *               Data validation sequence
  *               Storing of entered data (via business_unit object)
@@ -38,7 +38,7 @@
         // First take care of the image (if specified)
         if (tep_not_null($_POST['business_units_image_displayname'])) {
           include(DIR_WS_CLASSES . 'upload.php');
-          $business_units_image = new upload('business_units_image_upload', DIR_FS_IMAGES, null, array('png','gif','jpg','bmp'));
+          $business_units_image = new upload('business_units_image_upload', DIR_FS_IMAGES, '775', array('png','gif','jpg','bmp'));
           $error_level = $business_units_image->parse();
           if ($error_level > 0) {
             // Filetype not allowed, destination not writeable, destination does not exist or no file uploaded
