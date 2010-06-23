@@ -3,7 +3,7 @@
  * CODE FILE   : tariff_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 21 june 2009
+ * Date        : 04 august 2009
  * Description : Tariff entry fields
  */
 ?>
@@ -64,7 +64,7 @@
           </tr>
           <tr>
             <td class="item_entry" style="text-align:left">
-              <?php if (tep_not_null($_POST['employees_roles_id']) && $_POST['action'] != 'enter_data' && $_POST['action'] != 'delete_entry') {
+              <?php if (tep_not_null($_POST['employees_roles_id']) && $_POST['action'] != 'enter_data' && !($_POST['action'] == 'delete_entry' && $error_level == 0)) {
                 echo tep_draw_form('fnew', tep_href_link(FILENAME_ADMINISTRATION_TARIFFS)) . tep_create_parameters(array('action'=>'enter_data'), array('mPath', 'projects_id', 'employees_roles_id'), 'hidden_field');
                 echo tep_image_submit('button_new.gif', TEXT_ENTRY_NEW, 'style="vertical-align:middle"');
                 echo '</form>';
@@ -76,7 +76,7 @@
               <?php if ($_POST['action']=='enter_data') {
                 echo tep_image_submit('button_save.gif', TEXT_ENTRY_SAVE, 'style="vertical-align:middle"');
                 echo '</form>';
-              } else if ($_POST['action']=='delete_entry') {
+              } else if ($_POST['action']=='delete_entry' && $error_level==0) {
                 echo TEXT_ENTRY_DELETE_QUESTION . '&nbsp;';
                 echo tep_draw_form('delete_entry_confirm', tep_href_link(FILENAME_ADMINISTRATION_TARIFFS)) . tep_create_parameters(array('action'=>'delete_entry_confirmed'), array('mPath', 'projects_id', 'employees_roles_id', 'tariffs_id'), 'hidden_field');
                 echo tep_image_submit('button_ok.gif', TEXT_ENTRY_DELETE_OK, 'style="vertical-align:middle"');
@@ -85,7 +85,7 @@
                 echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_save_disabled.gif', null, null, null, 'style="vertical-align:middle"');
               }
               echo '&nbsp;';
-              if ($_POST['action'] == 'enter_data' || $_POST['action'] == 'delete_entry') {
+              if ($_POST['action'] == 'enter_data' || ($_POST['action'] == 'delete_entry' && $error_level == 0)) {
                 echo tep_draw_form('fcancel', tep_href_link(FILENAME_ADMINISTRATION_TARIFFS)) . tep_create_parameters(array(), array('mPath', 'projects_id', 'employees_roles_id'), 'hidden_field');
                 echo tep_image_submit('button_cancel.gif', TEXT_ENTRY_CANCEL, 'style="vertical-align:middle"');
                 echo '</form>';

@@ -3,7 +3,7 @@
  * CODE FILE   : administration_tariffs.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 01 july 2009
+ * Date        : 04 august 2009
  * Description : Tariff administration form
  *               Data validation sequence
  *               Storing of entered data
@@ -29,7 +29,7 @@
 
   switch ($_POST['action']) {
     case 'enter_data':
-      // Format tariff from database to display
+      // Format tariff amount from database to display
       if (isset($_POST['tariffs_amount'])) {
         $_POST['tariffs_amount_display'] = tep_number_db_to_user($_POST['tariffs_amount'], 2);
       }
@@ -158,8 +158,10 @@
       $administration_tariff = new tariff($_POST['tariffs_id']);
       if ($administration_tariff->has_dependencies()) {
         $error_level = 11; // Related activities exist
-        $_POST['action'] = '';
+        //$_POST['action'] = '';
       }
+      // Format tariff amount from database to display
+      $_POST['tariffs_amount_display'] = tep_number_db_to_user($_POST['tariffs_amount'], 2);
       // Format dates (from uts to display)
       $_POST['tariffs_start_date_display'] = tep_strftime(DATE_FORMAT_SHORT, $_POST['tariffs_start_date']);
       if ($_POST['tariffs_end_date'] != 0) {
