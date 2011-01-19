@@ -3,7 +3,7 @@
  * CLASS FILE  : general.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 june 2009
+ * Date        : 19 january 2011
  * Description : General functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -174,7 +174,7 @@
     } else if (is_array($value)) {
       return (sizeof($value) > 0);
     } else {
-      return (($value != '') && (strtolower($value) != 'null') && (strlen(trim($value)) > 0));
+      return (($value != '') && (strtolowear($value) != 'null') && (strlen(trim($value)) > 0));
     }
   }
 
@@ -197,10 +197,15 @@
     return $result_array;
   }
 
-  
-  
-  
-  
+  // Get a certain array from within an array
+  function tep_get_array_from_array($array = null, $keyname = '', $criterium = '') {
+    foreach ($array as $row) {
+      if ($row[$keyname] == $criterium) {
+        return $row;
+      }
+    }
+    return array();
+  }
   
 
 
