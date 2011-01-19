@@ -3,12 +3,67 @@
  * CODE FILE   : html_output.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 03 july 2009
+ * Date        : 05 july 2010
  * Description : html output functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
  *               http://www.oscommerce.com
  */
+
+  // Case-insensitive str_replace()
+  function tep_stri_replace($find, $replace, $string) {
+    $parts = explode( strtolower($find), strtolower($string) );
+
+    $pos = 0;
+
+    foreach( $parts as $key=>$part ){
+      $parts[ $key ] = substr($string, $pos, strlen($part));
+      $pos += strlen($part) + strlen($find);
+    }
+
+    return( join( $replace, $parts ) );
+  }
+
+  // Transforms txt in html
+  function tep_txt2html($text) {
+    //Kills double spaces and spaces inside tags.
+    while( !( strpos($text,'  ') === FALSE ) ) $text = str_replace('  ',' ',$txt);
+    $text = str_replace(' >','>',$text);
+    $text = str_replace('< ','<',$text);
+
+    //Transforms accents in html entities.
+    $text = htmlentities($text);
+
+    //We need some HTML entities back!
+    $text = str_replace('&quot;','"',$text);
+    $text = str_replace('&lt;','<',$text);
+    $text = str_replace('&gt;','>',$text);
+    $text = str_replace('&amp;','&',$text);
+
+    //Ajdusts links - anything starting with HTTP opens in a new window
+    $text = tep_stri_replace("<a href=\"http://","<a target=\"_blank\" href=\"http://",$text);
+    $text = tep_stri_replace("<a href=http://","<a target=\"_blank\" href=http://",$text);
+
+    //Basic formatting
+    $eol = ( strpos($text,"\r") === FALSE ) ? "\n" : "\r\n";
+    $html = '<p>'.str_replace("$eol$eol","</p><p>",$text).'</p>';
+    $html = str_replace("$eol","<br />\n",$html);
+    $html = str_replace("</p>","</p>\n\n",$html);
+    $html = str_replace("<p></p>","<p>&nbsp;</p>",$html);
+
+    //Wipes <br> after block tags (for when the user includes some html in the text).
+    $wipebr = Array("table","tr","td","blockquote","ul","ol","li");
+
+    for($x = 0; $x < count($wipebr); $x++) {
+
+      $tag = $wipebr[$x];
+      $html = tep_stri_replace("<$tag><br />","<$tag>",$html);
+      $html = tep_stri_replace("</$tag><br />","</$tag>",$html);
+
+    }
+
+    return $html;
+  }
 
   // The HTML href link wrapper function
   function tep_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true) {
@@ -298,13 +353,25 @@
   }
 
 ////
-// Output a a javascript focus part
+// Output a javascript focus part
   function tep_javascript_focus($fieldname, $form = '') {
     $script = '<script language="javascript">';
     $script .= 'document.';
     if (tep_not_null($form))
       $script .= $form . '.';
     $script .= $fieldname . '.focus();</script>';
+    return $script;
+  }
+
+////
+// Output a javascript maxlength part (for textareas)
+  function tep_javascript_maxlength() {
+    $script = '<script language="javascript"> ';
+    $script .= 'function maxLength(textAreaObject, maximumLength) { ';
+    $script .= 'if (textAreaObject.value.length > maximumLength) { ';
+    $script .= 'textAreaObject.value = textAreaObject.value.substring(0, maximumLength); ';
+    $script .= '} } ';
+    $script .= '</script>';
     return $script;
   }
 
