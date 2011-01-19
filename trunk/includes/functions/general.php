@@ -174,7 +174,7 @@
     } else if (is_array($value)) {
       return (sizeof($value) > 0);
     } else {
-      return (($value != '') && (strtolowear($value) != 'null') && (strlen(trim($value)) > 0));
+      return (($value != '') && (strtolower($value) != 'null') && (strlen(trim($value)) > 0));
     }
   }
 
