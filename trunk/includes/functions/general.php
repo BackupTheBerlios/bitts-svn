@@ -199,8 +199,8 @@
 
   // Get a certain array from within an array
   function tep_get_array_from_array($array = null, $keyname = '', $criterium = '') {
-    foreach ($array as $row) {
-      if ($row[$keyname] == $criterium) {
+  	foreach ($array as $row) {
+      if ($row->$keyname == $criterium) {
         return $row;
       }
     }

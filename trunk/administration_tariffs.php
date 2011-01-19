@@ -3,7 +3,7 @@
  * CODE FILE   : administration_tariffs.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 04 august 2009
+ * Date        : 19 january 2011
  * Description : Tariff administration form
  *               Data validation sequence
  *               Storing of entered data
@@ -21,7 +21,7 @@
   if (!$_SESSION['employee']->profile->right['administration'])
     tep_redirect(tep_href_link(FILENAME_DEFAULT));
 
-  // Create a new employee_role object with id == 0 (default)
+  // Create a new tariff object with id == 0 (default)
   $_SESSION['tariff'] = new tariff(0, 'dummy');
 
   // Reset error level
@@ -250,6 +250,24 @@
                       <tr>
                         <td align="center">
                           <?php require(DIR_WS_INCLUDES . 'tariff_entry.php'); ?>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <table border="0" width="100%" cellspacing="0" cellpadding="2" class="entryListing">
+                            <tr class="entryListing-odd">
+                              <td class="entryListing-data" style="text-align:center">
+                                <?php if (tep_not_null($_POST['projects_id']) && tep_not_null($_POST['employees_roles_id'])) {
+                               	  echo tep_get_array_from_array($temp_employee_role->listing, 'id', $_POST['employees_roles_id'])->name;
+                                } else {
+                                  echo TEXT_EMPLOYEES_ROLES_LISTING_IS_EMPTY;
+                                } ?>
+                              </td>
+                            </tr>
+                          </table>
                         </td>
                       </tr>
                       <tr>

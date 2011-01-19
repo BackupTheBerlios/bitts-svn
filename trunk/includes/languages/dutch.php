@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 12 july 2009
+ * Date        : 18 january 2011
  * Description : Dutch language file
  */
 
@@ -94,6 +94,15 @@ define('BOX_MAINMENU_ADMINISTRATION_ROLES', 'Rollen');
 define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES_ROLES', 'Medewerker-Rollen');
 define('BOX_MAINMENU_ADMINISTRATION_TARIFFS', 'Tarieven');
 
+define('BOX_HEADING_BENEFITS', 'Verlofsaldo');
+define('BOX_BENEFITS_CREDIT', 'Van vorig jaar :');
+define('BOX_BENEFITS_GRANTED', 'Dit jaar :');
+define('BOX_BENEFITS_TOTAL', 'Totaal :');
+define('BOX_BENEFITS_USED', 'Gebruikt :');
+define('BOX_BENEFITS_REMAINING', 'Te besteden :');
+define('BOX_BENEFITS_HOURS', ' uur');
+define('BOX_BENEFITS_DAYS', ' dgn');
+
 define('BODY_TEXT_LOGIN', 'Login');
 define('BODY_TEXT_PASSWORD', 'Wachtwoord');
 define('BODY_TEXT_PASSWORD_VERIFY', 'Herhaal wachtwoord');
@@ -182,7 +191,7 @@ define('TEXT_EMPLOYEES_ROLES_START_DATE', 'Start datum');
 define('TEXT_EMPLOYEES_ROLES_END_DATE', 'Eind datum');
 define('TEXT_EMPLOYEES_ROLES_QUESTION_T1', 'Start datum tarieven wijzigen');
 define('TEXT_EMPLOYEES_ROLES_QUESTION_T2', 'Eind datum tarieven wijzigen');
-define('TEXT_EMPLOYEES_ROLES_LISTING_IS_EMPTY', 'Geen medewerker-rollen aanwezig');
+define('TEXT_EMPLOYEES_ROLES_LISTING_IS_EMPTY', 'Geen medewerker-rollen geselecteerd of aanwezig');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $EMPLOYEE_ROLE_ERROR_LEVEL = array (0  => '',

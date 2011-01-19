@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 12 july 2009
+ * Date        : 18 january 2011
  * Description : English language file
  */
 
@@ -94,6 +94,15 @@ define('BOX_MAINMENU_ADMINISTRATION_ROLES', 'Roles');
 define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES_ROLES', 'Employees-Roles');
 define('BOX_MAINMENU_ADMINISTRATION_TARIFFS', 'Tariffs');
 
+define('BOX_HEADING_BENEFITS', 'Benefits');
+define('BOX_BENEFITS_CREDIT', 'Prev year :');
+define('BOX_BENEFITS_GRANTED', 'This year :');
+define('BOX_BENEFITS_TOTAL', 'Total :');
+define('BOX_BENEFITS_USED', 'Used :');
+define('BOX_BENEFITS_REMAINING', 'Remaining :');
+define('BOX_BENEFITS_HOURS', ' hrs');
+define('BOX_BENEFITS_DAYS', ' days');
+
 define('BODY_TEXT_LOGIN', 'Login');
 define('BODY_TEXT_PASSWORD', 'Password');
 define('BODY_TEXT_PASSWORD_VERIFY', 'Repeat password');
@@ -182,7 +191,7 @@ define('TEXT_EMPLOYEES_ROLES_START_DATE', 'Start date');
 define('TEXT_EMPLOYEES_ROLES_END_DATE', 'End date');
 define('TEXT_EMPLOYEES_ROLES_QUESTION_T1', 'Change tariffs start date');
 define('TEXT_EMPLOYEES_ROLES_QUESTION_T2', 'Change tariffs end date');
-define('TEXT_EMPLOYEES_ROLES_LISTING_IS_EMPTY', 'No employee-roles available');
+define('TEXT_EMPLOYEES_ROLES_LISTING_IS_EMPTY', 'No employee-roles selected or available');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
 $EMPLOYEE_ROLE_ERROR_LEVEL = array (0  => '',
