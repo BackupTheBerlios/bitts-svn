@@ -3,7 +3,7 @@
  * CODE FILE   : column_left.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 april 2008
+ * Date        : 26 january 2011
  * Description : .....
  *               .....
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -11,4 +11,5 @@
  */
 
   require(DIR_WS_BOXES . 'main_menu.php');
+  require(DIR_WS_BOXES . 'benefits.php');
 ?>
