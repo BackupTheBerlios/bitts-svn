@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 january 2011
+ * Date        : 26 january 2011
  * Description : English language file
  */
 
@@ -73,6 +73,7 @@ define('HEADER_TEXT_ADMINISTRATION_EMPLOYEES_ROLES', 'Administration Employees-R
 define('HEADER_TEXT_ADMINISTRATION_UNITS', 'Administration Units');
 define('HEADER_TEXT_ADMINISTRATION_TARIFFS', 'Administration Tariffs');
 define('HEADER_TEXT_ADMINISTRATION_TIMESHEETS', 'Administration Timesheets');
+define('HEADER_TEXT_ADMINISTRATION_BENEFITS', 'Administration Benefits');
 
 define('BOX_HEADING_MAINMENU', 'Menu');
 define('BOX_MAINMENU_HOME', 'Home');
@@ -84,6 +85,7 @@ define('BOX_MAINMENU_ADMINISTRATION_GENERAL', 'General');
 define('BOX_MAINMENU_ADMINISTRATION_PROFILES', 'Profiles');
 define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES', 'Employees');
 define('BOX_MAINMENU_ADMINISTRATION_TIMESHEETS', 'Timesheets');
+define('BOX_MAINMENU_ADMINISTRATION_BENEFITS', 'Benefits');
 define('BOX_MAINMENU_ADMINISTRATION_SYSTEM', 'System');
 define('BOX_MAINMENU_ADMINISTRATION_CUSTOMERS', 'Customers');
 define('BOX_MAINMENU_ADMINISTRATION_BUSINESS_UNITS', 'Business Units');
@@ -418,6 +420,34 @@ define('TEXT_UNITS_LISTING_IS_EMPTY', 'No units available');
 $UNIT_ERROR_LEVEL = array (0 => '',
                            1 => 'Name is missing',
                            2 => 'Deletion not permitted, tariffs exist');
+
+define('TEXT_BENEFITS', 'TEXT_BENEFITS');
+define('TEXT_BENEFITS_ROLE', 'Type');
+define('TEXT_BENEFITS_PROPOSAL', 'Proposal');
+define('TEXT_BENEFITS_CREDIT', 'Credit');
+define('TEXT_BENEFITS_GRANTED', 'Granted');
+define('TEXT_BENEFITS_TOTAL', 'Total');
+define('TEXT_BENEFITS_USED', 'Used');
+define('TEXT_BENEFITS_REMAINING', 'Remaining');
+define('TEXT_BENEFITS_START_DATE', 'Start date');
+define('TEXT_BENEFITS_END_DATE', 'End date');
+define('TEXT_BENEFITS_COMMENT', 'Comment');
+define('TEXT_BENEFITS_LISTING_IS_EMPTY', 'No employee selected or no benefit(s) available');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$BENEFIT_ERROR_LEVEL = array (0  => '',
+                               1  => 'Role is missing',
+                               2  => 'Employee is missing',
+                               3  => 'Start date is missing',
+                               4  => 'Incorrect date',
+                               5  => 'Start date before project start date',
+                               6  => 'End date after project end date',
+                               7  => 'Duplicate entries found',
+                               8  => 'Tariffs exist before new start date',
+                               9  => 'Activities exist between old and new start date',
+                               10 => 'Tariffs exist after new end date',
+                               11 => 'Activities exist between old and new end date',
+                               12 => 'Deletion not permitted, tariffs exist');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>

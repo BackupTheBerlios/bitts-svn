@@ -2,7 +2,7 @@
  * CODE FILE   : stylesheet.css
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 june 2009
+ * Date        : 18 january 2011
  * Description : Stylesheet
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -112,6 +112,14 @@ TD.footer {
   background: #ffffff;
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
+}
+
+.infoBoxContentsRight {
+  /*** Inhoud boxes ***/
+  background: #ffffff;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 10px;
+  text-align: right;
 }
 
 .infoBoxNotice {

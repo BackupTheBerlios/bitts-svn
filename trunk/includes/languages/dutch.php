@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 january 2011
+ * Date        : 26 january 2011
  * Description : Dutch language file
  */
 
@@ -73,6 +73,7 @@ define('HEADER_TEXT_ADMINISTRATION_EMPLOYEES_ROLES', 'Beheer Medewerker-Rollen')
 define('HEADER_TEXT_ADMINISTRATION_UNITS', 'Beheer Eenheden');
 define('HEADER_TEXT_ADMINISTRATION_TARIFFS', 'Beheer Tarieven');
 define('HEADER_TEXT_ADMINISTRATION_TIMESHEETS', 'Beheer Timesheets');
+define('HEADER_TEXT_ADMINISTRATION_BENEFITS', 'Beheer Verlofkaarten');
 
 define('BOX_HEADING_MAINMENU', 'Menu');
 define('BOX_MAINMENU_HOME', 'Home');
@@ -84,6 +85,7 @@ define('BOX_MAINMENU_ADMINISTRATION_GENERAL', 'Algemeen');
 define('BOX_MAINMENU_ADMINISTRATION_PROFILES', 'Profielen');
 define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES', 'Medewerkers');
 define('BOX_MAINMENU_ADMINISTRATION_TIMESHEETS', 'Timesheets');
+define('BOX_MAINMENU_ADMINISTRATION_BENEFITS', 'Verlofkaarten');
 define('BOX_MAINMENU_ADMINISTRATION_SYSTEM', 'Systeem');
 define('BOX_MAINMENU_ADMINISTRATION_CUSTOMERS', 'Debiteuren');
 define('BOX_MAINMENU_ADMINISTRATION_BUSINESS_UNITS', 'Business Units');
@@ -95,7 +97,7 @@ define('BOX_MAINMENU_ADMINISTRATION_EMPLOYEES_ROLES', 'Medewerker-Rollen');
 define('BOX_MAINMENU_ADMINISTRATION_TARIFFS', 'Tarieven');
 
 define('BOX_HEADING_BENEFITS', 'Verlofsaldo');
-define('BOX_BENEFITS_CREDIT', 'Van vorig jaar :');
+define('BOX_BENEFITS_CREDIT', 'Vorig tegoed :');
 define('BOX_BENEFITS_GRANTED', 'Dit jaar :');
 define('BOX_BENEFITS_TOTAL', 'Totaal :');
 define('BOX_BENEFITS_USED', 'Gebruikt :');
@@ -418,6 +420,34 @@ define('TEXT_UNITS_LISTING_IS_EMPTY', 'Geen eenheden aanwezig');
 $UNIT_ERROR_LEVEL = array (0 => '',
                            1 => 'Naam ontbreekt',
                            2 => 'Verwijderen niet toegestaan, tarieven aanwezig');
+
+define('TEXT_BENEFITS', 'TEXT_BENEFITS');
+define('TEXT_BENEFITS_ROLE', 'Type');
+define('TEXT_BENEFITS_PROPOSAL', 'Voorstel');
+define('TEXT_BENEFITS_CREDIT', 'Vorig tegoed');
+define('TEXT_BENEFITS_GRANTED', 'Toegekend');
+define('TEXT_BENEFITS_TOTAL', 'Totaal');
+define('TEXT_BENEFITS_USED', 'Gebruikt');
+define('TEXT_BENEFITS_REMAINING', 'Restant');
+define('TEXT_BENEFITS_START_DATE', 'Start datum');
+define('TEXT_BENEFITS_END_DATE', 'Eind datum');
+define('TEXT_BENEFITS_COMMENT', 'Opmerkingen');
+define('TEXT_BENEFITS_LISTING_IS_EMPTY', 'Geen medewerker geselecteerd of geen verlofkaart(en) aanwezig');
+// Errorlevels  1..31 == severe error
+// errorlevels 32..63 == attention required
+$BENEFIT_ERROR_LEVEL = array (0  => '',
+                               1  => 'Rol ontbreekt',
+                               2  => 'Medewerker ontbreekt',
+                               3  => 'Start datum ontbreekt',
+                               4  => 'Datum onjuist',
+                               5  => 'Start datum voor project start datum',
+                               6  => 'Eind datum na project eind datum',
+                               7  => 'Duplicaten aangetroffen',
+                               8  => 'Tarieven aanwezig voor nieuwe start datum',
+                               9  => 'Activiteiten tussen oude en nieuwe start datum',
+                               10 => 'Tarieven aanwezig na nieuwe eind datum',
+                               11 => 'Activiteiten aanwezig tussen oude en nieuwe eind datum',
+                               12 => 'Verwijderen niet toegestaan, tarieven aanwezig');
 
 define('FOOTER_TEXT_BODY', 'Copyright &copy; ' . date('Y') . ' <a href="' . tep_href_link(FILENAME_DEFAULT) . '">' . COMPANY_NAME . '</a>');
 ?>
