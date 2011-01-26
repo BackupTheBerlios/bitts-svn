@@ -3,7 +3,7 @@
  * CODE FILE   : administration_benefits.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 25 january 2011
+ * Date        : 26 january 2011
  * Description : Benefits administration form
  *               Data validation sequence
  *               Storing of entered data
@@ -281,7 +281,8 @@
                           <table border="0" width="100%" cellspacing="0" cellpadding="2" class="entryListing">
                             <tr style="vertical-align:top">
                               <td class="entryListing-heading"><?php echo TEXT_BENEFITS_ROLE; ?></td>
-                              <td class="entryListing-heading"  style="text-align:right"><?php echo TEXT_BENEFITS_CREDIT . '<br>' . TEXT_BENEFITS_GRANTED; ?></td>
+                              <td class="entryListing-heading"  style="text-align:right"><?php echo TEXT_BENEFITS_CREDIT; ?></td>
+                              <td class="entryListing-heading"  style="text-align:right"><?php echo TEXT_BENEFITS_GRANTED; ?></td>
                               <td class="entryListing-heading"  style="text-align:right"><?php echo TEXT_BENEFITS_TOTAL; ?></td>
                               <td class="entryListing-heading"  style="text-align:right"><?php echo TEXT_BENEFITS_USED; ?></td>
                               <td class="entryListing-heading"  style="text-align:right"><?php echo TEXT_BENEFITS_REMAINING; ?></td>
@@ -294,7 +295,8 @@
                               for ($index = 0; $index < sizeof($_SESSION['benefit']->listing); $index++) { ?>
                                 <tr class="entryListing-<?php echo $odd_or_even; ?>" style="vertical-align:top">
                                   <td class="entryListing-data"><?php echo $_SESSION['benefit']->listing[$index]->role->name; ?></td>
-                                  <td class="entryListing-data"  style="text-align:right"><?php echo tep_number_db_to_user($_SESSION['benefit']->listing[$index]->credit, 2) . '<br>' . tep_number_db_to_user($_SESSION['benefit']->listing[$index]->granted, 2); ?></td>
+                                  <td class="entryListing-data"  style="text-align:right"><?php echo tep_number_db_to_user($_SESSION['benefit']->listing[$index]->credit, 2); ?></td>
+                                  <td class="entryListing-data"  style="text-align:right"><?php echo tep_number_db_to_user($_SESSION['benefit']->listing[$index]->granted, 2); ?></td>
                                   <td class="entryListing-data"  style="text-align:right"><?php echo tep_number_db_to_user($_SESSION['benefit']->listing[$index]->credit + $_SESSION['benefit']->listing[$index]->granted, 2); ?></td>
                                   <td class="entryListing-data"  style="text-align:right"><?php echo 'gebruikte hoeveelheid'; ?></td>
                                   <td class="entryListing-data"  style="text-align:right"><?php echo tep_number_db_to_user($_SESSION['benefit']->listing[$index]->credit + $_SESSION['benefit']->listing[$index]->granted, 2); ?></td>
@@ -314,7 +316,7 @@
                               }
                             } else { ?>
                               <tr class="entryListing-odd">
-                                <td class="entryListing-data" colspan="8"  style="text-align:center">
+                                <td class="entryListing-data" colspan="9"  style="text-align:center">
                                   <?php echo TEXT_BENEFITS_LISTING_IS_EMPTY; ?>
                                 </td>
                               </tr>
