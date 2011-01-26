@@ -3,7 +3,7 @@
  * CODE FILE   : database_tables.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 30 june 2009
+ * Date        : 05 january 2011
  * Description : Definition of the database table names used in the project
  * 
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -11,6 +11,7 @@
  */
 
   define('TABLE_ACTIVITIES', 'activities');
+  define('TABLE_BENEFITS', 'benefits');
   define('TABLE_BUSINESS_UNITS', 'business_units');
   define('TABLE_CATEGORIES', 'categories');
   define('TABLE_CONFIGURATION', 'configuration');
@@ -25,4 +26,6 @@
   define('TABLE_SESSIONS', 'sessions');
   define('TABLE_TARIFFS', 'tariffs');
   define('TABLE_TIMESHEETS', 'timesheets');
+
+  define('VIEW_BENEFITS', 'v_benefits');
 ?>
