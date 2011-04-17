@@ -3,7 +3,7 @@
  * CODE FILE   : html_output.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 05 july 2010
+ * Date        : 17 april 2011
  * Description : html output functions
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -67,20 +67,20 @@
 
   // The HTML href link wrapper function
   function tep_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true) {
-    global $request_type, $session_started, $SID;
+    global $session_started, $SID;
 
     if (!tep_not_null($page)) {
       die('</td></tr></table></td></tr></table><br><br><font color="#ff0000"><b>Error!</b></font><br><br><b>Unable to determine the page link!<br><br>');
     }
 
     if ($connection == 'NONSSL') {
-      $link = HTTP_SERVER . DIR_WS_APPLICATION;
-    } elseif ($connection == 'SSL') {
       if (ENABLE_SSL == true) {
         $link = HTTPS_SERVER . DIR_WS_APPLICATION;
       } else {
         $link = HTTP_SERVER . DIR_WS_APPLICATION;
       }
+    } elseif ($connection == 'SSL') {
+      $link = HTTPS_SERVER . DIR_WS_APPLICATION;
     } else {
       die('</td></tr></table></td></tr></table><br><br><font color="#ff0000"><b>Error!</b></font><br><br><b>Unable to determine connection method on a link!<br><br>Known methods: NONSSL SSL</b><br><br>');
     }
@@ -99,7 +99,7 @@
     if ( ($add_session_id == true) && ($session_started == true) && (SESSION_FORCE_COOKIE_USE == 'False') ) {
       if (tep_not_null($SID)) {
         $_sid = $SID;
-      } elseif ( ( ($request_type == 'NONSSL') && ($connection == 'SSL') && (ENABLE_SSL == true) ) || ( ($request_type == 'SSL') && ($connection == 'NONSSL') ) ) {
+      } elseif ( ( (getenv('HTTPS') != 'on') && ($connection == 'SSL') && (ENABLE_SSL == true) ) || ( (getenv('HTTPS') == 'on') && ($connection == 'NONSSL') ) ) {
         if (HTTP_COOKIE_DOMAIN != HTTPS_COOKIE_DOMAIN) {
           $_sid = tep_session_name() . '=' . tep_session_id();
         }
