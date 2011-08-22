@@ -3,7 +3,7 @@
  * CODE FILE   : administration_benefits.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 26 january 2011
+ * Date        : 08 february 2011
  * Description : Benefits administration form
  *               Data validation sequence
  *               Storing of entered data
@@ -219,7 +219,7 @@
   }
 
   // Create a new benefit object with id == 0 (default)
-  $_SESSION['benefit'] = new benefit(0, $_POST['employees_id']);
+  $_SESSION['adm_benefits'] = new benefit(0, $_POST['employees_id']);
 
   // header //
   require(DIR_WS_INCLUDES . 'header.php'); ?>
@@ -290,24 +290,24 @@
                               <td class="entryListing-heading" style="width:20px">&nbsp;</td>
                               <td class="entryListing-heading" style="width:20px">&nbsp;</td>
                             </tr>
-                            <?php if (tep_not_null($_POST['employees_id']) && !$_SESSION['benefit']->listing_empty) {
+                            <?php if (tep_not_null($_POST['employees_id']) && !$_SESSION['adm_benefits']->listing_empty) {
                               $odd_or_even = "odd";
-                              for ($index = 0; $index < sizeof($_SESSION['benefit']->listing); $index++) { ?>
+                              for ($index = 0; $index < sizeof($_SESSION['adm_benefits']->listing); $index++) { ?>
                                 <tr class="entryListing-<?php echo $odd_or_even; ?>" style="vertical-align:top">
-                                  <td class="entryListing-data"><?php echo $_SESSION['benefit']->listing[$index]->role->name; ?></td>
-                                  <td class="entryListing-data"  style="text-align:right"><?php echo tep_number_db_to_user($_SESSION['benefit']->listing[$index]->credit, 2); ?></td>
-                                  <td class="entryListing-data"  style="text-align:right"><?php echo tep_number_db_to_user($_SESSION['benefit']->listing[$index]->granted, 2); ?></td>
-                                  <td class="entryListing-data"  style="text-align:right"><?php echo tep_number_db_to_user($_SESSION['benefit']->listing[$index]->credit + $_SESSION['benefit']->listing[$index]->granted, 2); ?></td>
+                                  <td class="entryListing-data"><?php echo $_SESSION['adm_benefits']->listing[$index]->role->name; ?></td>
+                                  <td class="entryListing-data"  style="text-align:right"><?php echo tep_number_db_to_user($_SESSION['adm_benefits']->listing[$index]->credit, 2); ?></td>
+                                  <td class="entryListing-data"  style="text-align:right"><?php echo tep_number_db_to_user($_SESSION['adm_benefits']->listing[$index]->granted, 2); ?></td>
+                                  <td class="entryListing-data"  style="text-align:right"><?php echo tep_number_db_to_user($_SESSION['adm_benefits']->listing[$index]->credit + $_SESSION['adm_benefits']->listing[$index]->granted, 2); ?></td>
                                   <td class="entryListing-data"  style="text-align:right"><?php echo 'gebruikte hoeveelheid'; ?></td>
-                                  <td class="entryListing-data"  style="text-align:right"><?php echo tep_number_db_to_user($_SESSION['benefit']->listing[$index]->credit + $_SESSION['benefit']->listing[$index]->granted, 2); ?></td>
-                                  <td class="entryListing-data"><?php echo tep_strftime(DATE_FORMAT_SHORT, $_SESSION['benefit']->listing[$index]->start_date).'<br>'.($_SESSION['benefit']->listing[$index]->end_date!=0?tep_strftime(DATE_FORMAT_SHORT, $_SESSION['benefit']->listing[$index]->end_date):'&#8734;'); ?></td>
+                                  <td class="entryListing-data"  style="text-align:right"><?php echo tep_number_db_to_user($_SESSION['adm_benefits']->listing[$index]->credit + $_SESSION['adm_benefits']->listing[$index]->granted, 2); ?></td>
+                                  <td class="entryListing-data"><?php echo tep_strftime(DATE_FORMAT_SHORT, $_SESSION['adm_benefits']->listing[$index]->start_date).'<br>'.($_SESSION['adm_benefits']->listing[$index]->end_date!=0?tep_strftime(DATE_FORMAT_SHORT, $_SESSION['adm_benefits']->listing[$index]->end_date):'&#8734;'); ?></td>
                                   <td class="entryListing-data" style="width:20px;text-align:center">
-                                    <?php echo tep_draw_form('edit_entry', tep_href_link(FILENAME_ADMINISTRATION_BENEFITS)) . tep_create_parameters(array('action'=>'enter_data', 'benefits_id'=>$_SESSION['benefit']->listing[$index]->id, 'benefits_credit'=>$_SESSION['benefit']->listing[$index]->credit, 'benefits_granted'=>$_SESSION['benefit']->listing[$index]->granted, 'benefits_comment'=>$_SESSION['benefit']->listing[$index]->comment, 'roles_id'=>$_SESSION['benefit']->listing[$index]->role->id, 'benefits_start_date'=>$_SESSION['benefit']->listing[$index]->start_date, 'benefits_end_date'=>$_SESSION['benefit']->listing[$index]->end_date), array('mPath', 'employees_id'), 'hidden_field');
+                                    <?php echo tep_draw_form('edit_entry', tep_href_link(FILENAME_ADMINISTRATION_BENEFITS)) . tep_create_parameters(array('action'=>'enter_data', 'benefits_id'=>$_SESSION['adm_benefits']->listing[$index]->id, 'benefits_credit'=>$_SESSION['adm_benefits']->listing[$index]->credit, 'benefits_granted'=>$_SESSION['adm_benefits']->listing[$index]->granted, 'benefits_comment'=>$_SESSION['adm_benefits']->listing[$index]->comment, 'roles_id'=>$_SESSION['adm_benefits']->listing[$index]->role->id, 'benefits_start_date'=>$_SESSION['adm_benefits']->listing[$index]->start_date, 'benefits_end_date'=>$_SESSION['adm_benefits']->listing[$index]->end_date), array('mPath', 'employees_id'), 'hidden_field');
                                     echo tep_image_submit('edit.gif', TEXT_ENTRY_EDIT,'',DIR_WS_IMAGES);
                                     echo '</form>'; ?>
                                   </td>
                                   <td class="entryListing-data" style="width:20px;text-align:center">
-                                    <?php echo tep_draw_form('delete_entry', tep_href_link(FILENAME_ADMINISTRATION_BENEFITS)) . tep_create_parameters(array('action'=>'delete_entry', 'benefits_id'=>$_SESSION['benefit']->listing[$index]->id, 'benefits_credit'=>$_SESSION['benefit']->listing[$index]->credit, 'benefits_granted'=>$_SESSION['benefit']->listing[$index]->granted, 'benefits_comment'=>$_SESSION['benefit']->listing[$index]->comment, 'roles_id'=>$_SESSION['benefit']->listing[$index]->role->id, 'benefits_start_date'=>$_SESSION['benefit']->listing[$index]->start_date, 'benefits_end_date'=>$_SESSION['benefit']->listing[$index]->end_date), array('mPath', 'employees_id'), 'hidden_field');
+                                    <?php echo tep_draw_form('delete_entry', tep_href_link(FILENAME_ADMINISTRATION_BENEFITS)) . tep_create_parameters(array('action'=>'delete_entry', 'benefits_id'=>$_SESSION['adm_benefits']->listing[$index]->id, 'benefits_credit'=>$_SESSION['adm_benefits']->listing[$index]->credit, 'benefits_granted'=>$_SESSION['adm_benefits']->listing[$index]->granted, 'benefits_comment'=>$_SESSION['adm_benefits']->listing[$index]->comment, 'roles_id'=>$_SESSION['adm_benefits']->listing[$index]->role->id, 'benefits_start_date'=>$_SESSION['adm_benefits']->listing[$index]->start_date, 'benefits_end_date'=>$_SESSION['adm_benefits']->listing[$index]->end_date), array('mPath', 'employees_id'), 'hidden_field');
                                     echo tep_image_submit('delete.gif', TEXT_ENTRY_DELETE,'',DIR_WS_IMAGES);
                                     echo '</form>'; ?>
                                   </td>

@@ -3,14 +3,14 @@
  * CLASS FILE  : project.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 june 2009
+ * Date        : 19 july 2011
  * Description : Project class
  */
 
   class project {
     private $id, $business_unit, $customer, $name, $description, $customers_contact_name, $customers_reference, $start_date, $end_date, $calculated_hours, $calculated_hours_period, $roles, $listing;
 
-    public function __construct($id = 0, $role_object = null) {
+    public function __construct($id = 0, $role_object = null, $show_history = false) {
       $database = $_SESSION['database'];
       $this->id = $id;
       $this->roles = array();
@@ -19,7 +19,7 @@
       if ($id != 0) {
         $id = $database->prepare_input($id);
 
-        $projects_query = $database->query("select projects_name, projects_description, projects_customers_contact_name, projects_customers_reference, projects_start_date, projects_end_date, projects_calculated_hours, projects_calculated_hours_period, business_units_id, customers_id from " . TABLE_PROJECTS . " where projects_id = '" . (int)$id . "'");
+        $projects_query = $database->query("SELECT projects_name, projects_description, projects_customers_contact_name, projects_customers_reference, projects_start_date, projects_end_date, projects_calculated_hours, projects_calculated_hours_period, business_units_id, customers_id FROM " . TABLE_PROJECTS . " WHERE projects_id = '" . (int)$id . "';");
         $projects_result = $database->fetch_array($projects_query);
 
         if (tep_not_null($projects_result)) {
@@ -46,7 +46,7 @@
         }
       } else {
         // We probably created an empty project object to retrieve the entire project listing
-        $this->listing = $this->get_array();
+        $this->listing = $this->get_array($show_history);
       }
     }
 
@@ -97,12 +97,17 @@
         $this->customer = new customer($customers_id);
     }
 
-    private function get_array() {
+    private function get_array($show_history = false) {
       $database = $_SESSION['database'];
       $projects_array = array();
 
       $index = 0;
-      $projects_query = $database->query("select projects_id from " . TABLE_PROJECTS . " order by projects_name");
+      $projects_sql = "SELECT projects_id FROM " . TABLE_PROJECTS;
+      if (!$show_history || $show_history == 'false') {
+        $projects_sql .= " WHERE projects_end_date >= CURDATE()";
+      }
+      $projects_sql .= " ORDER BY projects_name;";
+      $projects_query = $database->query($projects_sql);
       while ($projects_result = $database->fetch_array($projects_query)) {
         $projects_array[$index] = new project($projects_result['projects_id'], 'dummy');
         $index++;

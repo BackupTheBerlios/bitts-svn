@@ -3,7 +3,7 @@
  * CODE FILE   : administration_projects.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 01 july 2009
+ * Date        : 19 aug 2011
  * Description : Project administration form
  *               Data validation sequence
  *               Storing of entered data (via project object)
@@ -271,7 +271,7 @@
 
   // Reload the project object in order to
   // update the project listing below
-  $_SESSION['project'] = new project();
+  $_SESSION['project'] = new project(0, null, $_POST['show_history']);
 
   // header //
   require(DIR_WS_INCLUDES . 'header.php'); ?>
@@ -307,7 +307,25 @@
             <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
           </tr>
           <tr>
-            <td>
+            <td align="center">
+              <table border="0" cellspacing="0" cellpadding="2" class="item_entry">
+                <tr>
+                  <td class="item_entry">
+                    <?php echo TEXT_PROJECTS_SHOW_HISTORY; ?>
+                  </td>
+                  <td class="item_entry" style="text-align:left">
+                    <?php echo tep_draw_checkbox_field('show_history', 'true', ($_POST['show_history'] == 'true'), 'onClick="refreshProjectListing(' . $_POST['mPath'] . ', this.checked);"'); ?>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
+          </tr>
+          <tr>
+            <td id="projectEntries">
+              <!-- ********** projectEntries ********** //-->
               <table border="0" width="100%" cellspacing="0" cellpadding="2" class="entryListing">
                 <tr valign="top">
                   <td class="entryListing-heading"><?php echo TEXT_PROJECTS_NAME; ?></td>
@@ -333,11 +351,13 @@
                       <td class="entryListing-data"><?php echo $_SESSION['project']->listing[$index]->customer->name; ?></td>
                       <td class="entryListing-data" style="width:20px;text-align:center">
                         <?php echo tep_draw_form('edit_entry', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array('action'=>'enter_data', 'projects_id'=>$_SESSION['project']->listing[$index]->id, 'projects_name'=>$_SESSION['project']->listing[$index]->name, 'projects_description'=>$_SESSION['project']->listing[$index]->description, 'projects_customers_contact_name'=>$_SESSION['project']->listing[$index]->customers_contact_name, 'projects_customers_reference'=>$_SESSION['project']->listing[$index]->customers_reference, 'projects_start_date'=>$_SESSION['project']->listing[$index]->start_date, 'projects_end_date'=>$_SESSION['project']->listing[$index]->end_date, 'projects_calculated_hours'=>$_SESSION['project']->listing[$index]->calculated_hours, 'projects_calculated_hours_period'=>$_SESSION['project']->listing[$index]->calculated_hours_period, 'projects_business_units_id'=>$_SESSION['project']->listing[$index]->business_unit->id, 'projects_customers_id'=>$_SESSION['project']->listing[$index]->customer->id), array('mPath'), 'hidden_field');
+                        echo tep_draw_hidden_field('show_history', $_POST['show_history']);
                         echo tep_image_submit('edit.gif', TEXT_ENTRY_EDIT,'',DIR_WS_IMAGES);
                         echo '</form>'; ?>
                       </td>
                       <td class="entryListing-data" style="width:20px;text-align:center">
                         <?php echo tep_draw_form('delete_entry', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array('action'=>'delete_entry', 'projects_id'=>$_SESSION['project']->listing[$index]->id, 'projects_name'=>$_SESSION['project']->listing[$index]->name, 'projects_description'=>$_SESSION['project']->listing[$index]->description, 'projects_customers_contact_name'=>$_SESSION['project']->listing[$index]->customers_contact_name, 'projects_customers_reference'=>$_SESSION['project']->listing[$index]->customers_reference, 'projects_start_date'=>$_SESSION['project']->listing[$index]->start_date, 'projects_end_date'=>$_SESSION['project']->listing[$index]->end_date, 'projects_calculated_hours'=>$_SESSION['project']->listing[$index]->calculated_hours, 'projects_calculated_hours_period'=>$_SESSION['project']->listing[$index]->calculated_hours_period, 'projects_business_units_id'=>$_SESSION['project']->listing[$index]->business_unit->id, 'projects_customers_id'=>$_SESSION['project']->listing[$index]->customer->id), array('mPath'), 'hidden_field');
+                        echo tep_draw_hidden_field('show_history', $_POST['show_history']);
                         echo tep_image_submit('delete.gif', TEXT_ENTRY_DELETE,'',DIR_WS_IMAGES);
                         echo '</form>'; ?>
                       </td>
@@ -352,6 +372,7 @@
                   </tr>
                 <?php } ?>
               </table>
+              <!-- ********** projectEntries ********** //-->
             </td>
           </tr>
           <tr>
@@ -362,6 +383,18 @@
       <!-- body_text_eof //-->
     </tr>
   </table>
+  <script type="text/javascript" src="<?php echo DIR_WS_JAVASCRIPT; ?>jah.js"></script>
+  <script type="text/javascript">
+    function refreshProjectListing(mPath, showHistory) {
+      var arr = new Array();
+      arr = document.getElementsByName('show_history');
+      for (var i = 0; i < arr.length; i++) {
+        var obj = document.getElementsByName('show_history').item(i);
+        obj.value = (showHistory == true);
+      }
+      jah('ajax_administration_projects.php?mPath=' + mPath + '&showhistory=' + showHistory, 'projectEntries');
+    }
+  </script>
 <!-- body_eof //-->
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>

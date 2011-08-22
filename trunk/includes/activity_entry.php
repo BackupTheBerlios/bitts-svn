@@ -197,7 +197,8 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
                   <td width="50%" class="item_entry"><?php echo tep_draw_input_field('activity_ticket_number', '', 'size="1" maxlength="16" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?></td>
                   <td width="22px" class="item_entry">
                     <?php if (ENABLE_TICKET_DATABASE_LOOKUPS && ($_POST['action']=='enter_data'||$_POST['action']=='save_data')) {
-                      echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_lookup.gif');
+                      echo tep_image_button('button_lookup.gif', TEXT_ACTIVITY_TICKETNUMBER_LOOKUP, 'onClick="fetchTicketDescription(document.getElementsByName(\'activity_ticket_number\').item(0).value);"');
+                      //echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_lookup.gif', '', '', '', 'onClick="fetchTicketDescription(document.getElementsByName(\'activity_ticket_number\').item(0).value);"');
                     } else {
                       echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_lookup_disabled.gif');
                     } ?>
@@ -212,7 +213,7 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
             </td>
             <td class="item_entry">
               <?php //echo tep_draw_input_field('activity_comment', '', 'size="1" maxlength="256" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled'));
-                echo tep_draw_textarea_field('activity_comment', 'off', 64, 4, '', 'onKeyUp="maxLength(this, 256)" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?>
+                echo tep_draw_textarea_field('activity_comment', 'on', 64, 4, $_POST['activity_comment'], 'id="activity_comment" style="width: 100%; resize: none;" onKeyUp="maxLength(this, 256)"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?>
             </td>
           </tr>
           <tr>

@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 26 january 2011
+ * Date        : 18 july 2011
  * Description : Dutch language file
  */
 
@@ -157,6 +157,7 @@ define('TEXT_PROJECTS_QUESTION_ER1', 'Start datum medewerker-rollen wijzigen');
 define('TEXT_PROJECTS_QUESTION_T1', 'Start datum tarieven wijzigen');
 define('TEXT_PROJECTS_QUESTION_ER2', 'Eind datum medewerker-rollen wijzigen');
 define('TEXT_PROJECTS_QUESTION_T2', 'Eind datum tarieven wijzigen');
+define('TEXT_PROJECTS_SHOW_HISTORY', 'Toon historie');
 define('TEXT_PROJECTS_LISTING_IS_EMPTY', 'Geen projecten aanwezig');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
@@ -246,6 +247,7 @@ define('TEXT_ACTIVITY_UNIT', 'Eenheid');
 define('TEXT_ACTIVITY_TRAVELDISTANCE', 'Reisafstand (km)');
 define('TEXT_ACTIVITY_EXPENSES', 'Onkosten (&euro;)');
 define('TEXT_ACTIVITY_TICKETNUMBER', 'Ticket nr.');
+define('TEXT_ACTIVITY_TICKETNUMBER_LOOKUP', 'Ticket omschrijving ophalen');
 define('TEXT_ACTIVITY_COMMENT', 'Opmerkingen');
 define('TEXT_ACTIVITY_COPY', 'Laatste activiteit van vorige (werk-)dag kopi&euml;ren');
 // Errorlevels  1..31 == severe error

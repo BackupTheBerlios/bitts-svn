@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 26 january 2011
+ * Date        : 18 july 2011
  * Description : English language file
  */
 
@@ -157,6 +157,7 @@ define('TEXT_PROJECTS_QUESTION_ER1', 'Change employees-roles start date');
 define('TEXT_PROJECTS_QUESTION_T1', 'Change tariffs start date');
 define('TEXT_PROJECTS_QUESTION_ER2', 'Change employees-roles end date');
 define('TEXT_PROJECTS_QUESTION_T2', 'Change tariffs end date');
+define('TEXT_PROJECTS_SHOW_HISTORY', 'Show history');
 define('TEXT_PROJECTS_LISTING_IS_EMPTY', 'No projects available');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
@@ -246,6 +247,7 @@ define('TEXT_ACTIVITY_UNIT', 'Unit');
 define('TEXT_ACTIVITY_TRAVELDISTANCE', 'Travel dist. (km)');
 define('TEXT_ACTIVITY_EXPENSES', 'Expenses (&euro;)');
 define('TEXT_ACTIVITY_TICKETNUMBER', 'Ticket nr.');
+define('TEXT_ACTIVITY_TICKETNUMBER_LOOKUP', 'Get ticket description');
 define('TEXT_ACTIVITY_COMMENT', 'Remarks');
 define('TEXT_ACTIVITY_COPY', 'Copy last activity of previous (work-)day');
 // Errorlevels  1..31 == severe error

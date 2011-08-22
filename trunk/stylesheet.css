@@ -180,11 +180,13 @@ TABLE.projectListing, TABLE.entryListing, TABLE.calendar , TABLE.item_entry, TAB
   background: #b6b7cb;
   color: #FFFFFF;
   font-weight: bold;
+  vertical-align: top;
 }
 
 TD.projectListing-data, TD.entryListing-data {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
+  vertical-align: top;
 }
 
 TD.calendar-weekday {

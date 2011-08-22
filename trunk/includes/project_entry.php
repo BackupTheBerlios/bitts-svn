@@ -3,7 +3,7 @@
  * CODE FILE   : project_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 june 2009
+ * Date        : 19 aug 2011
  * Description : Project entry fields
  */
 ?>
@@ -21,10 +21,11 @@
           <?php }
           if ($_POST['action']=='enter_data' || $_POST['action']=='save_data') {
             echo tep_draw_form('project_entry', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array('action'=>'save_data'), array('mPath', 'projects_id', 'projects_name', 'projects_description', 'projects_customers_contact_name', 'projects_customers_reference', 'projects_start_date', 'projects_start_date_display', 'projects_end_date', 'projects_end_date_display', 'projects_calculated_hours', 'projects_calculated_hours_period', 'projects_business_units_id', 'projects_customers_id', 'question_er1_answer', 'question_t1_answer', 'question_er2_answer', 'question_t2_answer'), 'hidden_field');
+            echo tep_draw_hidden_field('show_history', $_POST['show_history']);
           } ?>
           <tr>
             <td class="item_entry">
-              <?php echo TEXT_PROJECTS_NAME; ?>
+            <?php echo TEXT_PROJECTS_NAME; ?>
             </td>
             <td class="item_entry" width="150">
               <?php echo tep_draw_input_field('projects_name', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
@@ -156,6 +157,7 @@
             <td align="left" class="item_entry">
               <?php if ($_POST['action']!='enter_data'&&$_POST['action']!='save_data'&&$_POST['action']!='delete_entry') {
                 echo tep_draw_form('fnew', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array('action'=>'enter_data', 'projects_calculated_hours_period'=>'E'), array('mPath'), 'hidden_field');
+                echo tep_draw_hidden_field('show_history', $_POST['show_history']);
                 echo tep_image_submit('button_new.gif', TEXT_ENTRY_NEW, 'style="vertical-align:middle"');
                 echo '</form>';
               } else {
@@ -169,6 +171,7 @@
               } else if ($_POST['action']=='delete_entry') {
                 echo TEXT_ENTRY_DELETE_QUESTION . '&nbsp;';
                 echo tep_draw_form('delete_entry_confirm', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array('action'=>'delete_entry_confirmed'), array('mPath', 'projects_id'), 'hidden_field');
+                echo tep_draw_hidden_field('show_history', $_POST['show_history']);
                 echo tep_image_submit('button_ok.gif', TEXT_ENTRY_DELETE_OK, 'style="vertical-align:middle"');
                 echo '</form>';
               } else {
@@ -177,6 +180,7 @@
               echo '&nbsp;';
               if ($_POST['action']=='enter_data' || $_POST['action']=='save_data' || $_POST['action']=='delete_entry') {
                 echo tep_draw_form('fcancel', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array(), array('mPath'), 'hidden_field');
+                echo tep_draw_hidden_field('show_history', $_POST['show_history']);
                 echo tep_image_submit('button_cancel.gif', TEXT_ENTRY_CANCEL, 'style="vertical-align:middle"');
                 echo '</form>';
               } else {
