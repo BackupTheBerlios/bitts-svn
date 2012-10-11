@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 03 july 2009
+ * Date        : 22 aug 2011
  * Description : Data gathering and reporting functions
  */
 
@@ -226,11 +226,72 @@
     case 'report_consolidated_projects_per_employee':
       $database = $_SESSION['database'];
       // *** Create pdf object ***
-      $pdf = new PDF('L'); // All the others should be landscape
-      $pdf->SetTitle(REPORT_NAME_CONSOLIDATED_PROJECTS);
+      $pdf = new PDF('L'); // The report should be landscape
+      $pdf->SetTitle(REPORT_NAME_CONSOLIDATED_PROJECTS_PER_EMPLOYEE);
       $pdf->SetAuthor(TITLE);
       $pdf->AddPage();
-      // Contents have to be determined
+
+      $periodstartdate = $database->prepare_input(tep_periodstartdate($_POST['period']));
+      $employees_query_string = 'SELECT ts.timesheets_start_date, ts.timesheets_end_date, cus.customers_id, cus.customers_name, bu.business_units_image, bu.business_units_image_position, pr.projects_id, pr.projects_name, rl.roles_id, rl.roles_name, rl.roles_mandatory_ticket_entry, act.activities_date, emp.employees_id, emp.employees_fullname, act.activities_amount, units.units_id, units.units_name, tar.tariffs_amount, act.activities_travel_distance, act.activities_expenses, act.activities_ticket_number, act.activities_expenses + (act.activities_amount * tar.tariffs_amount) AS total, act.activities_comment ' .
+                                'FROM ' . TABLE_TIMESHEETS . ' AS ts ' .
+                                'INNER JOIN (' . TABLE_EMPLOYEES . ' AS emp, ' . TABLE_ACTIVITIES . ' AS act, ' . TABLE_UNITS . ', ' . TABLE_TARIFFS . ' AS tar, ' . TABLE_EMPLOYEES_ROLES . ' AS er, ' . TABLE_ROLES . ' AS rl, ' . TABLE_PROJECTS . ' AS pr, ' . TABLE_CUSTOMERS . ' AS cus, ' . TABLE_BUSINESS_UNITS . ' AS bu) ' .
+                                'ON (ts.employees_id = emp.employees_id ' .
+                                'AND act.timesheets_id = ts.timesheets_id ' .
+                                'AND act.tariffs_id = tar.tariffs_id ' .
+                                'AND units.units_id = tar.units_id ' .
+                                'AND er.employees_roles_id = tar.employees_roles_id ' .
+                                'AND rl.roles_id = er.roles_id ' .
+                                'AND pr.projects_id = rl.projects_id ' .
+                                'AND cus.customers_id = pr.customers_id ' .
+                                'AND bu.business_units_id = pr.business_units_id) ' .
+                                'WHERE ts.timesheets_start_date = "' . $periodstartdate . '" ' .
+                                'ORDER BY emp.employees_id, act.activities_date, cus.customers_id, pr.projects_id, rl.roles_id, units.units_id';
+      $employees_query = $database->query($employees_query_string);
+      $employees_array = array();
+
+      $employees_id = '';
+      $table_header_set = false;
+
+      while ($employees_result = $database->fetch_array($employees_query)) {
+        if ($employees_id != $employees_result['employees_id']) {
+          $employees_id = $employees_result['employees_id'];
+          if ($table_header_set) {
+            // A previous table exists, create a footer for that one
+            $pdf->ConsolidatedProjectsTableFooter($total_amount, $total_value, $total_travel_distance, $total_expenses);
+            $pdf->AddPage();
+          }
+          // Create a new Employee header
+          $pdf->ConsolidatedProjectsHeader(tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $employees_result['timesheets_start_date'])) . ' - ' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $employees_result['timesheets_end_date'])),
+                                           '(' . $employees_result['employees_id'] . ') ' . $employees_result['employees_fullname']);
+          // Create a new table header
+          $pdf->ConsolidatedProjectsTableHeader();
+          $table_header_set = true;
+          $total_amount = 0.00;
+          $total_value = 0.00;
+          $total_travel_distance = 0;
+          $total_expenses = 0.00;
+        }
+        // And we're off creating the table contents
+        $pdf->ConsolidatedProjectsTableContents(tep_datetouts('%Y-%m-%d', $employees_result['activities_date']),
+                                                              $employees_result['projects_name'],
+                                                              $employees_result['roles_name'],
+                                                              $employees_result['activities_amount'],
+                                                              $employees_result['units_name'],
+                                                              $employees_result['tariffs_amount'],
+                                                              $employees_result['total'],
+                                                              $employees_result['activities_travel_distance'],
+                                                              $employees_result['activities_expenses'],
+                                                              $employees_result['activities_ticket_number'],
+                                                              $employees_result['activities_comment']);
+        $total_amount += $employees_result['activities_amount'];
+        $total_value += $employees_result['total'];
+        $total_travel_distance += $employees_result['activities_travel_distance'];
+        $total_expenses += $employees_result['activities_expenses'];
+      }
+      if ($table_header_set) {
+        // Create a footer for the last table
+        $pdf->ConsolidatedProjectsTableFooter($total_amount, $total_value, $total_travel_distance, $total_expenses);
+      }
       break;
     default:
       // *** Create pdf object ***

@@ -3,7 +3,7 @@
  * CLASS FILE  : pdf.php
  * Project     : BitTS - BART it TimeSheet
  * Auteur(s)   : Erwin Beukhof
- * Datum       : 03 july 2009
+ * Datum       : 22 aug 2011
  * Beschrijving: FPDF wrapper class with pre-formatting
  */
 
@@ -144,9 +144,9 @@
         $this->Cell(22, 5, tep_number_db_to_user($total_value, 2), 0, 0, 'R');
       }
       if ($this->show_comment) {
-        $this->Cell(0, 5, $comment);
+        $this->MultiCell(0, 5, $comment);
       }
-      $this->Ln();
+      //$this->Ln();
     }
 
     public function InvoiceTableFooter($total_amount, $total_travel_distance = 0, $total_expenses = 0.00, $total_value = 0.00) {
@@ -182,7 +182,7 @@
       $signature_height = 41; // Keep a margin of 8
       $x_pos = $this->w - $this->rMargin - $signature_width;
       // Determine if the signature cells fit on the page
-      if (($this->h - ($this->CurOrientation=='P'?$this->x:$this->y) - $this->bMargin) < $signature_height) {
+      if (($this->h - ($this->CurOrientation=='P'?$this->y:$this->x) - $this->bMargin) < $signature_height) {
         $this->AddPage();
         // Refer to previous page
       }
@@ -197,6 +197,141 @@
       $this->Ln();
       $this->SetFont('Arial','',6);
       $this->Cell(0, 7, REPORT_TEXT_FOOTER_ACKNOWLEDGE, 0, 1, 'C');
+    }
+
+    public function ConsolidatedProjectsHeader($period, $employee_name) {
+      $this->SetDrawColor(0, 0, 0);
+      $this->SetTextColor(0, 0, 0);
+      $this->SetLineWidth(.3);
+      $this->SetFont('Arial', '', 12);
+      $this->Cell(30, 6, REPORT_TEXT_EMPLOYEE_NAME, 0, 0, 'L');
+      $this->Cell(50, 6, $employee_name, 0, 0, 'L');
+      $this->Ln();
+      $this->Cell(30, 6, REPORT_TEXT_PERIOD, 0, 0, 'L');
+      $this->Cell(50, 6, $period, 0, 0, 'L');
+      $this->Ln();
+      $this->Ln(6);
+    }
+
+    public function ConsolidatedProjectsTableHeader($show_tariff = true, $show_travel_distance = true, $show_expenses = true, $show_ticket_number = true, $show_comment = true) {
+      $this->show_tariff = $show_tariff;
+      $this->show_travel_distance = $show_travel_distance;
+      $this->show_expenses = $show_expenses;
+      $this->show_ticket_number = $show_ticket_number;
+      $this->show_comment = $show_comment;
+      $this->SetFont('Arial', 'B', 10);
+      $this->SetFillColor(191, 191, 191);
+      $tempX = $this->GetX();
+      $tempY = $this->GetY();
+      $this->MultiCell(20, 5, REPORT_TABLE_HEADER_DATE . "\n ", 'LR', 'C', true);
+      $tempX += 20;
+
+      $this->SetXY($tempX, $tempY);
+      $this->MultiCell(50, 5, REPORT_TABLE_HEADER_PROJECT_NAME . "\n" . REPORT_TABLE_HEADER_ROLE_NAME, 'LR', 'C', true);
+      $tempX += 50;
+
+      $this->SetXY($tempX, $tempY);
+      $this->MultiCell(15, 5, REPORT_TABLE_HEADER_ACTIVITY_AMOUNT . "\n ", 'LR', 'C', true);
+      $tempX += 15;
+
+      $this->SetXY($tempX, $tempY);
+      $this->MultiCell(39, 5, REPORT_TABLE_HEADER_UNIT_NAME . "\n ", 'LR', 'C', true);
+      $tempX += 39;
+
+      if ($this->show_tariff) {
+        $this->SetXY($tempX, $tempY);
+        $this->MultiCell(15, 5, REPORT_TABLE_HEADER_TARIFF . "\n ", 'L', 'C', true);
+        $tempX += 15;
+        $this->SetXY($tempX, $tempY);
+        $this->MultiCell(22, 5, REPORT_TABLE_HEADER_TOTAL . "\n ", 'L', 'C', true);
+        $tempX += 22;
+      }
+      if ($this->show_travel_distance) {
+        $this->SetXY($tempX, $tempY);
+        $this->MultiCell(15, 5, REPORT_TABLE_HEADER_TRAVEL_DISTANCE . "\n ", 'LR', 'C', true);
+        $tempX += 15;
+      }
+      if ($this->show_expenses) {
+        $this->SetXY($tempX, $tempY);
+        $this->MultiCell(22, 5, REPORT_TABLE_HEADER_EXPENSES . "\n ", 'LR', 'C', true);
+        $tempX += 22;
+      }
+      if ($this->show_ticket_number) {
+        $this->SetXY($tempX, $tempY);
+        $this->MultiCell(22, 5, REPORT_TABLE_HEADER_TICKET_NUMBER . "\n ", 'LR', 'C', true);
+        $tempX += 22;
+      }
+      if ($this->show_comment) {
+        $this->SetXY($tempX, $tempY);
+        $this->MultiCell(0, 5, REPORT_TABLE_HEADER_COMMENT . "\n ", 'LR', 'C', true);
+      }
+    }
+
+    public function ConsolidatedProjectsTableContents($date, $project_name, $role_name, $activity_amount, $units_name, $tariff = 0.00, $total_value = 0.00, $travel_distance = 0, $expenses = 0.00, $ticket_number = '', $comment = '') {
+      $this->SetFont('Arial', '', 10);
+      $this->Cell(20, 5, tep_strftime(DATE_FORMAT_SHORT, $date), 0, 0, 'C');
+
+      $tempX = $this->GetX();
+      $tempY = $this->GetY();
+      $this->MultiCell(50, 5, $project_name . "\n" . $role_name, 0, 'L');
+      $tempX += 50;
+      $tempYMax = $this->GetY();
+
+      $this->SetXY($tempX, $tempY);
+      $this->Cell(15, 5, tep_number_db_to_user($activity_amount, 2), 0, 0, 'R');
+      $this->MultiCell(39, 5, $units_name, 0, 'L');
+      $tempX += 54;
+      if ($this->GetY() > $tempYMax) {
+        $tempYMax = $this->GetY();
+      }
+      $this->SetXY($tempX, $tempY);
+
+      if ($this->show_tariff) {
+        $this->Cell(15, 5, tep_number_db_to_user($tariff, 2), 0, 0, 'R');
+        $this->Cell(22, 5, tep_number_db_to_user($total_value, 2), 0, 0, 'R');
+      }
+      if ($this->show_travel_distance) {
+        $this->Cell(15, 5, $travel_distance, 0, 0, 'R');
+      }
+      if ($this->show_expenses) {
+        $this->Cell(22, 5, tep_number_db_to_user($expenses, 2), 0, 0, 'R');
+      }
+      if ($this->show_ticket_number) {
+        $this->Cell(22, 5, $ticket_number, 0, 0, 'C');
+      }
+      if ($this->show_comment) {
+        $this->MultiCell(0, 5, $comment);
+      }
+      if ($this->GetY() < $tempYMax) {
+        $this->SetY($tempYMax);
+      }
+      //$this->Ln();
+    }
+
+    public function ConsolidatedProjectsTableFooter($total_amount = 0.00, $total_value = 0.00, $total_travel_distance = 0, $total_expenses = 0.00) {
+      $this->SetLineWidth(.3);
+      $this->SetFont('Arial', 'B', 10);
+      $tempX = $this->GetX() + 70;
+      $tempY = $this->GetY();
+      $this->SetXY($tempX, $tempY);
+      $this->Cell(15, 5, tep_number_db_to_user($total_amount, 2), 'T', 0, 'R');
+      $tempX += 54;
+      if ($this->show_tariff) {
+        $tempX += 15;
+        $this->SetXY($tempX, $tempY);
+        $this->Cell(22, 5, tep_number_db_to_user($total_value, 2), 'T', 0, 'R');
+        $tempX += 22;
+      }
+      if ($this->show_travel_distance) {
+        $this->SetXY($tempX, $tempY);
+        $this->Cell(15, 5, $total_travel_distance, 'T', 0, 'R');
+        $tempX += 15;
+      }
+      if ($this->show_expenses) {
+        $this->SetXY($tempX, $tempY);
+        $this->Cell(22, 5, tep_number_db_to_user($total_expenses, 2), 'T', 0, 'R');
+      }
+      $this->Ln();
     }
 
     public function ChapterTitle($number, $label) {

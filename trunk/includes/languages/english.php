@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 july 2011
+ * Date        : 23 aug 2011
  * Description : English language file
  */
 
@@ -60,6 +60,7 @@ define('HEADER_TEXT_LOGIN', 'Log in');
 define('HEADER_TEXT_LOGOUT', 'Log out');
 define('HEADER_TEXT_TIMEREGISTRATION', 'Time registration');
 define('HEADER_TEXT_TIMEREGISTRATION_CALENDAR', 'Calendar');
+define('HEADER_TEXT_PUNCH_CLOCK', 'Punck Clock');
 define('HEADER_TEXT_ANALYSIS', 'Reports');
 define('HEADER_TEXT_ADMINISTRATION', 'Administration');
 define('HEADER_TEXT_ADMINISTRATION_CUSTOMERS', 'Administration Customers');
@@ -276,6 +277,13 @@ define('TEXT_ACTIVITY_ENTRY_SELECTED_DATE', 'Selected date: ');
 define('TEXT_ACTIVITY_ENTRY_NO_DATE_SELECTED', 'No date selected');
 define('TEXT_ACTIVITY_ENTRY_SELECT', 'Select');
 
+define('TEXT_PUNCH_CLOCK_START', 'Start');
+define('TEXT_PUNCH_CLOCK_STOP', 'Stop');
+define('TEXT_PUNCH_CLOCK_TIME', 'Time');
+define('TEXT_PUNCH_CLOCK_ACTIVITY', 'Activity');
+define('TEXT_PUNCH_CLOCK_IS_EMPTY', 'No entries found');
+define('TEXT_PUNCH_CLOCK_TOTAL', 'TOTAL');
+
 define('TEXT_ANALYSIS_BACK', 'Period back');
 define('TEXT_ANALYSIS_PERIOD', 'Period : ');
 define('TEXT_ANALYSIS_FORWARD', 'Period forward');
@@ -321,7 +329,10 @@ define('REPORT_CHECKBOX_SHOW_SIGNATURE', 'Show signature fields');
 
 define('REPORT_TABLE_HEADER_DATE', 'Date');
 define('REPORT_TABLE_HEADER_EMPLOYEE_NAME', 'Employee');
+define('REPORT_TABLE_HEADER_PROJECT_NAME', 'Project');
+define('REPORT_TABLE_HEADER_ROLE_NAME', 'Role');
 define('REPORT_TABLE_HEADER_ACTIVITY_AMOUNT', 'Amount');
+define('REPORT_TABLE_HEADER_UNIT_NAME', 'Unit');
 define('REPORT_TABLE_HEADER_IS_TARIFF', ' a ');
 define('REPORT_TABLE_HEADER_TARIFF', 'Tariff');
 define('REPORT_TABLE_HEADER_TRAVEL_DISTANCE', 'km');

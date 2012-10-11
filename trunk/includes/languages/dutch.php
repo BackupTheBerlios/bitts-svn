@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 july 2011
+ * Date        : 23 aug 2011
  * Description : Dutch language file
  */
 
@@ -60,6 +60,7 @@ define('HEADER_TEXT_LOGIN', 'Inloggen');
 define('HEADER_TEXT_LOGOUT', 'Uitloggen');
 define('HEADER_TEXT_TIMEREGISTRATION', 'Tijdregistratie');
 define('HEADER_TEXT_TIMEREGISTRATION_CALENDAR', 'Kalender');
+define('HEADER_TEXT_PUNCH_CLOCK', 'Prikklok');
 define('HEADER_TEXT_ANALYSIS', 'Rapportage');
 define('HEADER_TEXT_ADMINISTRATION', 'Beheer');
 define('HEADER_TEXT_ADMINISTRATION_CUSTOMERS', 'Beheer Debiteuren');
@@ -276,6 +277,13 @@ define('TEXT_ACTIVITY_ENTRY_SELECTED_DATE', 'Geselecteerde datum: ');
 define('TEXT_ACTIVITY_ENTRY_NO_DATE_SELECTED', 'Geen datum geselecteerd');
 define('TEXT_ACTIVITY_ENTRY_SELECT', 'Selecteer');
 
+define('TEXT_PUNCH_CLOCK_START', 'Start');
+define('TEXT_PUNCH_CLOCK_STOP', 'Stop');
+define('TEXT_PUNCH_CLOCK_TIME', 'Tijd');
+define('TEXT_PUNCH_CLOCK_ACTIVITY', 'Activiteit');
+define('TEXT_PUNCH_CLOCK_IS_EMPTY', 'Geen entries aanwezig');
+define('TEXT_PUNCH_CLOCK_TOTAL', 'TOTAAL');
+
 define('TEXT_ANALYSIS_BACK', 'Periode terug');
 define('TEXT_ANALYSIS_PERIOD', 'Periode : ');
 define('TEXT_ANALYSIS_FORWARD', 'Periode vooruit');
@@ -321,7 +329,10 @@ define('REPORT_CHECKBOX_SHOW_SIGNATURE', 'Toon handtekeningvelden');
 
 define('REPORT_TABLE_HEADER_DATE', 'Datum');
 define('REPORT_TABLE_HEADER_EMPLOYEE_NAME', 'Medewerker');
+define('REPORT_TABLE_HEADER_PROJECT_NAME', 'Project');
+define('REPORT_TABLE_HEADER_ROLE_NAME', 'Rol');
 define('REPORT_TABLE_HEADER_ACTIVITY_AMOUNT', 'Aantal');
+define('REPORT_TABLE_HEADER_UNIT_NAME', 'Eenheid');
 define('REPORT_TABLE_HEADER_IS_TARIFF', ' a ');
 define('REPORT_TABLE_HEADER_TARIFF', 'Tarief');
 define('REPORT_TABLE_HEADER_TRAVEL_DISTANCE', 'km');
