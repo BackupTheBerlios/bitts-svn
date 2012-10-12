@@ -16,7 +16,7 @@
   define('FILENAME_SSL_CHECK', 'ssl_check.php');
   define('FILENAME_TIMEREGISTRATION', 'timeregistration.php');
   define('FILENAME_TIMEREGISTRATION_CALENDAR', 'timeregistration_calendar.php');
-  define('FILENAME_PUNCH_CLOCK', 'punch_clock.php');
+  define('FILENAME_TIMEREGISTRATION_PUNCH_CLOCK', 'timeregistration_punch_clock.php');
   define('FILENAME_ANALYSIS', 'analysis.php');
   define('FILENAME_REPORT', 'report.php');
   define('FILENAME_EXPORT', 'export.php');
