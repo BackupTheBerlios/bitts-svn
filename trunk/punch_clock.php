@@ -3,7 +3,7 @@
  * CODE FILE   : punch_clock.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 11 oct 2012
+ * Date        : 12 october 2012
  * Description : Punck Clock form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -82,7 +82,7 @@
               <table border="0" cellspacing="0" cellpadding="2" class="calendar">
                 <tr>
                   <td style="vertical-align: middle;">
-                    <form name="frm1" action="punch_clock.php" method="post">
+                    <?php echo tep_draw_form('frmActivity1', tep_href_link(FILENAME_PUNCH_CLOCK)); ?>
                       <input name="btn" type="submit" style="width: 50px;" value="1"<?php if ($punch_clock_activities_id == 1) echo ' disabled'; ?>>
                     </form>
                   </td>
@@ -90,7 +90,7 @@
                 </tr>
                 <tr>
                   <td style="vertical-align: middle;">
-                    <form name="frm2" action="punch_clock.php" method="post">
+                    <?php echo tep_draw_form('frmActivity2', tep_href_link(FILENAME_PUNCH_CLOCK)); ?>
                       <input name="btn" type="submit" style="width: 50px;" value="2"<?php if ($punch_clock_activities_id == 2) echo ' disabled'; ?>>
                     </form>
                   </td>
@@ -98,7 +98,7 @@
                 </tr>
                 <tr>
                   <td style="vertical-align: middle;">
-                    <form name="frm3" action="punch_clock.php" method="post">
+                    <?php echo tep_draw_form('frmActivity3', tep_href_link(FILENAME_PUNCH_CLOCK)); ?>
                       <input name="btn" type="submit" style="width: 50px;" value="3"<?php if ($punch_clock_activities_id == 3) echo ' disabled'; ?>>
                     </form>
                   </td>
@@ -106,7 +106,7 @@
                 </tr>
                 <tr>
                   <td style="vertical-align: middle;">
-                    <form name="frmStop" action="punch_clock.php" method="post">
+                    <?php echo tep_draw_form('frmStop', tep_href_link(FILENAME_PUNCH_CLOCK)); ?>
                       <input name="btn" type="submit" style="width: 50px;" value="STOP"<?php if ($punch_clock_activities_id == 0) echo ' disabled'; ?>>
                     </form>
                   </td>
@@ -129,12 +129,11 @@
                 </tr>
                 <?php $activityDuration = array();
                 $logResult = $database->query("SELECT TIME(punch_clock_datetime_start) AS start, " .
-                                                "TIME(punch_clock_datetime_stop) AS stop, " .
-                                                "TIMEDIFF(punch_clock_datetime_stop, punch_clock_datetime_start) AS duration, " .
+                                                "IF(punch_clock_datetime_stop = '0000-00-00 00:00:00', '...', TIME(punch_clock_datetime_stop)) AS stop, " .
+                                                "TIMEDIFF(IF(punch_clock_datetime_stop = '0000-00-00 00:00:00', NOW(), punch_clock_datetime_stop), punch_clock_datetime_start) AS duration, " .
                                                 "activities_id " .
                                               "FROM punch_clock " .
                                               "WHERE DATE(punch_clock_datetime_start) = DATE(NOW()) " .
-                                                "AND punch_clock_datetime_stop != '0000-00-00' " .
                                                 "AND employees_id = " . $_SESSION['employee']->id . " " .
                                               "ORDER BY punch_clock_datetime_start;");
 
