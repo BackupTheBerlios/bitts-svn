@@ -122,10 +122,10 @@
             <td align="center">
               <table border="0" cellspacing="0" cellpadding="2" class="entryListing">
                 <tr>
-                  <td class="entryListing-heading"><?php echo TEXT_PUNCH_CLOCK_START; ?></td>
-                  <td class="entryListing-heading"><?php echo TEXT_PUNCH_CLOCK_STOP; ?></td>
-                  <td class="entryListing-heading"><?php echo TEXT_PUNCH_CLOCK_TIME; ?></td>
-                  <td class="entryListing-heading"><?php echo TEXT_PUNCH_CLOCK_ACTIVITY; ?></td>
+                  <td class="entryListing-heading" align="center"><?php echo TEXT_PUNCH_CLOCK_START; ?></td>
+                  <td class="entryListing-heading" align="center"><?php echo TEXT_PUNCH_CLOCK_STOP; ?></td>
+                  <td class="entryListing-heading" align="center"><?php echo TEXT_PUNCH_CLOCK_TIME; ?></td>
+                  <td class="entryListing-heading" align="center"><?php echo TEXT_PUNCH_CLOCK_ACTIVITY; ?></td>
                 </tr>
                 <?php $activityDuration = array();
                 $logResult = $database->query("SELECT TIME(punch_clock_datetime_start) AS start, " .
