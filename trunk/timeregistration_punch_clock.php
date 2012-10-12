@@ -71,7 +71,7 @@
             <td>
               <table border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td class="pageHeading"><?php echo HEADER_TEXT_PUNCH_CLOCK; ?></td>
+                  <td class="pageHeading"><?php echo HEADER_TEXT_TIMEREGISTRATION_PUNCH_CLOCK; ?></td>
                   <td class="pageHeading" align="right"><?php echo tep_image(DIR_WS_IMAGES . 'time_date-64x64.png', HEADER_TEXT_TIMEREGISTRATION_PUNCH_CLOCK, HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
                 </tr>
               </table>
@@ -82,7 +82,7 @@
               <table border="0" cellspacing="0" cellpadding="2" class="calendar">
                 <tr>
                   <td style="vertical-align: middle;">
-                    <?php echo tep_draw_form('frmActivity1', tep_href_link(FILENAME_PUNCH_CLOCK)) . tep_create_parameters(null, array('mPath', 'period'), 'hidden_field'); ?>
+                    <?php echo tep_draw_form('frmActivity1', tep_href_link(FILENAME_TIMEREGISTRATION_PUNCH_CLOCK)) . tep_create_parameters(null, array('mPath', 'period'), 'hidden_field'); ?>
                       <input name="btn" type="submit" style="width: 50px;" value="1"<?php if ($punch_clock_activities_id == 1) echo ' disabled'; ?>>
                     </form>
                   </td>
@@ -90,7 +90,7 @@
                 </tr>
                 <tr>
                   <td style="vertical-align: middle;">
-                    <?php echo tep_draw_form('frmActivity2', tep_href_link(FILENAME_PUNCH_CLOCK)) . tep_create_parameters(null, array('mPath', 'period'), 'hidden_field'); ?>
+                    <?php echo tep_draw_form('frmActivity2', tep_href_link(FILENAME_TIMEREGISTRATION_PUNCH_CLOCK)) . tep_create_parameters(null, array('mPath', 'period'), 'hidden_field'); ?>
                       <input name="btn" type="submit" style="width: 50px;" value="2"<?php if ($punch_clock_activities_id == 2) echo ' disabled'; ?>>
                     </form>
                   </td>
@@ -98,7 +98,7 @@
                 </tr>
                 <tr>
                   <td style="vertical-align: middle;">
-                    <?php echo tep_draw_form('frmActivity3', tep_href_link(FILENAME_PUNCH_CLOCK)) . tep_create_parameters(null, array('mPath', 'period'), 'hidden_field'); ?>
+                    <?php echo tep_draw_form('frmActivity3', tep_href_link(FILENAME_TIMEREGISTRATION_PUNCH_CLOCK)) . tep_create_parameters(null, array('mPath', 'period'), 'hidden_field'); ?>
                       <input name="btn" type="submit" style="width: 50px;" value="3"<?php if ($punch_clock_activities_id == 3) echo ' disabled'; ?>>
                     </form>
                   </td>
@@ -106,7 +106,7 @@
                 </tr>
                 <tr>
                   <td style="vertical-align: middle;">
-                    <?php echo tep_draw_form('frmStop', tep_href_link(FILENAME_PUNCH_CLOCK)) . tep_create_parameters(null, array('mPath', 'period'), 'hidden_field'); ?>
+                    <?php echo tep_draw_form('frmStop', tep_href_link(FILENAME_TIMEREGISTRATION_PUNCH_CLOCK)) . tep_create_parameters(null, array('mPath', 'period'), 'hidden_field'); ?>
                       <input name="btn" type="submit" style="width: 50px;" value="STOP"<?php if ($punch_clock_activities_id == 0) echo ' disabled'; ?>>
                     </form>
                   </td>
