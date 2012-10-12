@@ -3,7 +3,7 @@
  * CODE FILE   : main_menu.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 25 january 2011
+ * Date        : 12 october 2012
  * Description : Main navigation menu
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -24,7 +24,8 @@
                                          '<br>' .
                                          tep_draw_form('menu_200', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('mPath'=>'200'), array('period'), 'hidden_field') . tep_href_submit(BOX_MAINMENU_TIMEREGISTRATION, 'submitLinkInfoBoxContents', ($_SESSION['employee']->profile->right['timeregistration']?($_POST['mPath']=='200'?'style="font-weight:bold;cursor:default" disabled':''):'style="cursor:default" disabled')) . '</form><br>' .
                                          (substr($_POST['mPath'], 0, 1) == '2'?'' . 
-                                           tep_draw_form('menu_210', tep_href_link(FILENAME_TIMEREGISTRATION_CALENDAR)) . tep_create_parameters(array('mPath'=>'210'), array('period'), 'hidden_field') . '&nbsp;&nbsp;&nbsp;' . tep_href_submit(BOX_MAINMENU_TIMEREGISTRATION_CALENDAR, 'submitLinkInfoBoxContents', ($_SESSION['employee']->profile->right['timeregistration']?($_POST['mPath']=='210'?'style="font-weight:bold;cursor:default" disabled':''):'style="cursor:default" disabled')) . '</form><br>':'') .
+                                           tep_draw_form('menu_211', tep_href_link(FILENAME_TIMEREGISTRATION_PUNCH_CLOCK)) . tep_create_parameters(array('mPath'=>'211'), null, 'hidden_field') . '&nbsp;&nbsp;&nbsp;' . tep_href_submit(BOX_MAINMENU_TIMEREGISTRATION_PUNCH_CLOCK, 'submitLinkInfoBoxContents', ($_SESSION['employee']->profile->right['timeregistration']?($_POST['mPath']=='211'?'style="font-weight:bold;cursor:default" disabled':''):'style="cursor:default" disabled')) . '</form><br>' .
+                                           tep_draw_form('menu_212', tep_href_link(FILENAME_TIMEREGISTRATION_CALENDAR)) . tep_create_parameters(array('mPath'=>'212'), array('period'), 'hidden_field') . '&nbsp;&nbsp;&nbsp;' . tep_href_submit(BOX_MAINMENU_TIMEREGISTRATION_CALENDAR, 'submitLinkInfoBoxContents', ($_SESSION['employee']->profile->right['timeregistration']?($_POST['mPath']=='212'?'style="font-weight:bold;cursor:default" disabled':''):'style="cursor:default" disabled')) . '</form><br>':'') .
                                          tep_draw_form('menu_300', tep_href_link(FILENAME_ANALYSIS)) . tep_create_parameters(array('mPath'=>'300'), array('period'), 'hidden_field') . tep_href_submit(BOX_MAINMENU_ANALYSIS, 'submitLinkInfoBoxContents', ($_SESSION['employee']->profile->right['analysis']?($_POST['mPath']=='300'?'style="font-weight:bold;cursor:default" disabled':''):'style="cursor:default" disabled')) . '</form><br>' .
                                          tep_draw_form('menu_400', tep_href_link(FILENAME_ADMINISTRATION)) . tep_create_parameters(array('mPath'=>'400'), array('period'), 'hidden_field') . tep_href_submit(BOX_MAINMENU_ADMINISTRATION, 'submitLinkInfoBoxContents', ($_SESSION['employee']->profile->right['administration']?($_POST['mPath']=='400'?'style="font-weight:bold;cursor:default" disabled':''):'style="cursor:default" disabled')) . '</form>' .
                                          (substr($_POST['mPath'], 0, 1) == '4'?'<br>' .
