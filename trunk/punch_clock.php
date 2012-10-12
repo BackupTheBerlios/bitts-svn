@@ -32,13 +32,13 @@
       break;
     default:
       $idResult = $database->query("SELECT activities_id " .
-                                   "FROM punch_clock " .
+                                   "FROM " . TABLE_PUNCH_CLOCK . " " .
                                    "WHERE punch_clock_datetime_stop = '0000-00-00' ".
                                      "AND employees_id = " . $_SESSION['employee']->id . " " .
                                    "ORDER BY punch_clock_datetime_start DESC " .
                                    "LIMIT 0, 1;");
       if ($idRow = $database->fetch_array($idResult)) {
-        $punch_clock_activities_id = intval($idRow['stopwatch_activities_id']);
+        $punch_clock_activities_id = intval($idRow['activities_id']);
       } else { // if ($idRow = $database->fetch_array($idResult))
         $punch_clock_activities_id = 0;
       } // if ($idRow = $database->fetch_array($idResult))
@@ -46,9 +46,9 @@
   } // switch ($_REQUEST['btn'])
 
   if (isset($_POST['btn']) && ($punch_clock_activities_id > 0 || $_POST['btn'] == 'STOP')) {
-    $database->query("UPDATE punch_clock SET punch_clock_datetime_stop = NOW() WHERE punch_clock_datetime_stop = '0000-00-00' AND employees_id = " . $_SESSION['employee']->id . ";");
+    $database->query("UPDATE " . TABLE_PUNCH_CLOCK . " SET punch_clock_datetime_stop = NOW() WHERE punch_clock_datetime_stop = '0000-00-00' AND employees_id = " . $_SESSION['employee']->id . ";");
     if ($punch_clock_activities_id > 0) {
-      $database->query("INSERT INTO punch_clock (punch_clock_datetime_start, employees_id, activities_id) VALUES (NOW(), " . $_SESSION['employee']->id . ", " . $punch_clock_activities_id . ");");
+      $database->query("INSERT INTO " . TABLE_PUNCH_CLOCK . " (punch_clock_datetime_start, employees_id, activities_id) VALUES (NOW(), " . $_SESSION['employee']->id . ", " . $punch_clock_activities_id . ");");
     } // if ($punch_clock_activities_id > 0)
   } // if (isset($_POST['btn']) && ($punch_clock_activities_id > 0 || $_POST['btn'] == 'STOP'))
 
@@ -132,7 +132,7 @@
                                                 "IF(punch_clock_datetime_stop = '0000-00-00 00:00:00', '...', TIME(punch_clock_datetime_stop)) AS stop, " .
                                                 "TIMEDIFF(IF(punch_clock_datetime_stop = '0000-00-00 00:00:00', NOW(), punch_clock_datetime_stop), punch_clock_datetime_start) AS duration, " .
                                                 "activities_id " .
-                                              "FROM punch_clock " .
+                                              "FROM " . TABLE_PUNCH_CLOCK . " " .
                                               "WHERE DATE(punch_clock_datetime_start) = DATE(NOW()) " .
                                                 "AND employees_id = " . $_SESSION['employee']->id . " " .
                                               "ORDER BY punch_clock_datetime_start;");
