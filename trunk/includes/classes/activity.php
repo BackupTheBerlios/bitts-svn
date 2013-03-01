@@ -3,7 +3,7 @@
  * CLASS FILE  : activity.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 02 july 2009
+ * Date        : 01 march 2013
  * Description : Activity class
  *
  */
@@ -183,11 +183,11 @@
       // Insert a new activity if one does not exist and retrieve the id
       if ($this->activity_id == 0) {
         // The activity does not exist
-        $database->query("insert into " . TABLE_ACTIVITIES . " (activities_date, activities_amount, tariffs_id, activities_travel_distance, activities_expenses, activities_ticket_number, activities_comment, timesheets_id) values ('" . tep_strftime(DATE_FORMAT_DATABASE, $this->date) . "', '" . $this->amount . "', '" . $this->tariff->id . "', '" . $this->travel_distance . "', '" . $this->expenses . "', '" . $this->ticket_number . "', '" . $this->comment . "', '" . $this->timesheet_id . "')");
+        $database->query("insert into " . TABLE_ACTIVITIES . " (activities_date, activities_amount, tariffs_id, activities_travel_distance, activities_expenses, activities_ticket_number, activities_comment, timesheets_id) values ('" . tep_strftime(DATE_FORMAT_DATABASE, $this->date) . "', '" . $this->amount . "', '" . $this->tariff->id . "', '" . $this->travel_distance . "', '" . $this->expenses . "', '" . $this->ticket_number . "', '" . $database->input($this->comment) . "', '" . $this->timesheet_id . "')");
         $this->activity_id = $database->insert_id(); // The proper id is now known
       } else {
         // The activity exists, update the contents
-        $activity_query = $database->query("update " . TABLE_ACTIVITIES . " set activities_date='" . tep_strftime(DATE_FORMAT_DATABASE, $this->date) . "', activities_amount='" . $this->amount . "', tariffs_id='" . $this->tariff->id . "', activities_travel_distance='" . $this->travel_distance . "', activities_expenses='" . $this->expenses . "', activities_ticket_number='" . $this->ticket_number . "', activities_comment='" . $this->comment . "' where activities_id = '" . (int)$this->activity_id . "'");
+        $activity_query = $database->query("update " . TABLE_ACTIVITIES . " set activities_date='" . tep_strftime(DATE_FORMAT_DATABASE, $this->date) . "', activities_amount='" . $this->amount . "', tariffs_id='" . $this->tariff->id . "', activities_travel_distance='" . $this->travel_distance . "', activities_expenses='" . $this->expenses . "', activities_ticket_number='" . $this->ticket_number . "', activities_comment='" . $database->input($this->comment) . "' where activities_id = '" . (int)$this->activity_id . "'");
       }
     }
 
