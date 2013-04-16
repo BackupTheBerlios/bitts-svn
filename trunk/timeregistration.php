@@ -247,7 +247,8 @@
       var arrTicketResult = window.showModalDialog("<?php echo FILENAME_TIMEREGISTRATION_TICKET_LOOKUP; ?>?activityDate=" + activityDate, null, "center: yes; dialogHeight: 400px; dialogWidth: 600px; help: no; resizable: no; status: no;");
       if (arrTicketResult.length == 2) {
         document.forms['activity_entry']['activity_ticket_number'].value = arrTicketResult[0];
-        document.forms['activity_entry']['activity_comment'].value = arrTicketResult[1];
+        document.forms['activity_entry']['activity_comment'].value = decodeURIComponent(arrTicketResult[1]);
+        maxLength(document.forms['activity_entry']['activity_comment'], 256);
       }
     }
   </script>
