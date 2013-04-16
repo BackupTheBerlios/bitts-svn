@@ -31,17 +31,24 @@ $ticket_sql = str_replace('%TICKET_DATE%', $database->input(rawurldecode($_REQUE
 require(DIR_WS_INCLUDES . 'header_dialog.php'); ?>
 <!-- body //-->
 <table border="0" width="100%" cellspacing="0" cellpadding="2" class="entryListing">
-  <tr>
-    <td class="entryListing-heading"><?php echo TEXT_TIMEREGISTRATION_TICKET_LOOKUP_TICKETNUMBER; ?></td>
-    <td class="entryListing-heading"><?php echo TEXT_TIMEREGISTRATION_TICKET_LOOKUP_TICKETDESCRIPTION; ?></td>
-  </tr>
   <?php $ticket_query = $database->query($ticket_sql);
   if ($database->num_rows($ticket_query) > 0) {
+    $headerRow = true;
+    $columnCount = 0;
     $odd_or_even = "odd";
-    while ($ticket_result = $database->fetch_array($ticket_query, MYSQL_NUM)) { ?>
+    while ($ticket_result = $database->fetch_array($ticket_query, MYSQL_BOTH)) {
+      if ($headerRow) { ?>
+        <tr>
+          <?php foreach ($ticket_result as $columnName => $columnValue) { ?>
+            <td class="entryListing-heading"><?php echo str_replace('_', '&nbsp;', $columnName); ?></td>
+          <?php } ?>
+        </tr>
+        <?php $headerRow = false;
+      } ?>
       <tr onmouseover="this.className='selectableRowMouseOver-<?php echo $odd_or_even; ?>'" onmouseout="this.className='entryListing-<?php echo $odd_or_even; ?>'" class="entryListing-<?php echo $odd_or_even; ?>" onclick="closeWindow('<?php echo $ticket_result[0]; ?>', '<?php echo rawurlencode($ticket_result[1]); ?>');">
-        <td class="entryListing-data"><?php echo $ticket_result[0]; ?></td>
-        <td class="entryListing-data"><?php echo $ticket_result[1]; ?></td>
+        <?php foreach ($ticket_result as $columnName => $columnValue) { ?>
+          <td class="entryListing-data"><?php echo $columnValue; ?></td>
+        <?php } ?>
       </tr>
       <?php $odd_or_even = ($odd_or_even == 'odd'?'even':'odd');
     }
