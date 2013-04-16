@@ -38,8 +38,8 @@ require(DIR_WS_INCLUDES . 'header_dialog.php'); ?>
     $odd_or_even = "odd";
     while ($ticket_result = $database->fetch_array($ticket_query, MYSQL_BOTH)) { ?>
       <tr class="entryListing-<?php echo $odd_or_even; ?>">
-        <td class="entryListing-data"><?php echo $ticket_result['tn']; ?></td>
-        <td class="entryListing-data"><?php echo $ticket_result['title']; ?></td>
+        <td class="entryListing-data"><?php echo $ticket_result[0]; ?></td>
+        <td class="entryListing-data"><?php echo $ticket_result[1]; ?></td>
       </tr>
       <?php $odd_or_even = ($odd_or_even == 'odd'?'even':'odd');
     }
