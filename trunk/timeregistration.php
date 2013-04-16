@@ -244,8 +244,12 @@
   </table>
   <script type="text/javascript" src="<?php echo DIR_WS_JAVASCRIPT; ?>jah.js"></script>
   <script type="text/javascript">
-    function fetchTicketDescription(ticketId) {
-      jah('ajax_timeregistration_tickets.php?ticket_id=' + ticketId, 'activity_comment');
+    function fetchTicketNrAndDescription(activityDate) {
+      var arrTicketResult = window.showModalDialog("<?php echo FILENAME_TIMEREGISTRATION_TICKETS; ?>?activityDate=" + activityDate, null, "center: yes; dialogHeight: 400px; dialogWidth: 600px; help: no; resizable: no; status: no;");
+      if (arrTicketResult.length == 2) {
+        document.forms['activity_entry']['activity_ticket_number'].value = arrTicketResult[0];
+        document.forms['activity_entry']['activity_comment'].value = arrTicketResult[1];
+      }
     }
   </script>
 <!-- body_eof //-->
