@@ -36,7 +36,7 @@ require(DIR_WS_INCLUDES . 'header_dialog.php'); ?>
     $headerRow = true;
     $columnNames = array();
     $odd_or_even = "odd";
-    while ($ticket_result = $database->fetch_array($ticket_query)) {
+    while ($ticket_result = $database->fetch_array($ticket_query, MYSQL_ASSOC)) {
       if ($headerRow) { ?>
         <tr>
           <?php foreach ($ticket_result as $columnName => $columnValue) {
