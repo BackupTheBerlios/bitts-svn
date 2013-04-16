@@ -248,7 +248,7 @@
       if (arrTicketResult.length == 2) {
         document.forms['activity_entry']['activity_ticket_number'].value = arrTicketResult[0];
         document.forms['activity_entry']['activity_comment'].value = decodeURIComponent(arrTicketResult[1]);
-        maxLength(document.forms['activity_entry']['activity_comment'], 256);
+        maxLength(document.forms['activity_entry']['activity_comment'], 255);
       }
     }
   </script>
