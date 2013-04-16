@@ -26,7 +26,8 @@ $database->connect(DB_TICKET_SERVER_NAME, DB_TICKET_SERVER_USERNAME, DB_TICKET_S
 $ticket_sql = str_replace('%TICKET_DATE%', $_REQUEST['activityDate'], DB_TICKET_DATABASE_QUERY);
 
 // header //
-require(DIR_WS_INCLUDES . 'header.php'); ?>
+require(DIR_WS_INCLUDES . 'header_dialog.php');
+echo $ticket_sql; ?>
 <!-- body //-->
 <table border="0" width="100%" cellspacing="0" cellpadding="2" class="entryListing">
   <tr>
@@ -65,7 +66,7 @@ require(DIR_WS_INCLUDES . 'header.php'); ?>
 </script>
 <!-- body_eof //-->
 <!-- footer //-->
-<?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
+<?php require(DIR_WS_INCLUDES . 'footer_dialog.php'); ?>
 <!-- footer_eof //-->
 <!-- application_bottom //-->
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
