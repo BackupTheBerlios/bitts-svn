@@ -36,8 +36,8 @@ require(DIR_WS_INCLUDES . 'header_dialog.php'); ?>
   <?php $ticket_query = $database->query($ticket_sql);
   if ($database->num_rows($ticket_query) > 0) {
     $odd_or_even = "odd";
-    while ($ticket_result = $database->fetch_array($ticket_query, MYSQL_BOTH)) { ?>
-      <tr class="entryListing-<?php echo $odd_or_even; ?>">
+    while ($ticket_result = $database->fetch_array($ticket_query, MYSQL_NUM)) { ?>
+      <tr class="entryListing-<?php echo $odd_or_even; ?>" onclick="closeWindow('<?php echo $ticket_result[0]; ?>', '<?php echo rawurlencode($ticket_result[1]); ?>');">
         <td class="entryListing-data"><?php echo $ticket_result[0]; ?></td>
         <td class="entryListing-data"><?php echo $ticket_result[1]; ?></td>
       </tr>
