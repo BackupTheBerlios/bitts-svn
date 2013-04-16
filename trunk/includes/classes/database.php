@@ -3,7 +3,7 @@
  * CLASS FILE  : database.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 17 december 2007
+ * Date        : 16 april 2013
  * Description : Database related functions and selection of proper database
  *               type.
  * 
@@ -111,8 +111,8 @@
       return query($query);
     }
 
-    public function fetch_array($db_query) {
-      return $this->real_database->fetch_array($db_query);
+    public function fetch_array($db_query, $array_type) {
+      return $this->real_database->fetch_array($db_query, $array_type);
     }
 
     public function num_rows($db_query) {
