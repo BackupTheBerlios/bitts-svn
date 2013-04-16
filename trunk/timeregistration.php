@@ -242,7 +242,6 @@
       <!-- body_text_eof //-->
     </tr>
   </table>
-  <script type="text/javascript" src="<?php echo DIR_WS_JAVASCRIPT; ?>jah.js"></script>
   <script type="text/javascript">
     function fetchTicketNrAndDescription(activityDate) {
       var arrTicketResult = window.showModalDialog("<?php echo FILENAME_TIMEREGISTRATION_TICKET_LOOKUP; ?>?activityDate=" + activityDate, null, "center: yes; dialogHeight: 400px; dialogWidth: 600px; help: no; resizable: no; status: no;");
