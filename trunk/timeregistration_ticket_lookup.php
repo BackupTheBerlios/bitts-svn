@@ -24,7 +24,7 @@ $database = new database();
 $database->connect(DB_TICKET_SERVER_NAME, DB_TICKET_SERVER_USERNAME, DB_TICKET_SERVER_PASSWORD, DB_TICKET_DATABASE_NAME) or die('Unable to connect to database server!');
 
 $ticket_sql = DB_TICKET_DATABASE_QUERY;
-$ticket_sql = str_replace('%TICKET_CUSTOMER%', $database->input(rawurldecode($_REQUEST['activityDate'])), $ticket_sql);
+$ticket_sql = str_replace('%TICKET_CUSTOMER%', $database->input(rawurldecode($_REQUEST['activityCustomer'])), $ticket_sql);
 $ticket_sql = str_replace('%TICKET_DATE%', $database->input(rawurldecode($_REQUEST['activityDate'])), $ticket_sql);
 
 // header //
