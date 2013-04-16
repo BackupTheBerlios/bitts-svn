@@ -34,7 +34,6 @@ require(DIR_WS_INCLUDES . 'header_dialog.php'); ?>
   <?php $ticket_query = $database->query($ticket_sql);
   if ($database->num_rows($ticket_query) > 0) {
     $headerRow = true;
-    $columnCount = 0;
     $odd_or_even = "odd";
     while ($ticket_result = $database->fetch_array($ticket_query, MYSQL_BOTH)) {
       if ($headerRow) { ?>
