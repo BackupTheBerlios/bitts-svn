@@ -169,11 +169,13 @@ TR.projectListing-green {
 
 TR.selectableRowMouseOver-odd {
   background-color: #0071c1;
+  color: #ffffff;
   cursor: pointer;
 }
 
 TR.selectableRowMouseOver-even {
   background-color: #0071c1;
+  color: #ffffff;
   cursor: pointer;
 }
 
