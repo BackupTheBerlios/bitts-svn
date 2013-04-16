@@ -26,8 +26,7 @@ $database->connect(DB_TICKET_SERVER_NAME, DB_TICKET_SERVER_USERNAME, DB_TICKET_S
 $ticket_sql = str_replace('%TICKET_DATE%', $_REQUEST['activityDate'], DB_TICKET_DATABASE_QUERY);
 
 // header //
-require(DIR_WS_INCLUDES . 'header_dialog.php');
-echo $ticket_sql; ?>
+require(DIR_WS_INCLUDES . 'header_dialog.php'); ?>
 <!-- body //-->
 <table border="0" width="100%" cellspacing="0" cellpadding="2" class="entryListing">
   <tr>
@@ -37,10 +36,10 @@ echo $ticket_sql; ?>
   <?php $ticket_query = $database->query($ticket_sql);
   if ($database->num_rows($ticket_query) > 0) {
     $odd_or_even = "odd";
-    while ($ticket_result = $database->fetch_array($ticket_query, MYSQL_NUM)) { ?>
+    while ($ticket_result = $database->fetch_array($ticket_query, MYSQL_BOTH)) { ?>
       <tr class="entryListing-<?php echo $odd_or_even; ?>">
-        <td class="entryListing-data"><?php echo $ticket_result[0]; ?></td>
-        <td class="entryListing-data"><?php echo $ticket_result[1]; ?></td>
+        <td class="entryListing-data"><?php echo $ticket_result['tn']; ?></td>
+        <td class="entryListing-data"><?php echo $ticket_result['title']; ?></td>
       </tr>
       <?php $odd_or_even = ($odd_or_even == 'odd'?'even':'odd');
     }
