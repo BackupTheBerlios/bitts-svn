@@ -3,7 +3,7 @@
  * CODE FILE   : activity_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 24 june 2010
+ * Date        : 16 april 2013
  * Description : Activity entry fields
  *               Data validation sequence
  *               Storing of entered data (via timesheet object)
@@ -197,8 +197,8 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
                   <td width="50%" class="item_entry"><?php echo tep_draw_input_field('activity_ticket_number', '', 'size="1" maxlength="16" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?></td>
                   <td width="22px" class="item_entry">
                     <?php if (ENABLE_TICKET_DATABASE_LOOKUPS && ($_POST['action']=='enter_data'||$_POST['action']=='save_data')) {
-                      echo tep_image_button('button_lookup.gif', TEXT_ACTIVITY_TICKETNUMBER_LOOKUP, 'onClick="fetchTicketDescription(document.getElementsByName(\'activity_ticket_number\').item(0).value);"');
-                      //echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_lookup.gif', '', '', '', 'onClick="fetchTicketDescription(document.getElementsByName(\'activity_ticket_number\').item(0).value);"');
+                      echo tep_image_button('button_lookup.gif', TEXT_ACTIVITY_TICKETNUMBER_LOOKUP, 'onClick="fetchTicketNrAndDescription(\'' . tep_strftime('%Y-%m-%d', $_POST['selected_date']) . '\');"');
+                      //echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_lookup.gif', '', '', '', 'onClick="fetchTicketNrAndDescription(\'' . tep_strftime('%Y-%m-%d', $_POST['selected_date']) . '\');"');
                     } else {
                       echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_lookup_disabled.gif');
                     } ?>
