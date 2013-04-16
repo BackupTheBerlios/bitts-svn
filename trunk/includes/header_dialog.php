@@ -19,3 +19,8 @@
     <link rel="shortcut icon" href="<?php echo DIR_WS_IMAGES ?>favicon.ico" type="image/x-icon">
   </head>
   <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0">
+    <table border="0" width="100%" cellspacing="0" cellpadding="1">
+      <tr class="headerNavigation">
+        <td class="headerNavigation">&nbsp;</td>
+      </tr>
+    </table>
