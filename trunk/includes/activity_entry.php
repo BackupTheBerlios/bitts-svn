@@ -212,8 +212,8 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
               <?php echo TEXT_ACTIVITY_COMMENT; ?>
             </td>
             <td class="item_entry">
-              <?php //echo tep_draw_input_field('activity_comment', '', 'size="1" maxlength="256" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled'));
-                echo tep_draw_textarea_field('activity_comment', 'on', 64, 4, $_POST['activity_comment'], 'id="activity_comment" style="width: 100%; resize: none;" onKeyUp="maxLength(this, 256)"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?>
+              <?php //echo tep_draw_input_field('activity_comment', '', 'size="1" maxlength="255" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled'));
+                echo tep_draw_textarea_field('activity_comment', 'on', 64, 4, $_POST['activity_comment'], 'id="activity_comment" style="width: 100%; resize: none;" onKeyUp="maxLength(this, 255)"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?>
             </td>
           </tr>
           <tr>
