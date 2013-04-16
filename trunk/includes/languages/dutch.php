@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 23 aug 2011
+ * Date        : 16 april 2013
  * Description : Dutch language file
  */
 
@@ -141,6 +141,8 @@ define('TEXT_TIMEREGISTRATION_CONFIRM_QUESTION_MINIMUM_HOURS_NOT_MET', 'Minimum 
 define('TEXT_TIMEREGISTRATION_CONFIRM_OK', 'Bevestigen OK');
 define('TEXT_TIMEREGISTRATION_CONFIRM_CANCEL', 'Bevestigen annuleren');
 define('TEXT_TIMEREGISTRATION_CALENDAR_DESCRIPTION', 'Overzicht geboekte aantallen per dag:');
+define('TEXT_TIMEREGISTRATION_TICKET_LOOKUP_TICKETNUMBER', 'ticket nr');
+define('TEXT_TIMEREGISTRATION_TICKET_LOOKUP_TICKETDESCRIPTION', 'omschrijving');
 
 define('TEXT_PROJECTS', 'Projecten');
 define('TEXT_PROJECTS_NAME', 'Project naam');
