@@ -97,14 +97,14 @@ TD.footer {
   /*** Balk onderin met datum etc. ***/
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
-  background: #561684;
+  background: #0071c1;
   color: #ffffff;
   font-weight: bold;
 }
 
 .infoBox {
   /*** Rand om de boxes ***/
-  background: #561684;
+  background: #0071c1;
 }
 
 .infoBoxContents {
@@ -233,7 +233,7 @@ TD.calendar-notavailable {
 }
 
 TD.large-calendar-weekday {
-  border: 1px solid #561684;
+  border: 1px solid #0071c1;
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #f8f8f9;
@@ -243,7 +243,7 @@ TD.large-calendar-weekday {
 }
 
 TD.large-calendar-weekday-minimum-not-met {
-  border: 1px solid #561684;
+  border: 1px solid #0071c1;
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #f8f8f9;
@@ -254,7 +254,7 @@ TD.large-calendar-weekday-minimum-not-met {
 }
 
 TD.large-calendar-weekend {
-  border: 1px solid #561684;
+  border: 1px solid #0071c1;
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #b6b7cb;
@@ -264,7 +264,7 @@ TD.large-calendar-weekend {
 }
 
 TD.large-calendar-today {
-  border: 1px solid #561684;
+  border: 1px solid #0071c1;
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   background: #008fc3;
@@ -339,7 +339,7 @@ TD.pageHeading, DIV.pageHeading {
   font-family: Verdana, Arial, sans-serif;
   font-size: 20px;
   font-weight: bold;
-  color: #561684;
+  color: #0071c1;
 }
 
 TR.subBar {
