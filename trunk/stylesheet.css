@@ -167,6 +167,16 @@ TR.projectListing-green {
   background: #00ff00;
 }
 
+TR.selectableRowMouseOver-odd {
+  background-color: #f0f0c0;
+  cursor: pointer;
+}
+
+TR.selectableRowMouseOver-even {
+  background-color: #f8f8f9;
+  cursor: pointer;
+}
+
 TABLE.projectListing, TABLE.entryListing, TABLE.calendar , TABLE.item_entry, TABLE.report_listing{
   border: 1px;
   border-style: solid;
