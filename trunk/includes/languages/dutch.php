@@ -143,6 +143,7 @@ define('TEXT_TIMEREGISTRATION_CONFIRM_CANCEL', 'Bevestigen annuleren');
 define('TEXT_TIMEREGISTRATION_CALENDAR_DESCRIPTION', 'Overzicht geboekte aantallen per dag:');
 define('TEXT_TIMEREGISTRATION_TICKET_LOOKUP_TICKETNUMBER', 'ticket nr');
 define('TEXT_TIMEREGISTRATION_TICKET_LOOKUP_TICKETDESCRIPTION', 'omschrijving');
+define('TEXT_TIMEREGISTRATION_TICKET_LOOKUP_IS_EMPTY', 'Geen te selecteren tickets gevonden.');
 
 define('TEXT_PROJECTS', 'Projecten');
 define('TEXT_PROJECTS_NAME', 'Project naam');
