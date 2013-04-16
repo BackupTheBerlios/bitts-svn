@@ -143,6 +143,7 @@ define('TEXT_TIMEREGISTRATION_CONFIRM_CANCEL', 'Cancel confirm');
 define('TEXT_TIMEREGISTRATION_CALENDAR_DESCRIPTION', 'Overview registered amounts per day:');
 define('TEXT_TIMEREGISTRATION_TICKET_LOOKUP_TICKETNUMBER', 'ticket nr');
 define('TEXT_TIMEREGISTRATION_TICKET_LOOKUP_TICKETDESCRIPTION', 'description');
+define('TEXT_TIMEREGISTRATION_TICKET_LOOKUP_IS_EMPTY', 'No selectable tickets available.');
 
 define('TEXT_PROJECTS', 'Projects');
 define('TEXT_PROJECTS_NAME', 'Project name');
