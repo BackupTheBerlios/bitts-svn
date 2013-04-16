@@ -2,7 +2,7 @@
  * CODE FILE   : stylesheet.css
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 18 january 2011
+ * Date        : 16 april 2013
  * Description : Stylesheet
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -43,7 +43,7 @@ TR.header {
 }
 
 TR.headerNavigation {
-  background: #bbc3d3;
+  background: #0071c1;
 }
 
 TD.headerNavigation {
@@ -90,7 +90,7 @@ TD.headerInfo {
 }
 
 TR.footer {
-  background: #bbc3d3;
+  background: #0071c1;
 }
 
 TD.footer {
@@ -136,7 +136,7 @@ TD.infoBoxHeading {
   font-family: Verdana, Arial, sans-serif;
   font-size: 10px;
   font-weight: bold;
-  background: #561684;
+  background: #0071c1;
   color: #ffffff;
 }
 
@@ -168,12 +168,12 @@ TR.projectListing-green {
 }
 
 TR.selectableRowMouseOver-odd {
-  background-color: #f0f0c0;
+  background-color: #0071c1;
   cursor: pointer;
 }
 
 TR.selectableRowMouseOver-even {
-  background-color: #f8f8f9;
+  background-color: #0071c1;
   cursor: pointer;
 }
 
