@@ -245,7 +245,7 @@
   <script type="text/javascript" src="<?php echo DIR_WS_JAVASCRIPT; ?>jah.js"></script>
   <script type="text/javascript">
     function fetchTicketNrAndDescription(activityDate) {
-      var arrTicketResult = window.showModalDialog("<?php echo FILENAME_TIMEREGISTRATION_TICKETS; ?>?activityDate=" + activityDate, null, "center: yes; dialogHeight: 400px; dialogWidth: 600px; help: no; resizable: no; status: no;");
+      var arrTicketResult = window.showModalDialog("<?php echo FILENAME_TIMEREGISTRATION_TICKET_LOOKUP; ?>?activityDate=" + activityDate, null, "center: yes; dialogHeight: 400px; dialogWidth: 600px; help: no; resizable: no; status: no;");
       if (arrTicketResult.length == 2) {
         document.forms['activity_entry']['activity_ticket_number'].value = arrTicketResult[0];
         document.forms['activity_entry']['activity_comment'].value = arrTicketResult[1];
