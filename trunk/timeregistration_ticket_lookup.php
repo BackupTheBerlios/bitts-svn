@@ -34,18 +34,20 @@ require(DIR_WS_INCLUDES . 'header_dialog.php'); ?>
   <?php $ticket_query = $database->query($ticket_sql);
   if ($database->num_rows($ticket_query) > 0) {
     $headerRow = true;
+    $columnNames = array();
     $odd_or_even = "odd";
-    while ($ticket_result = $database->fetch_array($ticket_query, MYSQL_BOTH)) {
+    while ($ticket_result = $database->fetch_array($ticket_query)) {
       if ($headerRow) { ?>
         <tr>
-          <?php foreach ($ticket_result as $columnName => $columnValue) { ?>
+          <?php foreach ($ticket_result as $columnName => $columnValue) {
+            array_push($columnNames, $columnName); ?>
             <td class="entryListing-heading"><?php echo str_replace('_', '&nbsp;', $columnName); ?></td>
           <?php } ?>
         </tr>
         <?php $headerRow = false;
       } ?>
-      <tr onmouseover="this.className='selectableRowMouseOver-<?php echo $odd_or_even; ?>'" onmouseout="this.className='entryListing-<?php echo $odd_or_even; ?>'" class="entryListing-<?php echo $odd_or_even; ?>" onclick="closeWindow('<?php echo $ticket_result[0]; ?>', '<?php echo rawurlencode($ticket_result[1]); ?>');">
-        <?php foreach ($ticket_result as $columnName => $columnValue) { ?>
+      <tr onmouseover="this.className='selectableRowMouseOver-<?php echo $odd_or_even; ?>'" onmouseout="this.className='entryListing-<?php echo $odd_or_even; ?>'" class="entryListing-<?php echo $odd_or_even; ?>" onclick="closeWindow('<?php echo $ticket_result[$columnNames[0]]; ?>', '<?php echo rawurlencode($ticket_result[$columnNames[1]]); ?>');">
+        <?php foreach ($ticket_result as $columnValue) { ?>
           <td class="entryListing-data"><?php echo $columnValue; ?></td>
         <?php } ?>
       </tr>
