@@ -3,7 +3,7 @@
  * CLASS FILE  : database_interface.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 december 2007
+ * Date        : 16 april 2013
  * Description : Interface to database specific functions
  */
 
@@ -14,7 +14,7 @@
     public function errno();
     public static function escape_string($string);
     public function query($query);
-    public function fetch_array($result);
+    public function fetch_array($result, $array_type);
     public function fetch_row($result);
     public function fetch_assoc($result);
     public function fetch_object($result);
