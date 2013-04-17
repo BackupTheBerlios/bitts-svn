@@ -152,7 +152,7 @@ TR.accountHistory-odd, TR.addressBook-odd, TR.alsoPurchased-odd, TR.payment-odd,
 }
 
 TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-even, TR.entryListing-even, TR.productReviews-even, TR.upcomingProducts-even, TR.shippingOptions-even {
-  background: #f0f0c0;
+  background: #e5e5e6;
 }
 
 TR.projectListing-red {
