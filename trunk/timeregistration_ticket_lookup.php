@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 april 2013
+ * Date        : 18 april 2013
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -65,7 +65,6 @@ require(DIR_WS_INCLUDES . 'header_dialog.php'); ?>
   $database->close(); ?>
 </table>
 <script type="text/javascript">
-  var retVal = array();
   window.returnValue = [];
 
   function closeWindow(ticketNumber, ticketDescription) {
