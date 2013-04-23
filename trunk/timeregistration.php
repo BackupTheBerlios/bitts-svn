@@ -161,7 +161,7 @@
                       <td class="entryListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->project_name.'<br>'.$_SESSION['timesheet']->activities[$index]->role_name; ?></td>
                       <td class="entryListing-data"><?php echo tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->amount, 2); ?></td>
                       <td class="entryListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->unit_name; ?></td>
-                      <td class="entryListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->travel_distance; ?></td>
+                      <td class="entryListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->travel_distance.'<br>'.$_SESSION['timesheet']->activities[$index]->travel_description; ?></td>
                       <td class="entryListing-data"><?php echo tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->expenses, 2); ?></td>
                       <td class="entryListing-data"><?php echo $_SESSION['timesheet']->activities[$index]->ticket_number; ?></td>
                       <td class="entryListing-data"><?php echo tep_txt2html($_SESSION['timesheet']->activities[$index]->comment); ?></td>
