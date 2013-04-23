@@ -22,6 +22,7 @@ CREATE TABLE `activities` (
   `tariffs_id` int(10) unsigned NOT NULL default '0',
   `activities_amount` decimal(5,2) NOT NULL default '0.00',
   `activities_travel_distance` int(11) NOT NULL default '0',
+  `activities_travel_description` varchar(64) NOT NULL default '',
   `activities_expenses` decimal(6,2) NOT NULL default '0.00',
   `activities_ticket_number` varchar(16) NOT NULL default '',
   `activities_comment` varchar(255) NOT NULL default '',
