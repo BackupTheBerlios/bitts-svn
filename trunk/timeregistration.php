@@ -3,7 +3,7 @@
  * CODE FILE   : timeregistration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 april 2013
+ * Date        : 23 april 2013
  * Description : Time registration form
  *
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -167,7 +167,7 @@
                       <td class="entryListing-data"><?php echo tep_txt2html($_SESSION['timesheet']->activities[$index]->comment); ?></td>
                       <td align="center" width="20" class="entryListing-data">
                       <?php if (!$_SESSION['timesheet']->locked) {
-                        echo tep_draw_form('edit_activity', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'enter_data','selected_date'=>$_SESSION['timesheet']->activities[$index]->date,'projects_id'=>$_SESSION['timesheet']->activities[$index]->projects_id,'roles_id'=>$_SESSION['timesheet']->activities[$index]->roles_id, 'activity_id'=>$_SESSION['timesheet']->activities[$index]->activity_id, 'activity_amount'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->amount, 2), 'original_activity_amount'=>$_SESSION['timesheet']->activities[$index]->amount, 'tariffs_id'=>$_SESSION['timesheet']->activities[$index]->tariff->id, 'activity_travel_distance'=>"".$_SESSION['timesheet']->activities[$index]->travel_distance, 'activity_expenses'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->expenses, 2), 'activity_ticket_number'=>$_SESSION['timesheet']->activities[$index]->ticket_number, 'activity_comment'=>$_SESSION['timesheet']->activities[$index]->comment), array('mPath','period','sort_order'), 'hidden_field');
+                        echo tep_draw_form('edit_activity', tep_href_link(FILENAME_TIMEREGISTRATION)) . tep_create_parameters(array('action'=>'enter_data','selected_date'=>$_SESSION['timesheet']->activities[$index]->date,'projects_id'=>$_SESSION['timesheet']->activities[$index]->projects_id,'roles_id'=>$_SESSION['timesheet']->activities[$index]->roles_id, 'activity_id'=>$_SESSION['timesheet']->activities[$index]->activity_id, 'activity_amount'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->amount, 2), 'original_activity_amount'=>$_SESSION['timesheet']->activities[$index]->amount, 'tariffs_id'=>$_SESSION['timesheet']->activities[$index]->tariff->id, 'activity_travel_distance'=>"".$_SESSION['timesheet']->activities[$index]->travel_distance, 'activity_travel_description'=>"".$_SESSION['timesheet']->activities[$index]->travel_description, 'activity_expenses'=>tep_number_db_to_user($_SESSION['timesheet']->activities[$index]->expenses, 2), 'activity_ticket_number'=>$_SESSION['timesheet']->activities[$index]->ticket_number, 'activity_comment'=>$_SESSION['timesheet']->activities[$index]->comment), array('mPath','period','sort_order'), 'hidden_field');
                         echo tep_image_submit('edit.gif', TEXT_ENTRY_EDIT,'',DIR_WS_IMAGES);
                         echo '</form>';
                       } ?>
