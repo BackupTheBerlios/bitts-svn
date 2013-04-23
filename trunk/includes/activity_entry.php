@@ -3,7 +3,7 @@
  * CODE FILE   : activity_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 april 2013
+ * Date        : 23 april 2013
  * Description : Activity entry fields
  *               Data validation sequence
  *               Storing of entered data (via timesheet object)
@@ -33,6 +33,7 @@ if ($_POST['action'] == 'copy_activity') {
       $_POST['activity_amount'] = tep_number_db_to_user($_SESSION['timesheet']->former_activity->amount, 2);
       $_POST['tariffs_id'] = $_SESSION['timesheet']->former_activity->tariff->id;
       $_POST['activity_travel_distance'] = "" . $_SESSION['timesheet']->former_activity->travel_distance;
+      $_POST['activity_travel_description'] = "" . $_SESSION['timesheet']->former_activity->travel_description;
       $_POST['activity_expenses'] = tep_number_db_to_user($_SESSION['timesheet']->former_activity->expenses, 2);
       $_POST['activity_ticket_number'] = $_SESSION['timesheet']->former_activity->ticket_number;
       $_POST['activity_comment'] = $_SESSION['timesheet']->former_activity->comment;
@@ -73,6 +74,7 @@ if ($_POST['action'] == 'save_data') {
                                           $_POST['activity_amount'],
                                           $_POST['tariffs_id'],
                                           $_POST['activity_travel_distance'],
+                                          $_POST['activity_travel_description'],
                                           $_POST['activity_expenses'],
                                           $_POST['activity_ticket_number'],
                                           $_POST['activity_comment']);
@@ -187,14 +189,16 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
             <td class="item_entry">
               <table border="0" cellspacing="0" cellpadding="2" width="250" class="item_entry">
                 <tr>
-                  <td width="50%" class="item_entry"><?php echo TEXT_ACTIVITY_TRAVELDISTANCE; ?></td><td colspan="2" width="50%" class="item_entry"><?php echo tep_draw_input_field('activity_travel_distance', '', 'size="1" maxlength="5" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?></td>
+                  <td width="50%" class="item_entry"><?php echo TEXT_ACTIVITY_TRAVELDISTANCE; ?></td>
+                  <td width="25%" class="item_entry"><?php echo tep_draw_input_field('activity_travel_distance', '', 'size="1" maxlength="5" style="width: 35px"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?></td>
+                  <td colspan="2" width="25%" class="item_entry"><?php echo tep_draw_input_field('activity_travel_description', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?></td>
                 </tr>
                 <tr>
-                  <td width="50%" class="item_entry"><?php echo TEXT_ACTIVITY_EXPENSES; ?></td><td colspan="2" width="50%" class="item_entry"><?php echo tep_draw_input_field('activity_expenses', '', 'size="1" maxlength="7" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?></td>
+                  <td width="50%" class="item_entry"><?php echo TEXT_ACTIVITY_EXPENSES; ?></td><td colspan="4" width="50%" class="item_entry"><?php echo tep_draw_input_field('activity_expenses', '', 'size="1" maxlength="7" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?></td>
                 </tr>
                 <tr>
                   <td width="50%" class="item_entry"><?php echo TEXT_ACTIVITY_TICKETNUMBER; ?></td>
-                  <td width="50%" class="item_entry"><?php echo tep_draw_input_field('activity_ticket_number', '', 'size="1" maxlength="16" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?></td>
+                  <td colspan="2" width="50%" class="item_entry"><?php echo tep_draw_input_field('activity_ticket_number', '', 'size="1" maxlength="16" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?></td>
                   <td width="22px" class="item_entry">
                     <?php if (ENABLE_TICKET_DATABASE_LOOKUPS && ($_POST['action']=='enter_data'||$_POST['action']=='save_data')) {
                       echo tep_image_button('button_lookup.gif', TEXT_ACTIVITY_TICKETNUMBER_LOOKUP, 'onClick="fetchTicketNrAndDescription(\'' . tep_strftime('%Y-%m-%d', $_POST['selected_date']) . '\');"');
