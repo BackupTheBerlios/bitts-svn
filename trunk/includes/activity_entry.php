@@ -190,8 +190,8 @@ $_POST['previous_activity_amount'] = activity::format('amount', $_POST['activity
               <table border="0" cellspacing="0" cellpadding="2" width="250" class="item_entry">
                 <tr>
                   <td width="50%" class="item_entry"><?php echo TEXT_ACTIVITY_TRAVELDISTANCE; ?></td>
-                  <td width="20%" class="item_entry"><?php echo tep_draw_input_field('activity_travel_distance', '', 'size="1" maxlength="5" style="width: 35px"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?></td>
-                  <td colspan="2" width="30%" class="item_entry"><?php echo tep_draw_input_field('activity_travel_description', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?></td>
+                  <td width="15%" class="item_entry"><?php echo tep_draw_input_field('activity_travel_distance', '', 'size="1" maxlength="5" style="width: 35px"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?></td>
+                  <td colspan="2" width="35%" class="item_entry"><?php echo tep_draw_input_field('activity_travel_description', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?></td>
                 </tr>
                 <tr>
                   <td width="50%" class="item_entry"><?php echo TEXT_ACTIVITY_EXPENSES; ?></td><td colspan="4" width="50%" class="item_entry"><?php echo tep_draw_input_field('activity_expenses', '', 'size="1" maxlength="7" style="width: 100%"' . ($_POST['action']=='enter_data'||$_POST['action']=='save_data'?'':' disabled')); ?></td>
