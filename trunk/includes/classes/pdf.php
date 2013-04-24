@@ -3,7 +3,7 @@
  * CLASS FILE  : pdf.php
  * Project     : BitTS - BART it TimeSheet
  * Auteur(s)   : Erwin Beukhof
- * Datum       : 22 aug 2011
+ * Datum       : 24 april 2013
  * Beschrijving: FPDF wrapper class with pre-formatting
  */
 
@@ -211,6 +211,41 @@
       $this->Cell(50, 6, $period, 0, 0, 'L');
       $this->Ln();
       $this->Ln(6);
+    }
+
+    public function TravelDistancesAndExpensesHeader($period, $employee_name) {
+      $this->SetDrawColor(0, 0, 0);
+      $this->SetTextColor(0, 0, 0);
+      $this->SetLineWidth(.3);
+      $this->SetFont('Arial', '', 12);
+      $this->Cell(30, 6, REPORT_TEXT_PERIOD, 0, 0, 'L');
+      $this->Cell(50, 6, $period, 0, 0, 'L');
+      $this->Ln();
+      $this->Cell(30, 6, REPORT_TEXT_EMPLOYEE_NAME, 0, 0, 'L');
+      $this->Cell(50, 6, $employee_name, 0, 0, 'L');
+      $this->Ln();
+      $this->Ln(6);
+    }
+
+    public function TravelDistancesAndExpensesTableHeader() {
+      $this->SetFont('Arial', 'B', 10);
+      $this->SetFillColor(191, 191, 191);
+      $this->Cell(20, 5, REPORT_TABLE_HEADER_DATE, 'LR', 0, 'C', true);
+      $this->Cell(22, 5, REPORT_TABLE_HEADER_TRAVEL_DISTANCE, 'LR', 0, 'C', true);
+      $this->Cell(22, 5, REPORT_TABLE_HEADER_TRAVEL_DESCRIPTION, 'LR', 0, 'C', true);
+      $this->Cell(22, 5, REPORT_TABLE_HEADER_EXPENSES, 'LR', 0, 'C', true);
+      // Fill the rest of the available space (277 mm -/- cell widths)
+      $this->Cell(0, 5, '', 'L', 1, 'C', true);
+    }
+
+    public function TravelDistancesAndExpensesTableFooter($total_travel_distance, $total_expenses) {
+      $this->SetLineWidth(.3);
+      $this->SetFont('Arial', 'B', 10);
+      $this->Cell(20, 5);
+      $this->Cell(22, 5, $total_travel_distance, 'T', 0, 'R');
+      $this->Cell(22, 5);
+      $this->Cell(22, 5, tep_number_db_to_user($total_expenses, 2), 'T', 0, 'R');
+      $this->Ln();
     }
 
     public function ConsolidatedProjectsTableHeader($show_tariff = true, $show_travel_distance = true, $show_expenses = true, $show_ticket_number = true, $show_comment = true) {
