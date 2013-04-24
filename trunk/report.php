@@ -279,13 +279,14 @@
               $pdf->InvoiceSignature();
             }
             $pdf->AddPage();
-          }
+          } // if ($table_header_set)
           $pdf->TravelDistancesAndExpensesHeader(tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $travel_distances_and_expenses_row['timesheets_start_date'])) . ' - ' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $travel_distances_and_expenses_row['timesheets_end_date'])),
                                                  $travel_distances_and_expenses_row['employees_fullname']);
           $pdf->TravelDistancesAndExpensesTableHeader();
+          $table_header_set = true;
           $total_travel_distance = 0;
           $total_expenses = 0.00;
-        }
+        } // if ($employees_id != $travel_distances_and_expenses_row['employees_id'])
         // And we're off creating the table contents
         $pdf->TravelDistancesAndExpensesTableContents(tep_datetouts('%Y-%m-%d', $travel_distances_and_expenses_row['activities_date']),
                                                       $travel_distances_and_expenses_row['activities_travel_distance'],
