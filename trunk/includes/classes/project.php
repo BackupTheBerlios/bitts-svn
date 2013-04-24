@@ -102,11 +102,11 @@
       $projects_array = array();
 
       $index = 0;
-      $projects_sql = "SELECT projects_id FROM " . TABLE_PROJECTS;
-      if (!$show_history || $show_history == 'false') {
-        $projects_sql .= " WHERE projects_end_date >= CURDATE()";
+      $projects_sql = "SELECT projects_id FROM " . TABLE_PROJECTS . " ";
+      if (!$show_history) {
+        $projects_sql .= "WHERE projects_end_date >= CURDATE() ";
       }
-      $projects_sql .= " ORDER BY projects_name;";
+      $projects_sql .= "ORDER BY projects_name;";
       $projects_query = $database->query($projects_sql);
       while ($projects_result = $database->fetch_array($projects_query)) {
         $projects_array[$index] = new project($projects_result['projects_id'], 'dummy');
