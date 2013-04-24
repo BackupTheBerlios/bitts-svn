@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 16 april 2013
+ * Date        : 24 april 2013
  * Description : Dutch language file
  */
 
@@ -294,6 +294,7 @@ define('TEXT_BUTTON_PDF', 'Maak .pdf bestand');
 define('TEXT_BUTTON_CSV', 'Exporteer naar .csv bestand');
 define('REPORT_NAME_EMPLOYEES', 'Overzicht medewerkers');
 define('REPORT_NAME_PROJECTS', 'Overzicht projecten');
+define('REPORT_NAME_TRAVEL_DISTANCES_AND_EXPENSES', 'Overzicht reisafstanden en onkosten');
 define('REPORT_NAME_CONSOLIDATED_PROJECTS_PER_EMPLOYEE', 'Geconsolideerd overzicht per medewerker');
 define('REPORT_NAME_TIMESHEETS', 'Overzicht urenstaten');
 define('REPORT_EMPLOYEES_ID', 'nr');
