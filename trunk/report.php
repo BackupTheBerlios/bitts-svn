@@ -227,7 +227,7 @@
       $database = $_SESSION['database'];
       // *** Create pdf object ***
       $pdf = new PDF(); // Create a portrait pdf
-      $pdf->SetTitle(REPORT_NAME_PROJECTS);
+      $pdf->SetTitle(REPORT_NAME_TRAVEL_DISTANCES_AND_EXPENSES);
       $pdf->SetAuthor(TITLE);
       $pdf->AddPage();
 
@@ -262,7 +262,6 @@
       }
       $travel_distances_and_expenses_query .= "ORDER BY emp.employees_id, act.activities_date;";
       $travel_distances_and_expenses_result = $database->query($travel_distances_and_expenses_query);
-      $travel_distances_and_expenses_array = array();
 
       $employees_id = '';
       $table_header_set = false;
