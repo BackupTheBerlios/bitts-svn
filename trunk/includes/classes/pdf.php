@@ -238,6 +238,15 @@
       $this->Cell(0, 5, '', 'L', 1, 'C', true);
     }
 
+    public function TravelDistancesAndExpensesTableContents($date, $travel_distance, $travel_description, $expenses, $project_name, $role_name) {
+      $this->SetFont('Arial', '', 10);
+      $this->Cell(20, 5, tep_strftime(DATE_FORMAT_SHORT, $date), 0, 0, 'C');
+      $this->Cell(22, 5, $travel_distance, 0, 0, 'R');
+      $this->Cell(22, 5, $travel_description, 0, 0, 'R');
+      $this->Cell(22, 5, tep_number_db_to_user($expenses, 2), 0, 0, 'R');
+      //$this->Ln();
+    }
+
     public function TravelDistancesAndExpensesTableFooter($total_travel_distance, $total_expenses) {
       $this->SetLineWidth(.3);
       $this->SetFont('Arial', 'B', 10);
