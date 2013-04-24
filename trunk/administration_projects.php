@@ -3,7 +3,7 @@
  * CODE FILE   : administration_projects.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 aug 2011
+ * Date        : 24 april 2013
  * Description : Project administration form
  *               Data validation sequence
  *               Storing of entered data (via project object)
@@ -22,7 +22,7 @@
     tep_redirect(tep_href_link(FILENAME_DEFAULT));
 
   // Create a new project object with id == 0 (default)
-  $_SESSION['project'] = new project();
+  $_SESSION['project'] = new project(0, null, true);
 
   // Reset error level
   $error_level = 0;
