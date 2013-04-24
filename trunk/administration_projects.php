@@ -22,7 +22,7 @@
     tep_redirect(tep_href_link(FILENAME_DEFAULT));
 
   // Create a new project object with id == 0 (default)
-  $_SESSION['project'] = new project(0, null, true);
+  $_SESSION['project'] = new project();
 
   // Reset error level
   $error_level = 0;
@@ -271,7 +271,8 @@
 
   // Reload the project object in order to
   // update the project listing below
-  $_SESSION['project'] = new project(0, null, $_POST['show_history']);
+  // $_SESSION['project'] = new project(0, null, $_POST['show_history']);
+  $_SESSION['project'] = new project(0, null, true);
 
   // header //
   require(DIR_WS_INCLUDES . 'header.php'); ?>
@@ -306,23 +307,23 @@
           <tr>
             <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
           </tr>
-          <tr>
+<!--          <tr>
             <td align="center">
               <table border="0" cellspacing="0" cellpadding="2" class="item_entry">
                 <tr>
-                  <td class="item_entry">
-                    <?php echo TEXT_PROJECTS_SHOW_HISTORY; ?>
-                  </td>
-                  <td class="item_entry" style="text-align:left">
-                    <?php echo tep_draw_checkbox_field('show_history', 'true', ($_POST['show_history'] == 'true'), 'onClick="refreshProjectListing(' . $_POST['mPath'] . ', this.checked);"'); ?>
-                  </td>
+                  <td class="item_entry"> //-->
+                    <?php // echo TEXT_PROJECTS_SHOW_HISTORY; ?>
+<!--                  </td>
+                  <td class="item_entry" style="text-align:left"> //-->
+                    <?php // echo tep_draw_checkbox_field('show_history', 'true', ($_POST['show_history'] == 'true'), 'onClick="refreshProjectListing(' . $_POST['mPath'] . ', this.checked);"'); ?>
+<!--                  </td>
                 </tr>
               </table>
             </td>
           </tr>
-          <tr>
-            <td><?php echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
-          </tr>
+          <tr> //-->
+            <td><?php // echo tep_draw_separator('pixel_trans.gif', '100%', '20'); ?></td>
+<!--          </tr> //-->
           <tr>
             <td id="projectEntries">
               <!-- ********** projectEntries ********** //-->
@@ -392,7 +393,7 @@
         var obj = document.getElementsByName('show_history').item(i);
         obj.value = (showHistory == true);
       }
-      jah('ajax_administration_projects.php?mPath=' + mPath + '&showhistory=' + showHistory, 'projectEntries');
+      //jah('ajax_administration_projects.php?mPath=' + mPath + '&showhistory=' + showHistory, 'projectEntries');
     }
   </script>
 <!-- body_eof //-->
