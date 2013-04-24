@@ -244,7 +244,7 @@
       $this->Cell(22, 5, $travel_distance, 0, 0, 'R');
       $this->Cell(22, 5, $travel_description, 0, 0, 'R');
       $this->Cell(22, 5, tep_number_db_to_user($expenses, 2), 0, 0, 'R');
-      //$this->Ln();
+      $this->Ln();
     }
 
     public function TravelDistancesAndExpensesTableFooter($total_travel_distance, $total_expenses) {
