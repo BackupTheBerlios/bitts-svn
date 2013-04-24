@@ -3,7 +3,7 @@
  * CODE FILE   : report.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 aug 2011
+ * Date        : 24 april 2013
  * Description : Data gathering and reporting functions
  */
 
@@ -222,6 +222,90 @@
           $pdf->InvoiceSignature();
         }
       }
+      break;
+    case 'report_travel_distances_and_expenses':
+      $database = $_SESSION['database'];
+      // *** Create pdf object ***
+      $pdf = new PDF(); // Create a portrait pdf
+      $pdf->SetTitle(REPORT_NAME_PROJECTS);
+      $pdf->SetAuthor(TITLE);
+      $pdf->AddPage();
+
+      $periodstartdate = $database->prepare_input(tep_periodstartdate($_POST['period']));
+      $travel_distances_and_expenses_query = "SELECT ts.timesheets_start_date, " .
+                                                    "ts.timesheets_end_date, " .
+                                                    "emp.employees_id, " .
+                                                    "emp.employees_fullname, " .
+                                                    "act.activities_date, " .
+                                                    "act.activities_travel_distance, " .
+                                                    "act.activities_travel_description, " .
+                                                    "act.activities_expenses, " .
+                                                    "pr.projects_name, " .
+                                                    "rl.roles_name " .
+                                             "FROM " . TABLE_TIMESHEETS . " AS ts " .
+                                             "INNER JOIN (" . TABLE_EMPLOYEES . " AS emp, " .
+                                               TABLE_ACTIVITIES . " AS act, " .
+                                               TABLE_TARIFFS . " AS tar, " .
+                                               TABLE_EMPLOYEES_ROLES . " AS er, " .
+                                               TABLE_ROLES . " AS rl, " .
+                                               TABLE_PROJECTS . " AS pr) " .
+                                             "ON (ts.employees_id = emp.employees_id " .
+                                               "AND act.timesheets_id = ts.timesheets_id " .
+                                               "AND act.tariffs_id = tar.tariffs_id " .
+                                               "AND er.employees_roles_id = tar.employees_roles_id " .
+                                               "AND rl.roles_id = er.roles_id " .
+                                               "AND pr.projects_id = rl.projects_id) " .
+                                             "WHERE ts.timesheets_start_date = '" . $periodstartdate . "' " .
+                                               "AND (act.activities_travel_distance > 0 OR act.activities_expenses > 0) ";
+      if ($_POST['current_employee']) {
+        $travel_distances_and_expenses_query .= "AND emp.employees_id = " . $_SESSION['employee']->id . " ";
+      }
+      $travel_distances_and_expenses_query .= "ORDER BY emp.employees_id, act.activities_date;";
+      $travel_distances_and_expenses_result = $database->query($travel_distances_and_expenses_query);
+      $travel_distances_and_expenses_array = array();
+
+      $employees_id = '';
+      $table_header_set = false;
+
+      while ($travel_distances_and_expenses_row = $database->fetch_array($travel_distances_and_expenses_result)) {
+        if ($employees_id != $travel_distances_and_expenses_row['employees_id']) {
+          $employees_id = $travel_distances_and_expenses_row['employees_id'];
+          if ($table_header_set) {
+            // A previous table exists, create a footer for that one
+            $pdf->TravelDistancesAndExpensesTableFooter($total_travel_distance, $total_expenses);
+            $table_header_set = false; // To prevent the table footer to be written again on the new page
+            // New employee means the timesheet of the previous one has to be signed
+            // We know there is a previous one, because the table header is set
+            if ($_POST['show_signature']) {
+              $pdf->InvoiceSignature();
+            }
+            $pdf->AddPage();
+          }
+          $pdf->TravelDistancesAndExpensesHeader(tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $travel_distances_and_expenses_row['timesheets_start_date'])) . ' - ' . tep_strftime(DATE_FORMAT_SHORT, tep_datetouts('%Y-%m-%d', $travel_distances_and_expenses_row['timesheets_end_date'])),
+                                                 $travel_distances_and_expenses_row['employees_fullname']);
+          $pdf->TravelDistancesAndExpensesTableHeader();
+          $total_travel_distance = 0;
+          $total_expenses = 0.00;
+        }
+        // And we're off creating the table contents
+        $pdf->TravelDistancesAndExpensesTableContents(tep_datetouts('%Y-%m-%d', $travel_distances_and_expenses_row['activities_date']),
+                                                      $travel_distances_and_expenses_row['activities_travel_distance'],
+                                                      $travel_distances_and_expenses_row['activities_travel_description'],
+                                                      $travel_distances_and_expenses_row['activities_expenses'],
+                                                      $travel_distances_and_expenses_row['projects_name'],
+                                                      $travel_distances_and_expenses_row['roles_name']);
+        $total_travel_distance += $travel_distances_and_expenses_row['activities_travel_distance'];
+        $total_expenses += $travel_distances_and_expenses_row['activities_expenses'];
+      } // while ($travel_distances_and_expenses_row = $database->fetch_array($travel_distances_and_expenses_result))
+      $database->free_result($travel_distances_and_expenses_result);
+      if ($table_header_set) {
+        // Create a footer for the last table
+        $pdf->TravelDistancesAndExpensesTableFooter($total_travel_distance, $total_expenses);
+        // Finally the document needs one last signature
+        if ($_POST['show_signature']) {
+          $pdf->InvoiceSignature();
+        } // if ($_POST['show_signature'])
+      } // if ($table_header_set)
       break;
     case 'report_consolidated_projects_per_employee':
       $database = $_SESSION['database'];
