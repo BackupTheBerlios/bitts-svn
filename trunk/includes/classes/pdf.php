@@ -3,7 +3,7 @@
  * CLASS FILE  : pdf.php
  * Project     : BitTS - BART it TimeSheet
  * Auteur(s)   : Erwin Beukhof
- * Datum       : 24 april 2013
+ * Datum       : 25 april 2013
  * Beschrijving: FPDF wrapper class with pre-formatting
  */
 
@@ -232,7 +232,7 @@
       $this->SetFillColor(191, 191, 191);
       $this->Cell(20, 5, REPORT_TABLE_HEADER_DATE, 'LR', 0, 'C', true);
       $this->Cell(22, 5, REPORT_TABLE_HEADER_TRAVEL_DISTANCE, 'LR', 0, 'C', true);
-      $this->Cell(100, 5, REPORT_TABLE_HEADER_TRAVEL_DESCRIPTION, 'LR', 0, 'C', true);
+      $this->Cell(120, 5, REPORT_TABLE_HEADER_TRAVEL_DESCRIPTION, 'LR', 0, 'C', true);
       $this->Cell(22, 5, REPORT_TABLE_HEADER_EXPENSES, 'LR', 0, 'C', true);
       // Fill the rest of the available space (277 mm -/- cell widths)
       $this->Cell(0, 5, '', 'L', 1, 'C', true);
@@ -242,7 +242,7 @@
       $this->SetFont('Arial', '', 10);
       $this->Cell(20, 5, tep_strftime(DATE_FORMAT_SHORT, $date), 0, 0, 'C');
       $this->Cell(22, 5, $travel_distance, 0, 0, 'R');
-      $this->Cell(100, 5, $travel_description, 0, 0, 'L');
+      $this->Cell(120, 5, $travel_description, 0, 0, 'L');
       $this->Cell(22, 5, tep_number_db_to_user($expenses, 2), 0, 0, 'R');
       $this->Ln();
     }
@@ -252,7 +252,7 @@
       $this->SetFont('Arial', 'B', 10);
       $this->Cell(20, 5);
       $this->Cell(22, 5, $total_travel_distance, 'T', 0, 'R');
-      $this->Cell(100, 5);
+      $this->Cell(120, 5);
       $this->Cell(22, 5, tep_number_db_to_user($total_expenses, 2), 'T', 0, 'R');
       $this->Ln();
     }
