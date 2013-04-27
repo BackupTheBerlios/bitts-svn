@@ -166,8 +166,8 @@
             </td>
             <td style="text-align:left; vertical-align:middle;" class="item_entry" colspan="3">
               <?php if ($_POST['action']!='enter_data' && $_POST['action']!='save_data' && $_POST['action']!='delete_entry') {
-                echo tep_draw_form('fcancel', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array(), array('mPath'), 'hidden_field');
-                echo tep_draw_checkbox_field('projects_show_history_hidden', true, $_POST['show_history'], '') . TEXT_PROJECTS_SHOW_HISTORY;
+                echo tep_draw_form('fshowhistory', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array(), array('mPath'), 'hidden_field');
+                echo tep_draw_checkbox_field('show_history', true, $_POST['show_history'], 'onClick="document.forms[\'fshowhistory\'].submit();"') . TEXT_PROJECTS_SHOW_HISTORY;
                 echo '</form>';
               } else {
                 echo tep_draw_checkbox_field('projects_show_history_hidden', true, $_POST['show_history'], ' disabled') . TEXT_PROJECTS_SHOW_HISTORY;
