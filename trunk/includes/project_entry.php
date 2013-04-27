@@ -3,7 +3,7 @@
  * CODE FILE   : project_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 aug 2011
+ * Date        : 27 april 2013
  * Description : Project entry fields
  */
 ?>
@@ -164,7 +164,16 @@
                 echo tep_image(DIR_WS_LANGUAGES . $_SESSION['language'] . '/images/buttons/button_new_disabled.gif', null, null, null, 'style="vertical-align:middle"');
               } ?>
             </td>
-            <td align="right" class="item_entry" colspan="4">
+            <td style="text-align:left; vertical-align:middle;" class="item_entry" colspan="3">
+              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='save_data' || $_POST['action']=='delete_entry') {
+                echo tep_draw_form('fcancel', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array(), array('mPath'), 'hidden_field');
+                echo tep_draw_checkbox_field('projects_show_history_hidden', true, $_POST['show_history'], '') . TEXT_PROJECTS_SHOW_HISTORY;
+                echo '</form>';
+              } else {
+                echo tep_draw_checkbox_field('projects_show_history_hidden', true, $_POST['show_history'], ' disabled') . TEXT_PROJECTS_SHOW_HISTORY;
+              } ?>
+            </td>
+            <td style="text-align:right" class="item_entry">
               <?php if ($_POST['action']=='enter_data' || $_POST['action']=='save_data') {
                 echo tep_image_submit('button_save.gif', TEXT_ENTRY_SAVE, 'style="vertical-align:middle"');
                 echo '</form>';
