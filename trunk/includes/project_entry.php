@@ -155,7 +155,7 @@
           </tr>
           <tr>
             <td align="left" class="item_entry">
-              <?php if ($_POST['action']!='enter_data'&&$_POST['action']!='save_data'&&$_POST['action']!='delete_entry') {
+              <?php if ($_POST['action']!='enter_data' && $_POST['action']!='save_data' && $_POST['action']!='delete_entry') {
                 echo tep_draw_form('fnew', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array('action'=>'enter_data', 'projects_calculated_hours_period'=>'E'), array('mPath'), 'hidden_field');
                 echo tep_draw_hidden_field('show_history', $_POST['show_history']);
                 echo tep_image_submit('button_new.gif', TEXT_ENTRY_NEW, 'style="vertical-align:middle"');
@@ -165,7 +165,7 @@
               } ?>
             </td>
             <td style="text-align:left; vertical-align:middle;" class="item_entry" colspan="3">
-              <?php if ($_POST['action']=='enter_data' || $_POST['action']=='save_data' || $_POST['action']=='delete_entry') {
+              <?php if ($_POST['action']!='enter_data' && $_POST['action']!='save_data' && $_POST['action']!='delete_entry') {
                 echo tep_draw_form('fcancel', tep_href_link(FILENAME_ADMINISTRATION_PROJECTS)) . tep_create_parameters(array(), array('mPath'), 'hidden_field');
                 echo tep_draw_checkbox_field('projects_show_history_hidden', true, $_POST['show_history'], '') . TEXT_PROJECTS_SHOW_HISTORY;
                 echo '</form>';
