@@ -3,7 +3,7 @@
  * CODE FILE   : administration_projects.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 24 april 2013
+ * Date        : 27 april 2013
  * Description : Project administration form
  *               Data validation sequence
  *               Storing of entered data (via project object)
@@ -271,8 +271,7 @@
 
   // Reload the project object in order to
   // update the project listing below
-  // $_SESSION['project'] = new project(0, null, $_POST['show_history']);
-  $_SESSION['project'] = new project(0, null, true);
+  $_SESSION['project'] = new project(0, null, $_POST['show_history']);
 
   // header //
   require(DIR_WS_INCLUDES . 'header.php'); ?>
