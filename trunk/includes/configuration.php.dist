@@ -3,7 +3,7 @@
  * CODE FILE   : configuration.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 22 aug 2011
+ * Date        : 11 june 2013
  * Description : Configuration parameters.
  *               Semi-permanent and basic configuration parameters are placed
  *               here.
@@ -11,7 +11,7 @@
 
   // define the project version
   define('PROJECT_NAME', 'BitTS');
-  define('PROJECT_VERSION', 'v0.9.3');
+  define('PROJECT_VERSION', 'v0.9.4');
 
   // Define the webserver and path parameters
   define('HTTP_SERVER', 'http://localhost'); // eg, http://localhost - should not be empty for productive servers

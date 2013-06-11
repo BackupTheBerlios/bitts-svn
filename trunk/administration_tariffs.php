@@ -3,7 +3,7 @@
  * CODE FILE   : administration_tariffs.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 january 2011
+ * Date        : 11 june 2013
  * Description : Tariff administration form
  *               Data validation sequence
  *               Storing of entered data
@@ -219,9 +219,10 @@
                       <tr>
                         <td class="item_entry">
                           <?php echo tep_draw_form('project_selection', tep_href_link(FILENAME_ADMINISTRATION_TARIFFS)) . tep_create_parameters(array(), array('mPath'), 'hidden_field');
-                          $temp_project = new project();
-                          echo tep_html_select('projects_id', tep_get_partial_array($temp_project->listing, 'id', 'name'), true, (tep_not_null($_POST['projects_id'])?$_POST['projects_id']:'select_none'), 'onChange="this.form.submit();" size="'.(sizeof($temp_project->listing)>1?(sizeof($temp_project->listing)<24?sizeof($temp_project->listing):25):2).'" style="width:175pt"');
-                          ?>
+                            $temp_project = new project(); ?>
+                            <div style="overflow:auto;width:175pt">
+                              <?php echo tep_html_select('projects_id', tep_get_partial_array($temp_project->listing, 'id', 'name'), true, (tep_not_null($_POST['projects_id'])?$_POST['projects_id']:'select_none'), 'onChange="this.form.submit();" size="'.(sizeof($temp_project->listing)>1?(sizeof($temp_project->listing)<24?sizeof($temp_project->listing):25):2).'"'); ?>
+                            </div>
                           </form>
                         </td>
                       </tr>
@@ -236,9 +237,10 @@
                       <tr>
                         <td class="item_entry">
                           <?php echo tep_draw_form('employee_role_selection', tep_href_link(FILENAME_ADMINISTRATION_TARIFFS)) . tep_create_parameters(array(), array('mPath', 'projects_id'), 'hidden_field');
-                          $temp_employee_role = new employee_role(0, $_POST['projects_id']);
-                          echo tep_html_select('employees_roles_id', tep_get_partial_array($temp_employee_role->listing, 'id', 'name'), true, (tep_not_null($_POST['employees_roles_id'])?$_POST['employees_roles_id']:'select_none'), 'onChange="this.form.submit();" size="'.(sizeof($temp_employee_role->listing)>1?(sizeof($temp_employee_role->listing)<25?sizeof($temp_employee_role->listing):25):2).'" style="width:175pt"');
-                          ?>
+                            $temp_employee_role = new employee_role(0, $_POST['projects_id']); ?>
+                            <div style="overflow:auto;width:175pt">
+                              <?php echo tep_html_select('employees_roles_id', tep_get_partial_array($temp_employee_role->listing, 'id', 'name'), true, (tep_not_null($_POST['employees_roles_id'])?$_POST['employees_roles_id']:'select_none'), 'onChange="this.form.submit();" size="'.(sizeof($temp_employee_role->listing)>1?(sizeof($temp_employee_role->listing)<25?sizeof($temp_employee_role->listing):25):2).'"'); ?>
+                            </div>
                           </form>
                         </td>
                       </tr>
@@ -327,6 +329,14 @@
       <!-- body_text_eof //-->
     </tr>
   </table>
+  <script type="text/javascript">
+    if (document.forms['project_selection']['projects_id'].offsetWidth < 175) {
+      document.forms['project_selection']['projects_id'].style.width = "175pt";
+    }
+    if (document.forms['employee_role_selection']['employees_roles_id'].offsetWidth < 175) {
+      document.forms['employee_role_selection']['employees_roles_id'].style.width = "175pt";
+    }
+  </script>
 <!-- body_eof //-->
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
