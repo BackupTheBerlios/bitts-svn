@@ -3,7 +3,7 @@
  * CODE FILE   : application_top.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 25 janyary 2011
+ * Date        : 08 november 2013
  * Description : .....
  *               .....
  *               Framework: osCommerce, Open Source E-Commerce Solutions
@@ -18,6 +18,9 @@
 
   // Include server parameters
   require('includes/configuration.php');
+
+  // Additional definitions
+  define('FPDF_FONTPATH', DIR_WS_INCLUDES . '/fpdf_fonts/');
 
   // Include the list of application filenames
   require(DIR_WS_INCLUDES . 'filenames.php');
