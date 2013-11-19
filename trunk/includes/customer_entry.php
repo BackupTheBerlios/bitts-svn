@@ -39,10 +39,10 @@
           </tr>
           <tr>
             <td class="item_entry">
-              <?php echo TEXT_CUSTOMERS_ID_EXTERNAL; ?>
+              <?php echo TEXT_CUSTOMERS_NAME; ?>
             </td>
-            <td class="item_entry" width="150">
-              <?php echo tep_draw_input_field('customers_id_external', '', 'size="1" maxlength="10" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
+            <td class="item_entry">
+              <?php echo tep_draw_input_field('customers_name', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
             <td class="item_entry">&nbsp;</td>
             <td class="item_entry">
@@ -54,10 +54,10 @@
           </tr>
           <tr>
             <td class="item_entry">
-              <?php echo TEXT_CUSTOMERS_NAME; ?>
+              <?php echo TEXT_CUSTOMERS_ID_EXTERNAL; ?>
             </td>
-            <td class="item_entry">
-              <?php echo tep_draw_input_field('customers_name', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
+            <td class="item_entry" width="150">
+              <?php echo tep_draw_input_field('customers_id_external', '', 'size="1" maxlength="10" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
             <td class="item_entry">&nbsp;</td>
             <td class="item_entry">
