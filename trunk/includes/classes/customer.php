@@ -9,7 +9,7 @@
  */
 
   class customer {
-    private $id, $name, $id_external, $billing_name1, $billing_name2, $billing_address, $billing_postcode, $billing_city, $billing_country, $billing_email_address, $billing_phone, $billing_fax, $listing;
+    private $id, $name, $id_external, $billing_name1, $billing_name2, $billing_address, $billing_postcode, $billing_city, $billing_country, $billing_email_address, $billing_phone, $billing_fax, $billing_show_logo, $listing;
 
     public function __construct($id = 0) {
       $database = $_SESSION['database'];
