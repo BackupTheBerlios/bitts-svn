@@ -3,7 +3,7 @@
  * CODE FILE   : administration_customers.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 01 july 2009
+ * Date        : 19 november 2013
  * Description : Customer administration form
  *               Data validation sequence
  *               Storing of entered data (via customer object)
@@ -54,6 +54,7 @@
         // OK, entry can be saved
         $_SESSION['customer']->save($_POST['customers_id'],
                                     $_POST['customers_name'],
+                                    $_POST['customers_id_external'],
                                     $_POST['customers_billing_name1'],
                                     $_POST['customers_billing_name2'],
                                     $_POST['customers_billing_address'],
@@ -62,7 +63,8 @@
                                     $_POST['customers_billing_country'],
                                     $_POST['customers_billing_email_address'],
                                     $_POST['customers_billing_phone'],
-                                    $_POST['customers_billing_fax']);
+                                    $_POST['customers_billing_fax'],
+                                    $_POST['customers_billing_show_logo']);
 
         // Clear all values except mPath
         foreach($_POST as $key=>$value) {
