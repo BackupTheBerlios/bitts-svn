@@ -3,7 +3,7 @@
  * CODE FILE   : customer_entry.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 14 june 2009
+ * Date        : 19 november 2013
  * Description : Customer entry fields
  */
 ?>
@@ -39,10 +39,10 @@
           </tr>
           <tr>
             <td class="item_entry">
-              <?php echo TEXT_CUSTOMERS_NAME; ?>
+              <?php echo TEXT_CUSTOMERS_ID_EXTERNAL; ?>
             </td>
-            <td class="item_entry">
-              <?php echo tep_draw_input_field('customers_name', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
+            <td class="item_entry" width="150">
+              <?php echo tep_draw_input_field('customers_id_external', '', 'size="1" maxlength="10" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
             <td class="item_entry">&nbsp;</td>
             <td class="item_entry">
@@ -53,7 +53,13 @@
             </td>
           </tr>
           <tr>
-            <td class="item_entry" colspan="3">&nbsp;</td>
+            <td class="item_entry">
+              <?php echo TEXT_CUSTOMERS_NAME; ?>
+            </td>
+            <td class="item_entry">
+              <?php echo tep_draw_input_field('customers_name', '', 'size="1" maxlength="64" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
+            </td>
+            <td class="item_entry">&nbsp;</td>
             <td class="item_entry">
               <?php echo TEXT_CUSTOMERS_BILLING_ADDRESS; ?>
             </td>
@@ -113,6 +119,15 @@
             </td>
             <td class="item_entry">
               <?php echo tep_draw_input_field('customers_billing_fax', '', 'size="1" maxlength="32" style="width: 100%"' . ($_POST['action']=='enter_data'?'':' disabled')); ?>
+            </td>
+          </tr>
+          <tr>
+            <td class="item_entry" colspan="3">&nbsp;</td>
+            <td class="item_entry">
+              <?php echo TEXT_CUSTOMERS_BILLING_SHOW_LOGO; ?>
+            </td>
+            <td class="item_entry" style="text-align:left">
+              <?php echo tep_draw_checkbox_field('customers_billing_show_logo', true, false, ($_POST['action']=='enter_data'?'':' disabled')); ?>
             </td>
           </tr>
           <tr>
