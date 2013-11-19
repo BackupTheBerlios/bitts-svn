@@ -3,7 +3,7 @@
  * CODE FILE   : english.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 24 april 2013
+ * Date        : 19 november 2013
  * Description : English language file
  */
 
@@ -349,6 +349,7 @@ define('EXPORT_NAME_ACTIVITIES', 'Export activities');
 
 define('TEXT_CUSTOMERS', 'Customer');
 define('TEXT_CUSTOMERS_ID', 'Customernr');
+define('TEXT_CUSTOMERS_ID_EXTERNAL', 'External nr');
 define('TEXT_CUSTOMERS_NAME', 'Name');
 define('TEXT_CUSTOMERS_BILLING_NAME1', 'Billing name 1');
 define('TEXT_CUSTOMERS_BILLING_NAME2', 'Billing name 2');
@@ -359,6 +360,7 @@ define('TEXT_CUSTOMERS_BILLING_COUNTRY', 'Billing country');
 define('TEXT_CUSTOMERS_BILLING_EMAIL_ADDRESS', 'Billing e-mail');
 define('TEXT_CUSTOMERS_BILLING_PHONE', 'Billing phone');
 define('TEXT_CUSTOMERS_BILLING_FAX', 'Billing fax');
+define('TEXT_CUSTOMERS_BILLING_SHOW_LOGO', 'Show logo');
 define('TEXT_CUSTOMERS_LISTING_IS_EMPTY', 'No customers available');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required

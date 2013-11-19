@@ -3,7 +3,7 @@
  * CODE FILE   : dutch.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 24 april 2013
+ * Date        : 19 november 2013
  * Description : Dutch language file
  */
 
@@ -349,6 +349,7 @@ define('EXPORT_NAME_ACTIVITIES', 'Export activiteiten');
 
 define('TEXT_CUSTOMERS', 'Debiteur');
 define('TEXT_CUSTOMERS_ID', 'Debiteurnr');
+define('TEXT_CUSTOMERS_ID_EXTERNAL', 'Extern nr');
 define('TEXT_CUSTOMERS_NAME', 'Naam');
 define('TEXT_CUSTOMERS_BILLING_NAME1', 'Factuurnaam 1');
 define('TEXT_CUSTOMERS_BILLING_NAME2', 'Factuurnaam 2');
@@ -359,6 +360,7 @@ define('TEXT_CUSTOMERS_BILLING_COUNTRY', 'Facturatie land');
 define('TEXT_CUSTOMERS_BILLING_EMAIL_ADDRESS', 'Facturatie e-mail');
 define('TEXT_CUSTOMERS_BILLING_PHONE', 'Facturatie telefoonnr');
 define('TEXT_CUSTOMERS_BILLING_FAX', 'Facturatie faxnr');
+define('TEXT_CUSTOMERS_BILLING_SHOW_LOGO', 'Logo tonen');
 define('TEXT_CUSTOMERS_LISTING_IS_EMPTY', 'Geen debiteuren aanwezig');
 // Errorlevels  1..31 == severe error
 // errorlevels 32..63 == attention required
