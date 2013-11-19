@@ -3,13 +3,13 @@
  * CLASS FILE  : customer.php
  * Project     : BitTS - BART it TimeSheet
  * Author(s)   : Erwin Beukhof
- * Date        : 19 june 2009
+ * Date        : 19 november 2013
  * Description : Customer class
  *
  */
 
   class customer {
-    private $id, $name, $billing_name1, $billing_name2, $billing_address, $billing_postcode, $billing_city, $billing_country, $billing_email_address, $billing_phone, $billing_fax, $listing;
+    private $id, $name, $id_external, $billing_name1, $billing_name2, $billing_address, $billing_postcode, $billing_city, $billing_country, $billing_email_address, $billing_phone, $billing_fax, $listing;
 
     public function __construct($id = 0) {
       $database = $_SESSION['database'];
@@ -19,12 +19,13 @@
       if ($id != 0) {
         // Retrieve customer by id
         $id = $database->prepare_input($id);
-        $customer_query = $database->query("select customers_name, customers_billing_name1, customers_billing_name2, customers_billing_address, customers_billing_postcode, customers_billing_city, customers_billing_country, customers_billing_email_address, customers_billing_phone, customers_billing_fax from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$id . "'");
+        $customer_query = $database->query("select customers_name, customers_id_external, customers_billing_name1, customers_billing_name2, customers_billing_address, customers_billing_postcode, customers_billing_city, customers_billing_country, customers_billing_email_address, customers_billing_phone, customers_billing_fax, customers_billing_show_logo from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$id . "'");
         $customer_result = $database->fetch_array($customer_query);
 
         if (tep_not_null($customer_result)) {
           // Customer exists
           $this->fill($customer_result['customers_name'],
+                      $customer_result['customers_id_external'],
                       $customer_result['customers_billing_name1'],
                       $customer_result['customers_billing_name2'],
                       $customer_result['customers_billing_address'],
@@ -33,7 +34,8 @@
                       $customer_result['customers_billing_country'],
                       $customer_result['customers_billing_email_address'],
                       $customer_result['customers_billing_phone'],
-                      $customer_result['customers_billing_fax']);
+                      $customer_result['customers_billing_fax'],
+                      $customer_result['customers_billing_show_logo']==1);
         }
       } else {
         // We probably created an empty Customer object to retrieve the entire customer listing
@@ -47,6 +49,8 @@
           return $this->id;
       	case 'name':
           return $this->name;
+        case 'id_external':
+          return $this->id_external;
         case 'billing_name1':
           return $this->billing_name1;
         case 'billing_name2':
@@ -65,6 +69,8 @@
           return $this->billing_phone;
         case 'billing_fax':
           return $this->billing_fax;
+        case 'billing_show_logo':
+          return $this->billing_show_logo;
         case 'listing':
           return $this->listing;
         case 'listing_empty':
@@ -73,8 +79,9 @@
       return null;
     }
 
-    public function fill($name = '', $billing_name1 = '', $billing_name2 = '', $billing_address = '', $billing_postcode = '', $billing_city = '', $billing_country = '', $billing_email_address = '', $billing_phone = '', $billing_fax = '') {
+    public function fill($name = '', $id_external = '', $billing_name1 = '', $billing_name2 = '', $billing_address = '', $billing_postcode = '', $billing_city = '', $billing_country = '', $billing_email_address = '', $billing_phone = '', $billing_fax = '', $billing_show_logo = true) {
       $this->name = $name;
+      $this->id_external = $id_external;
       $this->billing_name1 = $billing_name1;
       $this->billing_name2 = $billing_name2;
       $this->billing_address = $billing_address;
@@ -84,6 +91,7 @@
       $this->billing_email_address = $billing_email_address;
       $this->billing_phone = $billing_phone;
       $this->billing_fax = $billing_fax;
+      $this->billing_show_logo = $billing_show_logo;
     }
 
     private function get_array() {
@@ -100,23 +108,23 @@
       return $customer_array;
     }
 
-    public function save($id = 0, $name = '', $billing_name1 = '', $billing_name2 = '', $billing_address = '', $billing_postcode = '', $billing_city = '', $billing_country = '', $billing_email_address = '', $billing_phone = '', $billing_fax = '') {
+    public function save($id = 0, $name = '', $id_external = '', $billing_name1 = '', $billing_name2 = '', $billing_address = '', $billing_postcode = '', $billing_city = '', $billing_country = '', $billing_email_address = '', $billing_phone = '', $billing_fax = '', $billing_show_logo = true) {
       // Create new customer, fill and save it
 
       if ($id != 0) {
         // Create, fill and save customer
         $customer = new customer($id);
-        $customer->fill($name, $billing_name1, $billing_name2, $billing_address, $billing_postcode, $billing_city, $billing_country, $billing_email_address, $billing_phone, $billing_fax);
+        $customer->fill($name, $id_external, $billing_name1, $billing_name2, $billing_address, $billing_postcode, $billing_city, $billing_country, $billing_email_address, $billing_phone, $billing_fax, $billing_show_logo);
         $customer->save();
       } else {
         $database = $_SESSION['database'];
         // Insert a new entry if one does not exist or update the existing one
         if (!$this->id_exists($this->id)) {
           // The entry does not exist
-          $database->query("insert into " . TABLE_CUSTOMERS . " (customers_id, customers_name, customers_billing_name1, customers_billing_name2, customers_billing_address, customers_billing_postcode, customers_billing_city, customers_billing_country, customers_billing_email_address, customers_billing_phone, customers_billing_fax) values ('" . $this->id . "', '" . $this->name . "', '" . $this->billing_name1 . "', '" . $this->billing_name2 . "', '" . $this->billing_address . "', '" . $this->billing_postcode . "', '" . $this->billing_city . "', '" . $this->billing_country . "', '" . $this->billing_email_address . "', '" . $this->billing_phone . "', '" . $this->billing_fax . "')");
+          $database->query("insert into " . TABLE_CUSTOMERS . " (customers_id, customers_name, customers_id_external, customers_billing_name1, customers_billing_name2, customers_billing_address, customers_billing_postcode, customers_billing_city, customers_billing_country, customers_billing_email_address, customers_billing_phone, customers_billing_fax, customers_billing_show_logo) values ('" . $this->id . "', '" . $database->input($this->name) . "', '" . $database->input($this->id_external) . "', '" . $database->input($this->billing_name1) . "', '" . $database->input($this->billing_name2) . "', '" . $database->input($this->billing_address) . "', '" . $database->input($this->billing_postcode) . "', '" . $database->input($this->billing_city) . "', '" . $database->input($this->billing_country) . "', '" . $database->input($this->billing_email_address) . "', '" . $database->input($this->billing_phone) . "', '" . $database->input($this->billing_fax) . "', '" . ($this->billing_show_logo?1:0) . "')");
         } else {
           // The entry exists, update the contents
-          $activity_query = $database->query("update " . TABLE_CUSTOMERS . " set customers_id='" . $this->id . "', customers_name='" . $this->name . "', customers_billing_name1='" . $this->billing_name1 . "', customers_billing_name2='" . $this->billing_name2 . "', customers_billing_address='" . $this->billing_address . "', customers_billing_postcode='" . $this->billing_postcode . "', customers_billing_city='" . $this->billing_city . "', customers_billing_country='" . $this->billing_country . "', customers_billing_email_address='" . $this->billing_email_address . "', customers_billing_phone='" . $this->billing_phone . "', customers_billing_fax='" . $this->billing_fax . "' where customers_id = '" . (int)$this->id . "'");
+          $activity_query = $database->query("update " . TABLE_CUSTOMERS . " set customers_id='" . $this->id . "', customers_name='" . $database->input($this->name) . "', customers_id_external='" . $database->input($this->id_external) . "', customers_billing_name1='" . $database->input($this->billing_name1) . "', customers_billing_name2='" . $database->input($this->billing_name2) . "', customers_billing_address='" . $database->input($this->billing_address) . "', customers_billing_postcode='" . $database->input($this->billing_postcode) . "', customers_billing_city='" . $database->input($this->billing_city) . "', customers_billing_country='" . $database->input($this->billing_country) . "', customers_billing_email_address='" . $database->input($this->billing_email_address) . "', customers_billing_phone='" . $database->input($this->billing_phone) . "', customers_billing_fax='" . $database->input($this->billing_fax) . "', customers_billing_show_logo='" . ($this->billing_show_logo?1:0) . "' where customers_id = '" . (int)$this->id . "'");
         }
       }
     }
