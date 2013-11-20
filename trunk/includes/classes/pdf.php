@@ -3,7 +3,7 @@
  * CLASS FILE  : pdf.php
  * Project     : BitTS - BART it TimeSheet
  * Auteur(s)   : Erwin Beukhof
- * Datum       : 19 november 2013
+ * Datum       : 20 november 2013
  * Beschrijving: FPDF wrapper class with pre-formatting
  */
 
@@ -42,8 +42,8 @@
       $this->Cell(0, 5, TITLE, 0, 0, 'C');
     }
 
-    public function InvoiceHeader($business_unit_image, $business_unit_image_position, $customer_name, $customer_billing_show_logo, $period, $project_name, $role_name, $employee_name = '') {
-      if ($business_unit_image!='' && $customer_billing_show_logo != 0) {
+    public function InvoiceHeader($business_unit_image, $business_unit_image_position, $customer_name, $period, $project_name, $role_name, $employee_name = '') {
+      if ($business_unit_image!='') {
         $image_size = getimagesize(DIR_WS_IMAGES . $business_unit_image);
         switch ($business_unit_image_position) {
           case 'C':
